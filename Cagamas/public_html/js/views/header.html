@@ -17,11 +17,12 @@
   </div>
   <div data-bind="css: $root.smallOnly() ? 'oj-flex-bar-center-absolute' : 'oj-flex-bar-middle oj-sm-align-items-baseline'">
     <span role="img" class="oj-sm-only-hide oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span>
-    <span class="oj-web-applayout-header-title" title="Application Name" data-bind="text: $root.smallOnly() ? ($root.router.stateId() === 'dashboard' ? 'Dashboard' : 'People') : appName, css: {'demo-employee-name-person-detail-phone' : $root.smallOnly() == true}"></span>
   </div>
   <div class="oj-flex-bar-end">
     <!-- Responsive Toolbar -->
     <div data-bind="ojComponent: {component:'ojToolbar'}">
+    
+      <h3 aria-orientation="vertical" data-bind="text: appName, css: {'demo-employee-name-person-detail-phone' : $root.smallOnly() == true}"></h3>
       <span class="oj-toolbar-separator" role="separator" aria-orientation="vertical"></span>
       <button id="userMenu"
         data-bind="ojComponent: {component: 'ojButton', label: userName,

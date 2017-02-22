@@ -100,14 +100,14 @@ define(['knockout', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojnavigationlist', 'ojs
                 name: router.states[0].label,
                 id: router.states[0].id,
                 disabled: 'false',
-                iconClass: 'oj-navigationlist-item-icon',
+                iconClass: 'demo-navi-people-icon oj-navigationlist-item-icon',
                 faIconClass: 'fa fa-database'
             },
             {
                 name: router.states[1].label,
                 id: router.states[1].id,
                 disabled: 'false',
-                iconClass: 'demo-navi-person-icon oj-navigationlist-item-icon',
+                iconClass: 'demo-navi-people-icon oj-navigationlist-item-icon',
                 faIconClass: 'fa fa-database'
             },
             {
@@ -115,7 +115,14 @@ define(['knockout', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojnavigationlist', 'ojs
                 id: router.states[2].id,
                 disabled: 'false',
                 iconClass: 'demo-navi-people-icon oj-navigationlist-item-icon',
-                faIconClass: 'fa fa-database'
+                faIconClass: 'fa fa-circle-o'
+            },
+            {
+                name: router.states[3].label,
+                id: router.states[3].id,
+                disabled: 'false',
+                iconClass: 'demo-navi-people-icon oj-navigationlist-item-icon',
+                faIconClass: 'fa fa-chain'
             }];
 
         self.dataSource = new oj.ArrayTableDataSource(appNavData, {idAttribute: 'id'});

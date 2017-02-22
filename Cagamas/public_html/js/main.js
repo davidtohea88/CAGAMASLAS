@@ -70,6 +70,7 @@ require(['ojs/ojcore',
         function (oj, ko, $, utils) {
             var router = oj.Router.rootInstance;
             router.configure({
+                'dashboard': {label: 'Dashboard'},
                 'masterdatas': {label: 'Master Data List'},
                 'pwr': {label: 'Purchase With Recourse'},
                 'mgp': {label: 'MGP'}
@@ -114,9 +115,9 @@ require(['ojs/ojcore',
                 self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
 
                 self.dynamicConfig = ko.pureComputed(function () {
-                    if (self.smallOnly()) {
+/*                    if (self.smallOnly()) {
                         return {name: 'phone/' + router.moduleConfig.name(), lifecycleListner: router.moduleConfig.lifecycleListner, params: router.moduleConfig.params};
-                    }
+                    }*/
                     return router.moduleConfig;
                 });
             }
