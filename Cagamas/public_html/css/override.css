@@ -1169,5 +1169,8 @@ html[dir="rtl"] .demo-oracle-icon {
 
 
 /*Monica edit start*/
-
+.oj-web-applayout-offcanvas
+{
+    max-width:220px;
+}
 /*Monica edit end*/

@@ -8,7 +8,7 @@
 -->
 <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center">
   <!-- Offcanvas toggle button -->
-  <div class="oj-flex-bar-start oj-md-hide">
+  <div class="oj-flex-bar-start">
     <!-- Button that toggles off-canvas content. -->
     <button class="oj-button-lg" data-bind="click: toggleAppDrawer,
       ojComponent: {component:'ojButton', label: offScreenButtonLabel,
@@ -22,10 +22,6 @@
   <div class="oj-flex-bar-end">
     <!-- Responsive Toolbar -->
     <div data-bind="ojComponent: {component:'ojToolbar'}">
-      <button data-bind="ojComponent: {component:'ojButton',
-        label: 'Search', display: 'icons', chroming: 'half',
-        icons: {start:'oj-fwk-icon-magnifier oj-fwk-icon'}}">
-      </button>
       <span class="oj-toolbar-separator" role="separator" aria-orientation="vertical"></span>
       <button id="userMenu"
         data-bind="ojComponent: {component: 'ojButton', label: userName,
@@ -58,17 +54,7 @@
     </div>
   </div>
 </div>
-<div id="ojAppNav"
-  class="oj-web-applayout-navbar oj-sm-only-hide oj-web-applayout-max-width oj-navigationlist-item-dividers oj-md-condense oj-md-justify-content-center oj-lg-justify-content-flex-end"
-  data-bind="ojComponent: {component: 'ojNavigationList',
-    drillMode: 'none',
-    edge: 'top', navigationLevel: 'application',
-    selection: $root.router.stateId(),
-    data: dataSource,
-    optionChange: $root.optionChangeHandler,
-    item: { template: 'app_nav_template'}
-    }" aria-label="Choose only one navigation element">
-</div>
+
 
 <!-- template for rendering app nav data -->
 <script type="text/html" id="app_nav_template">

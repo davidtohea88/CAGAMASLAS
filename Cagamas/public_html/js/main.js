@@ -55,73 +55,80 @@ requirejs.config({
  * by the modules themselves), we are listing them explicitly to get the references to the 'oj' and 'ko'
  * objects in the callback
  */
- 
- 
-require([ 'ojs/ojcore', 'knockout', 'jquery', 'hammerjs', 'ojs/ojjquery-hammer', 'ojs/ojknockout',
-    'ojs/ojmodule', 'ojs/ojoffcanvas', 'ojs/ojbutton'],
+require(['ojs/ojcore',
+    'knockout',
+    'jquery',
+    'utils',
+    'ojs/ojrouter',
+    'ojs/ojknockout',
+    'ojs/ojmodule',
+    'ojs/ojbutton',
+    'ojs/ojtoolbar',
+    'ojs/ojmenu',
+    'ojs/ojinputtext'
+],
+        function (oj, ko, $, utils) {
+            var router = oj.Router.rootInstance;
+            router.configure({
+                'masterdatas': {label: 'Master Data List'},
+                'pwr': {label: 'Purchase With Recourse'},
+                'mgp': {label: 'MGP'}
 
-  function(oj, ko, $, Hammer)
-  {
-              
-    function offcanvasModel()
-    {
-      var self = this;
-
-      this.drawer =
-      {
-        "displayMode": "push",
-        "selector": "#drawer",
-        "content": "#main"
-      };
-
-      this.toggleDrawer = function()
-      {
-        return oj.OffcanvasUtils.toggle(this.drawer);
-      };
-
-      this.openDrawer = function()
-      {
-        return oj.OffcanvasUtils.open(this.drawer);
-      };
-
-      this.isRTL = function()
-      {
-        var dir = document.documentElement.getAttribute("dir");
-        if (dir)
-          dir = dir.toLowerCase();
-        return (dir === "rtl");
-      };
-
-      //use hammer for swipe
-      var mOptions = {
-        "recognizers": [
-          [Hammer.Swipe, { "direction": Hammer["DIRECTION_HORIZONTAL"] }]
-      ]};
- 
-      $("#main")
-        .ojHammer(mOptions)
-        .on("swipeleft", function(event) {
-          event.preventDefault();
-          if (self.isRTL())
-            self.openDrawer();
-        })
-        .on("swiperight", function(event) {
-          event.preventDefault();
-          if (! self.isRTL())
-            self.openDrawer();
-        });
-
-    }
-    
-  
-    $(document).ready(
-      function()
-      {
-        ko.applyBindings(new offcanvasModel(), document.getElementById('parentDiv'))
-      }
-    );
-    
-     
-  });
+            });
 
 
+            function MainViewModel() {
+                var self = this;
+                self.router = router;
+                utils.readSettings();
+                self.myPeople = ko.observableArray();
+                self.myPerson = ko.observableArray();
+                self.ready = ko.observable(false);
+
+                self.optionChangeHandler = function (event, data) {
+                    // Only go for user action events
+                    if (('ojAppNav' === event.target.id || 'ojAppNav2' === event.target.id) && event.originalEvent) {
+                        self.router.go(data.value);
+                    }
+                };
+                self.getHomeURL = function () {
+                    var baseURL = window.location.href;
+                    var end = baseURL.indexOf('?');
+                    var url;
+                    if (end !== -1) {
+                        url = baseURL.substring(0, end);
+                    } else {
+                        url = baseURL;
+                    }
+
+                    return url;
+                };
+                self.screenRange = oj.ResponsiveKnockoutUtils.createScreenRangeObservable();
+                var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
+                var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
+                var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_UP);
+                var smOnlyQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
+                self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
+                self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
+                self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
+                self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
+
+                self.dynamicConfig = ko.pureComputed(function () {
+                    if (self.smallOnly()) {
+                        return {name: 'phone/' + router.moduleConfig.name(), lifecycleListner: router.moduleConfig.lifecycleListner, params: router.moduleConfig.params};
+                    }
+                    return router.moduleConfig;
+                });
+            }
+
+            oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
+            oj.Router.sync().then(
+                    function () {
+                        ko.applyBindings(new MainViewModel(), document.getElementById('globalBody'));
+                        $('#globalBody').show();
+                    },
+                    function (error) {
+                        oj.Logger.error('Error in root start: ' + error.message);
+                    });
+        }
+);

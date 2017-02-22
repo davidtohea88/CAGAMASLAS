@@ -5,8 +5,6 @@
  -->
 
 
-
-
 <!-- ************************ IMPORTANT INFORMATION ************************************
      This file and WorkBetter project are provided as an example of how to configure a JET application.
      It contains the Oracle JET framework and a default requireJS configuration file to show how JET can be setup
@@ -28,40 +26,36 @@
     <link id="css" rel="stylesheet" href="css/libs/oj/v2.3.0/alta/oj-alta-min.css" type="text/css"/>
 
     <!-- These style classes are for demonstration purposes only. -->
+    <link rel="stylesheet" href="css/demo-alta-patterns-min.css" type="text/css"/>
     <link id="css" rel="stylesheet" href="css/libs/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css"/>
 
-    <!-- This is where you would add any app specific styling -->    
+
+    <!-- This is where you would add any app specific styling -->
     <link rel="stylesheet" href="css/override.css" type="text/css"/>
+
     <!-- RequireJS bootstrap file -->
     <script data-main="js/main" src="js/libs/require/require.js"></script>
   </head>
   <body>
-    <div id="parentDiv">
-
-  <!-- outer offcanvas wrapper -->
-  <div class="oj-offcanvas-outer-wrapper oj-offcanvas-page" >
-
-    <!-- start offcanvas -->
-     <div id="drawer" class="oj-contrast-marker oj-web-applayout-offcanvas oj-offcanvas-start">
-        <div>Start offcanvas</div>
+    <div id="globalBody" class="oj-offcanvas-outer-wrapper oj-offcanvas-page">      <!--
+      ** This off-canvas section is used when the browser is resized to a
+      ** medium or smaller media query size. It moves the App Navigation into a drawer
+      -->
+      <!-- off-canvas content -->
+      <div id="appDrawer" class="oj-contrast-marker oj-web-applayout-offcanvas oj-offcanvas-start"
+        data-bind="ojModule: {name: 'header', viewName: 'demoAppHeaderOffCanvasTemplate'}"></div>
+      <div id="pageContent" class="oj-web-applayout-page">
+        <!-- Header section which contains the Global Branding, Global Navigation,
+        ** and Application Navigation code. Template is located in /js/views/header.html
+        -->
+        <header role="banner" class="oj-web-applayout-header" data-bind="ojModule: 'header'"></header>
+        <!-- This is where your main page content will be loaded -->
+        <div class="oj-web-applayout-max-width oj-web-applayout-content">
+          <!-- If the viewport size is small, we load the templates from the
+          ** phone directory to get a specific mobile design  -->
+          <div data-bind="ojModule: dynamicConfig()"></div>
         </div>
-      
-
-    <!-- main content -->
-    <div id="main" style="padding: 10px;">
-      <!-- start offcanvas launch button -->
-     
-       <button data-bind="click: toggleDrawer,
-                         ojComponent: {component:'ojButton', 
-                         label: 'Toggle start offcanvas', 
-                         chroming: 'half',
-                         display: 'icons', 
-                         icons: {start: 'oj-fwk-icon-hamburger oj-fwk-icon'}}">
-      </button> 
-    </div>
-
-  </div>
-</div>
+      </div>
     </div>
   </body>
 </html>
