@@ -1,5 +1,5 @@
 
-require(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource'],
 function(oj, ko, $)
 {
   function viewModel()
@@ -52,6 +52,7 @@ function(oj, ko, $)
         {DepartmentId: 12022, DepartmentName: 'Purchasing14', LocationId: 200, ManagerId: 300},
         {DepartmentId: 13022, DepartmentName: 'Human Resources15', LocationId: 200, ManagerId: 300}];
     self.pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'DepartmentId'}));
+    self.header="Master Data List Cagamas";
   }
   return viewModel;
 

@@ -123,6 +123,13 @@ define(['knockout', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojnavigationlist', 'ojs
                 disabled: 'false',
                 iconClass: 'demo-navi-people-icon oj-navigationlist-item-icon',
                 faIconClass: 'fa fa-chain'
+            },
+            {
+                name: router.states[4].label,
+                id: router.states[4].id,
+                disabled: 'false',
+                iconClass: 'demo-navi-people-icon oj-navigationlist-item-icon',
+                faIconClass: 'fa fa-chain'
             }];
 
         self.dataSource = new oj.ArrayTableDataSource(appNavData, {idAttribute: 'id'});

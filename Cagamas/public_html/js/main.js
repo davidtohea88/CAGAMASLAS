@@ -73,6 +73,7 @@ require(['ojs/ojcore',
                 'dashboard': {label: 'Dashboard'},
                 'masterdatas': {label: 'Master Data List'},
                 'pwr': {label: 'Purchase With Recourse'},
+                'pwor': {label: 'Purchase Without Recourse'},
                 'mgp': {label: 'MGP'}
 
             });

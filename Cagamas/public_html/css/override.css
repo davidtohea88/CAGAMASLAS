@@ -1176,7 +1176,7 @@ html[dir="rtl"] .demo-oracle-icon {
 
 .oj-web-applayout-header-title
 {
-    font-size:1.2em;
+    font-size:1em;
     top:20px;
 }
 
@@ -1185,4 +1185,41 @@ html[dir="rtl"] .demo-oracle-icon {
     margin-left:1em;
     font-weight:700;
 }
+
+.oj-pagingcontrol
+{
+    float:right;
+}
+
+.blue-color
+{
+    color:#013298;
+}
+
+h1,h3
+{
+    font-weight:300;
+}
+
+.oj-web-applayout-offcanvas
+{
+background-color: #f0f0f0;
+}
+
+.oj-contrast-marker .oj-navigationlist-item.oj-hover:not(.oj-selected)
+{
+    background-color:#013298;
+}
+
+.oj-contrast-marker a.oj-navigationlist-item-content .oj-navigationlist-item-label
+{
+    color:#013298;
+}
+
+.oj-table-header
+{
+    color:#013298;
+    font-size:1.2em;
+}
+
 /*Monica edit end*/
