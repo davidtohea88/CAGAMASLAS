@@ -1172,6 +1172,7 @@ html[dir="rtl"] .demo-oracle-icon {
 .oj-web-applayout-offcanvas
 {
     max-width:220px;
+    background-color: #f0f0f0;
 }
 
 .oj-web-applayout-header-title
@@ -1201,17 +1202,15 @@ h1,h3
     font-weight:300;
 }
 
-.oj-web-applayout-offcanvas
-{
-background-color: #f0f0f0;
-}
-
-.oj-contrast-marker .oj-navigationlist-item.oj-hover:not(.oj-selected)
+.oj-contrast-marker .oj-navigationlist-item.oj-hover:not(.oj-selected),
+.oj-contrast-marker .oj-navigationlist-vertical .oj-navigationlist-item.oj-selected
 {
     background-color:#013298;
 }
 
-.oj-contrast-marker a.oj-navigationlist-item-content .oj-navigationlist-item-label
+.oj-contrast-marker a.oj-navigationlist-item-content .oj-navigationlist-item-label,
+.oj-contrast-marker .oj-navigationlist-current-header,
+.oj-listview-no-data-message, .oj-web-applayout-offcanvas
 {
     color:#013298;
 }
@@ -1222,4 +1221,9 @@ background-color: #f0f0f0;
     font-size:1.2em;
 }
 
+#appDrawer
+{
+    max-width:300px;
+    margin-top:63px;
+}
 /*Monica edit end*/

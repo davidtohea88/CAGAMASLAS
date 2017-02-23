@@ -5,8 +5,8 @@
 /**
  * Header module
  */
-define(['knockout', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojnavigationlist', 'ojs/ojoffcanvas', 'ojs/ojdatacollection-common', 'ojs/ojdialog'
-], function (ko, oj) {
+define(['knockout', 'ojs/ojcore', 'jquery','ojs/ojknockout', 'ojs/ojnavigationlist', 'ojs/ojoffcanvas', 'ojs/ojdatacollection-common', 'ojs/ojdialog',
+], function (ko, oj,$) {
     /**
      * The view model for the header module
      */
@@ -88,52 +88,13 @@ define(['knockout', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojnavigationlist', 'ojs
                     "displayMode": "push",
                     "selector": "#appDrawer",
                     "selection": "selectedItem",
-                    "content": '#pageContent'
+                    "content": '#bodyContent'
                 };
 
         //
         // Data for application navigation
         //
         var router = oj.Router.rootInstance;
-        var appNavData = [
-            {
-                name: router.states[0].label,
-                id: router.states[0].id,
-                disabled: 'false',
-                iconClass: 'demo-navi-people-icon oj-navigationlist-item-icon',
-                faIconClass: 'fa fa-database'
-            },
-            {
-                name: router.states[1].label,
-                id: router.states[1].id,
-                disabled: 'false',
-                iconClass: 'demo-navi-people-icon oj-navigationlist-item-icon',
-                faIconClass: 'fa fa-database'
-            },
-            {
-                name: router.states[2].label,
-                id: router.states[2].id,
-                disabled: 'false',
-                iconClass: 'demo-navi-people-icon oj-navigationlist-item-icon',
-                faIconClass: 'fa fa-circle-o'
-            },
-            {
-                name: router.states[3].label,
-                id: router.states[3].id,
-                disabled: 'false',
-                iconClass: 'demo-navi-people-icon oj-navigationlist-item-icon',
-                faIconClass: 'fa fa-chain'
-            },
-            {
-                name: router.states[4].label,
-                id: router.states[4].id,
-                disabled: 'false',
-                iconClass: 'demo-navi-people-icon oj-navigationlist-item-icon',
-                faIconClass: 'fa fa-chain'
-            }];
-
-        self.dataSource = new oj.ArrayTableDataSource(appNavData, {idAttribute: 'id'});
-
         self.toggleAppDrawer = function ()
         {
             return oj.OffcanvasUtils.toggle(self.appDrawer);

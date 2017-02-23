@@ -43,14 +43,14 @@
       -->
       <!-- off-canvas content -->
       <div id="appDrawer" class="oj-contrast-marker oj-web-applayout-offcanvas oj-offcanvas-start"
-        data-bind="ojModule: {name: 'header', viewName: 'demoAppHeaderOffCanvasTemplate'}"></div>
+        data-bind="ojModule: 'navigation'"></div>
       <div id="pageContent" class="oj-web-applayout-page">
         <!-- Header section which contains the Global Branding, Global Navigation,
         ** and Application Navigation code. Template is located in /js/views/header.html
         -->
         <header role="banner" class="oj-web-applayout-header" data-bind="ojModule: 'header'"></header>
         <!-- This is where your main page content will be loaded -->
-        <div class="oj-web-applayout-max-width oj-web-applayout-content">
+        <div id="bodyContent" class="oj-web-applayout-max-width oj-web-applayout-content">
           <!-- If the viewport size is small, we load the templates from the
           ** phone directory to get a specific mobile design  -->
           <div data-bind="ojModule: dynamicConfig()"></div>

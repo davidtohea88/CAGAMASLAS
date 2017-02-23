@@ -65,20 +65,19 @@ require(['ojs/ojcore',
     'ojs/ojbutton',
     'ojs/ojtoolbar',
     'ojs/ojmenu',
-    'ojs/ojinputtext'
+    'ojs/ojinputtext',
+    'ojs/ojnavigationlist',
+    'ojs/ojjsontreedatasource'
 ],
         function (oj, ko, $, utils) {
             var router = oj.Router.rootInstance;
             router.configure({
-                'dashboard': {label: 'Dashboard'},
                 'masterdatas': {label: 'Master Data List'},
                 'pwr': {label: 'Purchase With Recourse'},
                 'pwor': {label: 'Purchase Without Recourse'},
                 'mgp': {label: 'MGP'}
 
             });
-
-
             function MainViewModel() {
                 var self = this;
                 self.router = router;
@@ -89,7 +88,7 @@ require(['ojs/ojcore',
 
                 self.optionChangeHandler = function (event, data) {
                     // Only go for user action events
-                    if (('ojAppNav' === event.target.id || 'ojAppNav2' === event.target.id) && event.originalEvent) {
+                    if (('navlistdemo' === event.target.id || 'ojAppNav' === event.target.id || 'ojAppNav2' === event.target.id) && event.originalEvent) {
                         self.router.go(data.value);
                     }
                 };
@@ -114,7 +113,13 @@ require(['ojs/ojcore',
                 self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
                 self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
                 self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
+                self.selectedItem = ko.observable("None");
 
+                $.getJSON( "js/data/menu.json",
+                function(data)
+                {
+                    self.dataSource =  new oj.JsonTreeDataSource(data);
+                });
                 self.dynamicConfig = ko.pureComputed(function () {
 /*                    if (self.smallOnly()) {
                         return {name: 'phone/' + router.moduleConfig.name(), lifecycleListner: router.moduleConfig.lifecycleListner, params: router.moduleConfig.params};

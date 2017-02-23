@@ -1,0 +1,21 @@
+<div id="navlistdemo">
+    <div style="max-width:300px">
+            <div data-bind="ojComponent:{
+                            component:'ojNavigationList',
+                            drillMode: 'sliding',
+                            selection: $root.selectedItem,
+                            data : $root.dataSource,
+                            optionChange: $parent.optionChangeHandler,
+                            item: { template: 'folder_template' }
+                            }">
+            </div>
+    </div>
+    <br>
+</div>
+<script type="text/html" id="folder_template">
+        <li >
+        <a href="#">
+            <span data-bind="text: $data['name']" class="oj-navigationlist-item-title"></span>
+        </a>
+    </li>
+</script>
