@@ -3,9 +3,8 @@
             <div data-bind="ojComponent:{
                             component:'ojNavigationList',
                             drillMode: 'sliding',
-                            selection: $root.selectedItem,
+                            selection: $root.router.stateId(),
                             data : $root.dataSource,
-                            optionChange: $parent.optionChangeHandler,
                             item: { template: 'folder_template' }
                             }">
             </div>
@@ -14,7 +13,7 @@
 </div>
 <script type="text/html" id="folder_template">
         <li >
-        <a href="#">
+        <a data-bind="click: function() {$parent.viewMovie($data['view'])}">
             <span data-bind="text: $data['name']" class="oj-navigationlist-item-title"></span>
         </a>
     </li>

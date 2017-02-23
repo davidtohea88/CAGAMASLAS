@@ -72,12 +72,14 @@ require(['ojs/ojcore',
         function (oj, ko, $, utils) {
             var router = oj.Router.rootInstance;
             router.configure({
-                'masterdatas': {label: 'Master Data List'},
+                'masterdatas': {label: 'Master Data List', isDefault:true},
                 'pwr': {label: 'Purchase With Recourse'},
                 'pwor': {label: 'Purchase Without Recourse'},
                 'mgp': {label: 'MGP'}
 
             });
+            
+                       
             function MainViewModel() {
                 var self = this;
                 self.router = router;
@@ -113,6 +115,8 @@ require(['ojs/ojcore',
                 self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
                 self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
                 self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
+
+
                 self.selectedItem = ko.observable("None");
 
                 $.getJSON( "js/data/menu.json",
@@ -120,12 +124,14 @@ require(['ojs/ojcore',
                 {
                     self.dataSource =  new oj.JsonTreeDataSource(data);
                 });
+                
                 self.dynamicConfig = ko.pureComputed(function () {
 /*                    if (self.smallOnly()) {
                         return {name: 'phone/' + router.moduleConfig.name(), lifecycleListner: router.moduleConfig.lifecycleListner, params: router.moduleConfig.params};
                     }*/
                     return router.moduleConfig;
                 });
+                
             }
 
             oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();

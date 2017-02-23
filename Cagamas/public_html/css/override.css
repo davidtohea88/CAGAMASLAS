@@ -1226,4 +1226,9 @@ h1,h3
     max-width:300px;
     margin-top:63px;
 }
+
+.oj-navigationlist-focused-element
+{
+   cursor: pointer;   
+}
 /*Monica edit end*/
