@@ -19,7 +19,9 @@
 </script>
 <script type="text/html" id="view_action">
     <td>
-        <a href="http://www.oracle.com">View</a>
-        <a><!-- ko text: $data['PurchaseContractID'] --> <!--/ko--></a>
+        <button id= "btn_PI"
+            data-bind="click: $parent.buttonClick, 
+                       ojComponent: { component: 'ojButton', label: 'View Details' }">
+        </button>
     </td>
 </script>

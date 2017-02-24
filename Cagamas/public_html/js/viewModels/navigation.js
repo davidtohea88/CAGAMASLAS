@@ -6,7 +6,7 @@ define(['ojs/ojcore', 'knockout'],
         function (oj, ko)
         {
             var viewModel = {
-    viewMovie: function(url) {
+    redirect: function(url) {
     if(url!=null || url!='')
       oj.Router.rootInstance.go(url);
     }

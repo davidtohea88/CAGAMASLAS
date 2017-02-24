@@ -78,7 +78,9 @@ require(['ojs/ojcore',
                 'origination-list': {label: 'Origination List'},
                 'origination-pi': {label: 'Origination Preliminary Indication'},
                 'origination-pc': {label: 'Origination Purchase Contract'},
-                'mgp': {label: 'MGP'}
+                'mgp': {label: 'MGP'},
+                'people': {label: 'people'},
+                'person': {label: 'person'}
 
             });
             

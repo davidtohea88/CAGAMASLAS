@@ -13,7 +13,7 @@
 </div>
 <script type="text/html" id="folder_template">
         <li >
-        <a data-bind="click: function() {$parent.viewMovie($data['view'])}">
+        <a data-bind="click: function() {$parent.redirect($data['view'])}">
             <span data-bind="text: $data['name']" class="oj-navigationlist-item-title"></span>
         </a>
     </li>
