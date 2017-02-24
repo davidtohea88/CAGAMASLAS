@@ -1175,6 +1175,10 @@ html[dir="rtl"] .demo-oracle-icon {
     background-color: #f0f0f0;
 }
 
+.oj-web-applayout-header
+{
+padding-bottom:3px;
+}
 .oj-web-applayout-header-title
 {
     font-size:1em;
@@ -1195,6 +1199,11 @@ html[dir="rtl"] .demo-oracle-icon {
 .blue-color
 {
     color:#013298;
+}
+
+.white-color
+{
+    color:#FFFFFF;
 }
 
 h1,h3
@@ -1230,5 +1239,29 @@ h1,h3
 .oj-navigationlist-focused-element
 {
    cursor: pointer;   
+}
+
+.oj-web-applayout-content
+{
+    background-color:#fff;
+    padding:0px;
+}
+
+.page-title
+{
+    margin: 0px 0px 0px 0px;
+    background-color: #013298;
+    padding: 8px 20px;
+    font-size:1.429rem;
+}
+
+.page-content
+{
+ padding:10px 20px;   
+}
+
+html:not([dir="rtl"]) .oj-web-applayout-header .oj-flex-bar-start .oj-button.oj-button-lg:first-child
+{
+    margin-left:0px;
 }
 /*Monica edit end*/

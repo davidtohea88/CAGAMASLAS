@@ -75,6 +75,9 @@ require(['ojs/ojcore',
                 'masterdatas': {label: 'Master Data List', isDefault:true},
                 'pwr': {label: 'Purchase With Recourse'},
                 'pwor': {label: 'Purchase Without Recourse'},
+                'origination-list': {label: 'Origination List'},
+                'origination-pi': {label: 'Origination Preliminary Indication'},
+                'origination-pc': {label: 'Origination Purchase Contract'},
                 'mgp': {label: 'MGP'}
 
             });

@@ -1,23 +1,25 @@
 <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
 <div id="pagingControlDemo" class="page-content">
-    <table id="table" summary="Department List" aria-label="Departments Table"
+    <table id="table" summary="Origination List" aria-label="Origination Table"
            data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
-            [{headerText: 'Master ID', field: 'MasterId',style: 'width: 10%'},
-             {headerText: 'Master Name', field: 'MasterName'},
-             {headerTemplate: 'oracle_action_hdr', template: 'oracle_action', style: 'width: 10%;text-align:center;'}], 
+            [{headerText: 'Preliminary Indication Number', field: 'OriginationId',style: 'width: 10%'},
+             {headerText: 'Counter Party Name', field: 'OriginationName'},
+             {headerText: 'Status', field: 'OriginationStatus'},
+             {headerTemplate: 'view_action_hdr', template: 'view_action', style: 'width: 10%;text-align:center;'}], 
              rootAttributes: {'style':'width: 100%;'}}">
     </table>
     <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
     </div>
 </div>
 
-<script type="text/html" id="oracle_action_hdr">
+<script type="text/html" id="view_action_hdr">
     <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
         Action
     </th>
 </script>
-<script type="text/html" id="oracle_action">
+<script type="text/html" id="view_action">
     <td>
         <a href="http://www.oracle.com">View</a>
+        <a><!-- ko text: $data['PurchaseContractID'] --> <!--/ko--></a>
     </td>
 </script>

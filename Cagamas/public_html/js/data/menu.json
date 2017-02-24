@@ -15,11 +15,18 @@
       "children":[  
          {  
             "attr":{  
-               "id":"pwor",
-               "name":"Purchase Without Recourse",
-               "view":"pwor"
+               "id":"origination-list",
+               "name":"Origination",
+               "view":"origination-list"
             }
          }
       ]
+   },
+   {  
+      "attr":{  
+         "id":"pwor",
+         "name":"Purchase Without Recourse",
+         "view":"pwor"
+      }
    }
 ]
