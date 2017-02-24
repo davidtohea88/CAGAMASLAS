@@ -76,8 +76,28 @@ require(['ojs/ojcore',
                 'pwr': {label: 'Purchase With Recourse'},
                 'pwor': {label: 'Purchase Without Recourse'},
                 'origination-list': {label: 'Origination List'},
-                'origination-pi': {label: 'Origination Preliminary Indication'},
-                'origination-pc': {label: 'Origination Purchase Contract'},
+                'origination-pi': {label: 'Origination Preliminary Indication',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                'origination-pc': {label: 'Origination Purchase Contract',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
                 'mgp': {label: 'MGP'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}

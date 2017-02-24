@@ -19,10 +19,10 @@ function(oj, ko, $)
     self.buttonClick= function(item) {
     if(item.OriginationStatus=='PI')
     {
-        history.pushState(null, '', 'index.html?root=pwr&id=' + item.OriginationId);
+        history.pushState(null, '', 'index.html?root=origination-pi&id=' + item.OriginationId);
     }
     else {
-        history.pushState(null, '', 'index.html?root=pwor&id=' + item.PurchaseContractID);
+        history.pushState(null, '', 'index.html?root=origination-pc&id=' + item.PurchaseContractID);
     }
         oj.Router.sync();
     };
