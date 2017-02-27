@@ -2,9 +2,11 @@
 <div id="pagingControlDemo" class="page-content">
     <table id="table" summary="Origination List" aria-label="Origination Table"
            data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
-            [{headerText: 'Preliminary Indication Number', field: 'OriginationId',style: 'width: 10%'},
-             {headerText: 'Counter Party Name', field: 'OriginationName'},
-             {headerText: 'Status', field: 'OriginationStatus'},
+            [{headerText: 'Product Type', field: 'ProductType'},
+             {headerText: 'Counter Party Name', field: 'CounterPartyName'},
+             {headerText: 'Currency', field: 'Currency', style: 'width: 5%'},
+             {headerText: 'Purchase Amount', field: 'PurchaseAmount'},
+             {headerText: 'Status', field: 'OriginationStatus', style: 'width: 10%'},
              {headerTemplate: 'view_action_hdr', template: 'view_action', style: 'width: 10%;text-align:center;'}], 
              rootAttributes: {'style':'width: 100%;'}}">
     </table>

@@ -1249,19 +1249,42 @@ h1,h3
 
 .page-title
 {
-    margin: 0px 0px 0px 0px;
+    margin: 0px 0px 10px 0px;
     background-color: #013298;
     padding: 8px 20px;
     font-size:1.429rem;
 }
 
+.page-button-wrapper
+{
+    margin: 0px;
+    padding: 0px 20px;
+    font-size:1.429rem;
+    clear: both;
+    height:50px;
+}
+
+.page-button-wrapper > button
+{
+    float:right;
+    margin: 0px 5px;
+}
 .page-content
 {
- padding:10px 20px;   
+ padding:0px 20px;   
 }
 
 html:not([dir="rtl"]) .oj-web-applayout-header .oj-flex-bar-start .oj-button.oj-button-lg:first-child
 {
     margin-left:0px;
+}
+.text-center
+{
+    text-align: center;    
+}
+html:not([dir="rtl"])  .oj-button-text-icon-start .oj-button-icon.oj-start
+{
+    margin-left:0.85rem;
+    margin-right:0.1rem;
 }
 /*Monica edit end*/

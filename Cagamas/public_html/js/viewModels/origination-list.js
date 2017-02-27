@@ -7,12 +7,12 @@ function(oj, ko, $)
     var self = this;
 
     var deptArray = [
-    {OriginationId: 10015, OriginationName: 'ADFPM 1001 neverending', OriginationStatus: 'PI'},
-    {OriginationId: 10015, OriginationName: 'ADFPM 1001 neverending', OriginationStatus: 'PI'},
-    {OriginationId: 10015, OriginationName: 'ADFPM 1001 neverending', OriginationStatus: 'PC', PurchaseContractID: 'PC0001'},
-    {OriginationId: 10015, OriginationName: 'ADFPM 1001 neverending', OriginationStatus: 'PC', PurchaseContractID: 'PC0001'},
-    {OriginationId: 10015, OriginationName: 'ADFPM 1001 neverending', OriginationStatus: 'PI'},
-    {OriginationId: 10015, OriginationName: 'ADFPM 1001 neverending', OriginationStatus: 'PI'},
+    {OriginationId: 'PI0001', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'100,000,000', Currency:'MYR', OriginationStatus: 'PI'},
+    {OriginationId: 'PI0002', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'30,000,000', Currency:'MYR', OriginationStatus: 'PI'},
+    {OriginationId: 'PI0003', CounterPartyName: 'Maybank', PurchaseAmount:'15,000,000', Currency:'MYR', OriginationStatus: 'PC', PurchaseContractID: '127/000/2810/159074/TX1/Q/C0-0/0'},
+    {OriginationId: 'PI0004', CounterPartyName: 'Maybank', PurchaseAmount:'900,000', Currency:'MYR', OriginationStatus: 'PC', PurchaseContractID: '127/000/2810/159074/TX1/Q/C0-0/1'},
+    {OriginationId: 'PI0005', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'10,000,000', Currency:'MYR', OriginationStatus: 'PI'},
+    {OriginationId: 'PI0006', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'30,000,000',Currency:'MYR',  OriginationStatus: 'PI'},
     ];
     self.pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'OriginationId'}));
     self.header="Origination";

@@ -1,1 +1,234 @@
-<div><h1 data-bind="text:header"></h1></div>
+<div id="form-container">
+<div class="page-title"><label class="white-color" data-bind="text:header"></label>
+</div>
+<div class="page-button-wrapper" id='buttons-container'>
+<button id= "btn_save" data-bind="ojComponent: { component: 'ojButton', label: 'Save' }">
+    </button>
+<button id= "btn_cancel" data-bind="ojComponent: { component: 'ojButton', label: 'Cancel' }">
+    </button>
+<button id= "btn_validate" data-bind="ojComponent: { component: 'ojButton', label: 'Validate' }">
+    </button>
+</div>
+
+
+  <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">   
+        <div class="oj-flex">  
+          <div class="oj-flex-item">
+            <label for="A1control">Product Group</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A1control" 
+                   data-bind="ojComponent: {component: 'ojInputText', 
+                                            value:'Conventional', required: false, disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A2control">Product Type</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A2control" 
+                   data-bind="ojComponent: {component: 'ojInputText', 
+                                            value:'PWR', required: false}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A3control">Counter Party</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A3control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'Please Select',
+                                            rootAttributes: {
+                                               style:'max-width:72%'
+                                            }}">
+            <button id="buttonOpener" 
+                data-bind="click: openCPPopUp, ojComponent: {
+                    component:'ojButton',
+                    icons: {start:'fa fa-search'}
+                }"></button>
+          </div>
+        </div>
+         <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Asset Type</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select'}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A5control">Purchase Mode</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A5control" 
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select'}">
+          </div>
+        </div>
+        </div>
+    </div>                               
+    <div class="oj-flex-item">
+      <div class="oj-form oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6  oj-lg-labels-inline"> 
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B1control">Currency</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B1control" 
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select'}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B2control">Purchase Amount</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B2control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'-'}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B3control">Payment Type</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B3control" 
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select'}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B4control">Rate Type</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B4control" 
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select'}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B5control">Payment Frequency</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B5control" 
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select'}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B5control">Pricing Factor</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B5control" 
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select'}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="oj-flex-item">
+      <div class="oj-form oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline"> 
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="C1control">Purchase Consideration Type</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="C1control" 
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select'}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="C2control">Purchase Date</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="C2control" 
+                   data-bind="ojComponent: {
+                   component: 'ojInputDate', value: oj.IntlConverterUtils.dateToLocalIso(new Date())}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="C3control">Tenure</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="C3control" 
+                   data-bind="ojComponent: {component: 'ojInputText',
+                                            rootAttributes: {
+                                               style:'max-width:20%'
+                                            }, 
+                                            value:'', required: false}">
+            <label for="C3control">Years</label>
+
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="C3control"></label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="C3control" 
+                   data-bind="ojComponent: {component: 'ojInputText',
+                                            rootAttributes: {
+                                               style:'max-width:20%'
+                                            }, 
+                                            value:'', required: false}">
+            <label for="C3control">Months</label>
+
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="C5control">Review Date</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="C5control" 
+                   data-bind="ojComponent: {
+                   component: 'ojInputDate', value: oj.IntlConverterUtils.dateToLocalIso(new Date())}">
+          </div>
+        </div>
+        <div class="oj-flex">  
+          <div class="oj-flex-item">
+            <label for="C6control">Status</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="C6control" 
+                   data-bind="ojComponent: {component: 'ojInputText', 
+                                            value:'Draft', required: false, disabled:true}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div id="pagingControlDemo" class="page-content">
+    <table id="table" summary="Origination List" aria-label="Origination Table"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
+            [{headerText: 'Product Type', field: 'ProductType'},
+             {headerText: 'Counter Party Name', field: 'CounterPartyName'},
+             {headerText: 'Currency', field: 'Currency', style: 'width: 5%'},
+             {headerText: 'Purchase Amount', field: 'PurchaseAmount'},
+             {headerText: 'Status', field: 'OriginationStatus', style: 'width: 10%'}]">
+    </table>
+    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
+    </div>
+</div>
+
+    <div style="display:none" id="scrollingDialog" title="Counter Party" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width: 800px; height: 400px;'}
+		  }">
+     <div class="oj-dialog-body">
+       <h3> Select counter party</h3>
+       
+     <div class="oj-dialog-footer">
+        <button id="okButton" data-bind="click: closeCPPopUp, ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
+      </div>
+  </div>
+</div>
+
+
