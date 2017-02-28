@@ -13,18 +13,19 @@ define(['ojs/ojcore', 'knockout', 'jquery',
             function mainViewModel() {
                 var self = this;
                 self.header = "Preliminary Indication";
-                var self = this;
-                self.openCPPopUp = function(){$("#scrollingDialog").ojDialog("open");return true;}
-                self.closeCPPopUp = function(){$("#scrollingDialog").ojDialog("close");return true;}
-                var deptArray = [
-                {OriginationId: 'PI0001', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'100,000,000', Currency:'MYR', OriginationStatus: 'PI'},
-                {OriginationId: 'PI0002', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'30,000,000', Currency:'MYR', OriginationStatus: 'PI'},
-                {OriginationId: 'PI0003', CounterPartyName: 'Maybank', PurchaseAmount:'15,000,000', Currency:'MYR', OriginationStatus: 'PC', PurchaseContractID: '127/000/2810/159074/TX1/Q/C0-0/0'},
-                {OriginationId: 'PI0004', CounterPartyName: 'Maybank', PurchaseAmount:'900,000', Currency:'MYR', OriginationStatus: 'PC', PurchaseContractID: '127/000/2810/159074/TX1/Q/C0-0/1'},
-                {OriginationId: 'PI0005', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'10,000,000', Currency:'MYR', OriginationStatus: 'PI'},
-                {OriginationId: 'PI0006', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'30,000,000',Currency:'MYR',  OriginationStatus: 'PI'}
-                ];
-                self.pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'OriginationId'}));
+                self.openCPPopUp = function(){$("#scrollingDialog").ojDialog("open");return true;};
+                self.closeCPPopUp = function(){$("#scrollingDialog").ojDialog("close");return true;};
+    var deptArray = [
+    {CPCode: 'CIMBSD', CPName: 'CIMB Bank Sub Debt', CPGroup:'CIMB', CPType:'FI', FRGroup:'Qtr Ending Month 3,6,9,12'},
+    {CPCode: 'CIMBINV', CPName: 'CIMB Investment Bank BHD', CPGroup:'CIMB', CPType:'FI', FRGroup:'Qtr Ending Month 1,4,7,10'},
+    {CPCode: 'CIMBINVSPI', CPName: 'CIMB Investment Bank BHD-SPI', CPGroup:'CIMB', CPType:'FI', FRGroup:'Qtr Ending Month 1,4,7,10'},
+    {CPCode: 'CIMBISD', CPName: 'CIMB Islamic Bank Sub Debt', CPGroup:'CIMB', CPType:'FI', FRGroup:'Qtr Ending Month 2,5,8,11'},
+    {CPCode: 'CIMBSD', CPName: 'CIMB Bank Sub Debt', CPGroup:'CIMB', CPType:'FI', FRGroup:'Qtr Ending Month 3,6,9,12'},
+    {CPCode: 'CIMBINV', CPName: 'CIMB Investment Bank BHD', CPGroup:'CIMB', CPType:'FI', FRGroup:'Qtr Ending Month 1,4,7,10'},
+    {CPCode: 'CIMBINVSPI', CPName: 'CIMB Investment Bank BHD-SPI', CPGroup:'CIMB', CPType:'FI', FRGroup:'Qtr Ending Month 1,4,7,10'},
+    {CPCode: 'CIMBISD', CPName: 'CIMB Islamic Bank Sub Debt', CPGroup:'CIMB', CPType:'FI', FRGroup:'Qtr Ending Month 2,5,8,11'}
+    ];
+    self.pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'CPCode'}));
 
                 
             }

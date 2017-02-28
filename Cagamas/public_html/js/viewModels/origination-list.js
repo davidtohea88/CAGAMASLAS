@@ -9,8 +9,8 @@ function(oj, ko, $)
     var deptArray = [
     {OriginationId: 'PI0001', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'100,000,000', Currency:'MYR', OriginationStatus: 'PI'},
     {OriginationId: 'PI0002', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'30,000,000', Currency:'MYR', OriginationStatus: 'PI'},
-    {OriginationId: 'PI0003', CounterPartyName: 'Maybank', PurchaseAmount:'15,000,000', Currency:'MYR', OriginationStatus: 'PC', PurchaseContractID: '127/000/2810/159074/TX1/Q/C0-0/0'},
-    {OriginationId: 'PI0004', CounterPartyName: 'Maybank', PurchaseAmount:'900,000', Currency:'MYR', OriginationStatus: 'PC', PurchaseContractID: '127/000/2810/159074/TX1/Q/C0-0/1'},
+    {OriginationId: 'PI0003', CounterPartyName: 'Maybank', ProductType:'PWR', PurchaseAmount:'15,000,000', Currency:'MYR', OriginationStatus: 'PC', PurchaseContractID: '127/000/2810/159074/TX1/Q/C0-0/0'},
+    {OriginationId: 'PI0004', CounterPartyName: 'Maybank', ProductType:'PWR', PurchaseAmount:'900,000', Currency:'MYR', OriginationStatus: 'PC', PurchaseContractID: '127/000/2810/159074/TX1/Q/C0-0/1'},
     {OriginationId: 'PI0005', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'10,000,000', Currency:'MYR', OriginationStatus: 'PI'},
     {OriginationId: 'PI0006', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'30,000,000',Currency:'MYR',  OriginationStatus: 'PI'},
     ];

@@ -203,32 +203,29 @@
       </div>
     </div>
   </div>
-  
-  
-  <div id="pagingControlDemo" class="page-content">
-    <table id="table" summary="Origination List" aria-label="Origination Table"
-           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
-            [{headerText: 'Product Type', field: 'ProductType'},
-             {headerText: 'Counter Party Name', field: 'CounterPartyName'},
-             {headerText: 'Currency', field: 'Currency', style: 'width: 5%'},
-             {headerText: 'Purchase Amount', field: 'PurchaseAmount'},
-             {headerText: 'Status', field: 'OriginationStatus', style: 'width: 10%'}]">
-    </table>
-    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
-    </div>
 </div>
 
-    <div style="display:none" id="scrollingDialog" title="Counter Party" 
+    
+
+    <div style="display:none" id="scrollingDialog" title="Select Counter Party" 
        data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
 		  rootAttributes: { style: 'width: 800px; height: 400px;'}
 		  }">
      <div class="oj-dialog-body">
-       <h3> Select counter party</h3>
-       
-     <div class="oj-dialog-footer">
-        <button id="okButton" data-bind="click: closeCPPopUp, ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
-      </div>
+       <table id="table" summary="Counter Party" aria-label="Counter Party"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
+            [{headerTemplate: 'view_action_hdr', template: 'view_action', style: 'width: 10%;text-align:center;'},
+             {headerText: 'Code', field: 'CPCode'},
+             {headerText: 'Name', field: 'CPName'},
+             {headerText: 'Group', field: 'CPGroup'},
+             {headerText: 'Type', field: 'CPType'},
+             {headerText: 'Financial Review Group', field: 'FRGroup'}],
+             rootAttributes: {'style':'width: 98%;'}}">
+    </table>
+    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
+    </div>
   </div>
 </div>
+
 
 
