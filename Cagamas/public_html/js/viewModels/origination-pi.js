@@ -27,6 +27,7 @@
                     }
                 };
                 
+                
                         
 define(['ojs/ojcore', 'knockout', 'jquery',
            'ojs/ojknockout', 'ojs/ojinputtext','ojs/ojselectcombobox','ojs/ojdatetimepicker', 'ojs/ojbutton', 'ojs/ojcheckboxset', 'ojs/ojdialog', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource'],
@@ -41,21 +42,35 @@ define(['ojs/ojcore', 'knockout', 'jquery',
             self.closeCPPopUp = function(){$("#CPDialog").ojDialog("close");return true;};
             self.openVendorPopUp = function(){$("#VendorDialog").ojDialog("open");return true;};
             self.closeVendorPopUp = function(){$("#VendorDialog").ojDialog("close");return true;};
+            self.PIstatus = ko.observable('Draft');
+            self.pricingFactorRate  = ko.observable();
             self.selectedCP = ko.observable();
             self.selectedVendor = ko.observable();
             self.assetType = [{value : 'Housing Loan', label : 'Housing Loan'}];
             self.purchaseMode = [{value : 'Direct', label : 'Direct'},{value : 'B2B', label : 'Back to Back'}];
             self.paymentType = [{value : 'PI', label : 'Principal + Interest'}, {value : 'I', label : 'Interest'}];
             self.paymentFrequency = [{value : 'Monthly', label : 'Monthly'}, {value : 'Annually', label : 'Annually'}];
-            self.pricingFactor = [{value : 'Over  Collateralization', label :'Over  Collateralization'}];
-            self.pricingFactorRate = [{value : 'Calculated using highest GIR', label :'Calculated using highest GIR'}];
+            self.pricingFactor = [{value : 'OC', label :'Over  Collateralization'}, {value:'Others', label:'Others'}];
+           // self.pricingFactorRate = [{value : 'Calculated using highest GIR', label :'Calculated using highest GIR'}];
             self.purchaseConsiderationType = [{value: 'Cash', label:'Cash'}];
             self.rateType = [{value : 'fixed', label : 'Fixed'}, {value : 'floating', label : 'Floating'}];
             self.counterPartyType = [{value : 'CPType1', label : 'Counter Party Type 1'}, {value : 'CPType2', label : 'Counter Party Type 2'}];
             self.currency = [{value : 'MYR', label : 'MYR'},{value : 'SGD', label : 'SGD'},{value : 'USD', label : 'USD'}];
             self.selectCurrencyVal = ko.observable('Please Select');
+            self.pricingFactorOptionChangedHandler  = function(event,data) {
+                if(data.option=='value')
+                {
+                    if (data.value == "OC") {
+                        self.pricingFactorRate('Calculated using highest GIR');
+                    }
+                    else {
+                        self.pricingFactorRate('');
+                    }
+                }
+            };
 
-                       
+
+            
             function mainViewModel() {
                 var CPArray = [
                 {CPCode: 'CIMBSD', CPName: 'CIMB Bank Sub Debt', CPGroup:'CIMB', CPType:'FI', FRGroup:'Qtr Ending Month 3,6,9,12'},
@@ -86,10 +101,19 @@ define(['ojs/ojcore', 'knockout', 'jquery',
                 };
                 validateClick =  function(item) {
                     $("#btn_validate").css('display','none');
-                    $("#btn_save").css('display','flex');
+                    $("#btn_next").css('display','flex');
                 };
+                nextClick =  function(item) {
+                    $("#btn_next").attr('disabled','disabled');
+                    $("#btn_upload_loan").css('display','flex');
+                    $("#btn_temp_pc").css('display','flex');
+                    self.PIstatus('Validated');
+                };
+                redirectToUploadLoan= function(item) {
+                  oj.Router.rootInstance.go('upload-loan-detail');
+                }
                          
-
+            
 
             }
         

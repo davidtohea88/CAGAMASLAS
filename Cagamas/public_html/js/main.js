@@ -74,6 +74,7 @@ require(['ojs/ojcore',
             router.configure({
                 'masterdatas': {label: 'Master Data List', isDefault:true},
                 'pwr': {label: 'Purchase With Recourse'},
+                'upload-loan-detail': {label: 'Upload Loan Detail'},
                 'pwor': {label: 'Purchase Without Recourse'},
                 'origination-list': {label: 'Origination List'},
                 'origination-pi': {label: 'Origination Preliminary Indication',

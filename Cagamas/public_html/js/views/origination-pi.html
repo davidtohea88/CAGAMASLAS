@@ -2,13 +2,17 @@
 <div class="page-title"><label class="white-color" data-bind="text:header"></label>
 </div>
 <div class="page-button-wrapper" id='buttons-container'>
-<button id= "btn_next" data-bind="ojComponent: { component: 'ojButton', label: 'Next' }">
+<button class="hidden" id= "btn_temp_pc" data-bind="ojComponent: { component: 'ojButton', label: 'Create Temporary Purchase Contract' }">
     </button>
-<button id= "btn_validate" data-bind="click: validateClick, ojComponent: { component: 'ojButton', label: 'Validate' }">
+<button class="hidden" id= "btn_upload_loan" data-bind="click: redirectToUploadLoan, ojComponent: { component: 'ojButton', label: 'Upload Loan Details' }">
+    </button>
+<button class="hidden" id= "btn_next" data-bind="click: nextClick, ojComponent: { component: 'ojButton', label: 'Next' }">
+    </button>
+<button  id= "btn_validate" data-bind="click: validateClick, ojComponent: { component: 'ojButton', label: 'Validate' }">
     </button>
 <button id= "btn_cancel" data-bind="ojComponent: { component: 'ojButton', label: 'Cancel' }">
     </button>
-<button class="hidden" id= "btn_save" data-bind="ojComponent: { component: 'ojButton', label: 'Save' }">
+<button  id= "btn_save" data-bind="ojComponent: { component: 'ojButton', label: 'Save' }">
     </button>
 </div>
 
@@ -175,7 +179,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B8control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select', options: pricingFactor}">
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select', options: pricingFactor, optionChange: pricingFactorOptionChangedHandler}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -184,7 +188,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B9control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select', options: pricingFactorRate}">
+                   data-bind="ojComponent: {component: 'ojInputText', value: pricingFactorRate}">
           </div>
         </div>
       </div>
@@ -257,7 +261,7 @@
           <div class="oj-flex-item">
             <input id="C6control" 
                    data-bind="ojComponent: {component: 'ojInputText', 
-                                            value:'Draft', required: false, disabled:true}">
+                                            value: PIstatus, required: false, disabled:true}">
           </div>
         </div>
       </div>
