@@ -1287,4 +1287,9 @@ html:not([dir="rtl"])  .oj-button-text-icon-start .oj-button-icon.oj-start
     margin-left:0.85rem;
     margin-right:0.1rem;
 }
+
+.hidden
+{
+display: none;
+}
 /*Monica edit end*/
