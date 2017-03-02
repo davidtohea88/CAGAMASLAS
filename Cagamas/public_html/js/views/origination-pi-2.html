@@ -2,13 +2,13 @@
 <div class="page-title"><label class="white-color" data-bind="text:header"></label>
 </div>
 <div class="page-button-wrapper" id='buttons-container'>
-<button class="hidden" id= "btn_temp_pc" data-bind="ojComponent: { component: 'ojButton', label: 'Create Temporary Purchase Contract' }">
+<button  id= "btn_temp_pc" data-bind="click: createPC, ojComponent: { component: 'ojButton', label: 'Create Temporary Purchase Contract' }">
     </button>
-<button class="hidden" id= "btn_upload_loan" data-bind="click: redirectToUploadLoan, ojComponent: { component: 'ojButton', label: 'Upload Loan Details' }">
+<button  id= "btn_upload_loan" data-bind="click: redirectToUploadLoan, ojComponent: { component: 'ojButton', label: 'Upload Loan Details' }">
     </button>
-<button class="hidden" id= "btn_next" data-bind="click: nextClick, ojComponent: { component: 'ojButton', label: 'Next' }">
+<button id= "btn_next" disabled="disabled" data-bind="click: nextClick, ojComponent: { component: 'ojButton', label: 'Next' }">
     </button>
-<button  id= "btn_validate" data-bind="click: validateClick, ojComponent: { component: 'ojButton', label: 'Validate' }">
+<button  class="hidden" id= "btn_validate" data-bind="click: validateClick, ojComponent: { component: 'ojButton', label: 'Validate' }">
     </button>
 <button id= "btn_cancel" data-bind="ojComponent: { component: 'ojButton', label: 'Cancel' }">
     </button>
@@ -46,7 +46,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="A3control" type="text"
-                   data-bind="ojComponent: {component: 'ojInputText', value: selectedCP,
+                   data-bind="ojComponent: {component: 'ojInputText', value: 'CIMB Bank Sub Debt',
                                             rootAttributes: {
                                                style:'max-width:72%'
                                             }}">
@@ -63,7 +63,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="A4control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select', options: assetType}">
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Housing Loan', options: assetType}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -72,7 +72,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="A5control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select', options : purchaseMode, optionChange: purchaseModeOptionChangedHandler}">
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Direct', options : purchaseMode, optionChange: purchaseModeOptionChangedHandler}">
           </div>
         </div>
          <div class="oj-flex hidden" id="row_vendor"> 
@@ -102,7 +102,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B1control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value: selectCurrencyVal, options: currency, optionChange: currencyOptionChangedHandler }">
+                   data-bind="ojComponent: {component: 'ojCombobox', value: 'MYR', options: currency, optionChange: currencyOptionChangedHandler }">
           </div>
         </div>
         <div class="oj-flex hidden" id="row_foreignCurrencyAmount"> 
@@ -143,7 +143,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B4control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:'-'}">
+                   data-bind="ojComponent: {component: 'ojInputText', value:'50,000'}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -152,7 +152,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B5control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select', options: paymentType}">
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Principle + Interest', options: paymentType}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -161,7 +161,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B6control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select', options : rateType}">
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Fixed', options : rateType}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -170,7 +170,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B7control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select', options: paymentFrequency}">
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Monthly', options: paymentFrequency}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -179,7 +179,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B8control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value:selectedPricingFactor, options: pricingFactor, optionChange: pricingFactorOptionChangedHandler}">
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Over Collateralization', options: pricingFactor, optionChange: pricingFactorOptionChangedHandler}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -188,7 +188,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B9control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value: pricingFactorRate}">
+                   data-bind="ojComponent: {component: 'ojInputText', value: 'Calculated using highest GIR'}">
           </div>
         </div>
       </div>
@@ -201,7 +201,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="C1control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select', options: purchaseConsiderationType}">
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Cash', options:purchaseConsiderationType}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -220,11 +220,10 @@
           </div>
           <div class="oj-flex-item">
             <input id="C3control" 
-                   data-bind="ojComponent: {component: 'ojInputText',
+                   data-bind="ojComponent: {component: 'ojInputText', value:'3',
                                             rootAttributes: {
                                                style:'max-width:20%'
-                                            }, 
-                                            value:'', required: false}">
+                                            }, required: false}">
             <label for="C3control">Years</label>
 
           </div>
@@ -235,11 +234,10 @@
           </div>
           <div class="oj-flex-item">
             <input id="C3control" 
-                   data-bind="ojComponent: {component: 'ojInputText',
+                   data-bind="ojComponent: {component: 'ojInputText', value:'6',
                                             rootAttributes: {
                                                style:'max-width:20%'
-                                            }, 
-                                            value:'', required: false}">
+                                            }, required: false}">
             <label for="C3control">Months</label>
 
           </div>
@@ -261,7 +259,7 @@
           <div class="oj-flex-item">
             <input id="C6control" 
                    data-bind="ojComponent: {component: 'ojInputText', 
-                                            value: PIstatus, required: false, disabled:true}">
+                                            value: 'Uploaded', required: false, disabled:true}">
           </div>
         </div>
       </div>

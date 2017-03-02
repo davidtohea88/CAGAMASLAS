@@ -46,7 +46,7 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
                 self.closeCPPopUp = function(){$("#CPDialog").ojDialog("close");return true;};
                 self.openVendorPopUp = function(){$("#VendorDialog").ojDialog("open");return true;};
                 self.closeVendorPopUp = function(){$("#VendorDialog").ojDialog("close");return true;};
-                self.PIstatus = ko.observable('Draft');
+                self.PIstatus = ko.observable('Uploaded');
                 self.pricingFactorRate  = ko.observable();
                 self.selectedCP = ko.observable();
                 self.selectedVendor = ko.observable();
@@ -94,8 +94,6 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
                 {VendorCode: 'V0003', VendorName: 'Vendor C', VendorEmail:'vendor3@email.com', VendorPhone:'6017123456', VendorCPName:'James Lee'}
                 ];                
                 vendorPagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(vendorArray, {idAttribute: 'VendorCode'}));
-                         
-            
                 vendorLookUpClick =  function(item) {
                     self.selectedVendor(item.VendorName);
                     $("#VendorDialog").ojDialog("close");
@@ -108,14 +106,19 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
                     $("#btn_next").attr('disabled','disabled');
                     $("#btn_upload_loan").css('display','flex');
                     $("#btn_temp_pc").css('display','flex');
-                    self.PIstatus('Validated');
+                    self.PIstatus('Uploaded');
                 };
                 redirectToUploadLoan= function(item) {
                   oj.Router.rootInstance.go('upload-loan-detail');
-                }
+                }     
+            
+                createPC = function(item) {
+                  oj.Router.rootInstance.go('origination-pc');
+                }     
+
             }
             
-                 
+               
 
             return mainViewModel;        
                       

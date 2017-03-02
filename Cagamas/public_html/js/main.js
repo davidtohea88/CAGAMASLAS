@@ -88,6 +88,17 @@ require(['ojs/ojcore',
                         router.currentState().value = childRouter;
                     }
                 },
+                'origination-pi-2': {label: 'Origination Preliminary Indication',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
                 'origination-pc': {label: 'Origination Purchase Contract',
                     exit: function () {
                         var childRouter = router.currentState().value;
@@ -100,6 +111,7 @@ require(['ojs/ojcore',
                     }
                 },
                 'mgp': {label: 'MGP'},
+                'rate-is-setup': {label: 'Rate and IS Setup'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 
