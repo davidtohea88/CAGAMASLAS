@@ -117,6 +117,13 @@ require(['ojs/ojcore',
                 'installment-schedule': {label: 'Installment Schedule'},
                 'validate-loan-detail': {label: 'Validate Loan Detail'},
                 'contract-remittance-approval': {label: 'Contract Remittance Approval'},
+                'is-and-simulations': {label: 'IS and Simulations'},
+                'simulations': {label: 'Simulations'},
+                'final-cof': {label: 'Final COF'},
+                'purchase-contract-specific-cof': {label: 'Purchase Contract Specific COF'},
+                'published-rate': {label: 'Published Rate'},
+                'final-cof': {label: 'PC Specific Conversion Final COF'},
+                'pc-specific-conversion-final-cof': {label: 'Final COF'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 

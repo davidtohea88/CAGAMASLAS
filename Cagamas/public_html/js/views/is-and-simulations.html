@@ -1,0 +1,76 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div class="oj-form-layout page-content" id="form-container">
+
+    <h3 class="oj-header-border">Header</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Counter Party Name</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'CIMB Bank', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A5control">Purchase Contract Number</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A5control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'T-127/000/2701/179074/TL1', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+          </div>
+          <div class="oj-flex-item">
+            <button  id= "btn_search" data-bind="ojComponent: { component: 'ojButton', label: 'Search' }"></button>
+            <button  id= "btn_reset" data-bind="ojComponent: { component: 'ojButton', label: 'Reset' }"></button>
+    </div>
+        </div>
+        </div>
+    </div>                               
+  </div>
+</div>
+<div id="pagingControlDemo" class="page-content">
+    <table id="table" summary="Loan Detail" aria-label="Loan Detail"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
+            [{headerText: 'Counter Party', field: 'InstallmentDate'},
+             {headerText: 'Purchase Contract Number', field: 'OpeningBalance'},
+             {headerText: 'Payment Value', field: 'CagamasRate'},
+             {headerText: 'Cagamas Installment', field: 'CagamasInstallment'}, 
+             {headerText: 'Review Date Value', field: 'Principal'}, 
+             {headerText: 'Purchase Date', field: 'InterestPayable'}, 
+             {headerText: 'First Reset Date', field: 'ClosingBalance'}, 
+             {headerText: 'Review Date', field: 'ClosingBalance'}, 
+             {headerText: 'Caga Rate', field: 'ClosingBalance'}, 
+             {headerText: 'Benchmark', field: 'ClosingBalance'}, 
+             {headerText: 'Source', field: 'ClosingBalance'}, 
+             {headerText: 'Margin', field: 'ClosingBalance'}, 
+             {headerText: 'Reset Frequency', field: 'ClosingBalance'}, 
+             {headerText: 'Repayment Frequency', field: 'ClosingBalance'}, 
+             {headerText: 'Repayment Type', field: 'ClosingBalance'}, 
+             {headerText: 'Number of Loan', field: 'ClosingBalance'}, 
+             {headerText: 'Status', field: 'ClosingBalance'},
+             {headerTemplate: 'view_action_hdr', template: 'view_action', style: 'width: 10%;text-align:center;'}], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
+    </div>
+</div>
+
+<script type="text/html" id="view_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Approval
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+        <button id= "btn_Vendor" 
+            data-bind="ojComponent: { component: 'ojButton', label: 'Approval' }">
+        </button>
+    </td>
+</script>
