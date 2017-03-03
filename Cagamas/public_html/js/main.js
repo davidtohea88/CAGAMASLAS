@@ -112,6 +112,7 @@ require(['ojs/ojcore',
                 },
                 'mgp': {label: 'MGP'},
                 'rate-is-setup': {label: 'Rate and IS Setup'},
+                'validate-loan-detail': {label: 'Validate Loan Detail'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 

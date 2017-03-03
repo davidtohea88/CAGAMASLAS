@@ -1257,17 +1257,20 @@ h1,h3
 
 .page-button-wrapper
 {
-    margin: 0px;
+    display:flex;
     padding: 0px 20px;
     font-size:1.429rem;
     clear: both;
     height:50px;
+    margin: 0px auto;
 }
-
 .page-button-wrapper > button
 {
-    float:right;
-    margin: 0px 5px;
+    margin:0 10px;
+}
+.page-button-inner
+{
+margin : auto;
 }
 .page-content
 {
@@ -1292,4 +1295,50 @@ html:not([dir="rtl"])  .oj-button-text-icon-start .oj-button-icon.oj-start
 {
 display: none;
 }
+
+.centered-flex
+{
+    align-content:center;
+}
 /*Monica edit end*/
+
+
+/*Kevin edit start*/
+.two-cols{
+    width:50%;
+}
+.three-cols{
+    width:33.333333%;
+    min-width:33.333333%;
+    max-width:33.333333%;
+}
+.four-cols{
+    width:25%;
+    min-width:25%;
+    max-width:25%;
+}
+.action-button{
+    width:19%;
+    height:60px;
+    margin:5px 1%;
+}
+.action-button .oj-button-text{
+    white-space: normal;
+}
+.action-button-2{
+    width:32%;
+    height:60px;
+    margin:5px 1%;
+}
+.action-button-2 .oj-button-text{
+    white-space: normal;
+}
+.blank-footer{
+    height:50px;   
+}
+.center {
+    margin: auto;
+    width: 90%;
+    padding: 5px;
+}
+/*Kevin edit end*/

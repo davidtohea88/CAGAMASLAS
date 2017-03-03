@@ -36,9 +36,31 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
             /* 
              * Your application specific code will go here
              */
-
+            function updateReviewDateValue(self)
+            {
+                var d = new Date(self.purchaseDateValue());
+                var year = d.getFullYear();
+                var month = d.getMonth();
+                var day = d.getDate();
+                var c = new Date(year + parseInt(self.tenureYear()), month+parseInt(self.tenureMonth()), day);
+                self.reviewDateValue(oj.IntlConverterUtils.dateToLocalIso(c));
+            }
+            
             function mainViewModel() {
                 var self = this;
+                self.tenureYear = ko.observable(1);
+                self.tenureMonth = ko.observable(0);
+                self.reviewDateValue = ko.observable(0);
+                self.purchaseDateValue = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+                self.purchaseDateValue.subscribe(function(newValue) {
+                    updateReviewDateValue(self);
+                });                
+                self.tenureYear.subscribe(function() {
+                    updateReviewDateValue(self);
+                });
+                self.tenureMonth.subscribe(function() {
+                    updateReviewDateValue(self);
+                });
                 self.pricingFactor = [{value : 'OC', label :'Over  Collateralization'}, {value:'Others', label:'Others'}];
                 self.selectedPricingFactor = ko.observable('Please Select');
                 self.header = "Preliminary Indication";
@@ -52,8 +74,7 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
                 self.selectedVendor = ko.observable();
                 self.assetType = [{value : 'Housing Loan', label : 'Housing Loan'}];
                 self.purchaseMode = [{value : 'Direct', label : 'Direct'},{value : 'B2B', label : 'Back to Back'}];
-                self.paymentType = [{value : 'PI', label : 'Principal + Interest'}, {value : 'I', label : 'Interest'}];
-                self.paymentFrequency = [{value : 'Monthly', label : 'Monthly'}, {value : 'Annually', label : 'Annually'}];
+                self.paymentType = [{value : 'PI', label : 'Principal + Interest'}, {value : 'I', label : 'Interest'}, {value:'H', label:'Hybrid'}];                self.paymentFrequency = [{value : 'Monthly', label : 'Monthly'}, {value : 'Annually', label : 'Annually'}];
                // self.pricingFactorRate = [{value : 'Calculated using highest GIR', label :'Calculated using highest GIR'}];
                 self.purchaseConsiderationType = [{value: 'Cash', label:'Cash'}];
                 self.rateType = [{value : 'fixed', label : 'Fixed'}, {value : 'floating', label : 'Floating'}];
@@ -104,8 +125,8 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
                 };
                 nextClick =  function(item) {
                     $("#btn_next").attr('disabled','disabled');
-                    $("#btn_upload_loan").css('display','flex');
-                    $("#btn_temp_pc").css('display','flex');
+                    $("#btn_upload_loan").show();
+                    $("#btn_temp_pc").show();
                     self.PIstatus('Uploaded');
                 };
                 redirectToUploadLoan= function(item) {

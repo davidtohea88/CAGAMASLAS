@@ -1,5 +1,5 @@
     var redirectToPI = function(item) {
-        history.pushState(null, '', 'index.html?root=origination-pi-2&id=' + item );
+        history.pushState(null, '', 'index.html?root=origination-pi-2' );
         oj.Router.sync();
     };
 
