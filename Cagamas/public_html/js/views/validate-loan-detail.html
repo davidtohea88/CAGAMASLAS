@@ -1,0 +1,97 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div class="oj-form-layout page-content" id="form-container">
+  <div class="oj-form oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">  
+
+    <h3 class="oj-header-border">Upload</h3>
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <input id="Uploadcontrol" 
+               data-bind="ojComponent: {component: 'ojInputText', value:''}">
+      </div>
+      <div class="oj-flex-item">
+        <button  id= "btn_save" data-bind="ojComponent: { component: 'ojButton', label: 'Upload' }">
+    </button>
+        <button  id= "btn_save" data-bind="click:function(){redirectToPI('LoanUploaded')}, ojComponent: { component: 'ojButton', label: 'Back' }">
+    </button>
+      </div>
+    </div>
+    <h3 class="oj-header-border">Line</h3>
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+          <div class='oj-flex-bar-middle'>                 
+          <!-- You need to set the aria-labelledby attribute to make 
+          this accessible. -->
+          <div data-bind="ojComponent: {component: 'ojRadioset'}" 
+               aria-labelledby="mainlabelid">
+              <span class="oj-choice-row-inline">
+                  <input id="rbtn_p" type="radio" 
+                         value="P" name="fixedrateoptions">
+                  <label for="rbtn_p">Valid</label>
+              </span>
+              <span class="oj-choice-row-inline">
+                  <input id="rbtn_cp" type="radio" 
+                         value="CP" name="fixedrateoptions">
+                  <label for="rbtn_cp">Valid Not Considered</label>
+              </span>
+              <span class="oj-choice-row-inline">
+                  <input id="rbtn_i" type="radio" 
+                         value="CP" name="fixedrateoptions">
+                  <label for="rbtn_i">Invalid</label>
+              </span>
+              <span class="oj-choice-row-inline">
+                  <input id="rbtn_a" type="radio" 
+                         value="CP" name="fixedrateoptions">
+                  <label for="rbtn_a">All</label>
+              </span>
+          </div>
+        </div>
+          </div>
+          <div class="oj-flex-item">
+          <button  id= "btn_1" data-bind="ojComponent: { component: 'ojButton', label: 'Filter Nearest Purchase Amount' }">
+    </button>
+          <button  id= "btn_2" data-bind="ojComponent: { component: 'ojButton', label: 'Move' }">
+    </button>
+          <button  id= "btn_3" data-bind="ojComponent: { component: 'ojButton', label: 'Export' }">
+    </button>
+          <button  id= "btn_4" data-bind="ojComponent: { component: 'ojButton', label: 'Upload Data' }">
+    </button>
+          <button  id= "btn_5" data-bind="ojComponent: { component: 'ojButton', label: 'Revalidate' }">
+    </button>
+          </div>      
+    </div>
+  </div>
+</div>
+<div id="pagingControlDemo" class="page-content">
+    <table id="table" summary="Loan Detail" aria-label="Loan Detail"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
+            [{headerText: 'Loan Reference Number', field: 'LoanRefNum'},
+             {headerText: 'Branch Code', field: 'BranchCode'},
+             {headerText: 'Book Balance', field: 'BookBalance'},
+             {headerText: 'Forecasted Book Balance', field: 'ForecastedBookBalance'},
+             {headerText: 'Mortgage Rate', field: 'MortgageRate'},
+             {headerText: 'Mortgage Installment', field: 'MortgageInstallment'},
+             {headerText: 'Months in Arrear(s)', field: 'Month'}, 
+             {headerText: 'Initial Purchase Value', field: 'InitialPurchaseValue'}, 
+             {headerText: 'Deferred Purchase Value', field: 'DeferredPurchaseValue'}, 
+             {headerText: 'Cagamas Installment', field: 'CagamasInstallment'}, 
+             {headerText: 'Review Date Value', field: 'ReviewDateValue'}, 
+             {headerText: 'Status', field: 'Status'}], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
+    </div>
+</div>
+
+<script type="text/html" id="view_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+        <button id= "btn_PI"
+            data-bind="click: $parent.buttonClick, 
+                       ojComponent: { component: 'ojButton', label: 'View Details' }">
+        </button>
+    </td>
+</script>
