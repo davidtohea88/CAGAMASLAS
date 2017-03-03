@@ -146,8 +146,6 @@
                                    data-bind="ojComponent: {component: 'ojInputDate', value: purchaseDate, required: true}"/>
                         </div>
                     </div>
-                    <span class="oj-label">Current component value is: </span>
-                    <span data-bind="text: reviewDate"></span>
                     <div class="oj-flex">
                         <div class="oj-flex-item">
                             <div class="oj-label oj-component oj-combobox-label">
@@ -534,8 +532,8 @@
             </div>
             <div>
                 <button id= "button" class="action-button"
-                        data-bind="click: rateAndIsSetup, 
-                            ojComponent: {component: 'ojButton', label: 'PWR TERM SHEET', required: false, disabled:true}">
+                        data-bind="click: redirectToPWRTermSheet, 
+                            ojComponent: {component: 'ojButton', label: 'PWR TERM SHEET', disabled:false}">
                 </button>
                 <button id= "button" class="action-button"
                         data-bind="click: rateAndIsSetup, 
@@ -552,16 +550,16 @@
             </div>
             <div>
                 <button id= "button" class="action-button"
-                        data-bind="click: rateAndIsSetup, 
-                            ojComponent: {component: 'ojButton', label: 'CONTRACT REMITTANCE', required: false, disabled:true}">
+                        data-bind="click: onClickContractRemittance, 
+                            ojComponent: {component: 'ojButton', label: 'CONTRACT REMITTANCE', disabled:true}">
                 </button>
                 <button id= "button" class="action-button"
                         data-bind="click: onClickWithdraw, 
                             ojComponent: {component: 'ojButton', label: 'WITHDRAW', required: false, disabled:false}">
                 </button>
                 <button id= "button" class="action-button"
-                        data-bind="click: rateAndIsSetup, 
-                            ojComponent: {component: 'ojButton', label: 'CANCEL', required: false, disabled:true}">
+                        data-bind="click: onClickCancel, 
+                            ojComponent: {component: 'ojButton', label: 'CANCEL', required: false, disabled:false}">
                 </button>
             </div>
             </div>
@@ -570,28 +568,71 @@
       </div>
       <div style="display:none" id="WithdrawDialog" title="Withdraw" 
            data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
-                      rootAttributes: { style: 'width:900px; height: 500px;'}}">
+                      rootAttributes: { style: 'width:900px; height: 400px;'}}">
         <div class="oj-dialog-body">
             <div id="CounterPartyPopUp">
             <div class="oj-flex">
-                <div class="oj-flex-item">
+                <div style="width:25%;">
                     <label for="inputcontrol">Commitment Fee</label>
                 </div>
-                <div class="oj-flex-item">
+                <div style="width:75%;">
                     <input id="inputcontrol"
-                           data-bind="ojComponent: {component: 'ojInputText', value: 'value'}"/>
+                           data-bind="ojComponent: {component: 'ojInputText', value: '500.000', readOnly: true}"/>
                 </div>
             </div>
-        <div class="oj-flex">
-            <div class="oj-flex-item">
-              <label for="textareacontrol">Reason</label>
-            </div>
-            <div class="oj-flex-item">
-              <textarea id="textareacontrol" rows="6"
-                        data-bind="ojComponent: {component: 'ojTextArea', 
-                                                 value: '...',}"></textarea>
-            </div>
+            <div class="oj-flex">
+                <div style="width:25%;">
+                  <label for="textareacontrol">Reason</label>
+                </div>
+                <div style="width:75%;">
+                  <textarea id="textareacontrol" rows="6"
+                            data-bind="ojComponent: {component: 'ojTextArea', 
+                                                     value: '...', rootAttributes: {style:'max-width:30em;'}}"></textarea>
+                </div>
+              </div>
+              <div class="oj-flex" style='margin:10px 0 10px auto; width:45%;'>
+                <button id= "button" style='margin:5px;'
+                        data-bind="click: onClickWithdrawConfirm, 
+                            ojComponent: {component: 'ojButton', label: 'WITHDRAW' }">
+                </button>
+                <button id= "button" style='margin:5px;'
+                        data-bind="click: onClickWithdrawCancel, 
+                            ojComponent: {component: 'ojButton', label: 'CANCEL' }">
+                </button>
+              </div>
           </div>
+          </div>
+      </div>
+      <div style="display:none" id="CancelDialog" title="Cancel" 
+           data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+                      rootAttributes: { style: 'width:900px; height: 400px;'}}">
+        <div class="oj-dialog-body">
+            <div id="CounterPartyPopUp">
+            <div class="oj-flex">
+                <div>
+                    <label for="inputcontrol">Are you sure you want to cancel this Temporary Purchase Contract?</label>
+                </div>
+            </div>
+            <div class="oj-flex">
+                <div style="width:25%;">
+                  <label for="cancelReasonControl">Reason</label>
+                </div>
+                <div style="width:75%;">
+                  <textarea id="cancelReasonControl" rows="6"
+                            data-bind="ojComponent: {component: 'ojTextArea', 
+                                                     value: '...', rootAttributes: {style:'max-width:30em;'}}"></textarea>
+                </div>
+              </div>
+              <div class="oj-flex" style='margin:10px 0 10px auto; width:45%;'>
+                <button id= "button" style='margin:5px;'
+                        data-bind="click: onClickCancelConfirm, 
+                            ojComponent: {component: 'ojButton', label: 'YES' }">
+                </button>
+                <button id= "button" style='margin:5px;'
+                        data-bind="click: onClickCancelCancel, 
+                            ojComponent: {component: 'ojButton', label: 'NO' }">
+                </button>
+              </div>
           </div>
           </div>
       </div>

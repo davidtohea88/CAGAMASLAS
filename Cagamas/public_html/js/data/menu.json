@@ -45,9 +45,9 @@
          },
          {
             "attr":{  
-               "id":"final-cof",
-               "name":"Final COF",
-               "view":"final-cof"
+               "id":"weekly-cof",
+               "name":"Weekly COF",
+               "view":"weekly-cof"
             }
          },
          {

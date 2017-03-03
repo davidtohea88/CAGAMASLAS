@@ -1300,6 +1300,11 @@ display: none;
 {
     align-content:center;
 }
+
+.oj-header-border
+{
+text-transform:uppercase;
+}
 /*Monica edit end*/
 
 
@@ -1336,9 +1341,14 @@ display: none;
 .blank-footer{
     height:50px;   
 }
-.center {
+.text-center{
+    text-align: -webkit-center;
     margin: auto;
-    width: 90%;
-    padding: 5px;
+}
+.currency-right input{
+    text-align:right;
+}
+.currency-right::before { 
+    content: ":";
 }
 /*Kevin edit end*/

@@ -73,8 +73,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
         self.pricingFactorPerc=ko.observable();
         pricingFactorPerc='1';
         
-        self.onClickWithdraw = function(){$("#WithdrawDialog").ojDialog("open");return true;};
-        
         function mainModel(){
             var self = this;
             self.header = "Purchase Contract";
@@ -85,10 +83,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
             }
             
             self.rateAndIsSetup = function(data, event){};
-            self.redirectToRateISSetup= function(item) {
-                  oj.Router.rootInstance.go('rate-is-setup');
-                }
-
+            self.redirectToRateISSetup = function(item){
+              oj.Router.rootInstance.go('rate-is-setup');
+            }
+            self.redirectToPWRTermSheet = function(item){
+              oj.Router.rootInstance.go('pwr-term-sheet');
+            }
+            
+            self.onClickContractRemittance = function(){$("#WithdrawDialog").ojDialog("open");return true;};
+            self.onClickWithdraw = function(){$("#WithdrawDialog").ojDialog("open");return true;};
+            self.onClickCancel = function(){$("#CancelDialog").ojDialog("open");return true;};
+            //Withdraw popup dialog buttons
+            self.onClickWithdrawConfirm = function(item){};
+            self.onClickWithdrawCancel = function(item){};
+            
+            //Cancel popup dialog buttons
+            self.onClickCancelConfirm = function(item){};
+            self.onClickCancelCancel = function(item){};
         }
         
         return mainModel;

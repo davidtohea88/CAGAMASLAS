@@ -18,6 +18,81 @@
     </div>                               
   </div>
   
+        <h3 class="oj-header-border">CREDIT LIMIT</h3>
+        <div class="oj-flex" id="pwr-row-3">
+            <div class="oj-form-layout" style="width:100%;">
+                <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+                <div class="oj-flex-item">
+                  <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="pwrLimit">PWR Limit (RM Million)</label>
+                      </div>
+                      <div class="oj-flex-item currency-right">
+                        <input id="pwrLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: pwrLimit, disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="currUtilization">Current Utilization (RM Million)</label>
+                      </div>
+                      <div class="oj-flex-item currency-right">
+                        <input id="currUtilization"
+                               data-bind="ojComponent: {component: 'ojInputText', value: currUtilization, disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="avlLimit">Available Limit (RM Million)</label>
+                      </div>
+                      <div class="oj-flex-item currency-right">
+                        <input id="avlLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: avlLimit, disabled:true}"/>
+                      </div>
+                    </div>
+                    </div>
+                </div>                               
+              </div>
+            </div>
+        </div>
+        <div class="page-content oj-flex" id="pwr-row-4">
+            <table id="table"
+                    data-bind="ojComponent: {component: 'ojTable', 
+                            data: pwrDatasource, 
+                            columns: [{headerText: 'PWR Counterparty Type', 
+                                       field: 'pwrType'},
+                                      {headerText: 'Concentration Limit', 
+                                       field: 'concentrationLimit'},
+                                      {headerText: 'Exposures as at 31/1/2017', 
+                                       field: 'exposures'}],
+                                rootAttributes: {style:'width:100%;'}}">
+            </table>
+        </div>
+        <br>
+        <div class="page-content oj-flex" id="pwr-row-5">
+            <div style="width:100%;">
+                <table id="table"
+                        data-bind="ojComponent: {component: 'ojTable', 
+                                data: underlyingDatasource, 
+                                columns: [{headerText: 'Underlying Asset Type', 
+                                           field: 'underlyingType'},
+                                          {headerText: 'Concentration Limit', 
+                                           field: 'concentrationLimit'},
+                                          {headerText: 'Exposures as at 31/1/2017', 
+                                           field: 'exposures'}],
+                                rootAttributes: {style:'width:100%;'}}">
+                </table>
+            </div>
+            <div class="oj-flex" style="width:100%;">
+                <div class="two-cols">
+                    * Total Exposures = Total PWR + Total PWOR Outstanding Exposures
+                </div>
+                <div class="two-cols" style="text-align: right;">
+                    Exposures as at 31 January 2017
+                </div>
+            </div>
+        </div>
     <h3 class="oj-header-border">Product</h3>
     <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
     <div class="oj-flex-item">
