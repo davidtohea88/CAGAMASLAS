@@ -1,10 +1,5 @@
-    var redirectToPI = function(item) {
-        history.pushState(null, '', 'index.html?root=origination-pi-2' );
-        oj.Router.sync();
-    };
 
-
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable','ojs/ojdatetimepicker', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset', 'ojs/ojcheckboxset'],
 function(oj, ko, $)
 {
      var self = this;
@@ -22,6 +17,9 @@ function(oj, ko, $)
     ];
     header="Validate Loan Detail";
     pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'LoanRefNum'}));
+    redirectToPC= function(item) {
+      oj.Router.rootInstance.go('origination-pc');
+    }
     
   }
   return viewModel;

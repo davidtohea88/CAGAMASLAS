@@ -28,5 +28,49 @@
          "name":"Purchase Without Recourse",
          "view":"pwor"
       }
+   },
+   {  
+      "attr":{  
+         "id":"tcm",
+         "name":"TCM Access for COF Updates",
+         "view":""
+      },
+      "children":[  
+         {  
+            "attr":{  
+               "id":"is-and-simulations",
+               "name":"IS And Simulations",
+               "view":"is-and-simulations"
+            }
+         },
+         {
+            "attr":{  
+               "id":"final-cof",
+               "name":"Final COF",
+               "view":"final-cof"
+            }
+         },
+         {
+            "attr":{  
+               "id":"purchase-contract-specific-cof",
+               "name":"Purchase Contract Specific COF",
+               "view":"purchase-contract-specific-cof"
+            }
+         },
+         {
+            "attr":{  
+               "id":"published-rate",
+               "name":"Published Rate",
+               "view":"published-rate"
+            }
+         },
+         {
+            "attr":{  
+               "id":"pc-specific-conversion-final-cof",
+               "name":"PC Specific Conversion Final COF",
+               "view":"pc-specific-conversion-final-cof"
+            }
+         }
+      ]
    }
 ]

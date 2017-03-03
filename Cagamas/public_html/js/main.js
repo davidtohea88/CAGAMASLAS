@@ -112,7 +112,11 @@ require(['ojs/ojcore',
                 },
                 'mgp': {label: 'MGP'},
                 'rate-is-setup': {label: 'Rate and IS Setup'},
+                'cos-letter': {label: 'COS Letter'},
+                'cos-form': {label: 'COS Form'},
+                'installment-schedule': {label: 'Installment Schedule'},
                 'validate-loan-detail': {label: 'Validate Loan Detail'},
+                'contract-remittance-approval': {label: 'Contract Remittance Approval'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 
