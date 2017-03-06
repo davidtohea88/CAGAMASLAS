@@ -123,8 +123,8 @@ require(['ojs/ojcore',
                 'weekly-cof': {label: 'Weekly COF'},
                 'purchase-contract-specific-cof': {label: 'Purchase Contract Specific COF'},
                 'published-rate': {label: 'Published Rate'},
-                'final-cof': {label: 'PC Specific Conversion Final COF'},
-                'pc-specific-conversion-final-cof': {label: 'Final COF'},
+                'final-cof': {label: 'Final COF'},
+                'pc-specific-conversion-final-cof': {label: 'PC Specific Conversion Final COF'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 

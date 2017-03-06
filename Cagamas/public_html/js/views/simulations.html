@@ -1,0 +1,199 @@
+<div class="oj-form-layout" id="form-container">
+    <div class="page-title">
+        <label class="white-color" data-bind="text:header"></label>
+    </div>
+    <div class="page-content oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+                   oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">  
+        <div class="oj-flex" id="sims-row-1">
+            <div style="width:40%;">
+                <h3 class="oj-header-border">Simulation</h3>
+                <div class="oj-flex page-content">
+                    <div class="oj-flex-item">
+                        <label for="simulationNameControl">Simulation Name</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="simulationNameControl" type="text"
+                               data-bind="ojComponent: {component: 'ojInputText', value: simulationName,                                                     
+                               rootAttributes: {                                                        
+                               style:'max-width:72%'}}"/>
+                        <button id="buttonCPOpener"
+                                data-bind="click: openSNPopUp, ojComponent: 
+                                {component:'ojButton',icons: {start:'fa fa-search'}}">
+                        </button>
+                    </div>
+                </div>
+                <br>
+                <div class="page-content">
+                    <button id= "button" class="action-button"
+                            data-bind="click: onClickSave, 
+                                ojComponent: {component: 'ojButton', label: 'SAVE', childAttributes:{style:'white-space: normal;'}}">
+                    </button>
+                    <button id= "button" class="action-button"
+                            data-bind="click: onClickExport, 
+                                ojComponent: {component: 'ojButton', label: 'EXPORT', childAttributes:{style:'white-space: normal;'}}">
+                    </button>
+                    <button id= "button" class="action-button"
+                            data-bind="click: onClickBack, 
+                                ojComponent: {component: 'ojButton', label: 'BACK', childAttributes:{style:'white-space: normal;'}}">
+                    </button>
+                </div>
+            </div>
+            <div style="width:60%;">
+                <h3 class="oj-header-border">Parameter</h3>
+                <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">
+                    <div class="oj-flex-item">
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Tenure</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value: tenureYear, rootAttributes: {style:'width:20%; min-width:20%'}}"
+                                           type="number"/>
+                                     Years 
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value: tenureMonth, rootAttributes: {style:'width:20%; min-width:20%'}}"
+                                           type="number"/>
+                                     Months
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="interestRate">Interest Rate</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="interestRate"
+                                           data-bind="ojComponent: {component: 'ojInputText', value: interestRate}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="selectPaymentType">Payment Type</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <select id="selectPaymentType" required
+                                            data-bind="ojComponent: {component: 'ojSelect', options: paymentType, required: true}"></select>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="selectRateType">Rate Type</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <select id="selectRateType" required
+                                            data-bind="ojComponent: {component: 'ojSelect', options: rateType, required: true}"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3 class="oj-header-border">Simulation Installment Schedule</h3>
+        <div class="oj-flex" id="sims-row-2">
+            <div style="width:100%;">
+                <div class="oj-flex" id="sim-row-1">
+                    <div class="page-content three-cols">
+                        <div class="oj-flex-item">
+                            <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <div class="oj-label oj-component oj-inputdate-label">
+                                            <div class="oj-label-group">
+                                                <label for="purchaseDate">Purchase Date</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <input id="purchaseDate"
+                                               data-bind="ojComponent: {component: 'ojInputDate', value: purchaseDate}"/>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <div class="oj-label oj-component oj-inputdate-label">
+                                            <div class="oj-label-group">
+                                                <label for="reviewDate">Review Date</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <input id="reviewDate"
+                                               data-bind="ojComponent: {component: 'ojInputDate', value: reviewDate}"/>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label for="purcContractValue">Purchase Contract Value</label>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <input id="purcContractValue"
+                                               data-bind="ojComponent: {component: 'ojInputText', value: purcContractValue}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-content three-cols">
+                        <div class="oj-flex-item">
+                            <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label for="cagamasRate">Cagamas Rate</label>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <input id="cagamasRate"
+                                               data-bind="ojComponent: {component: 'ojInputText', value: cagamasRate}"/>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label for="reviewDateValue">Review Date Value</label>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <input id="reviewDateValue"
+                                               data-bind="ojComponent: {component: 'ojInputText', value: reviewDateValue}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex" id="sim-row-2">
+                    <table id="table"
+                           data-bind="ojComponent: {component: 'ojTable',data: datasource,
+                           columns: [{headerText: 'Installment Date', field: 'InstallmentDate'},
+                                    {headerText: 'Opening Balance',field: 'OpeningBalance'},
+                                    {headerText: 'Cagamas Rate',field: 'CagamasRate'},
+                                    {headerText: 'Mortage Installment', field: 'MortageInstallment'},
+                                    {headerText: 'Deferred Purchase Value',field: 'DeferredPurchaseValue'},
+                                    {headerText: 'Cagamas Installment',field: 'CagamasInstallment'},
+                                    {headerText: 'Principal', field: 'Principal'},
+                                    {headerText: 'Interest Payable',field: 'InterestPayable'},
+                                    {headerText: 'Closing Balance',field: 'ClosingBalance'},
+                                    {headerText: 'TOTALS',field: 'Totals'}],
+                            rootAttributes: {'style':'height: 300px;'}}">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

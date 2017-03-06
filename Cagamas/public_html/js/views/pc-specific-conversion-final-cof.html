@@ -1,0 +1,225 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div class="oj-form-layout page-content" id="form-container">
+
+    <h3 class="oj-header-border">Purchase Contract Specific COF</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Counterparty Name</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:selectedCP}">
+                   <button id="buttonCPOpener" 
+                data-bind="click: openCPPopUp, ojComponent: {
+                    component:'ojButton',
+                    icons: {start:'fa fa-search'}
+                }"></button>
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A5control">Purchase Contract Number</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A5control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:''}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+          </div>
+          <div class="oj-flex-item">
+            <button  id= "btn_search" data-bind="ojComponent: { component: 'ojButton', label: 'Search' }"></button>
+            <button  id= "btn_reset" data-bind="ojComponent: { component: 'ojButton', label: 'Reset' }"></button>
+    </div>
+        </div>
+        </div>
+    </div>                               
+  </div>
+ <div class="oj-flex">
+          <div class="oj-flex-item">
+
+          <button  id= "btn_1" data-bind="ojComponent: { component: 'ojButton', label: 'Upload' }">
+    </button>
+          <button  id= "btn_2" data-bind="ojComponent: { component: 'ojButton', label: 'Save' }">
+    </button>
+          <button  id= "btn_3" data-bind="ojComponent: { component: 'ojButton', label: 'Cancel' }">
+    </button>
+          </div>      
+    </div>
+    <div id="pagingControlDemo" >
+
+    <table id="table" summary="Loan Detail" aria-label="Loan Detail"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
+            [
+            {headerTemplate: 'cp_hdr', template: 'cp_item', style: 'width: 25%;text-align:center;'},
+            {headerTemplate: 'pcnum_hdr', template: 'pcnum_item', style: 'width: 18%;text-align:center;'},
+            {headerText: 'Date', field: 'Date'},
+            {headerTemplate: 'benchmark_hdr', template: 'benchmark_item'},
+            {headerTemplate: 'benchmark_source_hdr', template: 'benchmark_source_item'},
+            {headerTemplate: 'type_hdr', template: 'type_item',style: 'width: 8%;text-align:center;'},
+            {headerTemplate: 'new_rate_type_hdr', template: 'new_rate_type_item',style: 'width: 8%;text-align:center;'},
+            {headerTemplate: 'Final_COF_hdr', template: 'Final_COF_item'},
+            {headerTemplate: 'margin_hdr', template: 'margin_item'},
+            {headerTemplate: 'action_hdr', template: 'action_item'}
+            ], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
+    </div>
+</div>
+</div>
+
+<script type="text/html" id="cp_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Counterparty   
+    </th>
+</script>
+<script type="text/html" id="cp_item">
+    <td >
+         <input id="A4control"  style="border-width:1px;width:60%"
+                   data-bind="ojComponent: {component: 'ojInputText', value:selectedCP}">
+                   <button id="buttonCPOpener" style="margin-left:-20%;"
+                data-bind="click: openCPPopUp, ojComponent: {
+                    component:'ojButton',
+                    icons: {start:'fa fa-search'}
+                }"></button>
+    </td>
+</script>
+
+<script type="text/html" id="pcnum_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Purchase Contract Number
+    </th>
+</script>
+<script type="text/html" id="pcnum_item">
+    <td >
+         <input id="A4control"  style="border-width:1px;width:70%"
+                   data-bind="ojComponent: {component: 'ojInputText', value:selectedCP}">
+                   <button id="buttonCPOpener" style="margin-left:-15%;"
+                data-bind="click: openCPPopUp, ojComponent: {
+                    component:'ojButton',
+                    icons: {start:'fa fa-search'}
+                }"></button>
+    </td>
+</script>
+
+<script type="text/html" id="type_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Current Rate Type
+    </th>
+</script>
+<script type="text/html" id="type_item">
+    <td><label>Fixed</label></td>
+</script>
+
+<script type="text/html" id="new_rate_type_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        New Rate Type
+    </th>
+</script>
+<script type="text/html" id="new_rate_type_item">
+    <td><label>Floating</label></td>
+</script>
+
+<script type="text/html" id="benchmark_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Benchmark
+    </th>
+</script>
+<script type="text/html" id="benchmark_item">
+    <td>
+        <input id="C1control" style="border:1px solid #dfe4e7 !important; "
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select',
+                                    rootAttributes: {style:'max-width:20em'}}">
+    </td>
+</script>
+
+<script type="text/html" id="benchmark_source_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Benchmark Source
+    </th>
+</script>
+<script type="text/html" id="benchmark_source_item">
+    <td>
+        <input id="C1control" style="border:1px solid #dfe4e7 !important; "
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select',
+                                    rootAttributes: {style:'max-width:20em'}}">
+    </td>
+</script>
+
+<script type="text/html" id="tenure_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Tenure
+    </th>
+</script>
+<script type="text/html" id="tenure_item">
+    <td>
+        <input id="C1control" style="border:1px solid #dfe4e7 !important; "
+                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select',  options: tenure,
+                                    rootAttributes: {style:'max-width:20em'}}">
+    </td>
+</script>
+
+
+<script type="text/html" id="benchmark_rate_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Benchmark Rate
+    </th>
+</script>
+<script type="text/html" id="benchmark_rate_item">
+    <td>
+         <input id="rate1" style="border-width:1px;"
+                   data-bind="ojComponent: {component: 'ojInputText', 
+                                            value:'', required: false}">
+    </td>
+</script>
+
+<script type="text/html" id="spread_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Spread
+    </th>
+</script>
+<script type="text/html" id="spread_item">
+    <td>
+         <input id="rate1" style="border-width:1px;"
+                   data-bind="ojComponent: {component: 'ojInputText', 
+                                            value:'', required: false}">
+    </td>
+</script>
+
+<script type="text/html" id="Final_COF_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Final COF
+    </th>
+</script>
+<script type="text/html" id="Final_COF_item">
+    <td>
+         <input id="rate1" style="border-width:1px;"
+                   data-bind="ojComponent: {component: 'ojInputText', 
+                                            value:'', required: false}">
+    </td>
+</script>
+
+
+<script type="text/html" id="margin_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Margin
+    </th>
+</script>
+<script type="text/html" id="margin_item">
+    <td><label>0</label></td>
+</script>
+
+<script type="text/html" id="action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="action_item">
+    <td><button  id= "btn_1" data-bind="ojComponent: { component: 'ojButton', label: 'Save' }">
+    </button></td>
+</script>
