@@ -7,3 +7,5 @@ You can avoid creation of the readme.txt file in the future by
 configuring the Applications window to display empty folders. 
 To do so, enable the "Show Empty Folders" setting on the 
 display options of the Projects pane.
+
+Test
