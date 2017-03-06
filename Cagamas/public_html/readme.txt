@@ -8,4 +8,4 @@ configuring the Applications window to display empty folders.
 To do so, enable the "Show Empty Folders" setting on the 
 display options of the Projects pane.
 
-Test
+Cagamas SSI
