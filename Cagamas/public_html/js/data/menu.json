@@ -72,5 +72,21 @@
             }
          }
       ]
+   },
+ {  
+      "attr":{  
+         "id":"mgphome",
+         "name":"MGP",
+         "view":""
+      },
+      "children":[  
+         {  
+            "attr":{  
+               "id":"mgp-msad-upload",
+               "name":"Servicing",
+               "view":"mgp-msad-upload"
+            }
+         }
+      ]
    }
 ]
