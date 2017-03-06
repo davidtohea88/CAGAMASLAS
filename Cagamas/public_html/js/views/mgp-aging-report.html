@@ -1,0 +1,102 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div id="mgpmsad01Full" class="page-content">
+    
+ <div id="form-container">
+</div>
+ 
+
+<div class="demo-flex-display oj-flex-items-pad">
+  
+
+    
+    
+  <div  class="oj-flex oj-sm-flex-items-initial   oj-sm-justify-content-center">
+    <div class="oj-flex-item">
+     
+      Institution  <input id="mgpageinst" list="mgpageinstlist"  title="Months" 
+           data-bind="ojComponent: {component: 'ojCombobox', 
+                                      
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="mgpageinstlist">
+		<option value="EligibleIns">Eligible Institution</option>
+		<option value="InEligibleIns">In-eligible Institution</option>
+		<option value="All">All</option>
+ 
+	</datalist>
+       Purchase Contraxt No   <input id="pcocombobox" list="pcoList"  title="Months" 
+           data-bind="ojComponent: {component: 'ojCombobox', 
+                              
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="pcoList">
+		<option value="1231">12313</option>
+		<option value="34343">345345</option>
+		<option value="454654">5765576</option>
+		<option value="12312">23423424</option>
+		<option value="324324">234234243</option>
+	</datalist>
+           
+              Year    <input id="prdcombobox" list="prdlist"  title="Months" 
+           data-bind="ojComponent: {component: 'ojCombobox', 
+                                        
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="prdlist">
+		<option value="MSDSD">ASDSAD</option>
+		<option value="Prod1">Prod1</option>
+ 
+	</datalist>
+    
+     <button id="changeLabel" 
+      data-bind="ojComponent: {
+        component: 'ojButton',  
+        label: 'Search'}"></button>
+     
+    </div>
+  </div>
+    
+  
+    
+    
+    <div class="oj-panel oj-margin demo-mypanel"   >
+ 
+        <h3 class="oj-header-border">Servicing Details</h3>
+        <div>
+        
+
+      
+ 
+
+ 
+      
+
+                
+            <div id="msadageRg" class="page-content"  >
+            
+        <table id="msadageTbl" summary=" MSAD Aging Report" aria-label="MSAD Aging Report"
+           data-bind="ojComponent: {component: 'ojTable', data: msadageDS, columns:
+            [{headerText: 'Eligible Institution', field: 'eiName'},
+           {headerText: 'S No', field: 'srlNo',style: 'width: 10%'},
+             {headerText: 'Loan reference No', field: 'loanRefNo',style: 'width: 15%'},
+             {headerText: 'Contract No', field: 'contractNo',style: 'width: 15%'},
+               {headerText: 'Fully Disbursed', field: 'fullyDibs'},
+            {headerText: 'Current Outstanding Amount', field: 'curOutstdCapAmt',style: 'width: 10%'},
+             {headerText: 'Total Arrear Amount', field: 'totAmtArrears'},
+           
+             {headerText: 'OLat utstanding Capital Amount', field: 'netOutstdCapAmt'},
+             {headerText: 'Protection  Threshold Amount', field: 'protThresAmt'},
+         {headerText: 'Max Guarantee  Amoount', field: 'maxGuantAmt'}], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="msadagePg" data-bind="ojComponent: {component: 'ojPagingControl', data: msadageDS, pageSize: 15}">
+    </div>
+</div>
+    
+            
+            
+      </div>
+    </div>
+    
+    
+  
+
+</div>
+</div>
