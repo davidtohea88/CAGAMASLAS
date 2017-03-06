@@ -125,6 +125,7 @@ require(['ojs/ojcore',
                 'published-rate': {label: 'Published Rate'},
                 'final-cof': {label: 'Final COF'},
                 'pc-specific-conversion-final-cof': {label: 'PC Specific Conversion Final COF'},
+                'status-monitoring-masd-aar-status': {label: 'Status Monitoring MASD and AAR Status'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 
