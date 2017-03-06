@@ -111,6 +111,19 @@ require(['ojs/ojcore',
                     }
                 },
                 'mgp': {label: 'MGP'},
+                
+                  'mgp-msad-upload': {label: 'mgp-msad-upload',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                
                 'rate-is-setup': {label: 'Rate and IS Setup'},
                 'cos-letter': {label: 'COS Letter'},
                 'cos-form': {label: 'COS Form'},
