@@ -8,9 +8,9 @@ function(oj, ko, $)
     self.header = "Amortization Schedule";
     self.currentStatus = ko.observable();
     var list = [
-    {ScheduleDate: '28/02/2017', ContractNumber: '130/MGPFI/012017/001', Product:'MGPFI', Amount:'123'},
-    {ScheduleDate: '28/02/2017', ContractNumber: '130/MGPFI/022017/001', Product:'MGPFI',Amount:'123'},
-    {ScheduleDate: '28/02/2017', ContractNumber: '130/MGPFI/012017/004', Product:'MGPFI',Amount:'123'}
+    {ScheduleDate: '26/02/2017', ContractNumber: '130/MGPFI/012017/001', Product:'MGPFI', Amount:'123'},
+    {ScheduleDate: '26/03/2017', ContractNumber: '130/MGPFI/012017/001', Product:'MGPFI',Amount:'123'},
+    {ScheduleDate: '26/04/2017', ContractNumber: '130/MGPFI/012017/001', Product:'MGPFI',Amount:'123'}
     ];                             
     self.pagingDatasource = ko.observable();
  

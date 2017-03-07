@@ -1,0 +1,97 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>    
+  <div class="page-content oj-flex">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">   
+        <div class="oj-flex">
+            <div class="oj-flex-item">
+               <label for="A1control">Date</label>
+            </div>
+            <div class="oj-flex-item">
+              <input id="A1control" 
+                  data-bind="ojComponent: {component: 'ojInputDate',value:dateValue, disabled:true}">
+            </div>
+         </div>
+                 <div class="oj-flex">
+            <div class="oj-flex-item">
+               <label for="A1control">MGP Contract Number</label>
+            </div>
+            <div class="oj-flex-item">
+              <input id="A1control" type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', value: '130/MGPFI/012017/001'}">
+            </div>
+         </div>
+    </div>
+        </div>
+         <div class="oj-flex-item">             
+        </div>
+         <div class="oj-flex-item">             
+          <!-- You need to set the aria-labelledby attribute to make 
+          this accessible. -->
+          <div data-bind="ojComponent: {component: 'ojRadioset', value : currentStatus}" 
+               aria-labelledby="mainlabelid">
+              <span class="oj-choice-row-inline">
+                  <input id="rbtn_gr" type="radio" 
+                         value="gr" name="status">
+                  <label for="rbtn_gr">Guarantee Refund</label>
+              </span>
+              <span class="oj-choice-row-inline">
+                  <input id="rbtn_gf" type="radio" 
+                         value="gf" name="status">
+                  <label for="rbtn_gf">Guarantee Fee</label>
+              </span>
+              <span class="oj-choice-row-inline">
+                  <input id="rbtn_sf" type="radio" 
+                         value="sf" name="status">
+                  <label for="rbtn_sf">Settlement Fee</label>
+              </span>
+              <span class="oj-choice-row-inline">
+                  <input id="rbtn_lpf" type="radio" 
+                         value="lpf" name="status">
+                  <label for="rbtn_lpf">Late Payment Fee</label>
+              </span>
+          </div>
+
+          </div>
+                             <div class="oj-flex-item">             
+      <button id= "btn_search" data-bind="click : onSearchClick, ojComponent: { component: 'ojButton', label: 'Search' }"></button>    
+
+    </div>
+
+    </div>
+
+<div id="pagingControlDemo" class="page-content">
+    <table id="table" summary="Loan Detail" aria-label="Loan Detail"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, editMode: 'rowEdit', columns:
+            [
+            {headerTemplate: 'view_action_hdr', template: 'view_action'},            
+            {headerText: 'Contract Number', field: 'ContractNumber'},
+            {headerText: 'Payment Due Date', field: 'PaymentDueDate'},
+            {headerText: 'Payment Fee', field: 'PaymentFee'},
+            {headerText: 'Payment Date', field: 'PaymentDate'},
+            {headerText: 'Status', field: 'Status', sortProperty: 'Status'},
+            ], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
+    </div>
+</div>
+
+
+<script type="text/html" id="view_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Select
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+        <div id="checkboxSetAgreeIdForm" aria-labelledby="agreeIdForm" 
+             data-bind=
+             "ojComponent: {
+            component: 'ojCheckboxset'}" >
+          <span class="oj-choice-row">
+            <input id="agreeRequired" type="checkbox" value="agree" style="margin:0 auto;">
+          </span>
+        </div>
+    </td>
+</script>
+

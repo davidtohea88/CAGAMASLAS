@@ -8,9 +8,9 @@ function(oj, ko, $)
     self.header = "Amortization Summary";
     self.currentStatus = ko.observable();
     var list = [
-    {TransactionDate: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Event:'Accrual',Amount:'123', PostingFlag:'Y'},
-    {TransactionDate: 'CIMB Bank Berhad', ContractNumber: '345/MGPFI/022017/001', Product:'MGPFI', Event:'Accrual',Amount:'123', PostingFlag:'N'},
-    {TransactionDate: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/004', Product:'MGPFI', Event:'Accrual',Amount:'123', PostingFlag:'Y'},
+    {TransactionDate: '26/02/2017', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Event:'Accrual',Amount:'123', PostingFlag:'Y'},
+    {TransactionDate: '27/02/2017', ContractNumber: '345/MGPFI/022017/001', Product:'MGPFI', Event:'Accrual',Amount:'123', PostingFlag:'N'},
+    {TransactionDate: '28/02/2017', ContractNumber: '123/MGPFI/012017/004', Product:'MGPFI', Event:'Accrual',Amount:'123', PostingFlag:'Y'},
     ];                             
     self.pagingDatasource = ko.observable(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(list, {idAttribute: 'ContractNumber'})));
  

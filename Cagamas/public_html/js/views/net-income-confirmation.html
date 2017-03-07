@@ -1,0 +1,82 @@
+<div class="oj-form-layout" id="form-container">
+    <div class="page-title">
+        <label class="white-color" data-bind="text:header"></label>
+    </div>
+    <div class="page-content oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+                   oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">  
+        <h3 class="oj-header-border" data-bind="text:subHeader">
+            &nbsp;
+        </h3>
+        <div class="page-content oj-flex" id="gf-row-0">
+            <div style="width: 100%;text-align: right;">
+                <button  id= "buttonSearch" data-bind="click: onClickClose, ojComponent: { component: 'ojButton', label: 'Close' }"></button>
+            </div>
+        </div>
+        <div class="page-content oj-flex" id="gf-row-1">
+            <div style="width:100%;">
+                <label for="select" style="margin-right:20px;">Period</label>
+                <select id="selectMonth" style="max-width: 10em;margin-right:5px;" data-bind="ojComponent: {component: 'ojSelect', options: months, value: selectedMonth}"></select>
+                <select id="selectYear" style="max-width: 10em;margin-right:5px;" data-bind="ojComponent: {component: 'ojSelect', options: years, value: selectedYear}"></select>
+                <button  id= "buttonSearch" data-bind="click: onClickSearch, ojComponent: { component: 'ojButton', label: 'Search' }">
+                </button>
+            </div>
+        </div>
+        <br>
+         <h3 class="oj-header-border">Net Income</h3>
+        <div class="oj-flex" id="gf-row-2">
+            <table id="table" summary="Net Income Summary" aria-label="Net Income Summary"
+                   data-bind="ojComponent: {component: 'ojTable', data: datasource, 
+                   columnsDefault: {sortable: 'none'}, columns:
+                    [{headerText: 'Month', field: 'Month'},
+                    {headerText: 'Year', field: 'Year'},
+                    {headerText: 'Net Income', field: 'NetIncome'},
+                    {headerText: 'Action Type', field: 'ActionType'},
+                    {headerText: 'Justification', field: 'Justification'},
+                    {headerTemplate: 'action_hdr', template: 'action_item'}],
+                    rootAttributes: {'style':'width: 100%;'}}">
+            </table>
+        </div>
+    </div>
+    <div class="blank-footer">
+    </div>
+    <div style="display:none" id="ConfirmationDialog" title="Guarantee Fund - Confirmation"
+         data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',               rootAttributes: { style: 'width:900px; height: 400px;'}}">
+        <div class="oj-dialog-body">
+            <div id="CounterPartyPopUp">
+                <h3 class="oj-header-border">Comment</h3>
+                <div class="page-content oj-flex">
+                    <textarea id="textareacontrol" rows="6"
+                            data-bind="ojComponent: {component: 'ojTextArea', 
+                            value: inputComment, rootAttributes: {style:'max-width:50em;'}}">
+                    </textarea>
+                </div>
+                <br/>
+                <div class="oj-flex" style='margin:10px 0 10px auto; width:35%;'>
+                    <button id="button" style='margin:5px;'
+                            data-bind="click: onClickSave,
+                            ojComponent: {component: 'ojButton', label: 'Save' }"></button>
+                    <button id="button" style='margin:5px;'
+                            data-bind="click: onClickCancel,
+                            ojComponent: {component: 'ojButton', label: 'Cancel' }"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="action_hdr">
+        <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+            Action
+        </th>
+    </script>
+    <script type="text/html" id="action_item">
+        <td>
+            <button id="button" style='margin:5px;'
+                                data-bind="click: $parent.onClickConfirm,
+                                ojComponent: {component: 'ojButton', label: 'Confirm' }">
+            </button>    
+            <button id="button" style='margin:5px;'
+                    data-bind="click: $parent.onClickReject,
+                    ojComponent: {component: 'ojButton', label: 'Reject' }">
+            </button>
+        </td>
+    </script>
+</div>

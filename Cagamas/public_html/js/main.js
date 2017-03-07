@@ -153,6 +153,11 @@ require(['ojs/ojcore',
                 'status-monitoring-masd-aar-status': {label: 'Status Monitoring MASD and AAR Status'},
                 'amortization-schedule': {label: 'Amortization Schedule'},
                 'amortization-summary': {label: 'Amortization Summary'},
+                'mgp-payment-processing': {label: 'MGP Payment Processing'},
+                'guarantee-fund': {label: 'Guarantee Fund'},
+                'guarantee-fund-confirmation': {label: 'Guarantee Fund Confirmation'},
+                'net-income': {label: 'Net Income'},
+                'net-income-confirmation': {label: 'Net Income Confirmation'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 
