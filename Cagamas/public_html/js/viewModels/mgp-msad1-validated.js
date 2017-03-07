@@ -22,7 +22,7 @@
 
             function mgpViewModel() {
                 var self = this;
-                self.header = "This is MGPa ";
+                self.header = "MGP MASD Part1 Upload ";
                 
              
        
@@ -42,6 +42,7 @@
                         return "";
                 };
                  self.doUpload =  function()  {
+ 
               
                          this.omsad01Array = ([  
   
@@ -84,12 +85,10 @@
 {srlNo: "09",reportDate: "2017-03-02",reportMonth: "mar",reportYear: "2017",loanAppRefNum: " A16010800145",loanRefNo: "H1601210123",contractNo: "108/MGPSRP/0317/150",loanApprovDate: "2017-01-03",apprvAmt: 91,fullyDibs: "s",fullyDibsDate: "2017-03-03",blr: 94,intRate: 95,intRateEffDate: "2017-02-03",schMtlyIns: 96,lastOutstdCapAmt: 170000.00,totAmtDueOblr: 0,totAmtPaidOblr: 10000.00,curOutstdCapAmt: 1600000.00,monArrears: "0",totAmtArrears: 0,protectionTerminated: "N",terminatedReason: "",terminatedRmks: "",validateFlg: "Y",validateReason: "",createDate: "2017-03-03",createBy: "LAS",lastUpdateDate: "",lastUpdateBy: ""}
       
                 ]); 
-    
+    self.msad01DS = ko.observable();
     
        self.msad01DS  = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(this.omsad01Array, {idAttribute: 'srlNo'}));  
-       self.msad01SumDS  = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(this.omsad01Array, {idAttribute: 'srlNo'})); 
-        self.msad01StatusDS  = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(this.omsad01Array, {idAttribute: 'srlNo'})); 
-       self.months = ko.observableArray(["April"]);
+
                         
                              
         this.getNodeVisible = function(Node){
@@ -124,6 +123,26 @@ var mgpViewModel = new mgpViewModel();
    
        $("#canelButton").click(function() {
        $("#modalDialog1").ojDialog("close"); });
+    $("#flUpload").click(function(){ 
+        
+            this.omsad01Array = ([  
+  
+  {srlNo: "01",reportDate: "2017-03-02",reportMonth: "mar",reportYear: "2017",loanAppRefNum: " A16010800145",loanRefNo: "H1601210123",contractNo: "108/MGPSRP/0317/150",loanApprovDate: "2017-01-03",apprvAmt: 91,fullyDibs: "s",fullyDibsDate: "2017-03-03",blr: 94,intRate: 95,intRateEffDate: "2017-02-03",schMtlyIns: 96,lastOutstdCapAmt: 170000.00,totAmtDueOblr: 0,totAmtPaidOblr: 10000.00,curOutstdCapAmt: 1600000.00,monArrears: "0",totAmtArrears: 0,protectionTerminated: "N",terminatedReason: "",terminatedRmks: "",validateFlg: "Y",validateReason: "",createDate: "2017-03-03",createBy: "LAS",lastUpdateDate: "",lastUpdateBy: ""},
+ 
+                ]); 
+                
+//                ko.cleanNode(document.getElementById('msad01Rg'));
+                
+       this.msad01DS  = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(this.omsad01Array, {idAttribute: 'srlNo'}));  
+ 
+ 
+$( ".msad01Tbl" ).ojTable( "refresh" );
+
+//              
+//            ko.cleanNode(document.getElementById('mgpmsad01Full'));
+		
+    });
+   
    
    
             
