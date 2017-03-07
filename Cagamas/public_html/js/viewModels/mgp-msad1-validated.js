@@ -22,7 +22,7 @@
 
             function mgpViewModel() {
                 var self = this;
-                self.header = "MGP MASD Part1 Upload ";
+                self.header = "MGP MASD Part1 Validated Report ";
                 
              
        
