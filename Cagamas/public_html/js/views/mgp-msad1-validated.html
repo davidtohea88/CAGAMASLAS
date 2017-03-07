@@ -60,7 +60,26 @@
   <div   class="oj-flex oj-sm-flex-items-initial 
               oj-lg-justify-content-center" >
     <div class="oj-flex-item" >
- 
+ <span    >
+       <input  type="file"/>
+       
+             <button  id="flUpload"  
+                
+                data-bind="click: doUpload, ojComponent:{component:'ojButton', label: 'Upload'}"    ></button>
+     
+       
+      <button id="changeLabel" 
+      data-bind="click: sendNotification,  ojComponent: {
+        component: 'ojButton',  
+        label: 'Send Notification'}"></button>
+        
+       <button  id="changeLabel2"  
+                
+                data-bind="click: doUpload, ojComponent:{component:'ojButton', label: 'Validate Asset'}"    ></button>
+        </span>
+        
+        <br>
+        
        
           <div id="radioSetId"   
                aria-labelledby="radiosetlabel"
