@@ -44,32 +44,32 @@
           <div class='oj-flex-bar-middle'>                 
           <!-- You need to set the aria-labelledby attribute to make 
           this accessible. -->
-          <div data-bind="ojComponent: {component: 'ojRadioset'}" 
+          <div data-bind="ojComponent: {component: 'ojRadioset', value : currentStatus}" 
                aria-labelledby="mainlabelid">
               <span class="oj-choice-row-inline">
-                  <input id="rbtn_p" type="radio" 
-                         value="P" name="fixedrateoptions">
-                  <label for="rbtn_p">AAR Report</label>
+                  <input id="rbtn_aar" type="radio" 
+                         value="aar" name="status">
+                  <label for="rbtn_aar">AAR Report</label>
               </span>
               <span class="oj-choice-row-inline">
-                  <input id="rbtn_cp" type="radio" 
-                         value="CP" name="fixedrateoptions">
-                  <label for="rbtn_cp">MASD Part 1</label>
+                  <input id="rbtn_masd1" type="radio" 
+                         value="masd1" name="status">
+                  <label for="rbtn_masd1">MASD Part 1</label>
               </span>
               <span class="oj-choice-row-inline">
-                  <input id="rbtn_i" type="radio" 
-                         value="CP" name="fixedrateoptions">
-                  <label for="rbtn_i">MASD Part 2</label>
+                  <input id="rbtn_masd2" type="radio" 
+                         value="masd2" name="status">
+                  <label for="rbtn_masd2">MASD Part 2</label>
               </span>
               <span class="oj-choice-row-inline">
-                  <input id="rbtn_3" type="radio" 
-                         value="CP" name="fixedrateoptions">
-                  <label for="rbtn_3">MASD Part 3</label>
+                  <input id="rbtn_masd3" type="radio" 
+                         value="masd3" name="status">
+                  <label for="rbtn_masd3">MASD Part 3</label>
               </span>
               <span class="oj-choice-row-inline">
-                  <input id="rbtn_a" type="radio" 
-                         value="CP" name="fixedrateoptions">
-                  <label for="rbtn_a">All</label>
+                  <input id="rbtn_all" type="radio" 
+                         value="all" name="status">
+                  <label for="rbtn_all">All</label>
               </span>
           </div>
         </div>
@@ -77,7 +77,7 @@
            <div class="oj-flex-item">
             </div>
            <div class="oj-flex-item">
-              <button id= "btn_search" data-bind="ojComponent: { component: 'ojButton', label: 'Search' }"></button>    
+              <button id= "btn_search" data-bind="click : onSearchClick, ojComponent: { component: 'ojButton', label: 'Search' }"></button>    
             </div>            
         </div>
     </div>

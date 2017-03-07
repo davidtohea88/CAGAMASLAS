@@ -23,14 +23,63 @@ function(oj, ko, $)
                         {value : '2016', label : '2016'},
                         {value : '2017', label : '2017'},
                         {value : '2018', label : '2018'}];
-    var CPArray = [
-    {EligibleInstitution: 'CIMB Bank Berhad', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'01', Year:'2017',FileType:'MASD1',Status:'Submitted'},
-    {EligibleInstitution: 'CIMB Bank Berhad', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'01', Year:'2017',FileType:'MASD1',Status:'Submitted'},
-    {EligibleInstitution: 'CIMB Bank Berhad', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'01', Year:'2017',FileType:'MASD1',Status:'Submitted'},
-    {EligibleInstitution: 'CIMB Bank Berhad', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'01', Year:'2017',FileType:'MASD1',Status:'Submitted'}
+    self.currentStatus = ko.observable();
+    var AAR = [
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'01', Year:'2017',FileType:'AAR',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'02', Year:'2017',FileType:'AAR',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'03', Year:'2017',FileType:'AAR',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'04', Year:'2017',FileType:'AAR',Status:'Submitted'}
     ];                
-    pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(CPArray, {idAttribute: 'ContractNumber'}));
+    var MASD1 = [
+    {EligibleInstitution: 'CIMB Bank Berhad', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'05', Year:'2017',FileType:'MASD1',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank Berhad', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'06', Year:'2017',FileType:'MASD1',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank Berhad', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'07', Year:'2017',FileType:'MASD1',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank Berhad', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'08', Year:'2017',FileType:'MASD1',Status:'Submitted'}
+    ];                
+    var MASD2 = [
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'01', Year:'2017',FileType:'MASD2',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'02', Year:'2017',FileType:'MASD2',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'03', Year:'2017',FileType:'MASD2',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'04', Year:'2017',FileType:'MASD2',Status:'Submitted'}
+    ];                
+    var MASD3 = [
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'09', Year:'2017',FileType:'MASD3',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'10', Year:'2017',FileType:'MASD3',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'11', Year:'2017',FileType:'MASD3',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'12', Year:'2017',FileType:'MASD3',Status:'Submitted'}
+    ];                
+    var ALL = [
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '123/MGPFI/012017/001', Product:'MGPFI', Month:'09', Year:'2017',FileType:'MASD1',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank Berhad', ContractNumber: '456/MGPFI/012017/001', Product:'MGPFI', Month:'10', Year:'2017',FileType:'MASD2',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank', ContractNumber: '345/MGPFI/012017/001', Product:'MGPFI', Month:'11', Year:'2017',FileType:'MASD3',Status:'Submitted'},
+    {EligibleInstitution: 'CIMB Bank Berhad', ContractNumber: '456/MGPFI/012017/001', Product:'MGPFI', Month:'12', Year:'2017',FileType:'AAR',Status:'Submitted'}
+    ];                
+    self.pagingDatasource = ko.observable(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(MASD1, {idAttribute: 'ContractNumber'})));
+ 
+    onSearchClick = function(item)
+    {
+        if(self.currentStatus()=='masd1')
+        {
+            self.pagingDatasource(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(MASD1, {idAttribute: 'ContractNumber'})));
+        }
+        else if(self.currentStatus()=='masd2')
+        {
+            self.pagingDatasource(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(MASD2, {idAttribute: 'ContractNumber'})));
+        }
+        else if(self.currentStatus()=='masd3')
+        {
+            self.pagingDatasource(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(MASD3, {idAttribute: 'ContractNumber'})));
+        }
+        else if(self.currentStatus()=='aar')
+        {
+            self.pagingDatasource(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(AAR, {idAttribute: 'ContractNumber'})));
+        }
+        else if(self.currentStatus()=='all')
+        {
+            self.pagingDatasource(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(ALL, {idAttribute: 'ContractNumber'})));
+        }
 
+    }
     }
   return viewModel;
 });
