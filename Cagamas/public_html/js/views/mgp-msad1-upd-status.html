@@ -1,0 +1,229 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div id="mgpmsad01Full" class="page-content">
+    
+ <div id="form-container">
+</div>
+ 
+
+<div class="demo-flex-display oj-flex-items-pad">
+  
+  <div class="oj-flex oj-sm-flex-items-initial   oj-sm-justify-content-center">
+    <div class="oj-flex-item">
+    
+    <div id="train-container" >
+	<div id="mgpTrain" class="oj-train-stretch" style="min-width:400px; margin-left:auto;margin-right:auto;"
+	  data-bind="ojComponent:{
+		component: 'ojTrain', 
+		selected: currentStepValue, 
+		steps: stepArray}"></div>
+	<br/>
+	<h3 id="currentStepText"
+		data-bind="text: 'You are on ' + currentStepValueText()" 
+		style="text-align: center">
+	</h3>
+	<br/>
+</div>
+    
+    </div>
+  </div>
+  <div class="oj-flex oj-sm-flex-items-initial 
+              oj-sm-only-justify-content-center oj-md-only-justify-content-center" >
+    <div class="oj-flex-item">
+
+
+    
+    </div>
+  </div>
+    
+    
+    
+    
+    
+  <div data-bind="visible : getNodeVisible(2) || getNodeVisible(3) "  class="oj-flex oj-sm-flex-items-initial   oj-sm-justify-content-center">
+    <div class="oj-flex-item">
+     
+      MGP Contract No  <input id="mgpctrNocom" list="msadctrno"  title="Months" 
+           data-bind="ojComponent: {component: 'ojCombobox', 
+                                      
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="msadctrno">
+		<option value="123123">12313</option>
+		<option value="12313">123123</option>
+		<option value="123123123">12313</option>
+		<option value="12313213">12313132</option>
+		<option value="4534535">3453453453</option>
+	</datalist>
+       Month   <input id="mnthcombobox" list="msadmonths"  title="Months" 
+           data-bind="ojComponent: {component: 'ojCombobox', 
+                              
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="msadmonths">
+		<option value="Jan">Jan</option>
+		<option value="Feb">Feb</option>
+		<option value="March">March</option>
+		<option value="April">April</option>
+		<option value="May">May</option>
+	</datalist>
+           
+              Year    <input id="yrscombobox" list="msadyrs"  title="Months" 
+           data-bind="ojComponent: {component: 'ojCombobox', 
+                                        
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="msadyrs">
+		<option value="2011">2011</option>
+		<option value="2012">2012</option>
+		<option value="2013">2013</option>
+		<option value="2014">2014</option>
+		<option value="2015">2015</option>
+	</datalist>
+    
+     <button id="changeLabel" 
+      data-bind="ojComponent: {
+        component: 'ojButton',  
+        label: 'Search'}"></button>
+     
+    </div>
+  </div>
+    
+    
+    
+  <div data-bind="visible : getNodeVisible(1) || getNodeVisible(3) "  class="oj-flex oj-sm-flex-items-initial 
+              oj-lg-justify-content-center" >
+    <div class="oj-flex-item" >
+        <span  data-bind="visible : getNodeVisible(1) " >
+       <input  type="file"/>
+      <button id="changeLabel" 
+      data-bind="ojComponent: {
+        component: 'ojButton',  
+        label: 'Send Notification'}"></button>
+        
+          <button id="changeLabel2" 
+      data-bind="ojComponent: {
+        component: 'ojButton', 
+        label: 'Validate Asset'}"></button>
+        </span>
+        
+ 
+        
+       
+          <div id="radioSetId"   
+               aria-labelledby="radiosetlabel"
+               data-bind="ojComponent: {
+                 component: 'ojRadioset'}">
+            <span class="oj-choice-row-inline">
+              <input id="blueopt" type="radio" name="rbb" 
+                     value="blue">
+              <label for="blueopt">Validated Asset</label>
+            </span>
+            <span class="oj-choice-row-inline">
+              <input id="greenopt" type="radio" name="rbb" 
+                     value="green">
+              <label for="greenopt">Failed Asset</label>
+            </span>
+            <span class="oj-choice-row-inline">
+              <input id="redopt" type="radio" name="rbb" 
+                     value="red" checked>
+              <label for="redopt">All Asset</label>
+            </span>
+       
+      </div>
+        
+        
+    </div>
+  </div>
+    
+    
+    
+    
+    <div class="oj-panel oj-margin demo-mypanel"  data-bind="visible : getNodeVisible(1)">
+ 
+        <h3 class="oj-header-border">Header</h3>
+        <div>
+       
+
+                
+            <div id="msad01Rg" class="page-content"  >
+            
+        <table id="msad01Tbl" summary=" MSAD Upload File" aria-label="MSAD Upload File"
+           data-bind="ojComponent: {component: 'ojTable', data: msad01DS, columns:
+            [{headerText: 'S No', field: 'srlNo',style: 'width: 10%'},
+             {headerText: 'Loan reference No', field: 'loanRefNo',style: 'width: 15%'},
+             {headerText: 'Contract No', field: 'contractNo',style: 'width: 15%'},
+            {headerText: 'Loan Approval Date', field: 'loanApprovDate',style: 'width: 10%'},
+             {headerText: 'Approved Amount', field: 'apprvAmt'},
+             {headerText: 'Fully Disbursed', field: 'fullyDibs'},
+             {headerText: 'Fully Disbursed date', field: 'fullyDibsDate'},
+             {headerText: 'Interest Rate', field: 'intRate'}], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="msad01Pg" data-bind="ojComponent: {component: 'ojPagingControl', data: msad01DS, pageSize: 15}">
+    </div>
+</div>
+    
+            
+            
+      </div>
+    </div>
+    
+    
+    
+    <div class="oj-panel oj-margin demo-mypanel"   data-bind="visible : getNodeVisible(2)">
+ 
+        <h3 class="oj-header-border">Upload Status</h3>
+        <div>
+       
+
+                
+            <div id="msad01StatusRg" class="page-content"  >
+            
+        <table id="msad01StatusTbl" summary=" MSAD Summary" aria-label="MSAD Summary"
+           data-bind="ojComponent: {component: 'ojTable', data: msad01StatusDS, columns:
+            [             {headerText: 'Loan reference No', field: 'loanRefNo',style: 'width: 15%'},
+              
+            {headerText: 'Month', field: 'month',style: 'width: 10%'},
+             {headerText: 'Year', field: 'year'},
+             {headerText: 'Termination Reason', field: 'terminatedReason'},
+             {headerText: 'Comments', field: 'terminatedRmks'},
+              ], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="msad01StatusPg" data-bind="ojComponent: {component: 'ojPagingControl', data: msad01StatusDS, pageSize: 15}">
+    </div>
+            </div>
+
+        </div>
+        
+    </div>
+    
+    <div class="oj-panel oj-margin demo-mypanel"   data-bind="visible : getNodeVisible(3)">
+ 
+        <h3 class="oj-header-border">Summary</h3>
+        <div>
+       
+            <div id="msad01SumRg" class="page-content"  >
+            
+        <table id="msad01SumTbl" summary=" MSAD Summary" aria-label="MSAD Summary"
+           data-bind="ojComponent: {component: 'ojTable', data: msad01SumDS, columns:
+            [{headerText: 'S No', field: 'srlNo',style: 'width: 10%'},
+             {headerText: 'Loan reference No', field: 'loanRefNo',style: 'width: 15%'},
+             {headerText: 'Contract No', field: 'contractNo',style: 'width: 15%'},
+            {headerText: 'Loan Approval Date', field: 'loanApprovDate',style: 'width: 10%'},
+             {headerText: 'Approved Amount', field: 'apprvAmt'},
+             {headerText: 'Fully Disbursed', field: 'fullyDibs'},
+             {headerText: 'Fully Disbursed date', field: 'fullyDibsDate'},
+             {headerText: 'Interest Rate', field: 'intRate'}], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="msad01SumPg" data-bind="ojComponent: {component: 'ojPagingControl', data: msad01SumDS, pageSize: 15}">
+    </div>
+</div>
+            
+            
+      </div>
+    </div>
+    
+    
+    
+
+</div>
+</div>

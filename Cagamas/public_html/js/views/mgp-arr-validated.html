@@ -7,15 +7,15 @@
 <div class="demo-flex-display oj-flex-items-pad">
   
   <div class="oj-flex oj-sm-flex-items-initial   oj-sm-justify-content-center">
-   
+    <div class="oj-flex-item">
      
-  
+ <div id="form-container">       
      
  
 
      
         
-       <label style="padding:  0px 15px">    Counter Party  : </label>    <input id="partycombobox" list="msadparty"  title="Counter Party" 
+        Counter Party   <input id="partycombobox" list="msadparty"  title="Counter Party" 
            data-bind="ojComponent: {component: 'ojCombobox',  value : partyVal , selected : partyVal , 
                               
                                     rootAttributes: {style:'max-width:10em'}}"/>
@@ -29,7 +29,7 @@
         
 <!--        Counter Party Group : <label data-bind="text: partyGrpVal() , width: '100px'" ></label>-->
         
-        <label style="padding:  0px 15px">   Product : </label>  <input id="prdcombobox" list="msadprd"  title="Product" 
+        Product   <input id="prdcombobox" list="msadprd"  title="" 
            data-bind="ojComponent: {component: 'ojCombobox',  
                               
                                     rootAttributes: {style:'max-width:10em'}}"/>
@@ -39,25 +39,10 @@
 		<option value="ST">MGP TT</option>
  
 	</datalist>
-        
-                <label style="padding: 0px 15px">    Purchase Contract No : </label> 
-      
-      
-          <input id="inputcontrol"  title="Purchase Contract No" 
-                 data-bind="ojComponent: {component: 'ojInputText' 
-                                             }">
+    </div>
    
-        
-        
-            <button   style="margin: 0px 15px"
-      data-bind=" ojComponent: {
-        component: 'ojButton',  
-        label: 'Search'}"></button>
-        
-        
- 
-
-     
+    
+    </div>
   </div>
   <div class="oj-flex oj-sm-flex-items-initial 
               oj-sm-only-justify-content-center oj-md-only-justify-content-center" >
@@ -70,7 +55,72 @@
     
     
      
+    
+    
+  <div   class="oj-flex oj-sm-flex-items-initial 
+              oj-lg-justify-content-center" >
+    <div class="oj-flex-item" >
+        <span  >
+       <input  type="file"/>
+       
+             <button  id="flUpload"  
+                
+                data-bind=" ojComponent:{component:'ojButton', label: 'Upload'}"    ></button>
      
+       
+      <button id="changeLabel" 
+      data-bind="click: sendNotification,  ojComponent: {
+        component: 'ojButton',  
+        label: 'Send Notification'}"></button>
+        
+       <button  id="changeLabel2"  
+                
+                data-bind="click: doUpload, ojComponent:{component:'ojButton', label: 'Validate Asset'}"    ></button>
+        </span>
+        
+        <br>
+        
+       
+          <div id="radioSetId"   
+               aria-labelledby="radiosetlabel"
+               data-bind="ojComponent: {
+                 component: 'ojRadioset'}">
+            <span class="oj-choice-row-inline">
+              <input id="blueopt" type="radio" name="rbb" 
+                     value="D">
+              <label for="blueopt">Fully Disbursed Asset</label>
+            </span>
+              
+                  <span class="oj-choice-row-inline">
+              <input id="bluet" type="radio" name="rbb" 
+                     value="C">
+              <label for="bluet">Closed Asset</label>
+            </span>
+              
+                  <span class="oj-choice-row-inline">
+              <input id="bwwt" type="radio" name="rbb" 
+                     value="V">
+              <label for="blueopt">Validated Asset</label>
+            </span>
+              
+              
+            <span class="oj-choice-row-inline">
+              <input id="greenopt" type="radio" name="rbb" 
+                     value="F">
+              <label for="greenopt">Failed Asset</label>
+            </span>
+            <span class="oj-choice-row-inline">
+              <input id="redopt" type="radio" name="rbb" 
+                     value="A" checked>
+              <label for="redopt">All Asset</label>
+            </span>
+       
+      </div>
+        
+        
+    </div>
+  </div>
+    
     
     
     
@@ -90,32 +140,28 @@
         </h3>
         <div>
        
+ 
 
+ 
                 
             <div id="msad01Rg" class="page-content"  >
             
         <table id="msad01Tbl" summary=" MSAD Upload File" aria-label="MSAD Upload File"
            data-bind="ojComponent: {component: 'ojTable', data: msad01DS, columns:
             [
-      { headerText: 'Eligible Institution'  ,  field: 'ElgInst'},      
-   { headerText: 'S No'  ,  field: 'srlNo'}, 
-{ headerText: 'Account Number'  ,  field: 'loanAppRefNum'}, 
-{ headerText: 'Asset ID'  ,  field: 'loanRefNo'}, 
-{ headerText: 'Purchase Contract No'  ,  field: 'contractNo'}, 
+        
+
+  { headerText: 'SRL NO'  ,  field: 'Sno'}, 
+{ headerText: 'I/C NUMBER'  ,  field: 'IcNo'}, 
+{ headerText: 'APPLICATION DATE'  ,  field: 'AppDate'}, 
  
-{ headerText: 'Fully Disbursed'  ,  field: 'fullyDibs'}, 
-{ headerText: 'Fully Disbursed Date'  ,  field: 'fullyDibsDate'}, 
+{ headerText: 'Status'  ,  field: 'Status'}, 
+{ headerText: 'REJECT REASON'  ,  field: 'RejectReason'}, 
+{ headerText: 'REJECT Eligibility  REASON'  ,  field: 'RejectElibility'}, 
+{ headerText: 'REMARKS'  ,  field: 'Remarks'}
  
  
-{ headerText: 'Last Outstanding Capital'  ,  field: 'lastOutstdCapAmt'}, 
-{ headerText: 'Arrear Amount'  ,  field: 'totAmtDueOblr'}, 
- 
-{ headerText: 'Current Outstanding Amount'  ,  field: 'curOutstdCapAmt'}, 
-{ headerText: 'Protection Threshold Amount'  ,  field: 'totAmtArrears'}, 
-{ headerText: 'Proection Terminated'  ,  field: 'protectionTerminated'}, 
-{ headerText: 'Max Guarantee Amount'  ,  field: 'lastOutstdCapAmt'}, 
-{ headerText: 'Default Notice Provided'  ,  field: 'validateFlg'}
- 
+  
          ],                                  
              rootAttributes: {'style':'width: 100%;'}}">
     </table>
