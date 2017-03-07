@@ -82,11 +82,88 @@
       "children":[  
          {  
             "attr":{  
-               "id":"mgp-msad-upload",
-               "name":"Servicing",
-               "view":"mgp-msad-upload"
+               "id":"mgp-msad1-upd",
+               "name":"MASD Upload Part1",
+               "view":"mgp-msad1-upd" 
             }
-         }
+        }    ,
+         {  
+            "attr":{  
+               "id":"mgp-msad1-validated",
+               "name":"MASD Validated Report",
+               "view":"mgp-msad1-validated" 
+            }
+        },
+         {  
+            "attr":{  
+               "id":"mgp-msad1-err",
+               "name":"MASD Error Report",
+               "view":"mgp-msad1-err" 
+            }
+        },
+        {  
+            "attr":{  
+               "id":"mgp-aging-report",
+               "name":"MASD Aging Report",
+               "view":"mgp-aging-report" 
+            }
+        }    ,
+         {  
+            "attr":{  
+               "id":"mgp-arr-upload",
+               "name":"MGP ARR Report",
+               "view":"mgp-arr-upload" 
+            }
+        },
+         {  
+            "attr":{  
+               "id":"mgp-arr-validated",
+               "name":"ARR Validated Report",
+               "view":"mgp-arr-validated" 
+            }
+        },
+        {  
+            "attr":{  
+               "id":"mgp-arr-err",
+               "name":"ARR Error Report",
+               "view":"mgp-arr-err" 
+            }
+        }    ,
+         {  
+            "attr":{  
+               "id":"mgp-fully-disp",
+               "name":"MGP Fully Disbursed Report",
+               "view":"mgp-fully-disp" 
+            }
+        },
+         {  
+            "attr":{  
+               "id":"mgp-guarantee-recom",
+               "name":"Guarantee Pay Recommendation",
+               "view":"mgp-guarantee-recom" 
+            }
+        },
+        {  
+            "attr":{  
+               "id":"mgp-guarantee-app",
+               "name":"Guarantee Pay Approval",
+               "view":"mgp-guarantee-app" 
+            }
+        }    ,
+         {  
+            "attr":{  
+               "id":"mgp-disp-approved",
+               "name":"Disbursed Approved Report",
+               "view":"mgp-disp-approved" 
+            }
+        },
+         {  
+            "attr":{  
+               "id":"mgp-asset-delinquency",
+               "name":"MGP Asset Delinquency",
+               "view":"mgp-asset-delinquency" 
+            }
+        }
       ]
    }
 ]
