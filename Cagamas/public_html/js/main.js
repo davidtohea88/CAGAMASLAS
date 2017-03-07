@@ -124,6 +124,141 @@ require(['ojs/ojcore',
                     }
                 },
                 
+                  'mgp-msad1-upd': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                
+                'mgp-msad1-upd-sum': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                
+                  'mgp-msad1-validated': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                  'mgp-msad1-err': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                  'mgp-arr-upload': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                  'mgp-arr-validated': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                  'mgp-arr-err': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                  'mgp-fully-disp': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                  'mgp-disp-approved': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                  'mgp-guarantee-recom': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                  'mgp-guarantee-app': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                  'mgp-asset-delinquency': {label: 'MGP MASD Part1',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                   
                  'mgp-aging-report': {label: 'mgp-aging-report',
                     exit: function () {
                         var childRouter = router.currentState().value;
