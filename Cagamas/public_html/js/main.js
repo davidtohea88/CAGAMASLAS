@@ -111,6 +111,31 @@ require(['ojs/ojcore',
                     }
                 },
                 'mgp': {label: 'MGP'},
+                
+                  'mgp-msad-upload': {label: 'mgp-msad-upload',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                
+                 'mgp-aging-report': {label: 'mgp-aging-report',
+                    exit: function () {
+                        var childRouter = router.currentState().value;
+                        childRouter.dispose();
+                    },
+                    enter: function () {
+                        var childRouter = router.createChildRouter('id');
+                        childRouter.defaultStateId = '100';
+                        router.currentState().value = childRouter;
+                    }
+                },
+                
                 'rate-is-setup': {label: 'Rate and IS Setup'},
                 'cos-letter': {label: 'COS Letter'},
                 'cos-form': {label: 'COS Form'},
@@ -126,6 +151,8 @@ require(['ojs/ojcore',
                 'final-cof': {label: 'Final COF'},
                 'pc-specific-conversion-final-cof': {label: 'PC Specific Conversion Final COF'},
                 'status-monitoring-masd-aar-status': {label: 'Status Monitoring MASD and AAR Status'},
+                'amortization-schedule': {label: 'Amortization Schedule'},
+                'amortization-summary': {label: 'Amortization Summary'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 
