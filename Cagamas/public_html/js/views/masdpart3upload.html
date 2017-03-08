@@ -11,22 +11,18 @@
                             <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >  
                                 <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
                                     <div class="oj-flex-item">   
-                                        <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-label-nowrap">
-                                           
+                                        <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-label-nowrap">                                           
                                             <div class="oj-flex">  
                                                 <div class="oj-flex-item">
-                                                    <label for="EISearch">Counter Party</label>
+                                                    <label for="rprtDate2">Report Date</label>
                                                 </div>
-                                                <div class="oj-flex-item">
-                                                    <input id="EISearchCmp" placeholder="Search EI..."
-                                                           data-bind="ojComponent: {
-                                                            component: 'ojInputSearch',
-                                                            value: eiName,
-                                                            options: eitags,
-                                                            rootAttributes: {style:'max-width: 15em'}}">
-                                                </div>  
+                                                <div class="oj-flex-item">                                                     
+                                                    <input id="rprtDate" type="text" data-bind="ojComponent: {component : 'ojInputText'}"/>
+                                                </div>
+                                            
                                             </div> 
-                                          
+                                            
+                                          <!--
                                             <div class="oj-flex">  
                                                 <div class="oj-flex-item">
                                                     <label for="counterPartyGrp">Counter Party Group :</label>
@@ -48,7 +44,7 @@
                                                             rootAttributes: {style:'max-width: 15em'}}">
                                                 </div>
                                             </div> 
-                                        </div>
+                                        </div> -->
                                     </div>    
                                      <div class="oj-flex-item">   
                                         <div class="oj-form oj-md-labels-inline oj-label-nowrap">
@@ -60,12 +56,10 @@
                                                     <input type="file">
                                                 </div>
                                                  <div class="oj-flex-item">
-                                                    <button id= "upload" data-bind="ojComponent: { component: 'ojButton', label: 'Upload' }">
+                                                     <button id= "upload" data-bind="click: upload,ojComponent: { component: 'ojButton', label: 'Upload' }">
                                                     </button>                                                   
                                                 </div>
-                                            </div> 
-                                
-                                                                               
+                                            </div>                             
                                         </div>
                                     </div>                                 
                                     
@@ -86,6 +80,8 @@
                                                     <button id= "sendNOtification" data-bind="ojComponent: { component: 'ojButton', label: 'Send Notification' }">
                                                     </button>
                                                     <label>&nbsp;&nbsp;&nbsp;</label>   
+                                                    <a href="#" id="masdpart3" data-bind="click: getSummary">Summary</a>
+                                                     <label>&nbsp;&nbsp;&nbsp;</label> 
                                                     <div id="mgpAssets" aria-labelledby="mainlabelid"
                                                          data-bind="ojComponent: {component: 'ojRadioset',optionChange:assetDataEvent},value: currentValue">
                                                         <span>
@@ -128,7 +124,7 @@
                                            {headerText: 'DATE OF RECEIPT OF DISPOSAL PROCEEDS', field: 'disposalproceeds'},
                                            {headerText: 'DISPOSAL PRICE', field: 'disposalprice'},
                                            {headerText: 'RM3000', field: 'rm3000'},
-                                           {headerText: '3% OF NET', field: 'percent'}
+                                           {headerText: '3% OF NET OUTSTANDING CAPITAL AMOUNT AS AT DEFAULT NOTICE', field: 'percent'}
                                          ],
                                 scrollPolicy: 'loadMoreOnScroll',
                                 scrollPolicyOptions: {'fetchSize': 10},
@@ -164,3 +160,87 @@
       
     </div>
   
+<div style="display:none" class="oj-flex" id="masdpart3summary"  data-bind="ojComponent:{component: 'ojPopup'}">  
+                                <div class="oj-flex-item">  
+                                    <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >   
+                                        <h4><b>MASD PART 3 Summary Screen</b></h4>
+                                        <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >                                             
+                                            <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                                <div class="oj-flex-item">   
+                                                    <div class="oj-form  oj-md-labels-inline oj-label-nowrap">
+                                                        <div class="oj-flex">  
+                                                <div class="oj-flex-item">
+                                                    <label for="prdSearch">MGP Contract Number</label>
+                                                </div>
+                                               <div class="oj-flex-item">
+                                                    <input id="prdSearch" placeholder="Search Product..."
+                                                           data-bind="ojComponent: {
+                                                            component: 'ojInputSearch',
+                                                            value: '',
+                                                            options: '',
+                                                            rootAttributes: {style:'max-width: 15em'}}">
+                                                </div>
+                                            </div>    
+                                                        <div class="oj-flex">  
+                                                <div class="oj-flex-item">
+                                                    <label for="prdSearch">Loan Reference Number</label>
+                                                </div>
+                                               <div class="oj-flex-item">
+                                                    <input id="prdSearch" placeholder="Search Loan Reference Number..."
+                                                           data-bind="ojComponent: {
+                                                            component: 'ojInputSearch',
+                                                            value: '',
+                                                            options: '',
+                                                            rootAttributes: {style:'max-width: 15em'}}">
+                                                </div>
+                                            </div>    
+                                                        <div class="oj-flex">   
+                                                <div class="oj-flex-item">
+                                                      <button id= "search" data-bind="click: search,ojComponent: { component: 'ojButton', label: 'Search'}">
+                                                                </button>
+                                                </div>
+                                              
+                                            </div>    
+                                                        <div class="oj-flex">  
+                                             
+                                               <div class="oj-flex-item">
+                                                  <table id="recovery" summary="Asset Details" aria-label="Assets"
+                                                           data-bind="ojComponent: {component: 'ojTable', 
+                                data: masdpart3ds, 
+                                display: 'grid',    
+                                columns: [
+                                           {headerText: 'Report Date', field: 'rprtDate'},
+                                           {headerText: 'MGP Contract Number', field: 'contractNumber'},
+                                           {headerText: 'Loan Reference Number', field: 'lnRefNum'},
+                                           {headerText: 'Guarantee Amount refund to Cagamas SRP(PM)', field: 'gamntrefund2cagamas'},
+                                           {headerText: 'Received Accrued Return Paid to Cagamas', field: 'accrued'},
+                                           {headerText: 'Total', field: 'total'}
+                                           
+                                         ],
+                                scrollPolicy: 'loadMoreOnScroll',
+                                scrollPolicyOptions: {'fetchSize': 10},
+                                rootAttributes: {'style':'height: 300px;width: 1050px'}}">
+                                                    </table>
+                                                </div>
+                                            </div>    
+
+                                                        <div class="oj-flex ">  
+                                                            <div class="oj-flex-item">
+                                                                <button id= "cancel" data-bind="click: cancel,ojComponent: { component: 'ojButton', label: 'Cancel'}">
+                                                                </button>
+                                                                <button id= "refundRemainder" data-bind="ojComponent: { component: 'ojButton', label: 'Send Refund Remainder    '}">
+                                                                </button>
+                                                             
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div> 
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div> 
+
+                            </div>  

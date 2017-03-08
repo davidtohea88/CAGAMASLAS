@@ -130,13 +130,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojselectcombo
                     self.totalGuranteeFee("5000.00");
                     self.contractStauts("Priced");
                 };
-
+                
                 self.validate = function () {
                     self.originalCapAmt("200,000,000.00");
                     self.contractStauts("Validated");
 
                 };
-                self.save = function () {
+
+                self.upload = function () {
+                   $('#all')[0].checked= true;
+                   self.assetds(new oj.ArrayTableDataSource(self.allAssetArray, {idAttribute: 'AssetId'}));
+                };
+                self.save = function () {   
                     self.mgpContractNum("123/MGP-SRP/012017/001");
                 };
                 self.approve = function () {

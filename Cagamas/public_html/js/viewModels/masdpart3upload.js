@@ -18,7 +18,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojselectcombo
             self.countrpartyStatus = ko.observable("Active");
             self.counterPartyGrp = ko.observable("CIMB");
             self.currentValue = ko.observable("Validated");
-            self.mgpContractNum = ko.observable("123/MGP-SRP/012017/001");
+            self.mgpContractNum = ko.observable("123/MGP-SRP/012017/001");  
             self.EIs = [ {value: 'CPT0045', label: 'CIMB Bank Berhad'},
                          {value : 'CPT0004', label : 'Affin Bank Berhad'},
                         {value : 'CPT0009', label : 'Alliance Bank Malaysia Berhad'},
@@ -32,7 +32,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojselectcombo
                         ]; 
                   
            
-                self.validatedArray = [{SLNo:'001', LnRefNum:'12345', disposalproceeds:'12-FEB-2017', disposalprice:'350,000', rm3000:'200,00.00',percent:'20'},
+                self.validatedArray = [{SLNo:'001', LnRefNum:'511350052015270', disposalproceeds:'12-FEB-2017', disposalprice:'300000', rm3000:'3000',percent:'6095.57'},
                     {SLNo:'002', LnRefNum:'12346', disposalproceeds:'12-FEB-2017', disposalprice:'350,000', rm3000:'200,00.00',percent:'20'},
                     {SLNo:'003', LnRefNum:'12347', disposalproceeds:'13-FEB-2017', disposalprice:'350,000', rm3000:'200,00.00',percent:'20'},
                     {SLNo:'004', LnRefNum:'12348', disposalproceeds:'14-FEB-2017', disposalprice:'350,000', rm3000:'200,00.00',percent:'20'},
@@ -40,15 +40,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojselectcombo
                 ]
                 self.failedArray = [  {SLNo:'006', LnRefNum:'12350', disposalproceeds:'16-FEB-2017', disposalprice:'350,000', rm3000:'200,00.00',percent:'20'}
                 ]
-               self.allData = [{SLNo:'001', LnRefNum:'12345', disposalproceeds:'12-FEB-2017', disposalprice:'350,000', rm3000:'200,00.00',percent:'20'},
+               self.allData = [{SLNo:'001', LnRefNum:'511350052015270', disposalproceeds:'12-FEB-2017', disposalprice:'300000', rm3000:'3000',percent:'6095.57'},
                     {SLNo:'002', LnRefNum:'12346', disposalproceeds:'12-FEB-2017', disposalprice:'350,000', rm3000:'200,00.00',percent:'20'},
                     {SLNo:'003', LnRefNum:'12347', disposalproceeds:'13-FEB-2017', disposalprice:'350,000', rm3000:'200,00.00',percent:'20'},
                     {SLNo:'004', LnRefNum:'12348', disposalproceeds:'14-FEB-2017', disposalprice:'350,000', rm3000:'200,00.00',percent:'20'},
                     {SLNo:'005', LnRefNum:'12349', disposalproceeds:'15-FEB-2017', disposalprice:'350,000', rm3000:'200,00.00',percent:'20'},
                     {SLNo:'006', LnRefNum:'12350', disposalproceeds:'16-FEB-2017', disposalprice:'350,000', rm3000:'200,00.00',percent:'20'}
                 ]
+                
+                self.masdpart3summaryData = [{rprtDate:'001', contractNumber:'123/MGP-SRP/012017/001', lnRefNum:'H1234567', gamntrefund2cagamas:'1234.00', accrued:'110.00',total:'1334.00'}
+                  
+                ]
+                
+                
+                
 
-               self.summaryreportds = ko.observable(new oj.ArrayTableDataSource([], {}));  
+                self.summaryreportds = ko.observable(new oj.ArrayTableDataSource([], {})); 
+                self.masdpart3ds = ko.observable(new oj.ArrayTableDataSource([], {})); 
+       
                self.products = [{value: 'MGP/SPB', label: 'MGP-SPB'},
                 {value: 'MGP/SPR', label: 'MGP-SPR'}
                 ]
@@ -57,7 +66,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojselectcombo
             {
                 self.eitags = ko.observableArray(self.EIs);
                 self.prdtags = ko.observableArray(self.products);
+                
+                self.cancel =function() {
+                             $('#masdpart3summary').ojPopup('close', '#masdpart3');   
+                };
+                
+                
+                self.search =function() {
                            
+                      self.masdpart3ds(new oj.ArrayTableDataSource(self.masdpart3summaryData, {idAttribute: 'rprtDate'})); 
+                             
+                };
+                self.getSummary =function() {
+                             $('#masdpart3summary').ojPopup('open', '#masdpart3');  
+                             // self.masdpart3ds(new oj.ArrayTableDataSource(self.masdpart3summaryData, {idAttribute: 'SLNo'})); 
+                             
+                };
                 self.back =function() {
                         window.location = "?root=mgpcreate";
                 };
@@ -68,6 +92,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojselectcombo
                    // self.originalCapAmt("200,000,000.00");
                    // self.contractStauts("Validated");
 
+                };
+                 self.upload = function () {
+                   $('#all')[0].checked= true;
+                    self.summaryreportds(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'SLNo'})); 
                 };
                 self.assetDataEvent = function (event, data) {
                   
