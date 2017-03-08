@@ -225,15 +225,16 @@
                                                     </button>
                                                     <label>&nbsp;&nbsp;&nbsp;</label>
                                                     <div id="mgpAssets" aria-labelledby="mainlabelid"
-                                                         data-bind="ojComponent: {component: 'ojRadioset',optionChange:assetDataEvent},value: currentValue">
-                                                        <span>
+                                                         data-bind="ojComponent: {component: 'ojRadioset',optionChange:assetDataEvent},value: currentValue,required: true ">
+                                                            <span>
                                                             <input id="validatedAsset" type="radio" name="assetData" value="Validated"/>
                                                             <label for="validatedAsset">Validated Asset</label>            
-
+                                                          </span>    
+                                                          <span>
                                                             <input id="failed" type="radio" name="assetData" value="Failed">
                                                             <label for="failed">EC Failed Asset</label>
-
-                                                            <input id="all" type="radio" name="assetData" value="All">
+                                                            </span> 
+                                                         <span> <input id="all" type="radio" name="assetData" value="All">
                                                             <label for="all">All Assets</label>
                                                         </span>
                                                     </div>
