@@ -1,22 +1,19 @@
+/**
+ * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ * The Universal Permissive License (UPL), Version 1.0
+ */
+define(['knockout'],
+        function (ko)
+        {
+            /* 
+             * Your application specific code will go here
+             */
 
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource'],
-function(oj, ko, $)
-{
-  function viewModel()
-  {
-    var self = this;
+            function mainViewModel() {
+                var self = this;
+                self.header = "This is Master Data List Page";
+            }
 
-    var deptArray = [
-    {MasterId: 10015, MasterName: 'ADFPM 1001 neverending'},
-    {MasterId: 10015, MasterName: 'ADFPM 1001 neverending'},
-    {MasterId: 10015, MasterName: 'ADFPM 1001 neverending'},
-    {MasterId: 10015, MasterName: 'ADFPM 1001 neverending'},
-    {MasterId: 10015, MasterName: 'ADFPM 1001 neverending'},
-    {MasterId: 10015, MasterName: 'ADFPM 1001 neverending'},
-    ];
-    self.pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'MasterId'}));
-    self.header="Master Data List";
-  }
-  return viewModel;
+            return mainViewModel;
 
-});
+        });

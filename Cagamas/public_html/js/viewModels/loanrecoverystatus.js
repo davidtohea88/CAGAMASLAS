@@ -1,5 +1,5 @@
 
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojselectcombobox', 'ojs/ojtable', 'promise', 'ojs/ojarraytabledatasource', 'ojs/ojdatetimepicker', 'ojs/ojradioset'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojselectcombobox', 'ojs/ojtable', 'promise', 'ojs/ojarraytabledatasource', 'ojs/ojdatetimepicker', 'ojs/ojradioset','ojs/ojtabs'],
         function (oj, ko, $)
         {
 
@@ -39,12 +39,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojselectcombo
                 {value: 'MGP/SPR', label: 'MGP-SPR'}
             ]
 
-            self.loanrecovery = [{slno: '001', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '01-Jan-2017', defaultNoticeDate: '30-Jan-2017', contractNum: '123', loanNum: 'L001', defaultoutstanding: '10000', p1outstanding: '10000',guaranteeAmt:'',MIA: '5', state: 'KL'},
-                {slno: '002', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '01-Feb-2017', defaultNoticeDate: '26-Feb-2017', contractNum: '456', loanNum: 'L001', defaultoutstanding: '37500', p1outstanding: '37500', guaranteeAmt:'3750',MIA: '1', state: 'KL'},
-                {slno: '003', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '04-Feb-2017', defaultNoticeDate: '20-Feb-2017', contractNum: '456', loanNum: 'L001', defaultoutstanding: '55000', p1outstanding: '55000', guaranteeAmt:'5500',MIA: '2', state: 'KL'},
-                {slno: '004', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '10-Feb-2017', defaultNoticeDate: '21-Feb-2017', contractNum: '456', loanNum: 'L001', defaultoutstanding: '10000', p1outstanding: '10000', guaranteeAmt:'1000',MIA: '3', state: 'KL'}]
+            self.loanrecovery = [{slno: '001', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '31-Dec-2016', defaultNoticeDate: '30-Jan-2017', contractNum: '123', loanNum: 'L001', defaultoutstanding: '10000', p1outstanding: '10000',guaranteeAmt:'',MIA: '5', state: 'KL'},
+                {slno: '002', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '01-Jan-2017', defaultNoticeDate: '26-Feb-2017', contractNum: '456', loanNum: 'L002', defaultoutstanding: '37500', p1outstanding: '37500', guaranteeAmt:'3750',MIA: '1', state: 'KL'},
+                {slno: '003', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '01-Jan-2017', defaultNoticeDate: '20-Feb-2017', contractNum: '456', loanNum: 'L003', defaultoutstanding: '55000', p1outstanding: '55000', guaranteeAmt:'5500',MIA: '2', state: 'KL'},
+                {slno: '004', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '31-Dec-2016', defaultNoticeDate: '21-Feb-2017', contractNum: '456', loanNum: 'L004', defaultoutstanding: '10000', p1outstanding: '10000', guaranteeAmt:'1000',MIA: '3', state: 'KL'}]
 
             self.loands = ko.observable(new oj.ArrayTableDataSource([], {}));
+            
+            self.loansummary = [{slno: '001', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '31-Dec-2016', partyName: 'CIMB Bank Berhad', foreclosure: 'FL-CLOSURE1', clbalance: '10000', noofloans: '10'},
+                {slno: '002', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '31-Dec-2016', partyName: 'CIMB Bank Berhad', foreclosure: 'FL-CLOSURE1', clbalance: '50000', noofloans: '5'},
+                {slno: '003', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '01-Jan-2017', partyName: 'OCBC', foreclosure: 'FL-CLOSURE2', clbalance: '225000', noofloans: '7'},
+                {slno: '004', prodGrpType: 'MGP/SRP-C', masdp1reportDate: '01-Jan-2017', partyName: 'OCBC', foreclosure: 'FL-CLOSURE2', clbalance: '225000', noofloans: '6'}]
+         
+            self.summaryds = ko.observable(new oj.ArrayTableDataSource([], {}));
+            
             function viewModel()
             {
                 self.eitags = ko.observableArray(self.EIs);
@@ -59,7 +67,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojselectcombo
 
                 self.search = function (data, event) {
                     self.loands(new oj.ArrayTableDataSource(self.loanrecovery, {idAttribute: 'slno'}));
+                    self.summaryds(new oj.ArrayTableDataSource(self.loansummary, {idAttribute: 'slno'}));
                 }
+                self.getDetails = function (data, event) {
+                      $('#assetdetail').ojPopup('open', '#assetDetails');   
+                   
+                }
+                self.cancel = function (data, event) {
+                      $('#assetdetail').ojPopup('close', '#assetDetails');   
+                   
+                }
+                
 
             }
 

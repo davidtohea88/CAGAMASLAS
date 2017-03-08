@@ -82,6 +82,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojselectcombo
                     }
 
                 };
+                self.upload = function () {
+                   $('#all')[0].checked= true;
+                    self.summaryreportds(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'SLNo'}));
+                };
                            
             }
            
