@@ -21,8 +21,11 @@
                 <label for="A3control">Eligible Institution</label>
             </div>
             <div class="oj-flex-item">
-                <input id="A3control" 
-                       data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select', options: months}">
+                <input id="A3control" placeholder="Search Eligible Institution"
+                                                           data-bind="ojComponent: {
+                                                            component: 'ojInputSearch',
+                                                            value: eiName,
+                                                            options: eitags}">
             </div>
         </div>
     </div>
