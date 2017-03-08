@@ -302,6 +302,7 @@ require(['ojs/ojcore',
                 'mgpsummaryreport' : {label: 'mgpsummaryReport'},
                 'cost': {label: 'Cost'},
                 'cost-confirmation': {label: 'Cost Confirmation'},
+                'login': {label: 'login'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 
