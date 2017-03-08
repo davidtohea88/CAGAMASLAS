@@ -300,6 +300,8 @@ require(['ojs/ojcore',
                 'loanrecoverystatus': {label: 'Loan Recovery Status'},
                 'generatetransdoc' : {label: 'generatetransdoc'},
                 'mgpsummaryreport' : {label: 'mgpsummaryReport'},
+                'cost': {label: 'Cost'},
+                'cost-confirmation': {label: 'Cost Confirmation'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 

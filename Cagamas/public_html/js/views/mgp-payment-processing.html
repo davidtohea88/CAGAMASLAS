@@ -59,26 +59,28 @@
 
     </div>
 
-<div id="pagingControlDemo" class="page-content">
+<div class="page-content">
     <table id="table" summary="Loan Detail" aria-label="Loan Detail"
-           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, editMode: 'rowEdit', columns:
+           data-bind="ojComponent: {component: 'ojTable', data: datasource, columns:
             [
             {headerTemplate: 'view_action_hdr', template: 'view_action'},            
             {headerText: 'Contract Number', field: 'ContractNumber'},
             {headerText: 'Payment Due Date', field: 'PaymentDueDate'},
             {headerText: 'Payment Fee', field: 'PaymentFee'},
-            {headerText: 'Payment Date', field: 'PaymentDate'},
-            {headerText: 'Status', field: 'Status', sortProperty: 'Status'},
-            ], 
+            {headerTemplate: 'view_action_hdr_payment_date', template: 'view_action_payment_date'},            
+            {headerText: 'Status', field: 'Status', sortProperty: 'Status'}
+            ],
+            scrollPolicy: 'loadMoreOnScroll',
+            scrollPolicyOptions: {'fetchSize': 10}, 
              rootAttributes: {'style':'width: 100%;'}}">
     </table>
-    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
-    </div>
-</div>
+
+</div>                                                      
+                                                        
 <div style="clear:both;"></div>
 <div class="oj-flex page-content" style="margin-top:20px;">                      
     <div class="oj-flex-item">
-            <button id= "btn_search" data-bind="click : onSearchClick, ojComponent: { component: 'ojButton', label: 'Confirm Payment' }"></button>    
+            <button id= "btn_search" data-bind="click : onConfirm2Click, ojComponent: { component: 'ojButton', label: 'Confirm Payment' }"></button>    
         </div>
          <div class="oj-flex-item">   
          <div class="oj-flex">
@@ -117,14 +119,25 @@
 </script>
 <script type="text/html" id="view_action">
     <td>
-        <div id="checkboxSetAgreeIdForm" aria-labelledby="agreeIdForm" 
-             data-bind=
-             "ojComponent: {
-            component: 'ojCheckboxset'}" >
-          <span class="oj-choice-row">
-            <input id="agreeRequired" type="checkbox" value="agree" style="margin:0 auto;">
-          </span>
-        </div>
-    </td>
+<div id="checkboxSetAgreeId" aria-labelledby="agreeId" 
+           data-bind=
+           "ojComponent: {component: 'ojCheckboxset', 
+            value: selected}" >
+        <span class="oj-choice-row">
+          <input id="selected" type="checkbox" value=selected>
+        </span>
+      </div>    </td>
 </script>
 
+
+<script type="text/html" id="view_action_hdr_payment_date">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Payment Date
+    </th>
+</script>
+<script type="text/html" id="view_action_payment_date">
+    <td>
+         <input id="paymentDateControl" 
+                       data-bind="ojComponent: {component: 'ojInputDate',value:PaymentDate}">
+    </td>
+</script>

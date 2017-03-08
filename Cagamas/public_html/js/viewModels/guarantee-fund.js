@@ -5,28 +5,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
       {
         function mainModel(){
             var self = this;
-            var currentRow = '';
             self.header = "Monthly Cost and Fund";
             self.subHeader = "Guarantee Fund";
-            self.months = [{value : '0', label : 'Month'},
-                        {value : '1', label : 'January'},
-                        {value : '2', label : 'February'},
-                        {value : '3', label : 'March'},
-                        {value : '4', label : 'April'},
-                        {value : '5', label : 'May'},
-                        {value : '6', label : 'June'},
-                        {value : '7', label : 'July'},
-                        {value : '8', label : 'August'},
-                        {value : '9', label : 'September'},
-                        {value : '10', label : 'October'},
-                        {value : '11', label : 'November'},
-                        {value : '12', label : 'December'}];
-            self.years = [{value : '0', label : 'Year'},
-                        {value : '2015', label : '2015'},
+            self.months = [{value : 'Jan', label : 'January'},
+                        {value : 'Feb', label : 'February'},
+                        {value : 'Mar', label : 'March'},
+                        {value : 'Apr', label : 'April'},
+                        {value : 'May', label : 'May'},
+                        {value : 'Jun', label : 'June'},
+                        {value : 'Jul', label : 'July'},
+                        {value : 'Aug', label : 'August'},
+                        {value : 'Sep', label : 'September'},
+                        {value : 'Oct', label : 'October'},
+                        {value : 'Nov', label : 'November'},
+                        {value : 'Dec', label : 'December'}];
+            self.years = [{value : '2015', label : '2015'},
                         {value : '2016', label : '2016'},
                         {value : '2017', label : '2017'}];
-            self.selectedMonth = ko.observable('0');
-            self.selectedYear = ko.observable('0');
+            self.selectedMonth = ko.observable();
+            self.selectedYear = ko.observable();
             var gfArray = [{Month:'February', Year:'2017', InitialGuaranteeFund:'50,000,000.00', AdditionalFund:'33,000,000.00', AvailableGuaranteeFund:'17,000,000.00', Status:'Pending Confirmation', EffectivePeriod:'Mar-2017', GuaranteeFundTres:'98'},
                         {Month:'January', Year:'2017', InitialGuaranteeFund:'50,000,000.00', AdditionalFund:'29,000,000.00', AvailableGuaranteeFund:'21,000,000.00', Status:'Confirmed', EffectivePeriod:'Jan-2017', GuaranteeFundTres:'97'},
                         {Month:'December', Year:'2016', InitialGuaranteeFund:'50,000,000.00', AdditionalFund:'30,000,000.00', AvailableGuaranteeFund:'20,000,000.00', Status:'Confirmed', EffectivePeriod:'Feb-2015', GuaranteeFundTres:'96'}];
@@ -37,7 +34,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             var gfArray2017 = [{Month:'February', Year:'2017', InitialGuaranteeFund:'50,000,000.00', AdditionalFund:'33,000,000.00', AvailableGuaranteeFund:'17,000,000.00', Status:'Pending Confirmation', EffectivePeriod:'Mar-2017'},
                         {Month:'January', Year:'2017', InitialGuaranteeFund:'50,000,000.00', AdditionalFund:'29,000,000.00', AvailableGuaranteeFund:'21,000,000.00', Status:'Confirmed', EffectivePeriod:'Jan-2017'}];
             self.gfObservableArray = ko.observableArray(gfArray);
-            self.datasourceGF= new oj.ArrayTableDataSource(ko.observableArray(gfArray), {idAttribute: 'Month'});
+            self.datasourceGF = ko.observable(new oj.ArrayTableDataSource([], {}));
             
             //intialize the observable values in the forms
             self.inputInitialGuaranteeFund = ko.observable();
@@ -47,38 +44,46 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             self.inputPeriodMonth = ko.observable();
             self.inputPeriodYear = ko.observable();
             self.inputEffectivePeriod = ko.observable(); //need to be reformated before update value
+            self.inputGuaranteeFundTresPU = ko.observable();
+            //tmp values
+            self.tmpMonth;
+            self.tmpYear;
+            self.tmpAdditionalFund;
+            self.tmpCurrAvlGuaranteeFund;
+            self.tmpStatus;
+            self.tmpEffectivePeriod;
+            self.tmpGuaranteeFundTres;
             
             self.onClickSearch = function(){
-//                if(self.selectedMonth()==0 && self.selectedYear()==0){
-//                    self.datasourceGF(new oj.ArrayTableDataSource(gfArray, {idAttribute: 'Month'}));
-//                }else if((self.selectedMonth()==2 && self.selectedYear()==0) || ((self.selectedMonth()==2 && self.selectedYear()==2017))){
-//                    self.datasourceGF(new oj.ArrayTableDataSource(gfArrayFeb, {idAttribute: 'Month'}));
-//                }else if((self.selectedMonth()==1 && self.selectedYear()==0) || (self.selectedMonth()==1 && self.selectedYear()==2017)){
-//                    self.datasourceGF(new oj.ArrayTableDataSource(gfArrayJan, {idAttribute: 'Month'}));
-//                }else if((self.selectedMonth()==12 && self.selectedYear()==0) || (self.selectedMonth()==12 && self.selectedYear()==2016)){
-//                    self.datasourceGF(new oj.ArrayTableDataSource(gfArrayDec, {idAttribute: 'Month'}));
-//                }else if(self.selectedYear()==2016 && self.selectedMonth()==0){
-//                    self.datasourceGF(new oj.ArrayTableDataSource(gfArray2016, {idAttribute: 'Month'}));
-//                }else if(self.selectedYear()==2017 && self.selectedMonth()==0){
-//                    self.datasourceGF(new oj.ArrayTableDataSource(gfArray2017, {idAttribute: 'Month'}));
-//                }else{
-//                    self.datasourceGF(new oj.ArrayTableDataSource([], {idAttribute: 'Month'}));
-//                }
+                self.datasourceGF(new oj.ArrayTableDataSource(self.gfObservableArray, {idAttribute: 'Month'}));
             };
             
             self.onClickUpdate = function(item){
+                console.log("tmpGuaranteeFundTres : "+self.tmpGuaranteeFundTres);
+                self.inputGuaranteeFundTresPU(self.tmpGuaranteeFundTres);
                 $("#UpdateDialog").ojDialog("open");
                 return true;
             };
-            self.onClickSave = function(item){
+            self.onClickSave = function(){
+                var currentRow = $('#table').ojTable('option', 'currentRow');
+                if(self.inputPeriodMonth()!= null && self.inputPeriodYear()!= null){
+                    var effectivePeriod = self.inputPeriodMonth()+"-"+self.inputPeriodYear();
+                }
+                var num1 = Number(self.inputInitialGuaranteeFund().replace(/[^0-9\.]+/g,""));
+                var num2 = Number(self.inputAdditionalFund().replace(/[^0-9\.]+/g,""));
+                num1 += num2;
+                var newInitialGuaranteeFund = num1.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
                 if (currentRow != null)
                 {
-                    alert(self.inputInitialGuaranteeFund());
                     self.gfObservableArray.splice(currentRow['rowIndex'], 1, {
-                                 'InitialGuaranteeFund': self.inputInitialGuaranteeFund(),
-//                                 '': self.inputGuaranteeFundTres(),
-                                 'AdditionalFund': self.inputAdditionalFund()
-//                                 'EffectivePeriod': self.inputPeriodMonth()
+                                 'Month': self.tmpMonth,
+                                 'Year': self.tmpYear,
+                                 'InitialGuaranteeFund': newInitialGuaranteeFund,
+                                 'AdditionalFund': self.tmpAdditionalFund,
+                                 'AvailableGuaranteeFund': self.tmpCurrAvlGuaranteeFund,
+                                 'Status': self.tmpStatus,
+                                 'EffectivePeriod': effectivePeriod,
+                                 'GuaranteeFundTres': self.inputGuaranteeFundTresPU()
                               });
                 }
                 $("#UpdateDialog").ojDialog("close");
@@ -86,19 +91,30 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             self.onClickCancel = function(){
                 $("#UpdateDialog").ojDialog("close");
             };
-            
-            selectClick =  function(item) {
-                currentRow = $('#table').ojTable('option', 'currentRow');
+            self.onPrintClick = function(){
+            };
+            self.onExportClick = function(){
+            };
+            self.rowClick = function(item){
+                self.tmpMonth = item.Month;
+                self.tmpYear = item.Year;
+                self.tmpAdditionalFund = item.AdditionalFund;
+                self.tmpStatus = item.Status;
+                self.tmpCurrAvlGuaranteeFund = item.AvailableGuaranteeFund;
+                self.tmpEffectivePeriod = item.EffectivePeriod;
+                self.tmpGuaranteeFundTres = item.GuaranteeFundTres;
+                console.log("item : "+item.GuaranteeFundTres);
+                console.log("tmp : "+self.tmpGuaranteeFundTres);
                 self.inputInitialGuaranteeFund(item.InitialGuaranteeFund);
                 self.inputGuaranteeFundTres(item.GuaranteeFundTres);
                 self.inputCurrAvlGuaranteeFund(item.AvailableGuaranteeFund);
                 if(item.Status == 'Pending Confirmation'){
-                    $("#updateButton").ojButton({"disabled": true});
-                }else{
                     $("#updateButton").ojButton({"disabled": false});
+                }else{
+                    $("#updateButton").ojButton({"disabled": true});
                 }
-            };
-        }       
-           
+            }
+            
+        }
         return mainModel;     
       });
