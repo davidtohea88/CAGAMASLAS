@@ -75,8 +75,41 @@
     <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
     </div>
 </div>
-
-
+<div style="clear:both;"></div>
+<div class="oj-flex page-content" style="margin-top:20px;">                      
+    <div class="oj-flex-item">
+            <button id= "btn_search" data-bind="click : onSearchClick, ojComponent: { component: 'ojButton', label: 'Confirm Payment' }"></button>    
+        </div>
+         <div class="oj-flex-item">   
+         <div class="oj-flex">
+            <div class="oj-flex-item">
+               <label for="A1control">Payment Paid</label>
+            </div>
+            <div class="oj-flex-item">
+              <input id="A1control" type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', value: '1234', disabled:true}">
+            </div>
+         </div>
+        </div>
+         <div class="oj-flex-item">                       
+        <div class="oj-flex">
+            <div class="oj-flex-item">
+               <label for="A1control">Payment Pending</label>
+            </div>
+            <div class="oj-flex-item">
+              <input id="A1control" type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', value: '1234', disabled:true}">
+            </div>
+         </div>
+          </div>
+          </div>
+<hr/>
+<div class="oj-flex page-content">                      
+    <div class="oj-flex-item">
+        <button id= "btn_search" data-bind="click : onExportClick, ojComponent: { component: 'ojButton', label: 'Export' }"></button>
+        <button id= "btn_search" data-bind="click : onPrintClick, ojComponent: { component: 'ojButton', label: 'Print' }"></button>
+    </div>
+</div>
 <script type="text/html" id="view_action_hdr">
     <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
         Select

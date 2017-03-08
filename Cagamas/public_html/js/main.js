@@ -158,6 +158,13 @@ require(['ojs/ojcore',
                 'guarantee-fund-confirmation': {label: 'Guarantee Fund Confirmation'},
                 'net-income': {label: 'Net Income'},
                 'net-income-confirmation': {label: 'Net Income Confirmation'},
+                'mgpsummary': {label: 'MGP'},
+                'mgpcreate': {label: 'MGP Contract Create & Edit'},
+                'masdpart2upload': {label: 'MASD PART 2 Upload'},
+                'masdpart3upload': {label: 'MASD PART 3 Upload'},
+                'loanrecoverystatus': {label: 'Loan Recovery Status'},
+                'generatetransdoc' : {label: 'generatetransdoc'},
+                'mgpsummaryreport' : {label: 'mgpsummaryReport'},
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<div id="form-container">
+    <div class="oj-flex">  
+        <div class="oj-flex-item">
+            <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >                    
+                <img src="img/cagamas-logo-new_0.png"/>                      
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">  
+                        <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >   
+                            <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >  
+                                <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                    <div class="oj-flex-item">   
+                                        <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-label-nowrap">
+                                           
+                                            <div class="oj-flex">  
+                                                <div class="oj-flex-item">
+                                                    <label for="EISearch">Counter Party</label>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <input id="EISearchCmp" placeholder="Search EI..."
+                                                           data-bind="ojComponent: {
+                                                            component: 'ojInputSearch',
+                                                            value: eiName,
+                                                            options: eitags,
+                                                            rootAttributes: {style:'max-width: 15em'}}">
+                                                </div>  
+                                            </div> 
+                                          
+                                            <div class="oj-flex">  
+                                                <div class="oj-flex-item">
+                                                    <label for="counterPartyGrp">Counter Party Group :</label>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <label for="counterPartyGrp" data-bind="text: counterPartyGrp"></label>
+                                                </div>
+                                            </div>                         
+                                             <div class="oj-flex">  
+                                                <div class="oj-flex-item">
+                                                    <label for="Product">Product</label>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <input id="prdSearch" placeholder="Search Product..."
+                                                           data-bind="ojComponent: {
+                                                            component: 'ojInputSearch',
+                                                            value: product,
+                                                            options: prdtags,
+                                                            rootAttributes: {style:'max-width: 15em'}}">
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>    
+                                     <div class="oj-flex-item">   
+                                        <div class="oj-form oj-md-labels-inline oj-label-nowrap">
+                                            <div class="oj-flex">  
+                                                <div class="oj-flex-item">
+                                                    <label for="Product">MASD PART3</label>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <input type="file">
+                                                </div>
+                                                 <div class="oj-flex-item">
+                                                    <button id= "upload" data-bind="ojComponent: { component: 'ojButton', label: 'Upload' }">
+                                                    </button>                                                   
+                                                </div>
+                                            </div> 
+                                
+                                                                               
+                                        </div>
+                                    </div>                                 
+                                    
+                                </div>
+
+                            </div>
+                            <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                     
+                                <div class="oj-flex-item">   
+                                    <div class="oj-form oj-md-labels-inline">
+                                          <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >   
+                                           
+                                            <div class="oj-flex">                        
+                                                <div class="oj-flex-item">
+                                                     
+                                                    <button id= "validate" data-bind="click:validate,ojComponent: { component: 'ojButton', label: 'Validate Asset' }">
+                                                    </button>
+                                                    <button id= "sendNOtification" data-bind="ojComponent: { component: 'ojButton', label: 'Send Notification' }">
+                                                    </button>
+                                                    <label>&nbsp;&nbsp;&nbsp;</label>   
+                                                    <div id="mgpAssets" aria-labelledby="mainlabelid"
+                                                         data-bind="ojComponent: {component: 'ojRadioset',optionChange:assetDataEvent},value: currentValue">
+                                                        <span>
+                                                            <input id="validatedAsset" type="radio" name="assetData" value="Validated"/>
+                                                            <label for="validatedAsset">Validated Asset</label>            
+
+                                                            <input id="failed" type="radio" name="assetData" value="Failed">
+                                                            <label for="failed">Failed Asset</label>
+
+                                                            <input id="all" type="radio" name="assetData" value="All">
+                                                            <label for="all">All Assets</label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                       
+                                    </div>   
+
+
+                                </div>                             
+                            </div>  
+                                             
+                            <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                     
+                                <div class="oj-flex-item">   
+                                    <div class="oj-form oj-md-labels-inline">
+                                          <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >   
+                                            <h4><b>Servicing Details</b></h4>
+                                            <div class="oj-flex">                        
+                                                <div class="oj-flex-item">
+                                                    <table id="table" summary="Asset Details" aria-label="Assets"
+                                                           data-bind="ojComponent: {component: 'ojTable', 
+                                data: summaryreportds, 
+                                display: 'grid',
+                                columns: [
+                                           {headerText: 'SRL NO', field: 'SLNo'},
+                                           {headerText: 'LOAN REFERENCE NUMBER', field: 'LnRefNum'},
+                                           {headerText: 'DATE OF RECEIPT OF DISPOSAL PROCEEDS', field: 'disposalproceeds'},
+                                           {headerText: 'DISPOSAL PRICE', field: 'disposalprice'},
+                                           {headerText: 'RM3000', field: 'rm3000'},
+                                           {headerText: '3% OF NET', field: 'percent'}
+                                         ],
+                                scrollPolicy: 'loadMoreOnScroll',
+                                scrollPolicyOptions: {'fetchSize': 10},
+                                rootAttributes: {'style':'height: 300px;'}}">
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="oj-flex">                        
+                                            <div class="oj-flex-item">
+                                                <button id= "export" data-bind="click:assetDataExport,ojComponent: { component: 'ojButton', label: 'Export' }">
+                                                </button>
+                                                <button id= "Print" data-bind="ojComponent: { component: 'ojButton', label: 'Print' }">
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>   
+
+
+                                </div>                             
+                            </div>    
+                        </div>
+                    </div> 
+
+                </div>    
+
+ 
+            </div>
+         
+        </div> 
+      
+    </div>
+  

@@ -54,7 +54,7 @@ function(oj, ko, $)
     {EligibleInstitution: 'CIMB Bank', ContractNumber: '345/MGPFI/012017/001', Product:'MGPFI', Month:'11', Year:'2017',FileType:'MASD3',Status:'Submitted'},
     {EligibleInstitution: 'CIMB Bank Berhad', ContractNumber: '456/MGPFI/012017/001', Product:'MGPFI', Month:'12', Year:'2017',FileType:'AAR',Status:'Submitted'}
     ];                
-    self.pagingDatasource = ko.observable(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(MASD1, {idAttribute: 'ContractNumber'})));
+    self.pagingDatasource = ko.observable(new oj.PagingTableDataSource();
  
     onSearchClick = function(item)
     {
