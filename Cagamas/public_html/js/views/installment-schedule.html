@@ -95,12 +95,17 @@
     <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
     </div>
 </div>
-       <hr/>
-  <div class="page-button-wrapper" id='buttons-container'>
-  <div class="page-button-inner"> 
-<button  id= "btn_back" data-bind="ojComponent: { component: 'ojButton', label: 'Export' }">
+       <div style="clear:both;"></div>
+<hr/>
+<div class="demo-grid-sizes demo-flex-display">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-sm-12 oj-md-12 oj-lg-5 oj-flex-item"></div>
+    <div class="oj-sm-12 oj-md-6  oj-lg-3 oj-flex-item">
+<button  id= "btn_back" class="action-button-3" data-bind="ojComponent: { component: 'ojButton', label: 'Export' }">
     </button>
-<button  id= "btn_back" data-bind="click: redirectToPC, ojComponent: { component: 'ojButton', label: 'Back' }">
+<button  id= "btn_back" class="action-button-3" data-bind="click: redirectToPC, ojComponent: { component: 'ojButton', label: 'Back' }">
     </button>
     </div>
+    <div class="oj-sm-12 oj-md-6  oj-lg-4 oj-flex-item"></div>
+  </div>
 </div>

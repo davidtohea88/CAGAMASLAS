@@ -157,15 +157,15 @@
         </div>
           </div>
           <div class="oj-flex-item">
-          <button  id= "btn_1" data-bind="ojComponent: { component: 'ojButton', label: 'Filter Nearest Purchase Amount' }">
+          <button  id= "btn_1" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Filter Nearest Purchase Amount' }">
     </button>
-          <button  id= "btn_2" data-bind="ojComponent: { component: 'ojButton', label: 'Move' }">
+          <button  id= "btn_2" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Move' }">
     </button>
-          <button  id= "btn_3" data-bind="ojComponent: { component: 'ojButton', label: 'Export' }">
+          <button  id= "btn_3" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Export' }">
     </button>
-          <button  id= "btn_4" data-bind="ojComponent: { component: 'ojButton', label: 'Upload Data' }">
+          <button  id= "btn_4" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Upload Data' }">
     </button>
-          <button  id= "btn_5" data-bind="ojComponent: { component: 'ojButton', label: 'Revalidate' }">
+          <button  id= "btn_5" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Revalidate' }">
     </button>
           </div>      
     </div>
@@ -191,12 +191,17 @@
     <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
     </div>
 </div>
+<div style="clear:both;"></div>
        <hr/>
-  <div class="page-button-wrapper" id='buttons-container'>
-  <div class="page-button-inner"> 
-<button  id= "btn_back" data-bind="click: redirectToPC, ojComponent: { component: 'ojButton', label: 'Back' }">
+<div class="demo-grid-sizes demo-flex-display">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-sm-12 oj-md-12 oj-lg-5 oj-flex-item"></div>
+    <div class="oj-sm-12 oj-md-6  oj-lg-2 oj-flex-item">
+<button  id= "btn_back" class="action-button-2" data-bind="click: redirectToPC, ojComponent: { component: 'ojButton', label: 'Back' }">
     </button>
     </div>
+    <div class="oj-sm-12 oj-md-6  oj-lg-5 oj-flex-item"></div>
+  </div>
 </div>
 <script type="text/html" id="view_action_hdr">
     <th style="padding-left: 5px; padding-right: 5px;text-align:center;">

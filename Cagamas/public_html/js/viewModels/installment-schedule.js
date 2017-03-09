@@ -12,7 +12,8 @@ function(oj, ko, $)
     header="Installment Schedule";
     pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'InstallmentDate'}));
     redirectToPC= function(item) {
-      oj.Router.rootInstance.go('origination-pc');
+        history.pushState(null, '', 'index.html?root=origination-pc&status=temp-validated');
+        oj.Router.sync();
     }
     
   }

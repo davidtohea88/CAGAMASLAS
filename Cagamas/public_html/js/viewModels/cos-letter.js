@@ -8,6 +8,11 @@ function(oj, ko, $)
         redirectToPC= function(item) {
       oj.Router.rootInstance.go('origination-pc');
     }
+    redirectToPC= function(item) {
+                history.pushState(null, '', 'index.html?root=origination-pc&status=temp-pwrts&letter=1');
+                oj.Router.sync();
+    }
+    
 
   }
   return viewModel;

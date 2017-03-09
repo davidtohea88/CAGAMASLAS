@@ -1270,7 +1270,7 @@ h1,h3
 }
 .page-button-inner
 {
-margin : auto;
+margin: 0 auto;
 }
 .page-content
 {
@@ -1305,6 +1305,11 @@ display: none;
 {
 text-transform:uppercase;
 }
+
+.oj-inputsearch .oj-inputsearch-choice
+{
+border-width:1px;
+}
 /*Monica edit end*/
 
 
@@ -1338,6 +1343,15 @@ text-transform:uppercase;
 .action-button-2 .oj-button-text{
     white-space: normal;
 }
+
+.action-button-3
+{
+height:60px;
+}
+.action-button-3 .oj-button-text{
+margin:10px 15px;
+}
+
 .blank-footer{
     height:50px;   
 }

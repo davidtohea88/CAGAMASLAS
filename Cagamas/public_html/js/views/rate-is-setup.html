@@ -137,13 +137,18 @@
   </div>
   </div>
   <hr/>
-  <div class="page-button-wrapper" id='buttons-container'>
-  <div class="page-button-inner"> 
-    <button  id= "btn_save" data-bind="click:backToPC, ojComponent: { component: 'ojButton', label: 'Save' }">
+<div class="demo-grid-sizes demo-flex-display">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-sm-12 oj-md-12 oj-lg-4 oj-flex-item"></div>
+    <div class="oj-sm-12 oj-md-6  oj-lg-4 oj-flex-item">
+            <button  id= "btn_save" class="action-button-3" data-bind="click:backToPC, ojComponent: { component: 'ojButton', label: 'Save', childAttributes:{style:'white-space: normal;'} }">
         </button>
-    <button id= "btn_calculate" data-bind="ojComponent: { component: 'ojButton', label: 'Calculate' }">
+    <button id= "btn_calculate" class="action-button-3" data-bind="click:backToPC, ojComponent: { component: 'ojButton', label: 'Calculate' }">
         </button>
+
     </div>
+    <div class="oj-sm-12 oj-md-6  oj-lg-4 oj-flex-item"></div>
+  </div>
 </div>
 
 </div>

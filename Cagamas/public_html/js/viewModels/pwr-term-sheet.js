@@ -27,8 +27,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
             self.longDateConverter = cf.createConverter(ecmaBirthDateOptions);
             
             self.onClickPrint = function(item){};
-            self.onClickSubmit = function(item){};
-            self.onClickBack = function(item){};
+            self.onClickSubmit = function(item){
+                history.pushState(null, '', 'index.html?root=origination-pc&status=temp-pwrts');
+                oj.Router.sync();            
+            };
+            self.onClickBack = function(item){
+                history.pushState(null, '', 'index.html?root=origination-pc&status=temp-is');
+                oj.Router.sync();
+
+            };
             
         }
         

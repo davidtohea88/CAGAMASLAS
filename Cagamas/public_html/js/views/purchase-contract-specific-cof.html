@@ -10,13 +10,10 @@
             <label for="A4control">Counterparty Name</label>
           </div>
           <div class="oj-flex-item">
-            <input id="A4control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:selectedCP}">
-                   <button id="buttonCPOpener" 
-                data-bind="click: openCPPopUp, ojComponent: {
-                    component:'ojButton',
-                    icons: {start:'fa fa-search'}
-                }"></button>
+          <input id="A4control" placeholder=""
+               data-bind="ojComponent: {
+                component: 'ojInputSearch',
+                options: cp}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -24,8 +21,11 @@
             <label for="A5control">Purchase Contract Number</label>
           </div>
           <div class="oj-flex-item">
-            <input id="A5control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:''}">
+          <input id="A5control" placeholder=""
+               data-bind="ojComponent: {
+                component: 'ojInputSearch',
+                options: pc}">
+                
           </div>
         </div>
         <div class="oj-flex"> 
@@ -44,7 +44,7 @@
 
           <button  id= "btn_1" data-bind="ojComponent: { component: 'ojButton', label: 'Upload' }">
     </button>
-          <button  id= "btn_2" data-bind="ojComponent: { component: 'ojButton', label: 'Save' }">
+          <button  id= "btn_2" data-bind="click: redirectToPC, ojComponent: { component: 'ojButton', label: 'Save' }">
     </button>
           <button  id= "btn_3" data-bind="ojComponent: { component: 'ojButton', label: 'Cancel' }">
     </button>
@@ -81,13 +81,10 @@
 </script>
 <script type="text/html" id="cp_item">
     <td >
-         <input id="A4control"  style="border-width:1px;width:70%"
-                   data-bind="ojComponent: {component: 'ojInputText', value:selectedCP}">
-                   <button id="buttonCPOpener" style="margin-left:-15%;"
-                data-bind="click: openCPPopUp, ojComponent: {
-                    component:'ojButton',
-                    icons: {start:'fa fa-search'}
-                }"></button>
+     <input id="A4control"
+               data-bind="ojComponent: {
+                component: 'ojInputSearch',
+                options: cp}">
     </td>
 </script>
 

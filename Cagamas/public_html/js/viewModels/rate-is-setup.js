@@ -25,7 +25,8 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
                 self.Benchmark = [{value: 'A', label: 'Benchmark A'},{value: 'B', label: 'Benchmark B'}];
                 self.BenchmarkSource = [{value: 'A', label: 'Source A'},{value: 'B', label: 'Source B'}];
                 backToPC = function(item) {
-                  oj.Router.rootInstance.go('origination-pc');
+                    history.pushState(null, '', 'index.html?root=origination-pc&status=temp-validated');
+                    oj.Router.sync();
                 }     
 
             }

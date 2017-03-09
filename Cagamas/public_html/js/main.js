@@ -282,7 +282,7 @@ require(['ojs/ojcore',
                 'simulations': {label: 'Simulations'},
                 'weekly-cof': {label: 'Weekly COF'},
                 'purchase-contract-specific-cof': {label: 'Purchase Contract Specific COF'},
-                'published-rate': {label: 'Published Rate'},
+                'publish-rate': {label: 'Publish Rate'},
                 'final-cof': {label: 'Final COF'},
                 'pc-specific-conversion-final-cof': {label: 'PC Specific Conversion Final COF'},
                 'status-monitoring-masd-aar-status': {label: 'Status Monitoring MASD and AAR Status'},
@@ -303,6 +303,7 @@ require(['ojs/ojcore',
                 'cost': {label: 'Cost'},
                 'cost-confirmation': {label: 'Cost Confirmation'},
                 'login': {label: 'login'},
+mgp-msad1-upload                
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 

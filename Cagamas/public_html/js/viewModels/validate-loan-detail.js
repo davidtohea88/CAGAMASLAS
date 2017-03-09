@@ -15,11 +15,16 @@ function(oj, ko, $)
     {LoanRefNum: '7014262708600004', BranchCode: '701', BookBalance:'123,321', ForecastedBookBalance:'', MortgageRate:'5.5000', MortgageInstallment: '921', Month:'0.00'},
     {LoanRefNum: '7014262708600005', BranchCode: '701', BookBalance:'93,000', ForecastedBookBalance:'', MortgageRate:'5.2000', MortgageInstallment: '2,001', Month:'0.00'}
     ];
+    pagingDatasource = ko.observable();
     header="Validate Loan Detail";
-    pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'LoanRefNum'}));
     redirectToPC= function(item) {
-      oj.Router.rootInstance.go('origination-pc');
-    }
+                    history.pushState(null, '', 'index.html?root=origination-pc&status=temp-is');
+                    oj.Router.sync();
+    };
+    loadTable=function()
+    {
+    pagingDatasource(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'LoanRefNum'})));
+    };
     
   }
   return viewModel;

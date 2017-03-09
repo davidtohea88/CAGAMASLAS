@@ -182,7 +182,7 @@
                         <div class="oj-flex-item">
                             <div class="oj-label oj-component oj-combobox-label">
                                 <div class="oj-label-group">
-                                    <label for="select">Purchase Mode</label>
+                                    <label for="selectPurchaseMode">Purchase Mode</label>
                                 </div>
                             </div>
                         </div>
@@ -195,7 +195,7 @@
                         <div class="oj-flex-item">
                             <div class="oj-label oj-component oj-combobox-label">
                                 <div class="oj-label-group">
-                                    <label for="select">Payment Type</label>
+                                    <label for="selectPaymentType">Payment Type</label>
                                 </div>
                             </div>
                         </div>
@@ -212,7 +212,7 @@
                     <div class="oj-flex-item">
                         <div class="oj-label oj-component oj-combobox-label">
                             <div class="oj-label-group">
-                                <label for="select">Rate Type</label>
+                                <label for="selectRateType">Rate Type</label>
                             </div>
                         </div>
                     </div>
@@ -225,7 +225,7 @@
                     <div class="oj-flex-item">
                         <div class="oj-label oj-component oj-combobox-label">
                             <div class="oj-label-group">
-                                <label for="select">Payment Frequency</label>
+                                <label for="selectPaymentFrequency">Payment Frequency</label>
                             </div>
                         </div>
                     </div>
@@ -238,7 +238,7 @@
                     <div class="oj-flex-item">
                         <div class="oj-label oj-component oj-combobox-label">
                             <div class="oj-label-group">
-                                <label for="select">Purchase Consideration Type</label>
+                                <label for="selectPurchaseConsiderationType">Purchase Consideration Type</label>
                             </div>
                         </div>
                     </div>
@@ -251,7 +251,7 @@
                     <div class="oj-flex-item">
                         <div class="oj-label oj-component oj-combobox-label">
                             <div class="oj-label-group">
-                                <label for="select">Pricing Factor</label>
+                                <label for="selectPricingFactor">Pricing Factor</label>
                             </div>
                         </div>
                     </div>
@@ -262,10 +262,10 @@
                 </div>
                 <div class="oj-flex">
                     <div class="oj-flex-item">
-                        <label for="inputcontrol">Pricing Factor %</label>
+                        <label for="pricingFactorPerc">Pricing Factor %</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="inputcontrol"
+                        <input id="pricingFactorPerc"
                                data-bind="ojComponent: {component: 'ojInputText', required: true, value: pricingFactorPerc}"/>
                     </div>
                 </div>
@@ -275,7 +275,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <input id="inputcontrol"
-                               data-bind="ojComponent: {component: 'ojInputText',value:'TEMP-NEW', 
+                               data-bind="ojComponent: {component: 'ojInputText',value:inputStatus, 
                                                         required: false, disabled:true}" style="font-weight:bold;"/>
                     </div>
                 </div>
@@ -292,12 +292,12 @@
                     <div class="oj-flex-item">
                         <div class="oj-label oj-component oj-inputdate-label">
                             <div class="oj-label-group">
-                                <label for="datepickercontrol">Purchase Contact Date</label>
+                                <label for="purchaseContactDate">Purchase Contact Date</label>
                             </div>
                         </div>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="purchaseDate"
+                        <input id="purchaseContactDate"
                                data-bind="ojComponent: {component: 'ojInputDate', value: oj.IntlConverterUtils.dateToLocalIso(new Date()), required: false, disabled:true}"/>
                     </div>
                 </div>
@@ -305,12 +305,12 @@
                     <div class="oj-flex-item">
                         <div class="oj-label oj-component oj-inputdate-label">
                             <div class="oj-label-group">
-                                <label for="datepickercontrol">Deemed Purchase Date</label>
+                                <label for="deemedPurchaseDate">Deemed Purchase Date</label>
                             </div>
                         </div>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="purchaseDate"
+                        <input id="deemedPurchaseDate"
                                data-bind="ojComponent: {component: 'ojInputDate', value: oj.IntlConverterUtils.dateToLocalIso(new Date()), required: false, disabled:true}"/>
                     </div>
                 </div>
@@ -318,12 +318,12 @@
                     <div class="oj-flex-item">
                         <div class="oj-label oj-component oj-inputdate-label">
                             <div class="oj-label-group">
-                                <label for="datepickercontrol">Book Balance Date</label>
+                                <label for="bookBalanceDate">Book Balance Date</label>
                             </div>
                         </div>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="purchaseDate"
+                        <input id="bookBalanceDate"
                                data-bind="ojComponent: {component: 'ojInputDate', value: oj.IntlConverterUtils.dateToLocalIso(new Date()), required: false, disabled:true}"/>
                     </div>
                 </div>
@@ -352,12 +352,12 @@
                     <div class="oj-flex-item">
                         <div class="oj-label oj-component oj-inputdate-label">
                             <div class="oj-label-group">
-                                <label for="datepickercontrol">FBB Date</label>
+                                <label for="fbbDate">FBB Date</label>
                             </div>
                         </div>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="purchaseDate"
+                        <input id="fbbDate"
                                data-bind="ojComponent: {component: 'ojInputDate', value: oj.IntlConverterUtils.dateToLocalIso(new Date()), required: false, disabled:true}"/>
                     </div>
                 </div>
@@ -512,54 +512,54 @@
           <div class="two-cols">
             <h3 class="oj-header-border" style="margin-left:1%;">Action</h3>
             <div class="page-content">
-            <div>
-                <button id= "button" class="action-button"
+            <div class="pc-buttons-wrapper">
+                <button id= "rateISButton" class="action-button"
                         data-bind="click: redirectToRateISSetup, 
-                            ojComponent: {component: 'ojButton', label: 'RATE AND IS SETUP', childAttributes:{style:'white-space: normal;'}}">
+                            ojComponent: {component: 'ojButton', label: 'RATE AND IS SETUP', childAttributes:{style:'white-space: normal;'}, disabled: false}">
                 </button>
-                <button id= "button" class="action-button"
+                <button id= "loanDetailButton" class="action-button"
                         data-bind="click: rateAndIsSetup, 
                             ojComponent: {component: 'ojButton', label: 'VALIDATE LOAN DETAIL', required: false, disabled:true}">
                 </button>
-                <button id= "button" class="action-button"
+                <button id= "commDocButton" class="action-button"
                         data-bind="click: rateAndIsSetup, 
                             ojComponent: {component: 'ojButton', label: 'COMMODITY DOCUMENT', required: false, disabled:true}">
                 </button>
-                <button id= "button" class="action-button-2"
+                <button id= "gisButton" class="action-button-2"
                         data-bind="click: rateAndIsSetup, 
                             ojComponent: {component: 'ojButton', label: 'GENERATE INSTALLMENT SCHEDULE', required: false, disabled:true}">
                 </button>
             </div>
             <div>
-                <button id= "button" class="action-button"
+                <button id= "pwrTermSheetButton" class="action-button"
                         data-bind="click: redirectToPWRTermSheet, 
-                            ojComponent: {component: 'ojButton', label: 'PWR TERM SHEET', disabled:false}">
+                            ojComponent: {component: 'ojButton', label: 'PWR TERM SHEET', disabled:true}">
                 </button>
-                <button id= "button" class="action-button"
-                        data-bind="click: rateAndIsSetup, 
+                <button id= "cosFormButton" class="action-button"
+                        data-bind="click: cosForm, 
                             ojComponent: {component: 'ojButton', label: 'COS Form', required: false, disabled:true}">
                 </button>
-                <button id= "button" class="action-button"
-                        data-bind="click: rateAndIsSetup, 
+                <button id= "cosLetterButton" class="action-button"
+                        data-bind="click: cosLetter, 
                             ojComponent: {component: 'ojButton', label: 'COS Letter', required: false, disabled:true}">
                 </button>
-                <button id= "button" class="action-button-2"
-                        data-bind="click: rateAndIsSetup, 
+                <button id= "puchContractButton" class="action-button-2"
+                        data-bind="click: purchaseContract, 
                             ojComponent: {component: 'ojButton', label: 'PURCHASE CONTRACT', required: false, disabled:true}">
                 </button>
             </div>
             <div>
-                <button id= "button" class="action-button"
+                <button id= "contractRemittanceButton" class="action-button"
                         data-bind="click: onClickContractRemittance, 
                             ojComponent: {component: 'ojButton', label: 'CONTRACT REMITTANCE', disabled:true}">
                 </button>
-                <button id= "button" class="action-button"
+                <button id= "withdrawButton" class="action-button"
                         data-bind="click: onClickWithdraw, 
-                            ojComponent: {component: 'ojButton', label: 'WITHDRAW', required: false, disabled:false}">
+                            ojComponent: {component: 'ojButton', label: 'WITHDRAW', required: false, disabled:true}">
                 </button>
-                <button id= "button" class="action-button"
+                <button id= "cancelButton" class="action-button"
                         data-bind="click: onClickCancel, 
-                            ojComponent: {component: 'ojButton', label: 'CANCEL', required: false, disabled:false}">
+                            ojComponent: {component: 'ojButton', label: 'CANCEL', required: false, disabled:true}">
                 </button>
             </div>
             </div>

@@ -20,6 +20,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                     {value : '8', label : '8'},
                     {value : '9', label : '9'},
                     {value : '10', label : '10'}];
+     var PR = [{EffectiveStartDate:'...', EndDate:'...', ProductGroup:'...', AssetType:'...', Tenure:'...', PublishedRate:'...'}];
+     self.prObservableArray = ko.observableArray(PR);
+    self.pagingDatasourcePR = ko.observable(new oj.ArrayTableDataSource([], {}));
     
     function viewModel() {
         openCPPopUp = function () {
@@ -28,13 +31,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
         };
 
         header = "Published Rate";
-        self.onClickSearch = function(item){};
+        self.onClickSearch = function(item){
+        self.pagingDatasourcePR(new oj.ArrayTableDataSource(self.prObservableArray, {idAttribute: 'EffectiveStartDate'}));
+        };
         self.onClickReset = function(item){};
         self.onClickUpload = function(item){};
         self.onClickSave = function(item){};
         self.onClickCancel = function(item){};
-        var prArray = [{EffectiveStartDate:'...', EndDate:'...', ProductGroup:'...', AssetType:'...', Tenure:'...', PublishedRate:'...'}];
-        pagingDatasourcePR = new oj.ArrayTableDataSource(prArray, {idAttribute: 'EffectiveStartDate'});
         
         redirectToPC = function (item) {
             oj.Router.rootInstance.go('origination-pc');
