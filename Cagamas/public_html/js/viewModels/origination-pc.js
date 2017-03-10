@@ -1,9 +1,11 @@
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojknockout', 'ojs/ojinputtext',
         'ojs/ojradioset', 'ojs/ojselectcombobox', 'ojs/ojdatetimepicker', 'ojs/ojtimezonedata',
         'ojs/ojbutton', 'ojs/ojtable'], 
-      function(oj, ko, $)
+      function(oj, ko, $, configService)
       {
+      
         var self = this;
+        self.config = configService;
         var urlParams;
         
         //to get url query params on page load
@@ -93,7 +95,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
         pricingFactorPerc='1';
         
         function mainModel(){
-            var self = this;
+                alert(self.config.globalVariable);
             self.header = "Purchase Contract";
             var attachmentArray = [{FileName:'...', Description:'...', Type:'...', Version:'...', Date:'...'}];
             datasource = new oj.ArrayTableDataSource(attachmentArray, {idAttribute: 'FileName'});
@@ -111,6 +113,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
               oj.Router.rootInstance.go('purchase-contract-specific-cof');            
             };
             self.rateAndIsSetup = function(data, event){
+                $parent.test("a");
               oj.Router.rootInstance.go('validate-loan-detail');            
             };
             self.redirectToRateISSetup = function(item){

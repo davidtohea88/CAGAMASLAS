@@ -272,6 +272,7 @@ require(['ojs/ojcore',
                 },
                 
                 'rate-is-setup': {label: 'Rate and IS Setup'},
+                'configService': {label: 'config-service'},
                 'cos-letter': {label: 'COS Letter'},
                 'cos-form': {label: 'COS Form'},
                 'pwr-term-sheet': {label: 'PWR Term Sheet'},
@@ -303,7 +304,6 @@ require(['ojs/ojcore',
                 'cost': {label: 'Cost'},
                 'cost-confirmation': {label: 'Cost Confirmation'},
                 'login': {label: 'login'},
-mgp-msad1-upload                
                 'people': {label: 'people'},
                 'person': {label: 'person'}
 
@@ -312,6 +312,7 @@ mgp-msad1-upload
                        
             function MainViewModel() {
                 var self = this;
+                self.test = ko.observable("helloo");
                 self.router = router;
                 utils.readSettings();
                 self.myPeople = ko.observableArray();

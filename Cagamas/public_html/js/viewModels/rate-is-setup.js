@@ -3,16 +3,18 @@
  * The Universal Permissive License (UPL), Version 1.0
  */
 
-define(['ojs/ojcore', 'knockout',  'data/data','jquery',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
            'ojs/ojknockout', 'ojs/ojinputtext','ojs/ojselectcombobox','ojs/ojdatetimepicker', 'ojs/ojbutton', 'ojs/ojradioset'],
-        function (oj, ko,jsonData, $)
+        function (oj, ko, $,configService)
         {
             /* 
              * Your application specific code will go here
              */
-
-            function mainViewModel() {
                 var self = this;
+            self.config = configService;
+            function mainViewModel() {
+                 alert(self.config.globalVariable);
+                 self.config.globalVariable = "Modifed";
                 self.header = "Rate and Installment Schedule Setup";
 
                 self.selectedRateType = ko.observable('Fixed');
