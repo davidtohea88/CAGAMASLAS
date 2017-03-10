@@ -1,7 +1,6 @@
 <div class="oj-form-layout" id="form-container">
     <div class="page-title">
         <label class="white-color" data-bind="text:header"></label>
-        <label class="white-color" data-bind="text:$parent.test"></label>
         
     </div>
       <div class="page-content oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
@@ -277,7 +276,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <input id="inputcontrol"
-                               data-bind="ojComponent: {component: 'ojInputText',value:inputStatus, 
+                               data-bind="ojComponent: {component: 'ojInputText',value: inputStatus, 
                                                         required: false, disabled:true}" style="font-weight:bold;"/>
                     </div>
                 </div>
@@ -517,51 +516,51 @@
             <div class="pc-buttons-wrapper">
                 <button id= "rateISButton" class="action-button"
                         data-bind="click: redirectToRateISSetup, 
-                            ojComponent: {component: 'ojButton', label: 'RATE AND IS SETUP', childAttributes:{style:'white-space: normal;'}, disabled: false}">
+                            ojComponent: {component: 'ojButton', label: 'RATE AND IS SETUP', childAttributes:{style:'white-space: normal;'}, disabled: self.rateISBtn}">
                 </button>
                 <button id= "loanDetailButton" class="action-button"
-                        data-bind="click: rateAndIsSetup, 
-                            ojComponent: {component: 'ojButton', label: 'VALIDATE LOAN DETAIL', required: false, disabled:true}">
+                        data-bind="click: validateLoanDetail, 
+                            ojComponent: {component: 'ojButton', label: 'VALIDATE LOAN DETAIL', required: false, disabled:self.loanDetailBtn}">
                 </button>
                 <button id= "commDocButton" class="action-button"
-                        data-bind="click: rateAndIsSetup, 
-                            ojComponent: {component: 'ojButton', label: 'COMMODITY DOCUMENT', required: false, disabled:true}">
+                        data-bind="click: commodityDocument, 
+                            ojComponent: {component: 'ojButton', label: 'COMMODITY DOCUMENT', required: false, disabled:self.commDocBtn}">
                 </button>
                 <button id= "gisButton" class="action-button-2"
-                        data-bind="click: rateAndIsSetup, 
-                            ojComponent: {component: 'ojButton', label: 'GENERATE INSTALLMENT SCHEDULE', required: false, disabled:true}">
+                        data-bind="click: generateInstallmentSchedule, 
+                            ojComponent: {component: 'ojButton', label: 'GENERATE INSTALLMENT SCHEDULE', required: false, disabled:self.gisBtn}">
                 </button>
             </div>
             <div>
                 <button id= "pwrTermSheetButton" class="action-button"
                         data-bind="click: redirectToPWRTermSheet, 
-                            ojComponent: {component: 'ojButton', label: 'PWR TERM SHEET', disabled:true}">
+                            ojComponent: {component: 'ojButton', label: 'PWR TERM SHEET', disabled:self.pwrTermSheetBtn}">
                 </button>
                 <button id= "cosFormButton" class="action-button"
                         data-bind="click: cosForm, 
-                            ojComponent: {component: 'ojButton', label: 'COS Form', required: false, disabled:true}">
+                            ojComponent: {component: 'ojButton', label: 'COS Form', required: false, disabled:self.cosFormBtn}">
                 </button>
                 <button id= "cosLetterButton" class="action-button"
                         data-bind="click: cosLetter, 
-                            ojComponent: {component: 'ojButton', label: 'COS Letter', required: false, disabled:true}">
+                            ojComponent: {component: 'ojButton', label: 'COS Letter', required: false, disabled:self.cosLetterBtn}">
                 </button>
                 <button id= "puchContractButton" class="action-button-2"
                         data-bind="click: purchaseContract, 
-                            ojComponent: {component: 'ojButton', label: 'PURCHASE CONTRACT', required: false, disabled:true}">
+                            ojComponent: {component: 'ojButton', label: 'PURCHASE CONTRACT', required: false, disabled:self.puchContractBtn}">
                 </button>
             </div>
             <div>
                 <button id= "contractRemittanceButton" class="action-button"
                         data-bind="click: onClickContractRemittance, 
-                            ojComponent: {component: 'ojButton', label: 'CONTRACT REMITTANCE', disabled:true}">
+                            ojComponent: {component: 'ojButton', label: 'CONTRACT REMITTANCE', disabled:self.contractRemittanceBtn}">
                 </button>
                 <button id= "withdrawButton" class="action-button"
                         data-bind="click: onClickWithdraw, 
-                            ojComponent: {component: 'ojButton', label: 'WITHDRAW', required: false, disabled:true}">
+                            ojComponent: {component: 'ojButton', label: 'WITHDRAW', required: false, disabled:withdrawBtn}">
                 </button>
                 <button id= "cancelButton" class="action-button"
                         data-bind="click: onClickCancel, 
-                            ojComponent: {component: 'ojButton', label: 'CANCEL', required: false, disabled:true}">
+                            ojComponent: {component: 'ojButton', label: 'CANCEL', required: false, disabled:cancelBtn}">
                 </button>
             </div>
             </div>

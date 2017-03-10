@@ -1,7 +1,9 @@
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable','ojs/ojdatetimepicker', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset', 'ojs/ojcheckboxset'],
-function(oj, ko, $)
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojknockout', 'ojs/ojtable','ojs/ojdatetimepicker', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset', 'ojs/ojcheckboxset'],
+function(oj, ko, $, configService)
 {
      var self = this;
+            self.config = configService;
+     
   function viewModel()
   {
     header="Confirmation of Sale";
@@ -9,8 +11,10 @@ function(oj, ko, $)
         self.currUtilization = ko.observable('853.00 (as at 31 January 2017)');
         self.avlLimit = ko.observable('647.00 (as at 31 January 2017)');
     redirectToPC= function(item) {
-                history.pushState(null, '', 'index.html?root=origination-pc&status=temp-pwrts&form=1');
-                oj.Router.sync();
+                    self.config.status = "temp-pwrts";
+                    self.config.form = "1";
+                    self.config.letter = "0";
+                    oj.Router.rootInstance.go('origination-pc');
     }
     var pwrTypeArray = [{pwrType:'DFIA (exclude housing loan)', concentrationLimit:'RM 4 billion', exposures:'RM 671 mil'},
                         {pwrType:'Non-FI (corporations & credit/leasing)', concentrationLimit:'RM 1 billion', exposures:'RM 467 mil'}];

@@ -1,7 +1,8 @@
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable','ojs/ojdatetimepicker', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset', 'ojs/ojcheckboxset'],
-function(oj, ko, $)
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService','ojs/ojknockout', 'ojs/ojtable','ojs/ojdatetimepicker', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset', 'ojs/ojcheckboxset'],
+function(oj, ko, $,configService)
 {
      var self = this;
+            self.config = configService;
   function viewModel()
   {
     header="Confirmation of Sale";
@@ -9,8 +10,10 @@ function(oj, ko, $)
       oj.Router.rootInstance.go('origination-pc');
     }
     redirectToPC= function(item) {
-                history.pushState(null, '', 'index.html?root=origination-pc&status=temp-pwrts&letter=1');
-                oj.Router.sync();
+            self.config.status = "temp-pwrts";
+            self.config.letter = "1";
+            self.config.form = "0";
+            oj.Router.rootInstance.go('origination-pc');
     }
     
 

@@ -13,8 +13,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                 var self = this;
             self.config = configService;
             function mainViewModel() {
-                 alert(self.config.globalVariable);
-                 self.config.globalVariable = "Modifed";
                 self.header = "Rate and Installment Schedule Setup";
 
                 self.selectedRateType = ko.observable('Fixed');
@@ -27,8 +25,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                 self.Benchmark = [{value: 'A', label: 'Benchmark A'},{value: 'B', label: 'Benchmark B'}];
                 self.BenchmarkSource = [{value: 'A', label: 'Source A'},{value: 'B', label: 'Source B'}];
                 backToPC = function(item) {
-                    history.pushState(null, '', 'index.html?root=origination-pc&status=temp-validated');
-                    oj.Router.sync();
+                    self.config.status = "temp-new";
+                    oj.Router.rootInstance.go('origination-pc');
                 }     
 
             }

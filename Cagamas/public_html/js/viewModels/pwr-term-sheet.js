@@ -1,9 +1,11 @@
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojknockout', 'ojs/ojinputtext',
         'ojs/ojradioset', 'ojs/ojselectcombobox', 'ojs/ojdatetimepicker', 'ojs/ojtimezonedata',
         'ojs/ojbutton', 'ojs/ojtable'], 
-      function(oj, ko, $)
+      function(oj, ko, $, configService )
       {
         var self = this;
+        self.config = configService;
+        
         self.pwrDatasource=ko.observable(new oj.ArrayTableDataSource([], {})); 
         self.underlyingDatasource=ko.observable(new oj.ArrayTableDataSource([], {})); 
         
@@ -13,7 +15,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
         self.avlLimit = ko.observable('647.00 (as at 31 January 2017)');
         self.currentDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
         function mainModel(){
-            var self = this;
             self.header = "PWR Term Sheet";
             
             var pwrTypeArray = [{pwrType:'DFIA (exclude housing loan)', concentrationLimit:'RM 4 billion', exposures:'RM 671 mil'},
@@ -28,13 +29,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
             
             self.onClickPrint = function(item){};
             self.onClickSubmit = function(item){
-                history.pushState(null, '', 'index.html?root=origination-pc&status=temp-pwrts');
-                oj.Router.sync();            
+                    self.config.status = "temp-pwrts";
+                    oj.Router.rootInstance.go('origination-pc');
             };
             self.onClickBack = function(item){
-                history.pushState(null, '', 'index.html?root=origination-pc&status=temp-is');
-                oj.Router.sync();
-
+                    self.config.status = "temp-is";
+                    oj.Router.rootInstance.go('origination-pc');
             };
             
         }

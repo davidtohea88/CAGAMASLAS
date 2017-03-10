@@ -1,7 +1,8 @@
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable','ojs/ojdatetimepicker', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset', 'ojs/ojcheckboxset'],
-function(oj, ko, $)
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojknockout', 'ojs/ojtable','ojs/ojdatetimepicker', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset', 'ojs/ojcheckboxset'],
+function(oj, ko, $,configService)
 {
-     var self = this;
+               var self = this;
+            self.config = configService;
   function viewModel()
   {
 
@@ -12,8 +13,8 @@ function(oj, ko, $)
     header="Installment Schedule";
     pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'InstallmentDate'}));
     redirectToPC= function(item) {
-        history.pushState(null, '', 'index.html?root=origination-pc&status=temp-validated');
-        oj.Router.sync();
+                    self.config.status = "temp-validated";
+                    oj.Router.rootInstance.go('origination-pc');
     }
     
   }

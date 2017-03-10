@@ -1,7 +1,9 @@
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable','ojs/ojdatetimepicker', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset', 'ojs/ojcheckboxset', 'ojs/ojdialog', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource','ojs/ojselectcombobox'],
-function(oj, ko, $)
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojknockout', 'ojs/ojtable','ojs/ojdatetimepicker', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset', 'ojs/ojcheckboxset', 'ojs/ojdialog', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource','ojs/ojselectcombobox'],
+function(oj, ko, $,configService)
 {
      var self = this;
+            self.config = configService;
+
     self.cps = [{value: 'CPT0045', label: 'CIMB Bank Berhad'},
         {value: 'CPT0004', label: 'Affin Bank Berhad'},
         {value: 'CPT0009', label: 'Alliance Bank Malaysia Berhad'},
@@ -59,8 +61,8 @@ function(oj, ko, $)
         $("#CPDialog").ojDialog("close");
     };    
         redirectToPC= function(item) {
-        history.pushState(null, '', 'index.html?root=origination-pc&status=final');
-        oj.Router.sync();
+            self.config.status = "final";
+            oj.Router.rootInstance.go('origination-pc');
 };
 
   }

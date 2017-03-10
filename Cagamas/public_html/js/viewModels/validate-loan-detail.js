@@ -1,8 +1,10 @@
 
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable','ojs/ojdatetimepicker', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset', 'ojs/ojcheckboxset'],
-function(oj, ko, $)
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojknockout', 'ojs/ojtable','ojs/ojdatetimepicker', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource', 'ojs/ojradioset', 'ojs/ojcheckboxset'],
+function(oj, ko, $, configService)
 {
      var self = this;
+     self.config = configService;
+
   function viewModel()
   {
 
@@ -18,8 +20,8 @@ function(oj, ko, $)
     pagingDatasource = ko.observable();
     header="Validate Loan Detail";
     redirectToPC= function(item) {
-                    history.pushState(null, '', 'index.html?root=origination-pc&status=temp-is');
-                    oj.Router.sync();
+                    self.config.status = "temp-is";
+                    oj.Router.rootInstance.go('origination-pc');
     };
     loadTable=function()
     {
