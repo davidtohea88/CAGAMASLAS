@@ -27,7 +27,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             var ecmaBirthDateOptions = {day: '2-digit', month: 'long', year: 'numeric'};
             self.longDateConverter = cf.createConverter(ecmaBirthDateOptions);
             
-            self.onClickPrint = function(item){};
+            self.onClickPrint = function(item){
+                window.print();   
+            };
             self.onClickSubmit = function(item){
                     self.config.status = "temp-pwrts";
                     oj.Router.rootInstance.go('origination-pc');

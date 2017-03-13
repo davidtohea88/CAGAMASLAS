@@ -22,7 +22,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             
             console.log(urlParams);
         })(); 
-        
         self.datasource=ko.observable(new oj.ArrayTableDataSource([], {}));  
         
         self.currency = [{value : 'MYR', label : 'MYR'},
@@ -72,12 +71,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                                 {value : 'Yearly', label : 'Yearly'}]
         self.counterpartyRepayFreq = [{value : 'Monthly', label : 'Monthly'},
                                     {value : 'Yearly', label : 'Yearly'}]
-        self.performOverwrite = [{value : '0', label : 'Please Select'},
-                                {value : '1', label : '1'}]
-        self.performZeroTest = [{value : '0', label : 'Please Select'},
-                                {value : '1', label : '1'}]
-        self.documentType = [{value : '0', label : 'Document Type'},
-                                {value : 'PDF', label : 'PDF'},
+        self.performOverwrite = [{value : '1', label : '1'}]
+        self.performZeroTest = [{value : '1', label : '1'}]
+        self.documentType = [{value : 'PDF', label : 'PDF'},
                                 {value : 'Doc', label : 'DOC/DOCX'}]
         
         self.currentFBB = ko.observable("no");
@@ -93,6 +89,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
         console.log("param : "+self.config.status);
         self.inputStatus = ko.observable(self.config.status ? self.config.status.toUpperCase() : 'TEMP-NEW');
         pricingFactorPerc='1';
+        self.selectedDocType = ko.observable();
         
         //action-buttons param to set button disabled/not
         self.rateISBtn = true;
@@ -109,10 +106,46 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
         
         function mainModel(){
             self.header = "Purchase Contract";
-            var attachmentArray = [{FileName:'...', Description:'...', Type:'...', Version:'...', Date:'...'}];
-            datasource = new oj.ArrayTableDataSource(attachmentArray, {idAttribute: 'FileName'});
+            self.filename = ko.observable();
+            self.desc = ko.observable();
+            self.type = ko.observable();
+            self.version = ko.observable();
+            self.date = ko.observable();
             
-            self.buttonClick = function(data, event){
+            var attachmentArray = [{FileName: '...', Description: '...', Type: '...', Version:'...', Date:'...'}];
+            self.observableArray = ko.observableArray(attachmentArray);
+            datasource = ko.observable(new oj.ArrayTableDataSource(self.observableArray, {idAttribute: 'FileName'}));
+            var firstDataExist = true;
+            self.onClickUpload = function(data, event){
+                if(firstDataExist){
+                    self.observableArray.splice(0, 1);
+                    firstDataExist = false;
+                }
+                var x = document.getElementById("browseFile").files;
+                self.filename(x[0].name);
+                self.desc('description');
+                self.type(self.selectedDocType());
+                self.version(1);
+                self.dateConverter = oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
+                                    createConverter(
+                                    {
+                                      pattern : "dd-MMM-yyyy / hh:mm"
+                                    });
+                self.date = ko.observable(dateConverter.format(oj.IntlConverterUtils.dateToLocalIso(x[0].lastModifiedDate)));
+                var ni = {'FileName': self.filename(),
+                         'Description': self.desc(),
+                         'Type': self.type(),
+                         'Version': self.version(),
+                         'Date': self.date()};
+                self.observableArray.push(ni);
+            }
+            self.deleteRow = function(data, event){
+                var currentRow = $('#table').ojTable('option', 'currentRow');
+        
+                if (currentRow != null)
+                {
+                    self.observableArray.splice(currentRow['rowIndex'], 1);
+                }
             }
             
             self.cosForm = function(data, event){
@@ -162,6 +195,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             self.onClickCancelCancel = function(item){
                 $("#CancelDialog").ojDialog("close");
             };
+            
+            self.openFileDialog = function (){
+              document.getElementById("browseFile").click();
+            }
             
             if(!self.config.status){
                 self.rateISBtn = false;

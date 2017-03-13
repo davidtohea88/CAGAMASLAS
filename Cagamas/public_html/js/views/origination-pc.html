@@ -460,7 +460,7 @@
                         </div>
                     </div>
                     <div class="oj-flex-item">
-                        <select id="selectPerformOverwrite" data-bind="ojComponent: {component: 'ojSelect', options: performOverwrite}"></select>
+                        <select id="selectPerformOverwrite" data-bind="ojComponent: {component: 'ojSelect', options: performOverwrite, placeholder: 'Please Select'}"></select>
                     </div>
                 </div>
                 <div class="oj-flex">
@@ -472,7 +472,7 @@
                         </div>
                     </div>
                     <div class="oj-flex-item">
-                        <select id="selectPerformZeroTest" data-bind="ojComponent: {component: 'ojSelect', options: performZeroTest}"></select>
+                        <select id="selectPerformZeroTest" data-bind="ojComponent: {component: 'ojSelect', options: performZeroTest, placeholder: 'Please Select'}"></select>
                     </div>
                 </div>
                 </div>
@@ -483,10 +483,11 @@
             <h3 class="oj-header-border">Attachment</h3>
             <div class="page-content">
               <div id="uploadBar" class="center">
-                <a>Browse File</a>
-                        <select id="selectDocumentType" data-bind="ojComponent: {component: 'ojSelect', options: documentType}"></select>
-                    <button id= "button"
-                            data-bind="click: buttonClick, 
+                    <a onclick="openFileDialog();return;"><img src="../../css/images/blue-plus-icon.png"> Browse File</a>
+                    <input type="file" id="browseFile" value="Browse File" style="position: fixed; top: -100em"/>
+                        <select id="selectDocumentType" data-bind="ojComponent: {component: 'ojSelect', options: documentType, placeholder: 'Document Type', value: selectedDocType}"></select>
+                    <button id= "uploadButton"
+                            data-bind="click: onClickUpload, 
                                 ojComponent: {component: 'ojButton', label: 'Upload' }">
                     </button>
               </div>
@@ -495,17 +496,17 @@
                         data-bind="ojComponent: {component: 'ojTable', 
                                 data: datasource, 
                                 columns: [{headerText: 'File Name', 
-                                           field: 'FileName'},
+                                           field: 'FileName', style:'width: 20%;'},
                                           {headerText: 'Description', 
-                                           field: 'Description'},
+                                           field: 'Description', style:'width: 20%;'},
                                           {headerText: 'Type', 
-                                           field: 'Type'},
+                                           field: 'Type', style:'width: 10%;'},
                                           {headerText: 'Version', 
-                                           field: 'Version'},
+                                           field: 'Version', style:'width: 10%;'},
                                           {headerText: 'Date', 
-                                           field: 'Date'},
-                                          {headerText: 'Delete', 
-                                           field: 'Delete'}]}">
+                                           field: 'Date', style:'width: 20%;'},
+                                          {headerTemplate: 'delete_hdr', template: 'delete_action', style:'width: 20%;'}],
+                                          rootAttributes: {'style':'width: 100%;'}}">
                 </table>
               </div>
               </div>
@@ -640,3 +641,17 @@
       <div class="blank-footer">
       </div>
 </div>
+<script type="text/html" id="delete_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Delete
+    </th>
+</script>
+<script type="text/html" id="delete_action">
+    <td>
+        <!--<button id= "deleteButton"
+                data-bind="click: $parent.onClickDelete, 
+                    ojComponent: {component: 'ojButton', label: 'Delete' }">
+        </button>-->
+        <a onclick="deleteRow();"><img src="../../css/images/Block_Icon.png"></a>
+    </td>
+</script>

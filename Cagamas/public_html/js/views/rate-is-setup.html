@@ -15,7 +15,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B5control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value:selectedPaymentType, options: paymentType}">
+                   data-bind="ojComponent: {component: 'ojCombobox', value:selectedPaymentType, options: paymentType, optionChange: paymentTypeOptionChangedHandler}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -83,7 +83,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B2control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:'Defaulted'}">
+                   data-bind="ojComponent: {component: 'ojInputText', value: cofValue}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -92,7 +92,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B4control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:'-'}">
+                   data-bind="ojComponent: {component: 'ojInputText', value:pwrMarginValue}">
           </div>
         </div>
         
@@ -122,7 +122,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B9control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value: '0'}">
+                   data-bind="ojComponent: {component: 'ojInputText', value: buMarginValue}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -131,11 +131,41 @@
           </div>
           <div class="oj-flex-item">
             <input id="B9control" disabled="disabled"
-                   data-bind="ojComponent: {component: 'ojInputText', value: ''}">
+                   data-bind="ojComponent: {component: 'ojInputText', value: totalValue}">
           </div>
         </div>
         </div>
     </div>
+  </div>
+  
+  <div id="installment-schedule" style="display:none;">
+  <h3 class="oj-header-border">Installment Schedule</h3>
+    <div class="page-content oj-flex  oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <button  id= "btn_save"  data-bind="click:backToPC, ojComponent: { component: 'ojButton', label: 'Add', childAttributes:{style:'white-space: normal;'} }">
+        </button>
+    <button id= "btn_calculate" data-bind="click:backToPC, ojComponent: { component: 'ojButton', label: 'Remove' }">
+        </button>
+    </div>                               
+    </div>                               
+    <div class="oj-flex">
+      <div id="pagingControlDemo" >
+
+    <table id="table" summary="Loan Detail" aria-label="Loan Detail"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
+            [
+            {headerTemplate: 'view_action_hdr', template: 'view_action', style: 'width: 10%;text-align:center;'},
+            {headerTemplate: 'start_date_hdr', template: 'start_date_item'},
+            {headerTemplate: 'end_date_hdr', template: 'end_date_item'},
+            {headerTemplate: 'payment_type_hdr', template: 'payment_type_item'},
+            {headerTemplate: 'rate_hdr', template: 'rate_item'}
+            ], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
+    </div>
+</div>
+  </div>
   </div>
   </div>
   <hr/>
@@ -154,3 +184,69 @@
 </div>
 
 </div>
+
+<script type="text/html" id="start_date_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Start Date
+    </th>
+</script>
+<script type="text/html" id="start_date_item">
+    <td>
+         <input id="rate1" style="border-width:1px;"
+                   data-bind="ojComponent: {component: 'ojInputDate', 
+                                            value:''}">
+    </td>
+</script>
+
+<script type="text/html" id="end_date_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        End Date
+    </th>
+</script>
+<script type="text/html" id="end_date_item">
+    <td>
+         <input id="rate1" style="border-width:1px;"
+                   data-bind="ojComponent: {component: 'ojInputDate', 
+                                            value:''}">
+    </td>
+</script>
+
+<script type="text/html" id="payment_type_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Payment Type
+    </th>
+</script>
+<script type="text/html" id="payment_type_item">
+    <td>
+        <select id="selectPaymentType"
+                data-bind="ojComponent: {component: 'ojSelect', options: paymentType, required: true}"></select>
+    </td>
+</script>
+
+<script type="text/html" id="rate_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Rate Type
+    </th>
+</script>
+<script type="text/html" id="rate_item">
+    <td>
+<select id="selectRateType" data-bind="ojComponent: {component: 'ojSelect', options: rateType, required: true}"></select>
+    </td>
+</script>
+<script type="text/html" id="view_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Select
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+<div id="checkboxSetAgreeIdForm" aria-labelledby="agreeIdForm" 
+             data-bind=
+             "ojComponent: {
+            component: 'ojCheckboxset'}" >
+          <span class="oj-choice-row">
+            <input id="agreeRequired" type="checkbox" value="agree">
+          </span>
+        </div>
+    </td>
+</script>
