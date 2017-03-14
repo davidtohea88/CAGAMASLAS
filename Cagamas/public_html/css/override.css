@@ -1365,4 +1365,29 @@ margin:10px 15px;
 .currency-right::before { 
     content: ":";
 }
+.loader-wrapper{
+    display:none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #222222;
+    z-index: 1000;
+    opacity:0.75;
+}
+.loader-centered{
+    width: 100%;
+    height: 100%;
+    top: 40%;
+    position: relative;
+}
+.loading{
+    position: relative; 
+    width: 50%; 
+    height: 20%; 
+    margin: auto;
+        background: url('http://sites.jamanetwork.com/help/images/spinner-transparent.gif') no-repeat center center;
+    /*background: url('https://www.createwebsite.net/wp-content/uploads/2015/09/Display-Loading.gif') no-repeat center center;*/
+    background-size: contain;
+}
 /*Kevin edit end*/

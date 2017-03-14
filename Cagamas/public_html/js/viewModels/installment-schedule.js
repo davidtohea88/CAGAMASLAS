@@ -13,8 +13,8 @@ function(oj, ko, $,configService)
     header="Installment Schedule";
     pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'InstallmentDate'}));
     redirectToPC= function(item) {
-                    self.config.status = "temp-validated";
-                    oj.Router.rootInstance.go('origination-pc');
+         self.config.status = "temp-is";
+         oj.Router.rootInstance.go('origination-pc');
     }
     
   }

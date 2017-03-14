@@ -50,10 +50,7 @@ function(oj, ko, $,configService)
     tenure = [{value : '1', label : '1'}, {value : '2', label : '2'}];
     self.selectedCP = ko.observable();
     var CPArray = [
-    {Date:  '1/2/2017'},
-    {Date:  '3/2/2017'},
-    {Date:  '5/2/2017'},
-    {Date:  '6/2/2017'}
+    {Date:  '1/2/2017'}
     ];                
     pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(CPArray, {idAttribute: 'Date'}));
     cpLookUpClick =  function(item) {

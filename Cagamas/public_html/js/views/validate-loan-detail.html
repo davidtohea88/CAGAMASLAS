@@ -131,26 +131,26 @@
           <div class='oj-flex-bar-middle'>                 
           <!-- You need to set the aria-labelledby attribute to make 
           this accessible. -->
-          <div data-bind="ojComponent: {component: 'ojRadioset'}" 
+          <div data-bind="ojComponent: {component: 'ojRadioset',value:currentStatus}" 
                aria-labelledby="mainlabelid">
               <span class="oj-choice-row-inline">
-                  <input id="rbtn_p" type="radio" 
-                         value="P" name="fixedrateoptions">
-                  <label for="rbtn_p">Valid</label>
+                  <input id="rbtn_v" type="radio" 
+                         value="V" name="fixedrateoptions">
+                  <label for="rbtn_v">Valid</label>
               </span>
               <span class="oj-choice-row-inline">
                   <input id="rbtn_cp" type="radio" 
-                         value="CP" name="fixedrateoptions">
+                         value="VnC" name="fixedrateoptions">
                   <label for="rbtn_cp">Valid Not Considered</label>
               </span>
               <span class="oj-choice-row-inline">
                   <input id="rbtn_i" type="radio" 
-                         value="CP" name="fixedrateoptions">
+                         value="IV" name="fixedrateoptions">
                   <label for="rbtn_i">Invalid</label>
               </span>
               <span class="oj-choice-row-inline">
                   <input id="rbtn_a" type="radio" 
-                         value="CP" name="fixedrateoptions">
+                         value="ALL" name="fixedrateoptions">
                   <label for="rbtn_a">All</label>
               </span>
           </div>
@@ -159,13 +159,13 @@
           <div class="oj-flex-item">
           <button  id= "btn_1" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Filter Nearest Purchase Amount' }">
     </button>
-          <button  id= "btn_2" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Move' }">
+          <button  id= "btn_2" data-bind="click: moveRow, ojComponent: { component: 'ojButton', label: 'Move' }">
     </button>
-          <button  id= "btn_3" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Export' }">
+          <button  id= "btn_3" data-bind=" ojComponent: { component: 'ojButton', label: 'Export' }">
     </button>
-          <button  id= "btn_4" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Upload Data' }">
+          <button  id= "btn_4" data-bind="click: openUploadPopUp, ojComponent: { component: 'ojButton', label: 'Upload Data' }">
     </button>
-          <button  id= "btn_5" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Revalidate' }">
+          <button  id= "btn_5" data-bind=" ojComponent: { component: 'ojButton', label: 'Revalidate' }">
     </button>
           </div>      
     </div>
@@ -220,3 +220,43 @@
         </div>
     </td>
 </script>
+
+
+<div style="display:none" id="UploadDialog" title="Upload File" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:500px; height: 200px;'}
+		  }">
+     <div class="oj-dialog-body oj-flex-items-pad">
+     <div class="oj-flex  oj-sm-flex-items-initial oj-sm-justify-content-center">
+      <div class="oj-flex-item">
+                    <a onclick="openFileDialog();return;">Browse File</a>
+                    <input type="file" id="browseFile" value="Browse File" style=" top: -100em"/>
+      </div>
+      <div class="oj-flex-item ">
+      <div data-bind="ojComponent: {component: 'ojRadioset', value: dataType}" 
+               aria-labelledby="mainlabelid">
+              <span class="oj-choice-row-inline">
+                  <input id="rbtn_p" type="radio" 
+                         value="Fresh" name="datetypeoptions">
+                  <label for="rbtn_p">Fresh Data</label>
+              </span>
+              <span class="oj-choice-row-inline">
+                  <input id="rbtn_cp" type="radio" 
+                         value="Delta" name="datetypeoptions">
+                  <label for="rbtn_cp">Delta Data</label>
+              </span>
+          </div>
+      </div>
+      </div>
+     <div class="oj-flex  oj-sm-flex-items-initial oj-sm-justify-content-center" style="margin-top:20px;">      
+      <div class="oj-flex-item">
+
+        <button  id= "btn_save" data-bind="click: closeUploadPopUp, ojComponent: { component: 'ojButton', label: 'Upload' }">
+    </button>
+        <button  id= "btn_save" data-bind="click: closeUploadPopUp, ojComponent: { component: 'ojButton', label: 'Back' }">
+    </button>
+      </div>
+    </div>
+  </div>
+</div>
+

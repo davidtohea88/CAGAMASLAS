@@ -20,9 +20,16 @@ function(oj, ko, $)
     {LoanRefNum: '7014262708600004', BranchCode: '701', BookBalance:'123,321', ForecastedBookBalance:'', MortgageRate:'5.5000', MortgageInstallment: '921', Month:'0.00'},
     {LoanRefNum: '7014262708600005', BranchCode: '701', BookBalance:'93,000', ForecastedBookBalance:'', MortgageRate:'5.2000', MortgageInstallment: '2,001', Month:'0.00'}
     ];
+    self.pagingDatasource = ko.observable();
     header="Upload Loan Detail";
-    pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'LoanRefNum'}));
-    
+    self.openFileDialog = function (){
+              document.getElementById("browseFile").click();
+            };
+    self.loadTable=function()
+    {
+        self.pagingDatasource(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'LoanRefNum'})));
+    };
+            
   }
   return viewModel;
 });

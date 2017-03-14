@@ -1,21 +1,26 @@
 <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
 <div class="oj-form-layout page-content" id="form-container">
   <div class="oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
-               oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">  
+               oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-4 oj-lg-even-cols-4">  
 
     <h3 class="oj-header-border">Upload</h3>
     <div class="oj-flex">
       <div class="oj-flex-item">
-        <input id="Uploadcontrol" 
-               data-bind="ojComponent: {component: 'ojInputText', value:''}">
+                    <a onclick="openFileDialog();return;">Browse File</a>
+                    <input type="file" id="browseFile" value="Browse File" style=" top: -100em"/>
       </div>
       <div class="oj-flex-item">
-        <button  id= "btn_save" data-bind="ojComponent: { component: 'ojButton', label: 'Upload' }">
+
+        <button  id= "btn_save" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Upload' }">
     </button>
         <button  id= "btn_save" data-bind="click:function(){redirectToPI('LoanUploaded')}, ojComponent: { component: 'ojButton', label: 'Back' }">
     </button>
       </div>
     </div>
+    </div>
+      <div class="oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+               oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">  
+
     <h3 class="oj-header-border">Loan Detail</h3>
     <div class="oj-flex">
       <div class="oj-flex-item">

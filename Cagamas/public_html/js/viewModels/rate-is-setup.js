@@ -25,33 +25,34 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                 var self = this;
                 self.config = configService;
                 
-            function calculateTotal(self)
-            {
-                if(self.buMarginValue()!=0 && self.pwrMarginValue()!=0 && self.cofValue()!=0)
-                self.totalValue(parseInt(self.buMarginValue()) + parseInt(self.pwrMarginValue()) + parseInt(self.cofValue()));
-            }
-                
             function mainViewModel() {
                 self.header = "Rate and Installment Schedule Setup";
                 self.cofValue = ko.observable(0);
                 self.pwrMarginValue = ko.observable(0);
                 self.buMarginValue = ko.observable(0);
                 self.totalValue = ko.observable(0);
-                self.cofValue.subscribe(function() {
-                    calculateTotal(self);
-                });
-                self.pwrMarginValue.subscribe(function() {
-                    calculateTotal(self);
-                });
-                self.buMarginValue.subscribe(function() {
-                    calculateTotal(self);
-                });
 
                 self.selectedRateType = ko.observable('Fixed');
                 self.selectedPaymentType = ko.observable('Principal + Interest');
                 self.selectedBenchmark = ko.observable('Benchmark A');
                 self.selectedBenchmarkSource = ko.observable('Source A');
-
+                self.fixedRate = ko.observable();
+                self.fixedRate.subscribe(function(newValue){
+                    if(self.fixedRate){
+                        if(self.fixedRate() == 'P'){
+                            $("#benchmark-wrapper").hide();
+                            $("#benchmarkSource-wrapper").hide();
+                        }else{
+                            $("#benchmark-wrapper").show();
+                            $("#benchmarkSource-wrapper").show();
+                        }
+                    }
+                });
+                self.calculateTotal = function (){
+                    if(self.buMarginValue()!=0 && self.pwrMarginValue()!=0 && self.cofValue()!=0)
+                    self.totalValue(parseInt(self.buMarginValue()) + parseInt(self.pwrMarginValue()) + parseInt(self.cofValue()));
+                }
+                
                 self.paymentType = [{value : 'PI', label : 'Principal + Interest'}, {value : 'I', label : 'Interest'}, {value:'H', label:'Hybrid'}];
                 self.rateType = [{value : 'fixed', label : 'Fixed'}, {value : 'floating', label : 'Floating'}, {value : 'convertible', label : 'Convertible'}];
                 self.Benchmark = [{value: 'A', label: 'Benchmark A'},{value: 'B', label: 'Benchmark B'}];

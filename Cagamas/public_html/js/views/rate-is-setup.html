@@ -39,7 +39,7 @@
           <div class='oj-flex-bar-middle'>                 
           <!-- You need to set the aria-labelledby attribute to make 
           this accessible. -->
-          <div data-bind="ojComponent: {component: 'ojRadioset'}" 
+          <div data-bind="ojComponent: {component: 'ojRadioset', value: fixedRate}" 
                aria-labelledby="mainlabelid">
               <span class="oj-choice-row-inline">
                   <input id="rbtn_p" type="radio" 
@@ -55,7 +55,7 @@
         </div>
           </div>
         </div>
-        <div class="oj-flex"> 
+        <div class="oj-flex" id="benchmark-wrapper"> 
           <div class="oj-flex-item">
             <label for="A5control">Benchmark</label>
           </div>
@@ -64,7 +64,7 @@
                    data-bind="ojComponent: {component: 'ojCombobox', value:selectedBenchmark, options : Benchmark}">
           </div>
         </div>
-        <div class="oj-flex"> 
+        <div class="oj-flex" id="benchmarkSource-wrapper"> 
           <div class="oj-flex-item">
             <label for="A5control">Benchmark Source</label>
           </div>
@@ -102,7 +102,7 @@
             <label for="B7control">PWR Pricing Matrix Discount</label>
           </div>
           <div class="oj-flex-item">
-            <input id="B7control" disabled="disabled"
+            <input id="B7control"
                    data-bind="ojComponent: {component: 'ojInputText', value:'-'}">
           </div>
         </div>
@@ -175,7 +175,7 @@
     <div class="oj-sm-12 oj-md-6  oj-lg-4 oj-flex-item">
             <button  id= "btn_save" class="action-button-3" data-bind="click:backToPC, ojComponent: { component: 'ojButton', label: 'Save', childAttributes:{style:'white-space: normal;'} }">
         </button>
-    <button id= "btn_calculate" class="action-button-3" data-bind="click:backToPC, ojComponent: { component: 'ojButton', label: 'Calculate' }">
+    <button id= "btn_calculate" class="action-button-3" data-bind="click:calculateTotal, ojComponent: { component: 'ojButton', label: 'Calculate' }">
         </button>
 
     </div>

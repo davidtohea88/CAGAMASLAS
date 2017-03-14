@@ -6,22 +6,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
       
         var self = this;
         self.config = configService;
-        var urlParams;
         
+//        var urlParams;
         //to get url query params on page load
-        (window.onpopstate = function () {
-            var match,
-                pl     = /\+/g,  // Regex for replacing addition symbol with a space
-                search = /([^&=]+)=?([^&]*)/g,
-                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-                query  = window.location.search.substring(1);
-        
-            urlParams = {};
-            while (match = search.exec(query))
-               urlParams[decode(match[1])] = decode(match[2]);
-            
-            console.log(urlParams);
-        })(); 
+//        (window.onpopstate = function () {
+//            var match,
+//                pl     = /\+/g,  // Regex for replacing addition symbol with a space
+//                search = /([^&=]+)=?([^&]*)/g,
+//                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+//                query  = window.location.search.substring(1);
+//        
+//            urlParams = {};
+//            while (match = search.exec(query))
+//               urlParams[decode(match[1])] = decode(match[2]);
+//        })();
+
         self.datasource=ko.observable(new oj.ArrayTableDataSource([], {}));  
         
         self.currency = [{value : 'MYR', label : 'MYR'},
@@ -86,8 +85,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
         self.tenureMonth= ko.observable('1');
         self.reviewDate= ko.observable(purchaseDate());
         self.pricingFactorPerc=ko.observable();
-        console.log("param : "+self.config.status);
-        self.inputStatus = ko.observable(self.config.status ? self.config.status.toUpperCase() : 'TEMP-NEW');
         pricingFactorPerc='1';
         self.selectedDocType = ko.observable();
         
@@ -111,6 +108,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             self.type = ko.observable();
             self.version = ko.observable();
             self.date = ko.observable();
+            self.inputStatus = ko.observable(self.config.status ? self.config.status.toUpperCase() : 'TEMP-NEW');
             
             var attachmentArray = [{FileName: '...', Description: '...', Type: '...', Version:'...', Date:'...'}];
             self.observableArray = ko.observableArray(attachmentArray);
@@ -155,7 +153,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
               oj.Router.rootInstance.go('cos-letter');            
             };
             self.purchaseContract = function(data, event){
-              oj.Router.rootInstance.go('purchase-contract-specific-cof');            
+//              oj.Router.rootInstance.go('purchase-contract-specific-cof');    
+                $('.loader-wrapper').show();
+                setTimeout(function () {
+                    $('.loader-wrapper').hide();
+                    self.config.status = "temp-final";
+                    self.inputStatus("TEMP-FINAL");
+                    $("#rateISButton").ojButton("option", "disabled", true);
+                    $("#loanDetailButton").ojButton("option", "disabled", true);
+                    $("#gisButton").ojButton("option", "disabled", true);
+                    $("#pwrTermSheetButton").ojButton("option", "disabled", true);
+                    $("#cosFormButton").ojButton("option", "disabled", true);
+                    $("#cosLetterButton").ojButton("option", "disabled", true);
+                    $("#purchContractButton").ojButton("option", "disabled", true);
+                    $("#withdrawButton").ojButton("option", "disabled", true);
+                    $("#cancelButton").ojButton("option", "disabled", true);
+                    $("#contractRemittanceButton").ojButton("option", "disabled", false);
+                }, 2000);
             };
             self.validateLoanDetail = function(data, event){
               oj.Router.rootInstance.go('validate-loan-detail');            
@@ -166,17 +180,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             self.redirectToPWRTermSheet = function(item){
               oj.Router.rootInstance.go('pwr-term-sheet');
             }
-            self.commodityDocument = function(){};
-            self.generateInstallmentSchedule = function(){};
+            self.commodityDocument = function(){
+            };
+            self.generateInstallmentSchedule = function(){
+                oj.Router.rootInstance.go('installment-schedule');
+            };
             
-            self.onClickContractRemittance = function(){$("#WithdrawDialog").ojDialog("open");return true;};
+            self.onClickContractRemittance = function(){
+                oj.Router.rootInstance.go('contract-remittance-approval');
+            };
             self.onClickWithdraw = function(){$("#WithdrawDialog").ojDialog("open");return true;};
             self.onClickCancel = function(){$("#CancelDialog").ojDialog("open");return true;};
             //Withdraw popup dialog buttons
             self.onClickWithdrawConfirm = function(item){
                 self.config.status = "temp-withdraw";
                 self.inputStatus("TEMP-WITHDRAW");
-                $("#puchContractButton").ojButton("option", "disabled", true);
+                $("#pwrTermSheetButton").ojButton("option", "disabled", true);
+                $("#cosFormButton").ojButton("option", "disabled", true);
+                $("#cosLetterButton").ojButton("option", "disabled", true);
+                $("#purchContractButton").ojButton("option", "disabled", true);
+                $("#withdrawButton").ojButton("option", "disabled", true);
+                $("#cancelButton").ojButton("option", "disabled", true);
                 $("#WithdrawDialog").ojDialog("close");
                 oj.Router.rootInstance.go('origination-pc');
             };
@@ -188,7 +212,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             self.onClickCancelConfirm = function(item){
                 self.config.status = "cancelled";
                 self.inputStatus("CANCELLED");
-                $("#puchContractButton").ojButton("option", "disabled", true);
+                $("#pwrTermSheetButton").ojButton("option", "disabled", true);
+                $("#cosFormButton").ojButton("option", "disabled", true);
+                $("#cosLetterButton").ojButton("option", "disabled", true);
+                $("#purchContractButton").ojButton("option", "disabled", true);
+                $("#withdrawButton").ojButton("option", "disabled", true);
+                $("#cancelButton").ojButton("option", "disabled", true);
                 $("#CancelDialog").ojDialog("close");
                 oj.Router.rootInstance.go('origination-pc');
             };
@@ -220,76 +249,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                     }
 
                 if(self.config.letter)
-                    if(self.config.form == 1){
+                    if(self.config.letter == 1){
                         self.puchContractBtn = false;
                         self.withdrawBtn = false;
                         self.cancelBtn = false;
                     }
-            }else if(self.config.status.toUpperCase() == ("TEMP-WITHDRAW" || "CANCELLED" || "FINAL")){
-                self.pwrTermSheetBtn = false;
-                self.cosFormBtn = false;
-                self.cosLetterBtn = false;
-                self.withdrawBtn = false;
-                self.cancelBtn = false;
-                if(self.config.status.toUpperCase() == "FINAL"){
-                        self.contractRemittanceBtn = false;
-                }
+            }else if(self.config.status.toUpperCase() == "FINAL"){
+                self.contractRemittanceBtn = false;
             }
+            
+            self.currentFBB.subscribe(function(newValue){
+                if(self.currentFBB){
+                    if(self.currentFBB() == "yes"){
+                        $("#fbbDate-wrapper").show();
+                    }else{
+                        $("#fbbDate-wrapper").hide();
+                    }
+                }
+            });
         }
-        
-//        $( document ).ready(function() {
-//            console.log( "ready!" );
-            //Disable/enable button
-//            console.log("self.config.status : "+ self.config.status);
-//            console.log("rate is button option : "+ $("#rateISButton").ojButton("option", "disabled"));
-//            if(!self.config.status){
-//                console.log("status null");
-//                $("#rateISButton").ojButton("option", "disabled", false);
-//            }else if(self.config.status.toUpperCase() == "TEMP-NEW"){
-//                $("#rateISButton").ojButton("option", "disabled", false);
-//                $("#loanDetailButton").ojButton("option", "disabled", false);
-//            }else if(self.config.status.toUpperCase() == "TEMP-VALIDATED"){
-//                $("#loanDetailButton").ojButton("option", "disabled", false);
-//                $("#gisButton").ojButton("option", "disabled", false);
-//            }else if(self.config.status.toUpperCase() == "TEMP-IS"){
-//                $("#pwrTermSheetButton").ojButton("option", "disabled", false);
-//            }else if(self.config.status.toUpperCase() == "TEMP-PWRTS"){
-//                $("#pwrTermSheetButton").ojButton("option", "disabled", false);
-//                $("#cosFormButton").ojButton("option", "disabled", false);
-//                
-//                if(urlParams["form"])
-//                    if(urlParams["form"] == 1){
-//                        console.log("form = 1");
-//                        $("#cosLetterButton").ojButton("option", "disabled", false);
-//                    }
-//
-//                if(urlParams["letter"])
-//                    if(urlParams["letter"] == 1){
-//                        $("#puchContractButton").ojButton("option", "disabled", false);
-//                        $("#withdrawButton").ojButton("option", "disabled", false);
-//                        $("#cancelButton").ojButton("option", "disabled", false);
-//                    }
-//            }else if(self.config.status.toUpperCase() == "TEMP-WITHDRAW"){
-//                console.log(self.inputStatus());self.inputStatus = 'TEMP-WITHDRAW';console.log(self.inputStatus);
-//                $("#pwrTermSheetButton").ojButton("option", "disabled", false);
-//                $("#cosFormButton").ojButton("option", "disabled", false);
-//                $("#cosLetterButton").ojButton("option", "disabled", false);
-//                $("#withdrawButton").ojButton("option", "disabled", false);
-//                $("#cancelButton").ojButton("option", "disabled", false);
-//            }else if(self.config.status.toUpperCase() == "CANCELLED"){
-//                $("#pwrTermSheetButton").ojButton("option", "disabled", false);
-//                $("#cosFormButton").ojButton("option", "disabled", false);
-//                $("#cosLetterButton").ojButton("option", "disabled", false);
-//                $("#withdrawButton").ojButton("option", "disabled", false);
-//                $("#cancelButton").ojButton("option", "disabled", false);
-//            }else if(self.config.status.toUpperCase() == "FINAL"){
-//                $("#pwrTermSheetButton").ojButton("option", "disabled", false);
-//                $("#cosFormButton").ojButton("option", "disabled", false);
-//                $("#cosLetterButton").ojButton("option", "disabled", false);
-//                $("#contractRemittanceButton").ojButton("option", "disabled", false);
-//                $("#withdrawButton").ojButton("option", "disabled", false);
-//                $("#cancelButton").ojButton("option", "disabled", false);
-//            }
-//        });
         return mainModel;
       });

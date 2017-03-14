@@ -102,21 +102,21 @@
         </div>
         <div class="oj-flex hidden" id="row_exchangeRate"> 
           <div class="oj-flex-item">
-            <label for="B3control">Exchange Rate</label>
+            <label for="cbx_exchange_rate">Exchange Rate</label>
             </div>
             <div class="oj-flex-item">
             <div class="oj-flex-item">
             <div id="checkboxSetAgreeIdForm" aria-labelledby="agreeIdForm" 
              data-bind=
              "ojComponent: {
-            component: 'ojCheckboxset'}" >
+            component: 'ojCheckboxset', value:override}" >
           <span class="oj-choice-row">
-            <input id="agreeRequired" type="checkbox" value="agree">
-            <label for="agreeRequired">Override </label>
+            <input id="cbx_override" type="checkbox" value="true">
+            <label for="checkboxSetAgreeIdForm">Override </label>
           </span>
         </div>
-        <input id="B3control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:'-',
+        <input id="cbx_exchange_rate" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:exchangeRateValue, disabled:exchangeRateDisabled,
                                             rootAttributes: {
                                                style:'max-width:65%'
                                             }}">
@@ -170,11 +170,22 @@
         </div>
         <div class="oj-flex"> 
           <div class="oj-flex-item">
-            <label for="B9control">Pricing Factor Rate</label>
+            <label for="B9control">Pricing Factor Rate (%)</label>
           </div>
           <div class="oj-flex-item">
             <input id="B9control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value: pricingFactorRate}">
+                   data-bind="ojComponent: {
+              component: 'ojInputNumber', 
+              value: pricingFactorRate, 
+              step: .01,
+              converter: {
+                type: 'number', 
+                options: {
+                min:0,
+                  style:'percent',
+                  maximumFractionDigits: 2, 
+                  useGrouping: false, 
+                  pattern: '##,##0.00'}}}">
           </div>
         </div>
       </div>
@@ -257,17 +268,17 @@
           <hr/>
   <div class="page-button-wrapper" id='buttons-container'>
   <div class="page-button-inner"> 
-<button  id= "btn_save" class="action-button" data-bind="ojComponent: { component: 'ojButton', label: 'Save' }">
+<button  id= "btn_save" class="action-button-3" data-bind="ojComponent: { component: 'ojButton', label: 'Save' }">
     </button>
-<button id= "btn_cancel" class="action-button" data-bind="ojComponent: { component: 'ojButton', label: 'Cancel' }">
+<button id= "btn_cancel" class="action-button-3" data-bind="ojComponent: { component: 'ojButton', label: 'Cancel' }">
     </button>
-<button id= "btn_next" class="action-button" data-bind="click: nextClick, ojComponent: { component: 'ojButton', label: 'Next' }">
+<button id= "btn_next" class="action-button-3" data-bind="click: nextClick, ojComponent: { component: 'ojButton', label: 'Next' }">
     </button>
-<button  class="hidden action-button" id= "btn_validate" data-bind="click: validateClick, ojComponent: { component: 'ojButton', label: 'Validate' }">
+<button  class="hidden action-button-3" id= "btn_validate" data-bind="click: validateClick, ojComponent: { component: 'ojButton', label: 'Validate' }">
     </button>
-<button class="hidden action-button" id= "btn_upload_loan" data-bind="click: redirectToUploadLoan, ojComponent: { component: 'ojButton', label: 'Upload Loan Details' }">
+<button class="hidden action-button-3" id= "btn_upload_loan" data-bind="click: redirectToUploadLoan, ojComponent: { component: 'ojButton', label: 'Upload Loan Details' }">
     </button>
-<button class="hidden action-button" id= "btn_temp_pc" data-bind="ojComponent: { component: 'ojButton', label: 'Create Temporary Purchase Contract' }">
+<button class="hidden action-button-3" id= "btn_temp_pc" data-bind="ojComponent: { component: 'ojButton', label: 'Create Temporary Purchase Contract' }">
     </button>
 
     </div>

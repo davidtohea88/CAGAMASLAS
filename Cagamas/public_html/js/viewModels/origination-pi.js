@@ -2,19 +2,6 @@
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  * The Universal Permissive License (UPL), Version 1.0
  */
-                var currencyOptionChangedHandler = function (event, data) {
-                    if(data.option=='value'){
-                        if (data.value != "MYR") {
-                            $('#row_exchangeRate').css('display','flex');
-                            $('#row_foreignCurrencyAmount').css('display','flex');
-                        }
-                        else {
-                            $('#row_exchangeRate').hide();
-                            $('#row_foreignCurrencyAmount').hide();
-                            
-                        }
-                    }
-                };
                 var purchaseModeOptionChangedHandler = function(event,data) {
                     if(data.option=='value')
                     {
@@ -30,12 +17,14 @@
                 
                         
 define(['ojs/ojcore', 'knockout',  'data/data','jquery',
-           'ojs/ojknockout', 'ojs/ojinputtext','ojs/ojselectcombobox','ojs/ojdatetimepicker', 'ojs/ojbutton', 'ojs/ojcheckboxset', 'ojs/ojdialog', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource'],
+           'ojs/ojknockout', 'ojs/ojinputnumber','ojs/ojinputtext','ojs/ojselectcombobox','ojs/ojdatetimepicker', 'ojs/ojbutton', 'ojs/ojcheckboxset', 'ojs/ojdialog', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource'],
         function (oj, ko,jsonData, $)
         {
             /* 
              * Your application specific code will go here
              */
+             var SGDrate = 3.15;
+             var USDrate = 4.45;
              
             function updateReviewDateValue(self)
             {
@@ -49,6 +38,26 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
 
             function mainViewModel() {
                 var self = this;
+                self.override = ko.observable("false");
+                self.override.subscribe(function(newValue) {
+                    if(newValue=="true")
+                    {
+                        self.exchangeRateDisabled(false);
+                    }
+                    else
+                    {
+                        if(self.selectCurrencyVal()=="SGD") {
+                            self.exchangeRateValue(SGDrate);
+                        }
+                        else if(self.selectCurrencyVal()=="USD")
+                        {
+                            self.exchangeRateValue(USDrate);
+                        }
+                        self.exchangeRateDisabled(true);
+                    }
+                });            
+                self.exchangeRateValue = ko.observable(0);
+                self.exchangeRateDisabled = ko.observable(true);
                 self.tenureYear = ko.observable(0);
                 self.tenureMonth = ko.observable(0);
                 self.reviewDateValue = ko.observable(0);
@@ -135,6 +144,27 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
                 redirectToUploadLoan= function(item) {
                   oj.Router.rootInstance.go('upload-loan-detail');
                 }
+                self.currencyOptionChangedHandler = function (event, data) {
+                    if(data.option=='value'){
+                        if (data.value != "MYR") {
+                            $('#row_exchangeRate').css('display','flex');
+                            $('#row_foreignCurrencyAmount').css('display','flex');
+                            if(data.value == "SGD")
+                            {
+                                self.exchangeRateValue(SGDrate);
+                            }
+                            else if(data.value == "USD")
+                            {
+                                self.exchangeRateValue(USDrate);
+                            }
+                        }
+                        else {
+                            $('#row_exchangeRate').hide();
+                            $('#row_foreignCurrencyAmount').hide();
+                            
+                        }
+                    }
+                };
             }
             
                  
