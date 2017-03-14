@@ -1386,7 +1386,7 @@ margin:10px 15px;
     width: 50%; 
     height: 20%; 
     margin: auto;
-        background: url('http://sites.jamanetwork.com/help/images/spinner-transparent.gif') no-repeat center center;
+    background: url('http://sites.jamanetwork.com/help/images/spinner-transparent.gif') no-repeat center center;
     /*background: url('https://www.createwebsite.net/wp-content/uploads/2015/09/Display-Loading.gif') no-repeat center center;*/
     background-size: contain;
 }
