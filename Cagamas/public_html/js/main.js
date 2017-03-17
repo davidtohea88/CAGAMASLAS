@@ -304,9 +304,25 @@ require(['ojs/ojcore',
                 'cost': {label: 'Cost'},
                 'cost-confirmation': {label: 'Cost Confirmation'},
                 'login': {label: 'login'},
+                'reconciliation-user-interface': {label: 'Reconciliation User Interface'},
+                'non-las-to-open-movement': {label: 'Non LAS to Open Movement'},
+                'quarterly-review-caga-2': {label: 'Quarterly Review Caga 2'},
+                'quarterly-review-caga-1': {label: 'Quarterly Review Caga 1'},
+                'cumulative-partial-prepayment-listing': {label: 'Cumulative Partial Prepayment Listing'},
+                'repurchase-replacement': {label: 'Repurchase and Replacement'},
                 'people': {label: 'people'},
-                'person': {label: 'person'}
-
+                'person': {label: 'person'},
+                'reconciliation-dashboard': {label: 'Reconciliation Dashboard'},
+                'notifications-ui': {label: 'Notifications UI'},
+                'quarterly-reviews-dashboard': {label: 'Quarterly Reviews Dashboard'},
+                'rr-upload-ui': {label: 'Repurchase Replacement Upload UI'},
+                'reset-caga-rate': {label: 'Reset Caga Rate'},
+                'repurchase-review-date': {label: 'Repurchase Review Date'},
+                'repurchase-review-date-detail': {label: 'Repurchase Review Date Detail'},
+                'quarterly-reviews-upload': {label: 'Quarterly Reviews Upload'},
+                'reset': {label: 'Reset'},
+                'rollover': {label: 'Rollover'},
+                'review-date-bu': {label: 'Review Date BU'}
             });
             
                        

@@ -487,7 +487,8 @@
             <h3 class="oj-header-border">Attachment</h3>
             <div class="page-content">
               <div id="uploadBar" class="center">
-                    <a onclick="openFileDialog();return;"><img src="../../css/images/blue-plus-icon.png"> Browse File</a>
+                <a onclick="openFileDialog();return;"><img style="width: 16px;vertical-align: sub;" src="css/images/blue-plus-icon.png"> Browse File</a>                    
+                    
                     <input type="file" id="browseFile" value="Browse File" style="position: fixed; top: -100em"/>
                         <select id="selectDocumentType" data-bind="ojComponent: {component: 'ojSelect', options: documentType, placeholder: 'Document Type', value: selectedDocType}"></select>
                     <button id= "uploadButton"
@@ -656,6 +657,7 @@
                 data-bind="click: $parent.onClickDelete, 
                     ojComponent: {component: 'ojButton', label: 'Delete' }">
         </button>-->
-        <a onclick="deleteRow();"><img src="../../css/images/Block_Icon.png"></a>
+
+        <a onclick="deleteRow();"><img style="width: 20px;vertical-align: sub;" src="css/images/Block_Icon.png"></a>
     </td>
 </script>

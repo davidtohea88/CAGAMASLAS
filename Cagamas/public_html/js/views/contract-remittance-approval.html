@@ -61,6 +61,15 @@
     <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
     </div>
 </div>
+<br>
+<br>
+<br>
+<div style="margin: auto; width: 10%;">
+    <button id= "backButton" class="action-button-3"
+            data-bind="click: redirectToPC, 
+                ojComponent: {component: 'ojButton', label: 'Back', childAttributes:{style:'white-space: normal;'}}">
+    </button>
+</div>
 
 <script type="text/html" id="view_action_hdr">
     <th style="padding-left: 5px; padding-right: 5px;text-align:center;">

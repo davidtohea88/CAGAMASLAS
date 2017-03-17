@@ -88,19 +88,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
         pricingFactorPerc='1';
         self.selectedDocType = ko.observable();
         
-        //action-buttons param to set button disabled/not
-        self.rateISBtn = true;
-        self.loanDetailBtn = true;
-        self.commDocBtn = true;
-        self.gisBtn = true;
-        self.pwrTermSheetBtn = true;
-        self.cosFormBtn = true;
-        self.cosLetterBtn = true;
-        self.puchContractBtn = true;
-        self.contractRemittanceBtn = true;
-        self.withdrawBtn = true;
-        self.cancelBtn = true;
-        
         function mainModel(){
             self.header = "Purchase Contract";
             self.filename = ko.observable();
@@ -109,6 +96,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             self.version = ko.observable();
             self.date = ko.observable();
             self.inputStatus = ko.observable(self.config.status ? self.config.status.toUpperCase() : 'TEMP-NEW');
+            
+            //action-buttons param to set button disabled/not
+            self.rateISBtn = true;
+            self.loanDetailBtn = true;
+            self.commDocBtn = true;
+            self.gisBtn = true;
+            self.pwrTermSheetBtn = true;
+            self.cosFormBtn = true;
+            self.cosLetterBtn = true;
+            self.puchContractBtn = true;
+            self.contractRemittanceBtn = true;
+            self.withdrawBtn = true;
+            self.cancelBtn = true;
             
             var attachmentArray = [{FileName: '...', Description: '...', Type: '...', Version:'...', Date:'...'}];
             self.observableArray = ko.observableArray(attachmentArray);
@@ -157,8 +157,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 $('.loader-wrapper').show();
                 setTimeout(function () {
                     $('.loader-wrapper').hide();
-                    self.config.status = "temp-final";
-                    self.inputStatus("TEMP-FINAL");
+                    self.config.status = "final";
+                    self.inputStatus("FINAL");
                     $("#rateISButton").ojButton("option", "disabled", true);
                     $("#loanDetailButton").ojButton("option", "disabled", true);
                     $("#gisButton").ojButton("option", "disabled", true);
@@ -243,13 +243,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 self.pwrTermSheetBtn = false;
                 self.cosFormBtn = false;
                 
+                console.log("PWRTS");
                 if(self.config.form)
                     if(self.config.form == 1){
+                        console.log("form==1");
                         self.cosLetterBtn = false;
                     }
 
                 if(self.config.letter)
                     if(self.config.letter == 1){
+                        console.log("letter==1");
                         self.puchContractBtn = false;
                         self.withdrawBtn = false;
                         self.cancelBtn = false;

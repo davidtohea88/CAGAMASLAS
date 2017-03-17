@@ -1,0 +1,86 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div class="oj-form-layout page-content" id="form-container">
+    <div class="oj-form oj-lg-odd-cols-5 oj-lg-even-cols-5">  
+    
+        
+
+<h3 class="oj-header-border">Header</h3>
+        <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+            <div class="oj-flex-item">
+                        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-md-labels-inline oj-form-no-dividers">
+
+        <div class="oj-flex">
+            <div class="oj-flex-item">
+               <label for="A1control">Counterparty</label>
+            </div>
+            <div class="oj-flex-item">
+              <input id="A1control" type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', value: 'Counterparty B', disabled:true}">
+            </div>
+         </div>
+        <div class="oj-flex">
+            <div class="oj-flex-item">
+               <label for="A2control">Review Type</label>
+            </div>
+            <div class="oj-flex-item">
+              <input id="A2control" type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', value: '', disabled:true}">
+            </div>
+         </div>      
+         </div>
+            </div>
+         </div>
+         
+  
+<h3 class="oj-header-border">Details</h3>
+<div class="oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+<div class="oj-flex-bar ">
+    <div class="oj-flex-bar-start ">
+        <div>
+            <button id= "btn_data_consolidation"  style="margin-top:10px;" data-bind="ojComponent: { component: 'ojButton', label: 'Data Consolidation' }"></button>
+            <button id= "btn_validate"  style="margin-top:10px;" data-bind=" ojComponent: { component: 'ojButton', label: 'Validate' }"></button>
+            <button id= "btn_CPPL_Check"  style="margin-top:10px;" data-bind=" ojComponent: { component: 'ojButton', label: 'CPPL Check' }"></button>
+            <button id= "btn_error_reports"  style="margin-top:10px;" data-bind=" ojComponent: { component: 'ojButton', label: 'Error Reports' }"></button>
+        </div>
+    </div>
+  </div>
+  </div>  
+        <div class="oj-flex">                      
+                <table id="table" summary="Loan Detail" aria-label="Loan Detail"
+                           data-bind="ojComponent: {component: 'ojTable', data: datasourceOpenTrx, columns:
+                            [
+                            {headerText: 'Caga Report Date', field: 'RentasCPName'},
+                            {headerText: 'Purchase Contract Number', field: 'RentasTrxDate'},
+                            {headerText: 'Loan Reference Number', field: 'RentasTrxAmount'},
+                            {headerText: 'Branch Code', field: 'Currency'},
+                            {headerText: 'Partial Prepayment Amount', field: 'RentasTrxDesc'},
+                            {headerText: 'Partial Prepayment  Remittance Date', field: 'NonLasTrx'},
+                            {headerText: 'Prepayment For Repurchase', field: 'NonLasReason'},
+                            {headerText: 'Status', field: 'Status'},
+                            {headerText: 'Error Reason', field: 'Status'},
+                            {headerText: 'Error Action', field: 'Status'}
+                            ],
+                            scrollPolicy: 'loadMoreOnScroll',
+                            scrollPolicyOptions: {'fetchSize': 10}, 
+                             rootAttributes: {'style':'width: 100%;'}}">
+                    </table>            
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="view_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Select
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+<div id="checkboxSetAgreeId" aria-labelledby="agreeId" 
+           data-bind=
+           "ojComponent: {component: 'ojCheckboxset', 
+            value: selected, disabled:checkdisabled}" >
+        <span class="oj-choice-row">
+          <input id="selected" type="checkbox" value=selected>
+        </span>
+      </div>    </td>
+</script>
