@@ -98,6 +98,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                 self.paymentType = [{value : 'PI', label : 'Principal + Interest'}, {value : 'H', label : 'Hybrid'}];
                 self.rateType = [{value : 'Fixed', label : 'Fixed'},{value : '0', label : '0'}]
                 self.rollover = [{value : 'Yes', label : 'Yes'},{value : 'No', label : 'No'}];
+                self.onSave = function(item){
+                      oj.Router.rootInstance.go('review-date-bu');
+                };
                 self.onBack = function(item){};
                 self.deleteRow = function(data, event){
                     var currentRow = $('#table').ojTable('option', 'currentRow');
@@ -111,9 +114,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                     if(data.option=='value'){
                         if (data.value == "No") {
                             self.generateButton(false);
+                            $("#repurchaseDate").css("display","flex");
                         }
                         else {
                             self.generateButton(true);
+                            $("#repurchaseDate").css("display","none");
                         }
                     }
                 };

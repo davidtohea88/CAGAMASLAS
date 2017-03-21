@@ -16,9 +16,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
         self.currentDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
         function mainModel(){
             self.header = "PWR Term Sheet";
-            
+            self.cofDate = "31/12/2016"
+            self.finalCofDate = "1/2/2017"
             var pwrTypeArray = [{pwrType:'DFIA (exclude housing loan)', concentrationLimit:'RM 4 billion', exposures:'RM 671 mil'},
-                                {pwrType:'Non-FI (corporations & credit/leasing)', concentrationLimit:'RM 1 billion', exposures:'RM 467 mil'}];
+                                {pwrType:'Non-FI (corporations & credit/leasing & exclude housing loan)', concentrationLimit:'RM 1 billion', exposures:'RM 467 mil'}];
             pwrDatasource = new oj.ArrayTableDataSource(pwrTypeArray, {idAttribute: 'pwrType'});
             
             var underlyingTypeArray = [{underlyingType:'Non Housing Loan', concentrationLimit:'Not more than 50% of Total Exposures', exposures:'11.22%'}];

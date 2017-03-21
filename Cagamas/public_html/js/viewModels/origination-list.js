@@ -1,5 +1,7 @@
 
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojinputtext', 'ojs/ojbutton',
+'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource',
+'ojs/ojselectcombobox'],
 function(oj, ko, $)
 {
   function viewModel()
@@ -14,7 +16,8 @@ function(oj, ko, $)
     {OriginationId: 'PI0005', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'10,000,000', Currency:'MYR', OriginationStatus: 'PI'},
     {OriginationId: 'PI0006', CounterPartyName: 'Oracle Corp.', ProductType:'PWR', PurchaseAmount:'30,000,000',Currency:'MYR',  OriginationStatus: 'PI'},
     ];
-    self.pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(deptArray, {idAttribute: 'OriginationId'}));
+    self.observableArray = ko.observableArray(deptArray);
+    self.pagingDatasource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.observableArray, {idAttribute: 'OriginationId'}));
     self.header="Origination";
     self.buttonClick= function(item) {
     if(item.OriginationStatus=='PI')
@@ -35,7 +38,9 @@ function(oj, ko, $)
             return (false);
         }
     };
-    
+    self.onClickNew = function(){
+        oj.Router.rootInstance.go('origination-pi');
+    };    
   }
   return viewModel;
 

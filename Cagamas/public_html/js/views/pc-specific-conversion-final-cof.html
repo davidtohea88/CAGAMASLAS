@@ -32,13 +32,48 @@
           <div class="oj-flex-item">
           </div>
           <div class="oj-flex-item">
-            <button  id= "btn_search" data-bind="ojComponent: { component: 'ojButton', label: 'Search' }"></button>
+            <button  id= "btn_search" data-bind="click:onSearch, ojComponent: { component: 'ojButton', label: 'Search' }"></button>
             <button  id= "btn_reset" data-bind="ojComponent: { component: 'ojButton', label: 'Reset' }"></button>
     </div>
         </div>
         </div>
     </div>                               
   </div>
+  
+  <table id="table1" summary="table 1" aria-label="table1"
+           data-bind="ojComponent: {component: 'ojTable', data: datasource, columns:
+            [
+            {headerTemplate: 'select_hdr', template: 'select_item'},
+            {headerText: 'Counterparty', field: 'Counterparty'},
+            {headerText: 'Purchase Contract Number', field: 'PurchaseContractNumber'},
+            {headerText: 'Date', field: 'Date'},
+            {headerText: 'CurrentRateType', field: 'CurrentRateType'},
+            {headerText: 'FinalCOF', field: 'FinalCOF'},
+            {headerText: 'Margin', field: 'Margin'}
+            ], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div style="clear:both;height:20px;"></div>
+   
+  <h3 class="oj-header-border">New Rate For Selected Purchase Contract</h3>
+
+  <table id="table2" summary="table 2" aria-label="table2"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasourceNew, columns:
+            [
+            {headerText: 'Counterparty', field: 'Counterparty'},
+            {headerText: 'Purchase Contract Number', field: 'PurchaseContractNumber'},
+            {headerText: 'Date', field: 'Date'},
+            {headerText: 'Benchmark', field: 'Benchmark'},
+            {headerTemplate: 'benchmark_source_hdr', template: 'benchmark_source_item'},
+            {headerText: 'New Rate Type', field: 'NewRateType'},
+            {headerTemplate: 'benchmark_rate_hdr', template: 'benchmark_rate_item'},
+            {headerTemplate: 'spread_hdr', template: 'spread_item'},
+            {headerTemplate: 'Final_COF_hdr', template: 'Final_COF_item'}
+            ], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+
+<!--
  <div class="oj-flex">
           <div class="oj-flex-item">
 
@@ -71,72 +106,9 @@
     <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
     </div>
 </div>
+-->
 </div>
 
-<script type="text/html" id="cp_hdr">
-    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
-        Counterparty   
-    </th>
-</script>
-<script type="text/html" id="cp_item">
-    <td >
-         <input id="A4control"  style="border-width:1px;width:60%"
-                   data-bind="ojComponent: {component: 'ojInputText', value:selectedCP}">
-                   <button id="buttonCPOpener" style="margin-left:-20%;"
-                data-bind="click: openCPPopUp, ojComponent: {
-                    component:'ojButton',
-                    icons: {start:'fa fa-search'}
-                }"></button>
-    </td>
-</script>
-
-<script type="text/html" id="pcnum_hdr">
-    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
-        Purchase Contract Number
-    </th>
-</script>
-<script type="text/html" id="pcnum_item">
-    <td >
-         <input id="A4control"  style="border-width:1px;width:70%"
-                   data-bind="ojComponent: {component: 'ojInputText', value:selectedCP}">
-                   <button id="buttonCPOpener" style="margin-left:-15%;"
-                data-bind="click: openCPPopUp, ojComponent: {
-                    component:'ojButton',
-                    icons: {start:'fa fa-search'}
-                }"></button>
-    </td>
-</script>
-
-<script type="text/html" id="type_hdr">
-    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
-        Current Rate Type
-    </th>
-</script>
-<script type="text/html" id="type_item">
-    <td><label>Fixed</label></td>
-</script>
-
-<script type="text/html" id="new_rate_type_hdr">
-    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
-        New Rate Type
-    </th>
-</script>
-<script type="text/html" id="new_rate_type_item">
-    <td><label>Floating</label></td>
-</script>
-
-<script type="text/html" id="benchmark_hdr">
-    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
-        Benchmark
-    </th>
-</script>
-<script type="text/html" id="benchmark_item">
-    <td>
-        <input id="C1control" style="border:1px solid #dfe4e7 !important; "
-                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select',
-                                    rootAttributes: {style:'max-width:20em'}}">
-    </td>
-</script>
 
 <script type="text/html" id="benchmark_source_hdr">
     <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
@@ -147,19 +119,6 @@
     <td>
         <input id="C1control" style="border:1px solid #dfe4e7 !important; "
                    data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select',
-                                    rootAttributes: {style:'max-width:20em'}}">
-    </td>
-</script>
-
-<script type="text/html" id="tenure_hdr">
-    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
-        Tenure
-    </th>
-</script>
-<script type="text/html" id="tenure_item">
-    <td>
-        <input id="C1control" style="border:1px solid #dfe4e7 !important; "
-                   data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select',  options: tenure,
                                     rootAttributes: {style:'max-width:20em'}}">
     </td>
 </script>
@@ -187,7 +146,7 @@
     <td>
          <input id="rate1" style="border-width:1px;"
                    data-bind="ojComponent: {component: 'ojInputText', 
-                                            value:'', required: false}">
+                                            value:$parent.spread, required: false}">
     </td>
 </script>
 
@@ -200,7 +159,7 @@
     <td>
          <input id="rate1" style="border-width:1px;"
                    data-bind="ojComponent: {component: 'ojInputText', 
-                                            value:'', required: false}">
+                                            value:$parent.FinalCOF, required: false}">
     </td>
 </script>
 
@@ -214,12 +173,12 @@
     <td><label>0</label></td>
 </script>
 
-<script type="text/html" id="action_hdr">
+<script type="text/html" id="select_hdr">
     <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
         Action
     </th>
 </script>
-<script type="text/html" id="action_item">
-    <td><button  id= "btn_1" data-bind="ojComponent: { component: 'ojButton', label: 'Save' }">
+<script type="text/html" id="select_item">
+    <td><button  id= "btn_1" data-bind="ojComponent: { component: 'ojButton', label: 'Select' }">
     </button></td>
 </script>

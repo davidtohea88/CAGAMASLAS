@@ -35,9 +35,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
             var array = [{CounterpartyName:'CIMB Bank', CounterpartyType:'127/000/2701/179', PurchContractNum:'31-01-2022', AssetType:'300.000.000', ReviewDate:'300.000.000', 
                             OutstandingBalance:'300/012/2701/179', Tenure:'defaulted', IndicativeCagarate:'defaulted', Rollover:''},
                          {CounterpartyName:'CIMB Bank1', CounterpartyType:'127/000/2701/179', PurchContractNum:'31-01-2022', AssetType:'300.000.000', ReviewDate:'300.000.000', 
-                            OutstandingBalance:'300/012/2701/179', Tenure:'defaulted', IndicativeCagarate:'defaulted', Rollover:''}];
+                            OutstandingBalance:'300/012/2701/179', Tenure:'defaulted', IndicativeCagarate:'defaulted', Rollover:''}
+                            ];
+            var arrayICR = [
+            {Year:'1',Tenure:'3 Years',RateType:'Floating',Benchmark:'100,000',Source:'',COF:'1%',PWR:'2%',BU:'3%',CagaRate:'6%',Status:'Approved'},
+            {Year:'1',Tenure:'3 Years',RateType:'Floating',Benchmark:'100,000',Source:'',COF:'1%',PWR:'2%',BU:'3%',CagaRate:'6%',Status:'Approved'}
+            ];
             self.observableArray = ko.observableArray(array);
+            self.observableArrayICR = ko.observableArray(arrayICR);
             self.datasource = ko.observable(new oj.ArrayTableDataSource([], {idAttribute: 'CounterpartyName'}));
+            self.datasourceICR = ko.observable(new oj.ArrayTableDataSource(self.observableArrayICR, {idAttribute: 'Year'}));
             
             self.selectedRollover = ko.observable('');
             self.onClickSearch = function(){
@@ -48,7 +55,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
                 self.endDate(oj.IntlConverterUtils.dateToLocalIso(new Date()));
             };
             
-            self.onClickAction = function(){$("#ICRDialog").ojDialog("open");return true;};
+            self.onClickAction = function(){$("#ICRDialog2").ojDialog("open");return true;};
             self.onClickCalculate = function(){};
             self.onClickSave = function(){$("#ICRDialog").ojDialog("close");return true;};
             self.onClickApprove = function(){$("#ICRDialog").ojDialog("close");return true;};

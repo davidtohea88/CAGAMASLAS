@@ -42,7 +42,7 @@
                 <h3 class="oj-header-border">Parameter</h3>
                 <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">
                     <div class="oj-flex-item">
-                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">
                             <div class="oj-flex">
                                 <div class="oj-flex-item">
                                     <div class="oj-label oj-component oj-combobox-label">
@@ -62,19 +62,6 @@
                                      Months
                                 </div>
                             </div>
-                            <div class="oj-flex">
-                                <div class="oj-flex-item">
-                                    <label for="interestRate">Interest Rate</label>
-                                </div>
-                                <div class="oj-flex-item">
-                                    <input id="interestRate"
-                                           data-bind="ojComponent: {component: 'ojInputText', value: interestRate}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="oj-flex-item">
-                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">
                             <div class="oj-flex">
                                 <div class="oj-flex-item">
                                     <div class="oj-label oj-component oj-combobox-label">
@@ -97,12 +84,88 @@
                                     </div>
                                 </div>
                                 <div class="oj-flex-item">
-                                    <select id="selectRateType" required
+                                    <select id="selectRateType"
                                             data-bind="ojComponent: {component: 'ojSelect', options: rateType, required: true}"></select>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-8 oj-lg-even-cols-4 oj-lg-labels-inline">
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="cof">Cost of Fund</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="cof"
+                               data-bind="ojComponent: {component: 'ojInputText', value: ''}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="pwrmm">PWR Matrix Margin</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="pwrmm"
+                               data-bind="ojComponent: {component: 'ojInputText', value: ''}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="pwrwr">PWR Matrix Margin Waiver/Reduction</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="pwrwr"
+                               data-bind="ojComponent: {component: 'ojInputText', value: ''}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="pwrwr">Waiver/Reduction Rationale</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="pwrwr"
+                               data-bind="ojComponent: {component: 'ojInputText', value: ''}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="bum">Business Unit Margin</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="bum"
+                               data-bind="ojComponent: {component: 'ojInputText', value: ''}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <button id= "button" class="action-button"
+                            data-bind="click: onSimulate, 
+                                ojComponent: {component: 'ojButton', label: 'Simulate', childAttributes:{style:'white-space: normal;'}}">
+                    </button>
+                   
                 </div>
             </div>
         </div>
@@ -157,6 +220,15 @@
                             <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">
                                 <div class="oj-flex">
                                     <div class="oj-flex-item">
+                                        <label for="newcof">New Cost of Funds</label>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <input id="newcof"
+                                               data-bind="ojComponent: {component: 'ojInputText', value: ''}"/>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
                                         <label for="cagamasRate">Cagamas Rate</label>
                                     </div>
                                     <div class="oj-flex-item">
@@ -179,11 +251,11 @@
                 </div>
                 <div class="oj-flex" id="sim-row-2">
                     <table id="table"
-                           data-bind="ojComponent: {component: 'ojTable',data: datasource,
-                           columns: [{headerText: 'Installment Date', field: 'InstallmentDate'},
+                           data-bind="ojComponent: {component: 'ojTable',data: pagingDatasource,
+                           columns: [{headerText: 'Installment Date', field: 'Date'},
                                     {headerText: 'Opening Balance',field: 'OpeningBalance'},
                                     {headerText: 'Cagamas Rate',field: 'CagamasRate'},
-                                    {headerText: 'Mortage Installment', field: 'MortageInstallment'},
+                                    {headerText: 'Mortage Installment', field: 'MortgageInstallment'},
                                     {headerText: 'Deferred Purchase Value',field: 'DeferredPurchaseValue'},
                                     {headerText: 'Cagamas Installment',field: 'CagamasInstallment'},
                                     {headerText: 'Principal', field: 'Principal'},

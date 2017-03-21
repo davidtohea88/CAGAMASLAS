@@ -1390,4 +1390,12 @@ margin:10px 15px;
     /*background: url('https://www.createwebsite.net/wp-content/uploads/2015/09/Display-Loading.gif') no-repeat center center;*/
     background-size: contain;
 }
+.action-button-h{
+    width:19%;
+    height:30px;
+    margin:5px 1%;
+}
+.action-button-h .oj-button-text{
+    white-space: normal;
+}
 /*Kevin edit end*/

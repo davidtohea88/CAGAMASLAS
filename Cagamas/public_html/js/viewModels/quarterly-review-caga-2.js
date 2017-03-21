@@ -27,6 +27,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                 self.openTrxObservableArray = ko.observableArray(openTrx);
                 
                 self.datasourceOpenTrx = ko.observable(new oj.ArrayTableDataSource(self.openTrxObservableArray, {idAttribute: 'RentasCPName'}));
+                self.onClickBack = function(){oj.Router.rootInstance.go('quarterly-reviews-dashboard');};
+
             }
             
             return mainViewModel;        

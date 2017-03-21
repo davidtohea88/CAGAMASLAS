@@ -39,7 +39,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
             var docArray = [{DocumentType:'docx', DocumentName:'Document A', UploadDate:'01-Mar-2017', DocPath:'doc/Guarantee Notice.docx'},
                             {DocumentType:'xlsx', DocumentName:'Document B', UploadDate:'02-Mar-2017', DocPath:'doc/Notifications.xlsx'}];
             self.docObservableArray = ko.observableArray(docArray);
-            self.docDatasource = ko.observable(new oj.ArrayTableDataSource(self.docObservableArray, {idAttribute: 'DocumentType'}));
+            self.docDatasource = ko.observable(new oj.ArrayTableDataSource([], {idAttribute: 'DocumentType'}));
             self.documentType = [{value : 'PDF', label : 'PDF'},
                                 {value : 'Doc', label : 'DOC/DOCX'}]
             self.selectedDocType = ko.observable('');
@@ -63,7 +63,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
             };
             self.onClickClose = function(){$("#AttachmentDialog").ojDialog("close");return true;};
             
-            self.onClickGenerate = function(){};
+            self.onClickGenerate = function(){
+                 self.docDatasource(new oj.ArrayTableDataSource(self.docObservableArray, {idAttribute: 'DocumentType'}));
+
+            };
             self.onClickCancel = function(){};
             self.onClickViewDocument = function(item){
                 window.open(item.DocPath,'_blank');

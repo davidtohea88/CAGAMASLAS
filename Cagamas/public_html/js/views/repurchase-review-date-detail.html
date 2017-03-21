@@ -9,7 +9,7 @@
     <div class="oj-flex-bar ">
     <div class="oj-flex-bar-end">
         <div>
-            <button id= "btn_save" style="margin-top:10px;" data-bind=" ojComponent: { component: 'ojButton', label: 'Save' }"></button>
+            <button id= "btn_save" style="margin-top:10px;" data-bind="click:onSave, ojComponent: { component: 'ojButton', label: 'Save' }"></button>
             <button id= "btn_generate" style="margin-top:10px;" data-bind="ojComponent: { component: 'ojButton', label: 'Generate', disabled:generateButton }"></button>
             <button id= "btn_back" style="margin-top:10px;" data-bind=" ojComponent: { component: 'ojButton', label: 'Back' }"></button>
         </div>
@@ -104,7 +104,7 @@
                    data-bind="ojComponent: {component: 'ojCombobox', value:'Please Select', options: rollover, optionChange: rolloverOptionChangedHandler}">
           </div>
         </div>
-        <div class="oj-flex"> 
+        <div class="oj-flex" id="repurchaseDate"> 
           <div class="oj-flex-item">
             <label for="B9control">Repurchase Date</label>
           </div>

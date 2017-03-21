@@ -154,6 +154,15 @@
                     </div>
                     <div class="oj-flex"> 
                       <div class="oj-flex-item">
+                        <label for="currUtilization">Underlying Receivable</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="currUtilization"
+                               data-bind="ojComponent: {component: 'ojInputText', value: 'Housing Loan', disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
                         <label for="avlLimit">Transaction Date</label>
                       </div>
                       <div class="oj-flex-item">
@@ -210,10 +219,19 @@
                     </div>
                     <div class="oj-flex"> 
                       <div class="oj-flex-item">
-                        <label for="avlLimit">Cost of Fund (%)</label>
+                        <label for="avlLimit" data-bind="text:'Cost of Fund (%) ' + cofDate"></label>
                       </div>
                       <div class="oj-flex-item">
                         <input id="avlLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: 'value', disabled:true}" />
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="avlLimit2" data-bind="text:'Final Cost of Fund (%) ' + finalCofDate"></label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="avlLimit2"
                                data-bind="ojComponent: {component: 'ojInputText', value: 'value', disabled:true}"/>
                       </div>
                     </div>

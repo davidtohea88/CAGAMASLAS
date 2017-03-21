@@ -67,6 +67,7 @@ function(oj, ko, $, configService)
     self.header="Validate Loan Detail";
     self.redirectToPC= function(item) {
         self.config.status = "temp-validated";
+        self.config.loanStatus = "validated";
         oj.Router.rootInstance.go('origination-pc');
     };
     self.openFileDialog = function (){

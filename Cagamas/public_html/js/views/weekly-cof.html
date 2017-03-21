@@ -37,7 +37,7 @@
           <div class="oj-flex-item">
           </div>
           <div class="oj-flex-item">
-            <button  id= "btn_search" data-bind="ojComponent: { component: 'ojButton', label: 'Search' }"></button>
+            <button  id= "btn_search" data-bind="click:onSearch, ojComponent: { component: 'ojButton', label: 'Search' }"></button>
             <button  id= "btn_reset" data-bind="ojComponent: { component: 'ojButton', label: 'Reset' }"></button>
     </div>
         </div>
@@ -139,7 +139,7 @@
     <td>
          <input id="rate1" style="border-width:1px;"
                    data-bind="ojComponent: {component: 'ojInputText', 
-                                            value:'', required: false}">
+                                            value:benchmarkRate, required: false}">
     </td>
 </script>
 
@@ -152,7 +152,7 @@
     <td>
          <input id="rate1" style="border-width:1px;"
                    data-bind="ojComponent: {component: 'ojInputText', 
-                                            value:'', required: false}">
+                                            value:spread, required: false}">
     </td>
 </script>
 
@@ -165,7 +165,7 @@
     <td>
          <input id="rate1" type="text" style="border-width:1px;"
                    data-bind="ojComponent: {component: 'ojInputText', 
-                                            value:'', required: false}">
+                                            value:weeklyCOF, required: false}">
     </td>
 </script>
 

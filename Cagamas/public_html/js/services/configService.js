@@ -13,10 +13,9 @@ define(['jquery','ojs/ojcore' ,'knockout'], function($,oj,ko) {
          * @private
          */
         var self = this;
-        self.status = "";
-        self.form = "0";
-        self.letter = "0";
-       
+        self.status = "temp-new";
+        self.loanStatus = "not validated";       
+        
         //self.notificationDailogModel = new NotificationDailogModel(); 
     };
     return new ConfigServiceUtilities();

@@ -17,7 +17,9 @@
                 
                         
 define(['ojs/ojcore', 'knockout',  'data/data','jquery',
-           'ojs/ojknockout', 'ojs/ojinputnumber','ojs/ojinputtext','ojs/ojselectcombobox','ojs/ojdatetimepicker', 'ojs/ojbutton', 'ojs/ojcheckboxset', 'ojs/ojdialog', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource'],
+           'ojs/ojknockout', 'ojs/ojinputnumber','ojs/ojinputtext','ojs/ojselectcombobox',
+           'ojs/ojdatetimepicker', 'ojs/ojbutton', 'ojs/ojcheckboxset', 'ojs/ojdialog', 
+           'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource'],
         function (oj, ko,jsonData, $)
         {
             /* 

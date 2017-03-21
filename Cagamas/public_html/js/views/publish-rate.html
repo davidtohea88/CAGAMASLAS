@@ -59,7 +59,9 @@
                 {headerTemplate: 'productGroup_hdr', template: 'productGroup_item'},
                 {headerTemplate: 'assetType_hdr', template: 'assetType_item'},
                 {headerTemplate: 'tenure_hdr', template: 'tenure_item'},
-                {headerTemplate: 'publishedRate_hdr', template: 'publishedRate_item'}],
+                {headerTemplate: 'publishedRate_hdr', template: 'publishedRate_item'},
+                {headerTemplate: 'margin_hdr', template: 'margin_item'},
+                ],
                 rootAttributes: {'style':'width: 100%;'}}">
         </table>
     </div>
@@ -130,6 +132,19 @@
     </th>
 </script>
 <script type="text/html" id="publishedRate_item">
+    <td>
+        <input id="rate1" style="border-width:1px;"
+                   data-bind="ojComponent: {component: 'ojInputText', 
+                                            value:'', required: false}">
+    </td>
+</script>
+
+<script type="text/html" id="margin_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Margin
+    </th>
+</script>
+<script type="text/html" id="margin_item">
     <td>
         <input id="rate1" style="border-width:1px;"
                    data-bind="ojComponent: {component: 'ojInputText', 

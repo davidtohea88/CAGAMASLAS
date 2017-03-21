@@ -57,7 +57,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
         self.paymentType = [{value : 'PI', label : 'Principal + Interest'},
                             {value : '0', label : '0'}]
         self.rateType = [{value : 'Fixed', label : 'Fixed'},
-                        {value : '0', label : '0'}]
+                        {value : 'Convertible', label : 'Convertible'}]
         self.paymentFrequency = [{value : 'Monthly', label : 'Monthly'},
                                 {value : 'Yearly', label : 'Yearly'}]
         self.purchaseConsiderationType = [{value : 'CASH', label : 'CASH'},
@@ -157,8 +157,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 $('.loader-wrapper').show();
                 setTimeout(function () {
                     $('.loader-wrapper').hide();
-                    self.config.status = "final";
-                    self.inputStatus("FINAL");
+                    self.config.status = "final-pc";
+                    self.inputStatus("FINAL-PC");
                     $("#rateISButton").ojButton("option", "disabled", true);
                     $("#loanDetailButton").ojButton("option", "disabled", true);
                     $("#gisButton").ojButton("option", "disabled", true);
@@ -229,35 +229,53 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
               document.getElementById("browseFile").click();
             }
             
-            if(!self.config.status){
+            if(!self.config.status || self.config.status.toUpperCase() == "TEMP-NEW"){
                 self.rateISBtn = false;
-            }else if(self.config.status.toUpperCase() == "TEMP-NEW"){
+            }else if(self.config.status.toUpperCase() == "TEMP-RATE"){
                 self.rateISBtn = false;
                 self.loanDetailBtn = false;
+                self.pwrTermSheetBtn = false;
+                self.cancelBtn = false;
             }else if(self.config.status.toUpperCase() == "TEMP-VALIDATED"){
-                self.loanDetailBtn = false;
                 self.gisBtn = false;
+                self.cancelBtn = false;
+            }else if(self.config.status.toUpperCase() == "TEMP-VALID-ERROR"){
+                self.rateISBtn = false;
+                self.loanDetailBtn = false;
+                self.cancelBtn = false;
             }else if(self.config.status.toUpperCase() == "TEMP-IS"){
                 self.pwrTermSheetBtn = false;
-            }else if(self.config.status.toUpperCase() == "TEMP-PWRTS"){
+                self.cancelBtn = false;
+                self.rateISBtn = false;
+            }else if(self.config.status.toUpperCase() == "FINAL-CR"){
+                self.loanDetailBtn = false;
+                self.gisBtn = false;
+                self.cancelBtn = false;
+                self.rateISBtn = false;
+            }else if(self.config.status.toUpperCase() == "FINAL-IS"){
                 self.pwrTermSheetBtn = false;
-                self.cosFormBtn = false;
-                
-                console.log("PWRTS");
-                if(self.config.form)
-                    if(self.config.form == 1){
-                        console.log("form==1");
-                        self.cosLetterBtn = false;
-                    }
-
-                if(self.config.letter)
-                    if(self.config.letter == 1){
-                        console.log("letter==1");
-                        self.puchContractBtn = false;
-                        self.withdrawBtn = false;
-                        self.cancelBtn = false;
-                    }
-            }else if(self.config.status.toUpperCase() == "FINAL"){
+                self.rateISBtn = false;
+            }else if(self.config.status.toUpperCase() == "TEMP-PWRTS"){
+                if(self.config.loanStatus.toUpperCase() == "VALIDATED"){
+                    self.cosFormBtn = false;
+                }else{
+                    self.loanDetailBtn = false;
+                }
+                self.cancelBtn = false;
+                self.rateISBtn = false;
+            }else if(self.config.status.toUpperCase() == "TEMP-COSFORM"){
+                self.cosLetterBtn = false;
+                self.rateISBtn = false;
+            }else if(self.config.status.toUpperCase() == "TEMP-COSLETTER"){
+                self.puchContractBtn = false;
+                self.withdrawBtn = false;
+                self.cancelBtn = false;
+                self.rateISBtn = false;
+            }else if(self.config.status.toUpperCase() == "TEMP-WITHDRAW"){
+                self.cancelBtn = false;
+                self.rateISBtn = false;
+            }else if(self.config.status.toUpperCase() == "FINAL-PC"){
+                self.rateISBtn = false;
                 self.contractRemittanceBtn = false;
             }
             

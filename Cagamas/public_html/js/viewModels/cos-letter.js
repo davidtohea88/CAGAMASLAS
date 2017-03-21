@@ -10,9 +10,7 @@ function(oj, ko, $,configService)
       oj.Router.rootInstance.go('origination-pc');
     }
     redirectToPC= function(item) {
-            self.config.status = "temp-pwrts";
-            self.config.letter = "1";
-            self.config.form = "0";
+            self.config.status = "temp-cosletter";
             oj.Router.rootInstance.go('origination-pc');
     }
     
