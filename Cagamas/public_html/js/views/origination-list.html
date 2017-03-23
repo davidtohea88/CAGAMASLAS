@@ -1,30 +1,73 @@
 <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
 <div style="width:100%;display: flex;">
-    <div class="two-cols" style="margin:10px 20px; display:flex;">
-        <div style="margin-left:20px;width:15%;vertical-align:middle;line-height: 32px;">
-        Search
+    <div class="three-cols" style="display:flex;">
+        <div style="margin-left:20px;width:40%;vertical-align:middle;line-height: 32px;">
+        Purchase Contract Number
         </div>
-        <div style="width:85%;">
-            <div style="width:50%;" class="oj-inputsearch-choice">
-                <input class="oj-inputsearch-input" id="inputSearch" placeholder="Search keyword"
+        <div style="width:60%;">
+            <div style="width:90%;" class="oj-inputsearch-choice">
+                <input class="oj-inputsearch-input" id="inputSearch" placeholder="Search by purchase contract number"
                    type="search"/>
                 <a class="oj-inputsearch-search-button oj-inputsearch-search-icon oj-component-icon 
                 oj-clickable-icon-nocontext" role="button" aria-label="search"></a>
             </div>
         </div>
     </div>
-    <div class="two-cols">
+    <div class="three-cols" style="display:flex;">
+        <div style="margin-left:20px;width:40%;vertical-align:middle;line-height: 32px;">
+        Counterparty Name
+        </div>
+        <div style="width:60%;">
+            <div style="width:90%;" class="oj-inputsearch-choice">
+                <input class="oj-inputsearch-input" id="inputSearch" placeholder="Search by counterpary name"
+                   type="search"/>
+                <a class="oj-inputsearch-search-button oj-inputsearch-search-icon oj-component-icon 
+                oj-clickable-icon-nocontext" role="button" aria-label="search"></a>
+            </div>
+        </div>
+    </div>
+    <div class="three-cols">
         <button id= "rateISButton" class="action-button-h" style="float:right;margin-right:20px;"
                 data-bind="click: onClickNew, 
                     ojComponent: {component: 'ojButton', label: 'New', childAttributes:{style:'white-space: normal;'}, disabled: self.rateISBtn}">
         </button>
     </div>
 </div>
+<div style="width:100%;display: flex;">
+    <div class="three-cols" style="display:flex;">
+        <div style="margin-left:20px;width:40%;vertical-align:middle;line-height: 32px;">
+        Currency
+        </div>
+        <div style="width:60%;">
+            <div style="width:90%;" class="oj-inputsearch-choice">
+                <input class="oj-inputsearch-input" id="inputSearch" placeholder="Search by currency"
+                   type="search"/>
+                <a class="oj-inputsearch-search-button oj-inputsearch-search-icon oj-component-icon 
+                oj-clickable-icon-nocontext" role="button" aria-label="search"></a>
+            </div>
+        </div>
+    </div>
+    <div class="three-cols" style="display:flex;">
+        <div style="margin-left:20px;width:40%;vertical-align:middle;line-height: 32px;">
+        Status
+        </div>
+        <div style="width:60%;">
+            <div style="width:90%;" class="oj-inputsearch-choice">
+                <input class="oj-inputsearch-input" id="inputSearch" placeholder="Search by status"
+                   type="search"/>
+                <a class="oj-inputsearch-search-button oj-inputsearch-search-icon oj-component-icon 
+                oj-clickable-icon-nocontext" role="button" aria-label="search"></a>
+            </div>
+        </div>
+    </div>
+    <div class="three-cols">
+    </div>
+</div>
 <br>    
 <div id="pagingControlDemo" class="page-content">
     <table id="table" summary="Origination List" aria-label="Origination Table"
            data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
-            [{headerText: 'Product Type', field: 'ProductType'},
+            [{headerText: 'Purchase Contract Number', field: 'PurchaseContractID'},
              {headerText: 'Counter Party Name', field: 'CounterPartyName'},
              {headerText: 'Currency', field: 'Currency', style: 'width: 5%'},
              {headerText: 'Purchase Amount', field: 'PurchaseAmount'},

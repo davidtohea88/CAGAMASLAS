@@ -57,7 +57,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
         self.paymentType = [{value : 'PI', label : 'Principal + Interest'},
                             {value : '0', label : '0'}]
         self.rateType = [{value : 'Fixed', label : 'Fixed'},
-                        {value : 'Convertible', label : 'Convertible'}]
+                        {value : '0', label : '0'}]
         self.paymentFrequency = [{value : 'Monthly', label : 'Monthly'},
                                 {value : 'Yearly', label : 'Yearly'}]
         self.purchaseConsiderationType = [{value : 'CASH', label : 'CASH'},
@@ -157,7 +157,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 $('.loader-wrapper').show();
                 setTimeout(function () {
                     $('.loader-wrapper').hide();
-                    self.config.status = "final-pc";
+                    self.config.status = "final";
                     self.inputStatus("FINAL-PC");
                     $("#rateISButton").ojButton("option", "disabled", true);
                     $("#loanDetailButton").ojButton("option", "disabled", true);
@@ -235,18 +235,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 self.rateISBtn = false;
                 self.loanDetailBtn = false;
                 self.pwrTermSheetBtn = false;
-                self.cancelBtn = false;
+                self.cosFormBtn = false;
+                self.cosLetterBtn = false;
             }else if(self.config.status.toUpperCase() == "TEMP-VALIDATED"){
+                self.rateISBtn = false;
+                self.loanDetailBtn = false;
+                self.pwrTermSheetBtn = false;
+                self.cosFormBtn = false;
+                self.cosLetterBtn = false;
                 self.gisBtn = false;
-                self.cancelBtn = false;
             }else if(self.config.status.toUpperCase() == "TEMP-VALID-ERROR"){
                 self.rateISBtn = false;
                 self.loanDetailBtn = false;
                 self.cancelBtn = false;
             }else if(self.config.status.toUpperCase() == "TEMP-IS"){
-                self.pwrTermSheetBtn = false;
-                self.cancelBtn = false;
                 self.rateISBtn = false;
+                self.loanDetailBtn = false;
+                self.pwrTermSheetBtn = false;
+                self.cosFormBtn = false;
+                self.cosLetterBtn = false;
+                self.gisBtn = false;
+                self.cancelBtn = false;
+                self.withdrawBtn = false;
             }else if(self.config.status.toUpperCase() == "FINAL-CR"){
                 self.loanDetailBtn = false;
                 self.gisBtn = false;
@@ -256,21 +266,38 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 self.pwrTermSheetBtn = false;
                 self.rateISBtn = false;
             }else if(self.config.status.toUpperCase() == "TEMP-PWRTS"){
-                if(self.config.loanStatus.toUpperCase() == "VALIDATED"){
-                    self.cosFormBtn = false;
-                }else{
-                    self.loanDetailBtn = false;
-                }
-                self.cancelBtn = false;
+//                if(self.config.loanStatus.toUpperCase() == "VALIDATED"){
+//                    self.cosFormBtn = false;
+//                }else{
+//                    self.loanDetailBtn = false;
+//                }
                 self.rateISBtn = false;
-            }else if(self.config.status.toUpperCase() == "TEMP-COSFORM"){
+                self.loanDetailBtn = false;
+                self.pwrTermSheetBtn = false;
+                self.cosFormBtn = false;
                 self.cosLetterBtn = false;
+                self.gisBtn = false;
+                self.cancelBtn = false;
+                self.withdrawBtn = false;
+            }else if(self.config.status.toUpperCase() == "TEMP-COSFORM"){
                 self.rateISBtn = false;
+                self.loanDetailBtn = false;
+                self.pwrTermSheetBtn = false;
+                self.cosFormBtn = false;
+                self.cosLetterBtn = false;
+                self.gisBtn = false;
+                self.cancelBtn = false;
+                self.withdrawBtn = false;
             }else if(self.config.status.toUpperCase() == "TEMP-COSLETTER"){
                 self.puchContractBtn = false;
-                self.withdrawBtn = false;
-                self.cancelBtn = false;
                 self.rateISBtn = false;
+                self.loanDetailBtn = false;
+                self.pwrTermSheetBtn = false;
+                self.cosFormBtn = false;
+                self.cosLetterBtn = false;
+                self.gisBtn = false;
+                self.cancelBtn = false;
+                self.withdrawBtn = false;
             }else if(self.config.status.toUpperCase() == "TEMP-WITHDRAW"){
                 self.cancelBtn = false;
                 self.rateISBtn = false;
@@ -278,7 +305,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 self.rateISBtn = false;
                 self.contractRemittanceBtn = false;
             }
-            
+            self.testButton= function(){
+                $(":oj-select" ).ojSelect( { "disabled": true } );
+                $(":oj-button" ).ojButton( { "disabled": true } );
+                $(":oj-inputText" ).ojInputText( { "disabled": true } );
+                $(":oj-inputDate" ).ojInputDate( { "disabled": true } );
+            }
             self.currentFBB.subscribe(function(newValue){
                 if(self.currentFBB){
                     if(self.currentFBB() == "yes"){
