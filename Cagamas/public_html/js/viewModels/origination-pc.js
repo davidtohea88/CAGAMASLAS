@@ -169,8 +169,37 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                     $("#withdrawButton").ojButton("option", "disabled", true);
                     $("#cancelButton").ojButton("option", "disabled", true);
                     $("#contractRemittanceButton").ojButton("option", "disabled", false);
+                    
+                    self.addAttachments();
                 }, 2000);
             };
+            
+            self.addAttachments = function(){
+            console.log("inside add attachments");
+                if(firstDataExist){
+                    self.observableArray.splice(0, 1);
+                    firstDataExist = false;
+                }
+                self.dateConverter = oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
+                                createConverter(
+                                {
+                                  pattern : "dd-MMM-yyyy / hh:mm"
+                                });
+                self.date = ko.observable(dateConverter.format(oj.IntlConverterUtils.dateToLocalIso(new Date())));
+                var ni = {'FileName': 'Attachment One',
+                     'Description': 'Desc 1',
+                     'Type': 'Docx',
+                     'Version': '1.0',
+                     'Date': self.date()};
+                var ni2 = {'FileName': 'Attachment Two',
+                     'Description': 'Desc 2',
+                     'Type': 'PDF',
+                     'Version': '1.0',
+                     'Date': self.date()}
+                self.observableArray.push(ni);
+                self.observableArray.push(ni2);
+            };
+            
             self.validateLoanDetail = function(data, event){
               oj.Router.rootInstance.go('validate-loan-detail');            
             };
@@ -304,12 +333,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             }else if(self.config.status.toUpperCase() == "FINAL-PC"){
                 self.rateISBtn = false;
                 self.contractRemittanceBtn = false;
-            }
-            self.testButton= function(){
-                $(":oj-select" ).ojSelect( { "disabled": true } );
-                $(":oj-button" ).ojButton( { "disabled": true } );
-                $(":oj-inputText" ).ojInputText( { "disabled": true } );
-                $(":oj-inputDate" ).ojInputDate( { "disabled": true } );
+                self.addAttachments();
             }
             self.currentFBB.subscribe(function(newValue){
                 if(self.currentFBB){
