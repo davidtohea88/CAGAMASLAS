@@ -33,8 +33,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
               pattern : 'MMM-yy'
             }));
             self.selectedCP = ko.observable();
-            console.log(self.config.status.toUpperCase());
-            var array = [{Counterparty:'Counterparty A', ReviewMonth:'3', Status: self.config.status.toUpperCase() == 'UPLOAD' || 'CAGA1' || 'CAGA2' ? self.config.status.toUpperCase() : 'NEW'},
+            var array = [{Counterparty:'Counterparty A', ReviewMonth:'3', Status: self.config.status.toUpperCase() == 'UPLOAD' ? self.config.status.toUpperCase() : self.config.status.toUpperCase() == 'CAGA1' ? self.config.status.toUpperCase() : self.config.status.toUpperCase() == 'CAGA2' ? self.config.status.toUpperCase() : "NEW"},
                          {Counterparty:'Counterparty B', ReviewMonth:'3', Status:'CAGA1'},
                          {Counterparty:'Counterparty C', ReviewMonth:'3', Status:'CAGA2'},
                          {Counterparty:'Counterparty D', ReviewMonth:'3', Status:'CAGA2'}];
@@ -65,7 +64,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             self.openCPPopUp = function(){$("#CPDialog").ojDialog("open");return true;};
             
             self.onClickSearch = function(){
-                self.datasource(new oj.ArrayTableDataSource(self.observableArray, {idAttribute: 'ReviewMonth'}));
+                self.datasource(new oj.ArrayTableDataSource(self.observableArray, {idAttribute: 'Counterparty'}));
             };
             self.onClickReset = function(){
                 self.reviewMonth(oj.IntlConverterUtils.dateToLocalIso(new Date()));
@@ -84,15 +83,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             self.onClickCaga2 = function(){oj.Router.rootInstance.go('quarterly-review-caga-2');};
             self.onClickCaga1 = function(){oj.Router.rootInstance.go('quarterly-review-caga-1');};
             self.onClickGenerate = function(item){
-//                var currentRow = $('#qrd-table').ojTable('option', 'currentRow');
-//                if (currentRow != null)
-//                {
-//                    self.observableArray.splice(currentRow['rowIndex'], 1, {
-//                         'Counterparty': item.Counterparty,
-//                         'ReviewMonth': item.ReviewMonth,
-//                         'Status': 'GENERATED'
-//                      });
-//                }
+                var currentRow = $('#qrdtable').ojTable('option', 'currentRow');
+                if (currentRow != null)
+                {
+                    self.observableArray.splice(currentRow['rowIndex'], 1, {
+                         'Counterparty': item.Counterparty,
+                         'ReviewMonth': item.ReviewMonth,
+                         'Status': 'GENERATED'
+                      });
+                }
                 self.config.status = "GENERATED";
                 self.docDatasource(new oj.ArrayTableDataSource(docArray, {idAttribute: 'DocumentType'}));
             };
@@ -103,7 +102,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             }
             self.onClickUploadPU = function(item){
                 var currentRow = $('#qrdtable').ojTable('option', 'currentRow');
-                console.log("current rows : "+currentRow['rowIndex']);
                 if (currentRow != null)
                 {
                     self.observableArray.splice(currentRow['rowIndex'], 1, {
@@ -124,7 +122,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
         $("document").ready(function(){
             $("#browseFile1").change(function() {
                 var x = document.getElementById("browseFile1").files;
-                console.log("browseFile1 changes");
                 self.inputFileName1(x[0].name);
             });
             

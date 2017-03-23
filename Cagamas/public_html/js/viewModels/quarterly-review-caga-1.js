@@ -11,6 +11,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
              * Your application specific code will go here
              */
                 var self = this;
+                self.config = configService;
                 
             function mainViewModel() {
                 self.header = "Quarterly Review Caga 1";
@@ -28,7 +29,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                 
                 self.datasourceOpenTrx = ko.observable(new oj.ArrayTableDataSource(self.openTrxObservableArray, {idAttribute: 'RentasCPName'}));
                 
-                self.onClickBack = function(){oj.Router.rootInstance.go('quarterly-reviews-dashboard');};
+                self.onClickBack = function(){
+                    self.config.status = "caga1";
+                    oj.Router.rootInstance.go('quarterly-reviews-dashboard');
+                };
             }
             
             return mainViewModel;        

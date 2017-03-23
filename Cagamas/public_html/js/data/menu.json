@@ -19,6 +19,45 @@
                "name":"Origination",
                "view":"origination-list"
             }
+         },
+         {  
+            "attr":{  
+               "id":"collection-servicing",
+               "name":"Collection & Servicing",
+               "view":""
+            },
+          "children":[  
+             {  
+                "attr":{  
+                   "id":"quarterly-reviews-dashboard",
+                   "name":"Quarterly Reviews Dashboard",
+                   "view":"quarterly-reviews-dashboard"
+                }
+             }
+          ]
+         },
+         {  
+            "attr":{  
+               "id":"closure-redemption",
+               "name":"Closure & Redemption",
+               "view":""
+            },
+          "children":[  
+             {  
+                "attr":{  
+                   "id":"repurchase-review-date",
+                   "name":"Repurchase Review Date",
+                   "view":"repurchase-review-date"
+                }
+             }, 
+             {  
+                "attr":{  
+                   "id":"rollover",
+                   "name":"Rollover",
+                   "view":"rollover"
+                }
+             }
+          ]
          }
       ]
    },
@@ -75,16 +114,17 @@
    },
    {  
       "attr":{  
-         "id":"repurchase-replacement",
-         "name":"Repurchase Replacement",
-         "view":"repurchase-replacement"
-      }
-   },   {  
+         "id":"fin-access",
+         "name":"Fin Access",
+         "view":""
+      },
+      "children":[{  
       "attr":{  
-         "id":"repurchase-review-date",
-         "name":"Repurchase Review Date",
-         "view":"repurchase-review-date"
+         "id":"reconciliation-user-interface",
+         "name":"Reconciliation",
+         "view":"reconciliation-user-interface"
       }
+      }]
    },
  {  
       "attr":{  
