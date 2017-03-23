@@ -62,7 +62,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                 self.Benchmark = [{value: 'A', label: 'Benchmark A'},{value: 'B', label: 'Benchmark B'}];
                 self.BenchmarkSource = [{value: 'A', label: 'Source A'},{value: 'B', label: 'Source B'}];
                 self.tenureYear= ko.observable('1');
-                self.tenureMonth= ko.observable('1');
+                self.tenureMonth= ko.observable('0');
                 var CPArray = [
                 {ID:  '1'},
                 {ID:  '2'}
@@ -92,6 +92,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                     self.disabledForm(true);
 
                 }
+                self.rateTypeOptionChangedHandler = function(event,data)
+                {
+                    if(data.option=='value')
+                    {
+                        if (data.value == "convertible") {
+                            $('.convertible').css('display','flex');
+                        }
+                        else {
+                            $('.convertible').hide();
+                        }
+                    }
+
+                };
 
 
 

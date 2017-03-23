@@ -73,7 +73,7 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
                 self.tenureMonth.subscribe(function() {
                     updateReviewDateValue(self);
                 });
-                self.pricingFactor = [{value : 'OC', label :'Over  Collateralization'}, {value:'Others', label:'Others'}];
+                self.pricingFactor = [{value : 'OC', label :'Over  Collateralization'}, {value:'par', label:'Par'}];
                 self.selectedPricingFactor = ko.observable('Please Select');
                 self.header = "Preliminary Indication";
                 self.openCPPopUp = function(){$("#CPDialog").ojDialog("open");return true;};

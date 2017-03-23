@@ -59,7 +59,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B6control" 
-                   data-bind="ojComponent: {component: 'ojCombobox', value:selectedRateType, disabled:disabledForm, options : rateType, required:true}">
+                   data-bind="ojComponent: {component: 'ojCombobox', value:selectedRateType, disabled:disabledForm, options : rateType, required:true, optionChange: rateTypeOptionChangedHandler}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -94,10 +94,10 @@
         </div>
           </div>
         </div>
-        <div class="oj-flex"> 
+        <div class="oj-flex convertible"> 
         <p>* Conversion Date</p>
         </div>
-        <div class="oj-flex"> 
+        <div class="oj-flex convertible"> 
          <button id= "button" style='margin:5px;'
                        data-bind="click: onSelect, 
                             ojComponent: {component: 'ojButton', disabled:disabledForm, label: 'Add' }">
