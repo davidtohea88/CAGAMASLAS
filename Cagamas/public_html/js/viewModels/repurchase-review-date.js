@@ -30,8 +30,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
             self.selectCurrencyVal = ko.observable();
             self.counterPartyType = [{value : 'CPType1', label : 'Counter Party Type 1'}, {value : 'CPType2', label : 'Counter Party Type 2'}];
             
-            var array = [{ReviewDate:'01-02-2017', RepurchaseDate:'01-02-2017', Counterparty:'CIMB Bank Sub Debt', PCNumber:'T-127/000/2701/179074/TL5', AssetType:'', Rollover:'Yes', InstallmentAmount:'1,000,000,000'},
-                         {ReviewDate:'02-02-2017', RepurchaseDate:'01-02-2017', Counterparty:'CIMB Bank Sub Debt', PCNumber:'T-127/000/2701/179074/TL5', AssetType:'', Rollover:'No', InstallmentAmount:'500,000,000'}];
+            var array = [{ReviewDate:'24/03/2017', RepurchaseDate:'24/03/2017', Counterparty:'OCBC Bank (M) Berhad', PCNumber:'103/000/2230/131434/TL1/Q/C0-0/0', AssetType:'Housing Loan', Rollover:'No', InstallmentAmount:''}];
             self.datasource = ko.observable(new oj.ArrayTableDataSource([], {idAttribute: 'Counterparty'}));
             var CPArray = [
                 {CPCode: 'CIMBSD', CPName: 'CIMB Bank Sub Debt', CPGroup:'CIMB', CPType:'FI', FRGroup:'Qtr Ending Month 3,6,9,12'},

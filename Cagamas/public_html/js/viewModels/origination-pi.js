@@ -98,10 +98,10 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
                     {
                         selectedPricingFactor = data.value;
                         if (data.value == "OC") {
-                            self.pricingFactorRate('1.00%');
+                            $('#pricingFactorRate').show();
                         }
                         else {
-                            self.pricingFactorRate('');
+                            $('#pricingFactorRate').hide();
                         }
                     }
                 };

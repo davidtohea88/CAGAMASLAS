@@ -129,7 +129,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B4control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:'33,000,000'}">
+                   data-bind="ojComponent: {component: 'ojInputText', value:''}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -168,7 +168,7 @@
                    data-bind="ojComponent: {component: 'ojCombobox', value:selectedPricingFactor, options: pricingFactor, optionChange: pricingFactorOptionChangedHandler}">
           </div>
         </div>
-        <div class="oj-flex"> 
+        <div class="oj-flex" id="pricingFactorRate" style="display:none;"> 
           <div class="oj-flex-item">
             <label for="B9control">Pricing Factor Rate (%)</label>
           </div>

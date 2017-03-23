@@ -69,7 +69,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                 {ID:  '1'},
                 {ID:  '2'}
                 ];              
-                self.generateButton = ko.observable(true);
+                self.generateButton = ko.observable(false);
                 datasource = ko.observable(new oj.ArrayTableDataSource(self.observableArray, {idAttribute: 'FileName'}));
                 self.onClickUpload = function(data, event){
                 if(firstDataExist){
@@ -98,6 +98,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                 self.paymentType = [{value : 'PI', label : 'Principal + Interest'}, {value : 'H', label : 'Hybrid'}];
                 self.rateType = [{value : 'Fixed', label : 'Fixed'},{value : '0', label : '0'}]
                 self.rollover = [{value : 'Yes', label : 'Yes'},{value : 'No', label : 'No'}];
+//                self.selectedRollover = ko.observableArray(['No']);
                 self.onSave = function(item){
                       oj.Router.rootInstance.go('review-date-bu');
                 };
@@ -121,6 +122,52 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                             $("#repurchaseDate").css("display","none");
                         }
                     }
+                };
+                self.onClickGenerate = function(){
+                    if(firstDataExist){
+                        self.observableArray.splice(0, 1);
+                        firstDataExist = false;
+                    }
+                    self.dateConverter = oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
+                                        createConverter(
+                                        {
+                                          pattern : "dd-MMM-yyyy / hh:mm"
+                                        });
+                    self.date = ko.observable(dateConverter.format(oj.IntlConverterUtils.dateToLocalIso(new Date())));
+                    var a = {'FileName': 'Summary of Loans Repurchased',
+                             'Description': 'Summary of Loans Repurchased',
+                             'Type': 'PDF',
+                             'Version': '1.0',
+                             'Date': self.date()};
+                    self.observableArray.push(a);
+                    a = {'FileName': 'Reconstituted Summary of Loans Offered',
+                             'Description': 'Reconstituted Summary of Loans Offered',
+                             'Type': 'PDF',
+                             'Version': '1.0',
+                             'Date': self.date()};
+                    self.observableArray.push(a);
+                    a = {'FileName': 'Instalment Schedule',
+                             'Description': 'Instalment Schedule',
+                             'Type': 'PDF',
+                             'Version': '1.0',
+                             'Date': self.date()};
+                    self.observableArray.push(a);
+                    a = {'FileName': 'Notice to Repurchase (RC)',
+                             'Description': 'Notice to Repurchase (RC)',
+                             'Type': 'PDF',
+                             'Version': '1.0',
+                             'Date': self.date()};
+                    self.observableArray.push(a);
+                    a = {'FileName': 'Notice of Payment (NOP)',
+                             'Description': 'Notice of Payment (NOP)',
+                             'Type': 'PDF',
+                             'Version': '1.0',
+                             'Date': self.date()};
+                    self.observableArray.push(a);
+                
+                };
+                self.onClickBack = function(){
+                    oj.Router.rootInstance.go('repurchase-review-date');
                 };
             }
             

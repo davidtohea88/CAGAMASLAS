@@ -62,7 +62,7 @@
                    data-bind="ojComponent: {component: 'ojCombobox', value:selectedRateType, disabled:disabledForm, options : rateType, required:true, optionChange: rateTypeOptionChangedHandler}">
           </div>
         </div>
-        <div class="oj-flex"> 
+        <div class="oj-flex convertible" style="display:none;"> 
           <div class="oj-flex-item">
             <label for="B6control">Initiate Rate Type</label>
           </div>
@@ -94,10 +94,10 @@
         </div>
           </div>
         </div>
-        <div class="oj-flex convertible"> 
+        <div class="oj-flex convertible" style="display:none;"> 
         <p>* Conversion Date</p>
         </div>
-        <div class="oj-flex convertible"> 
+        <div class="oj-flex convertible" style="display:none;"> 
          <button id= "button" style='margin:5px;'
                        data-bind="click: onSelect, 
                             ojComponent: {component: 'ojButton', disabled:disabledForm, label: 'Add' }">
@@ -120,7 +120,7 @@
           <div class="oj-flex-item">
             </div>
         </div>
-        <div class="oj-flex" id="benchmark-wrapper"> 
+        <div class="oj-flex benchmark"  style="display:none;"> 
           <div class="oj-flex-item">
             <label for="A5control">Benchmark</label>
           </div>
@@ -129,7 +129,7 @@
                    data-bind="ojComponent: {component: 'ojCombobox', disabled:disabledForm, value:selectedBenchmark, options : Benchmark}">
           </div>
         </div>
-        <div class="oj-flex" id="benchmarkSource-wrapper"> 
+        <div class="oj-flex benchmark"  style="display:none;"> 
           <div class="oj-flex-item">
             <label for="A5control">Benchmark Source</label>
           </div>
@@ -168,7 +168,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B7control"
-                   data-bind="ojComponent: {component: 'ojInputText', disabled:disabledForm, value:'-'}">
+                   data-bind="ojComponent: {component: 'ojInputText', disabled:disabledForm, value:'0'}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -178,7 +178,7 @@
           <div class="oj-flex-item">
           <textarea id="B8control" rows="6"
                     data-bind="ojComponent: {component: 'ojTextArea', disabled:disabledForm, 
-                                             value: 'text',}"></textarea>
+                                             value: '',}"></textarea>
           </div>
         </div>
         <div class="oj-flex"> 
@@ -196,7 +196,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B9control" disabled="disabled"
-                   data-bind="ojComponent: {component: 'ojInputText', value: totalValue}">
+                   data-bind="ojComponent: {component: 'ojInputText', value: cagaRateValue}">
           </div>
         </div>
         </div>

@@ -31,27 +31,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                 self.header = "Rate and Installment Schedule Setup";
                 self.disabledForm = ko.observable(false);
                 self.selectedRow = '';
-                self.cofValue = ko.observable(0);
-                self.pwrMarginValue = ko.observable(0);
-                self.buMarginValue = ko.observable(0);
+                self.cofValue = ko.observable(3.75);
+                self.pwrMarginValue = ko.observable(0.1);
+                self.buMarginValue = ko.observable(0.32);
                 self.totalValue = ko.observable(0);
-                self.selectedRateType = ko.observable('Convertible');
+                self.cagaRateValue = ko.observable(4.17);
+                self.selectedRateType = ko.observable('Fixed');
                 self.selectedInitiateRateType = ko.observable('Fixed/Floating');
                 self.selectedPaymentType = ko.observable('Principal + Interest');
                 self.selectedBenchmark = ko.observable('Benchmark A');
-                self.selectedBenchmarkSource = ko.observable('Source A');
-                self.fixedRate = ko.observable();
-                self.fixedRate.subscribe(function(newValue){
-                    if(self.fixedRate){
-                        if(self.fixedRate() == 'P'){
-                            $("#benchmark-wrapper").hide();
-                            $("#benchmarkSource-wrapper").hide();
-                        }else{
-                            $("#benchmark-wrapper").show();
-                            $("#benchmarkSource-wrapper").show();
-                        }
-                    }
-                });
+                self.selectedBenchmarkSource = ko.observable('Reuters');
+                self.fixedRate = ko.observable("CP");
                 self.calculateTotal = function (){
                     if(self.buMarginValue()!=0 && self.pwrMarginValue()!=0 && self.cofValue()!=0)
                     self.totalValue(parseInt(self.buMarginValue()) + parseInt(self.pwrMarginValue()) + parseInt(self.cofValue()));
@@ -59,9 +49,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                 
                 self.paymentType = [{value : 'PI', label : 'Principal + Interest'}, {value : 'I', label : 'Interest'}, {value:'H', label:'Hybrid'}];
                 self.rateType = [{value : 'fixed', label : 'Fixed'}, {value : 'floating', label : 'Floating'}, {value : 'convertible', label : 'Convertible'}];
-                self.Benchmark = [{value: 'A', label: 'Benchmark A'},{value: 'B', label: 'Benchmark B'}];
-                self.BenchmarkSource = [{value: 'A', label: 'Source A'},{value: 'B', label: 'Source B'}];
-                self.tenureYear= ko.observable('1');
+                self.Benchmark = [{value: 'A', label: 'KLIBOR 3 months'},{value: 'B', label: 'KLIBOR 6 months'}];
+                self.BenchmarkSource = [{value: 'Reuters', label: 'Reuters'},{value: 'Bloomberg', label: 'Bloomberg'},{value: 'Cagamas', label: 'Cagamas'}];
+                self.tenureYear= ko.observable('3');
                 self.tenureMonth= ko.observable('0');
                 var CPArray = [
                 {ID:  '1'},
@@ -98,8 +88,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService',
                     {
                         if (data.value == "convertible") {
                             $('.convertible').css('display','flex');
+                            $('.benchmark').hide();
+                        }
+                        else if (data.value == "floating") {
+                            $('.benchmark').css('display','flex');
+                            $('.convertible').hide();
                         }
                         else {
+                            $('.benchmark').hide();
                             $('.convertible').hide();
                         }
                     }

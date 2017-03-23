@@ -7,6 +7,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
         var self = this;
         self.config = configService;
         
+        function updateReviewDateValue(self)
+        {
+            var d = new Date(self.purchaseDate());
+            var year = d.getFullYear();
+            var month = d.getMonth();
+            var day = d.getDate();
+            var c = new Date(year + parseInt(self.tenureYear()), month+parseInt(self.tenureMonth()), day);
+            self.reviewDate(oj.IntlConverterUtils.dateToLocalIso(c));
+        }
 //        var urlParams;
         //to get url query params on page load
 //        (window.onpopstate = function () {
@@ -53,17 +62,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                         {value : '12', label : '12'}]
         
         self.purchaseMode = [{value : 'Direct', label : 'Direct'},
-                            {value : '0', label : '0'}]
+                            {value : 'BacktoBack', label : 'Back to Back'}]
         self.paymentType = [{value : 'PI', label : 'Principal + Interest'},
-                            {value : '0', label : '0'}]
+                            {value : 'I', label : 'Interest'},
+                            {value : 'H', label : 'Hybrid'}]
         self.rateType = [{value : 'Fixed', label : 'Fixed'},
-                        {value : '0', label : '0'}]
+                        {value : 'Floating', label : 'Floating'}]
         self.paymentFrequency = [{value : 'Monthly', label : 'Monthly'},
-                                {value : 'Yearly', label : 'Yearly'}]
+                                {value : 'Quarterly', label : 'Quarterly'},
+                                {value : 'Annually', label : 'Annually'}]
+        self.selectedPaymentFreq = ko.observableArray(["Quarterly"]);
         self.purchaseConsiderationType = [{value : 'CASH', label : 'CASH'},
                                         {value : '0', label : '0'}]
-        self.pricingFactor = [{value : 'OC', label : 'Over Collateralization'},
-                            {value : '0', label : '0'}]
+        self.pricingFactor = [{value : 'Par', label : 'Par'},
+                            {value : 'OC', label : 'Over Collateralization'}]
         self.dayCountConversion = [{value : '30/360', label : '30/360'},
                                     {value : '0', label : '0'}]
         self.counterpartyRest = [{value : 'Monthly', label : 'Monthly'},
@@ -76,18 +88,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                                 {value : 'Doc', label : 'DOC/DOCX'}]
         
         self.currentFBB = ko.observable("no");
-        self.purchaseContractNo = 'T-127/000/2701/179074/TL1';
-        self.purchaseAmount= ko.observable('300.000.000');
+        self.selectedPricingFactor = ko.observable(["Par"]);
+        self.purchaseContractNo = ko.observable('T-127/000/2810/159074/TL1/Q/C0-0/0');
+        self.purchaseAmount= ko.observable('33.000.000,00');
         
         self.purchaseValue = purchaseAmount;
-        self.purchaseDate= ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-        self.tenureYear= ko.observable('1');
-        self.tenureMonth= ko.observable('1');
-        self.reviewDate= ko.observable(purchaseDate());
-        self.pricingFactorPerc=ko.observable();
-        pricingFactorPerc='1';
+        self.purchaseDate= ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date(2017, 2, 27)));
+        self.tenureYear= ko.observable('3');
+        self.tenureMonth= ko.observable('0');
+        self.reviewDate= ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date(2020, 2, 27)));
+        self.pricingFactorPerc=ko.observable(1);
         self.selectedDocType = ko.observable();
+        self.purchaseContractDate = ko.observable(self.purchaseDate());
+        self.deemedPurchDate = ko.observable(self.purchaseDate());
+        self.bookBalanceDate = ko.observable(self.purchaseDate());
         
+        self.cagaRate = ko.observable();
+        self.cagaInstallment = ko.observable();
+        self.reviewCagaVal = ko.observable();
+        self.intDebitPractice = ko.observable();
+        self.intDebitPeriod = ko.observable();
         function mainModel(){
             self.header = "Purchase Contract";
             self.filename = ko.observable();
@@ -185,19 +205,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                                 {
                                   pattern : "dd-MMM-yyyy / hh:mm"
                                 });
-                self.date = ko.observable(dateConverter.format(oj.IntlConverterUtils.dateToLocalIso(new Date())));
-                var ni = {'FileName': 'Attachment One',
-                     'Description': 'Desc 1',
-                     'Type': 'Docx',
+                self.date = ko.observable(dateConverter.format(oj.IntlConverterUtils.dateToLocalIso(new Date(2017, 2, 27))));
+                var ni = {'FileName': 'Purchase Contract',
+                     'Description': 'Purchase Contract Document',
+                     'Type': 'Doc',
                      'Version': '1.0',
                      'Date': self.date()};
-                var ni2 = {'FileName': 'Attachment Two',
-                     'Description': 'Desc 2',
+                self.observableArray.push(ni);
+                ni = {'FileName': 'Installment Schedule',
+                     'Description': 'Installment Schedule Doc',
                      'Type': 'PDF',
                      'Version': '1.0',
                      'Date': self.date()}
                 self.observableArray.push(ni);
-                self.observableArray.push(ni2);
+                ni = {'FileName': 'Summary of Mortgage Loans Offered',
+                     'Description': 'Summary of Mortgage Loans Offered',
+                     'Type': 'Xls',
+                     'Version': '1.0',
+                     'Date': self.date()}
+                self.observableArray.push(ni);
             };
             
             self.validateLoanDetail = function(data, event){
@@ -266,6 +292,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 self.pwrTermSheetBtn = false;
                 self.cosFormBtn = false;
                 self.cosLetterBtn = false;
+                
+                self.cagaRate('4.17');
             }else if(self.config.status.toUpperCase() == "TEMP-VALIDATED"){
                 self.rateISBtn = false;
                 self.loanDetailBtn = false;
@@ -273,6 +301,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 self.cosFormBtn = false;
                 self.cosLetterBtn = false;
                 self.gisBtn = false;
+                
+                self.cagaRate('4.17');
+                self.intDebitPractice('0');
+                self.intDebitPeriod('0');
             }else if(self.config.status.toUpperCase() == "TEMP-VALID-ERROR"){
                 self.rateISBtn = false;
                 self.loanDetailBtn = false;
@@ -286,6 +318,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 self.gisBtn = false;
                 self.cancelBtn = false;
                 self.withdrawBtn = false;
+                
+                self.cagaRate('4.17');
+                self.intDebitPractice('0');
+                self.intDebitPeriod('0');
+                self.cagaInstallment('433,660.07');
+                self.reviewCagaVal('31,860,186.56');
             }else if(self.config.status.toUpperCase() == "FINAL-CR"){
                 self.loanDetailBtn = false;
                 self.gisBtn = false;
@@ -308,6 +346,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 self.gisBtn = false;
                 self.cancelBtn = false;
                 self.withdrawBtn = false;
+                
+                self.cagaRate('4.17');
+                self.intDebitPractice('0');
+                self.intDebitPeriod('0');
+                self.cagaInstallment('433,660.07');
+                self.reviewCagaVal('31,860,186.56');
             }else if(self.config.status.toUpperCase() == "TEMP-COSFORM"){
                 self.rateISBtn = false;
                 self.loanDetailBtn = false;
@@ -317,7 +361,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 self.gisBtn = false;
                 self.cancelBtn = false;
                 self.withdrawBtn = false;
+                
+                self.cagaRate('4.17');
+                self.intDebitPractice('0');
+                self.intDebitPeriod('0');
+                self.cagaInstallment('433,660.07');
+                self.reviewCagaVal('31,860,186.56');
             }else if(self.config.status.toUpperCase() == "TEMP-COSLETTER"){
+                self.purchaseContractNo('127/000/2810/159074/TL1/Q/C0-0/0');
                 self.puchContractBtn = false;
                 self.rateISBtn = false;
                 self.loanDetailBtn = false;
@@ -327,13 +378,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                 self.gisBtn = false;
                 self.cancelBtn = false;
                 self.withdrawBtn = false;
+                
+                self.cagaRate('4.17');
+                self.intDebitPractice('0');
+                self.intDebitPeriod('0');
+                self.cagaInstallment('433,660.07');
+                self.reviewCagaVal('31,860,186.56');
             }else if(self.config.status.toUpperCase() == "TEMP-WITHDRAW"){
                 self.cancelBtn = false;
                 self.rateISBtn = false;
             }else if(self.config.status.toUpperCase() == "FINAL-PC"){
+                self.purchaseContractNo('127/000/2810/159074/TL1/Q/C0-0/0');
                 self.rateISBtn = false;
                 self.contractRemittanceBtn = false;
                 self.addAttachments();
+                
+                self.cagaRate('4.17');
+                self.intDebitPractice('0');
+                self.intDebitPeriod('0');
+                self.cagaInstallment('433,660.07');
+                self.reviewCagaVal('31,860,186.56');
             }
             self.currentFBB.subscribe(function(newValue){
                 if(self.currentFBB){
@@ -343,6 +407,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojkno
                         $("#fbbDate-wrapper").hide();
                     }
                 }
+            });
+            self.selectedPricingFactor.subscribe(function(newValue){
+                if(self.selectedPricingFactor){
+                    if(self.selectedPricingFactor() == "OC"){
+                        $("#pricingFactorPerc").show();
+                    }else{
+                        $("#pricingFactorPerc").hide();
+                    }
+                }
+            });
+            self.purchaseDate.subscribe(function(newValue) {
+                updateReviewDateValue(self);
+            });                
+            self.tenureYear.subscribe(function() {
+                updateReviewDateValue(self);
+            });
+            self.tenureMonth.subscribe(function() {
+                updateReviewDateValue(self);
             });
         }
         return mainModel;

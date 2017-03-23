@@ -73,6 +73,19 @@
          }
       ]
    },
+   {  
+      "attr":{  
+         "id":"repurchase-replacement",
+         "name":"Repurchase Replacement",
+         "view":"repurchase-replacement"
+      }
+   },   {  
+      "attr":{  
+         "id":"repurchase-review-date",
+         "name":"Repurchase Review Date",
+         "view":"repurchase-review-date"
+      }
+   },
  {  
       "attr":{  
          "id":"mgphome",

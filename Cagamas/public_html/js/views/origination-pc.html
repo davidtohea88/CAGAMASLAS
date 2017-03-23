@@ -28,7 +28,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <input id="inputcontrol"
-                               data-bind="ojComponent: {component: 'ojInputText', value:'CIMB Bank', required: false, disabled:true}"/>
+                               data-bind="ojComponent: {component: 'ojInputText', value:'CIMB Niaga', required: false, disabled:true}"/>
                     </div>
                 </div>
                 <div class="oj-flex">
@@ -236,7 +236,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <select id="selectPaymentFrequency"
-                                data-bind="ojComponent: {component: 'ojSelect', options: paymentFrequency, required: true}"></select>
+                                data-bind="ojComponent: {component: 'ojSelect', value: selectedPaymentFreq, options: paymentFrequency, required: true}"></select>
                     </div>
                 </div>
                 <div class="oj-flex">
@@ -262,10 +262,10 @@
                     </div>
                     <div class="oj-flex-item">
                         <select id="selectPricingFactor"
-                                data-bind="ojComponent: {component: 'ojSelect', options: pricingFactor, required: true}"></select>
+                                data-bind="ojComponent: {component: 'ojSelect', value: selectedPricingFactor, options: pricingFactor, required: true}"></select>
                     </div>
                 </div>
-                <div class="oj-flex">
+                <div class="oj-flex" id="pricingFactorPerc" style="display:none">
                     <div class="oj-flex-item">
                         <label for="pricingFactorPerc">Pricing Factor %</label>
                     </div>
@@ -303,7 +303,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <input id="purchaseContractDate"
-                               data-bind="ojComponent: {component: 'ojInputDate', value: oj.IntlConverterUtils.dateToLocalIso(new Date()), required: false, disabled:false}"/>
+                               data-bind="ojComponent: {component: 'ojInputDate', value: purchaseContractDate, required: false, disabled:false}"/>
                     </div>
                 </div>
                 <div class="oj-flex">
@@ -316,7 +316,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <input id="deemedPurchaseDate"
-                               data-bind="ojComponent: {component: 'ojInputDate', value: oj.IntlConverterUtils.dateToLocalIso(new Date()), required: false, disabled:false}"/>
+                               data-bind="ojComponent: {component: 'ojInputDate', value: deemedPurchDate, required: false, disabled:false}"/>
                     </div>
                 </div>
                 <div class="oj-flex">
@@ -329,7 +329,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <input id="bookBalanceDate"
-                               data-bind="ojComponent: {component: 'ojInputDate', value: oj.IntlConverterUtils.dateToLocalIso(new Date()), required: false, disabled:false}"/>
+                               data-bind="ojComponent: {component: 'ojInputDate', value: bookBalanceDate, required: false, disabled:false}"/>
                     </div>
                 </div>
                 <div class="oj-flex">
@@ -376,7 +376,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <input id="inputcontrol"
-                               data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                               data-bind="ojComponent: {component: 'ojInputText', value: cagaRate, required: false, disabled:true}"/>
                     </div>
                 </div>
                 <div class="oj-flex">
@@ -385,7 +385,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <input id="inputcontrol"
-                               data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                               data-bind="ojComponent: {component: 'ojInputText', value: cagaInstallment, required: false, disabled:true}"/>
                     </div>
                 </div>
                 <div class="oj-flex">
@@ -394,7 +394,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <input id="inputcontrol"
-                               data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                               data-bind="ojComponent: {component: 'ojInputText', value: reviewCagaVal, required: false, disabled:true}"/>
                     </div>
                 </div>
                 <div class="oj-flex">
@@ -403,7 +403,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <input id="inputcontrol"
-                               data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                               data-bind="ojComponent: {component: 'ojInputText', value: intDebitPractice, required: false, disabled:true}"/>
                     </div>
                 </div>
                 <div class="oj-flex">
@@ -412,7 +412,7 @@
                     </div>
                     <div class="oj-flex-item">
                         <input id="inputcontrol"
-                               data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                               data-bind="ojComponent: {component: 'ojInputText', value: intDebitPeriod, required: false, disabled:true}"/>
                     </div>
                 </div>
                 </div>

@@ -20,7 +20,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="A4control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:'CIMB Bank', disabled:true}">
+                   data-bind="ojComponent: {component: 'ojInputText', value:'CIMB Niaga', disabled:true}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -29,7 +29,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="A5control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:'T-127/000/2701/179074/TL1', disabled:true}">
+                   data-bind="ojComponent: {component: 'ojInputText', value:'T-127/000/2810/159074/TL1/Q/C0-0/0', disabled:true}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -38,7 +38,16 @@
           </div>
           <div class="oj-flex-item">
             <input id="A5control" 
-                   data-bind="ojComponent: {component: 'ojInputDate',value:'', disabled:true}">
+                   data-bind="ojComponent: {component: 'ojInputDate',value:oj.IntlConverterUtils.dateToLocalIso(new Date(2017, 2, 27)), disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A5control">Purchase Consideration</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A5control" 
+                   data-bind="ojComponent: {component: 'ojInputText',value:'Commodity', disabled:true}">
           </div>
         </div>
         </div>
@@ -51,7 +60,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B1control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:'100,000,000'}">
+                   data-bind="ojComponent: {component: 'ojInputText', value: purchContractValue}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -60,7 +69,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="B2control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:''}">
+                   data-bind="ojComponent: {component: 'ojInputText', value: cagamasRate}">
           </div>
         </div>       
        <div class="oj-flex"> 
@@ -69,9 +78,18 @@
           </div>
           <div class="oj-flex-item">
             <input id="B3control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:''}">
+                   data-bind="ojComponent: {component: 'ojInputText', value: reviewDateValue}">
           </div>
-        </div>  
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B3control">Deferred Purchase Value for Cagamas</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B3control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: defPurchValue}">
+          </div>
+        </div>
         </div>
     </div>
   </div>

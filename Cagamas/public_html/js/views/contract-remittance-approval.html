@@ -11,7 +11,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="A4control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:'CIMB Bank', disabled:true}">
+                   data-bind="ojComponent: {component: 'ojInputText', value:'CIMB Niaga', disabled:true}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -20,7 +20,7 @@
           </div>
           <div class="oj-flex-item">
             <input id="A5control" 
-                   data-bind="ojComponent: {component: 'ojInputText', value:'T-127/000/2701/179074/TL1', disabled:true}">
+                   data-bind="ojComponent: {component: 'ojInputText', value:'127/000/2810/159074/TL1/Q/C0-0/0', disabled:true}">
           </div>
         </div>
         <div class="oj-flex"> 
@@ -38,28 +38,26 @@
 <div id="pagingControlDemo" class="page-content">
     <table id="table" summary="Loan Detail" aria-label="Loan Detail"
            data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
-            [{headerText: 'Counter Party', field: 'InstallmentDate'},
-             {headerText: 'Purchase Contract Number', field: 'OpeningBalance'},
-             {headerText: 'Payment Value', field: 'CagamasRate'},
+            [{headerText: 'Counterparty', field: 'Counterparty'},
+             {headerText: 'Purchase Contract Number', field: 'PCNo'},
+             {headerText: 'Purchase Value', field: 'purchaseValue'},
              {headerText: 'Cagamas Installment', field: 'CagamasInstallment'}, 
-             {headerText: 'Review Date Value', field: 'Principal'}, 
-             {headerText: 'Purchase Date', field: 'InterestPayable'}, 
+             {headerText: 'Review Value', field: 'reviewValue'}, 
+             {headerText: 'Purchase Date', field: 'purchaseDate'}, 
              {headerText: 'First Reset Date', field: 'ClosingBalance'}, 
-             {headerText: 'Review Date', field: 'ClosingBalance'}, 
-             {headerText: 'Caga Rate', field: 'ClosingBalance'}, 
+             {headerText: 'Review Date', field: 'reviewDate'}, 
+             {headerText: 'Caga Rate', field: 'CagamasRate'}, 
              {headerText: 'Benchmark', field: 'ClosingBalance'}, 
-             {headerText: 'Source', field: 'ClosingBalance'}, 
+             {headerText: 'Source', field: 'source'}, 
              {headerText: 'Margin', field: 'ClosingBalance'}, 
              {headerText: 'Reset Frequency', field: 'ClosingBalance'}, 
-             {headerText: 'Repayment Frequency', field: 'ClosingBalance'}, 
-             {headerText: 'Repayment Type', field: 'ClosingBalance'}, 
-             {headerText: 'Number of Loan', field: 'ClosingBalance'}, 
-             {headerText: 'Status', field: 'ClosingBalance'},
+             {headerText: 'Repayment Frequency', field: 'RepaymentFrequency'}, 
+             {headerText: 'Repayment Type', field: 'RepaymentType'}, 
+             {headerText: 'Number of Loan', field: 'NoofLoan'}, 
+             {headerText: 'Status', field: 'Status'},
              {headerTemplate: 'view_action_hdr', template: 'view_action', style: 'width: 10%;text-align:center;'}], 
              rootAttributes: {'style':'width: 100%;'}}">
     </table>
-    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
-    </div>
 </div>
 <br>
 <br>
@@ -79,7 +77,7 @@
 <script type="text/html" id="view_action">
     <td>
         <button id= "btn_Vendor" 
-            data-bind="ojComponent: { component: 'ojButton', label: 'Approval' }">
+            data-bind="click:onApprove, ojComponent: { component: 'ojButton', label: 'Approval' }">
         </button>
     </td>
 </script>

@@ -48,10 +48,10 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
             
             function mainViewModel() {
                 var self = this;
-                self.tenureYear = ko.observable(1);
+                self.tenureYear = ko.observable(3);
                 self.tenureMonth = ko.observable(0);
                 self.reviewDateValue = ko.observable(0);
-                self.purchaseDateValue = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+                self.purchaseDateValue = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date('2017','02','27')));
                 self.purchaseDateValue.subscribe(function(newValue) {
                     updateReviewDateValue(self);
                 });                
@@ -136,10 +136,7 @@ define(['ojs/ojcore', 'knockout',  'data/data','jquery',
                 createPC = function(item) {
                   oj.Router.rootInstance.go('origination-pc');
                 }     
-
             }
-            
-               
 
             return mainViewModel;        
                       
