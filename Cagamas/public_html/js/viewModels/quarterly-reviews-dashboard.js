@@ -12,17 +12,20 @@ var currencyOptionChangedHandler = function (event, data) {
     }
 };
 
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/configService', 'ojs/ojknockout', 'ojs/ojinputtext',
         'ojs/ojradioset', 'ojs/ojselectcombobox', 'ojs/ojdatetimepicker', 'ojs/ojtimezonedata',
         'ojs/ojbutton', 'ojs/ojtable', 'ojs/ojpagingcontrol'], 
-      function(oj, ko, $ )
+      function(oj, ko, $, configService)
       {
         var self = this;
         self.inputFileName1 = ko.observable();
         self.inputFileName2 = ko.observable();
         function mainModel(){
             var self = this;
+            self.config = configService;
             self.header = "Notifications";
+            self.tmpCounterparty = ko.observable();
+            self.tmpReviewMonth = ko.observable();
             self.reviewMonth = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
             self.dateConverter = ko.observable(oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
             createConverter(
@@ -30,11 +33,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
               pattern : 'MMM-yy'
             }));
             self.selectedCP = ko.observable();
-            
-            var array = [{Counterparty:'Counterparty A', ReviewMonth:'3', Status:'UPLOAD'},
+            console.log(self.config.status.toUpperCase());
+            var array = [{Counterparty:'Counterparty A', ReviewMonth:'3', Status: self.config.status.toUpperCase() == 'UPLOAD' || 'CAGA1' || 'CAGA2' ? self.config.status.toUpperCase() : 'NEW'},
                          {Counterparty:'Counterparty B', ReviewMonth:'3', Status:'CAGA1'},
                          {Counterparty:'Counterparty C', ReviewMonth:'3', Status:'CAGA2'},
                          {Counterparty:'Counterparty D', ReviewMonth:'3', Status:'CAGA2'}];
+            self.observableArray = ko.observableArray(array);
             self.datasource = ko.observable(new oj.ArrayTableDataSource([], {idAttribute: 'Counterparty'}));
             var docArray = [{DocumentType:'docx', DocumentName:'Document A', UploadDate:'01-03-2017', DocPath:'doc/Guarantee Notice.docx'},
                             {DocumentType:'xlsx', DocumentName:'Document B', UploadDate:'02-03-2017', DocPath:'doc/Notifications.xlsx'}];
@@ -61,7 +65,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
             self.openCPPopUp = function(){$("#CPDialog").ojDialog("open");return true;};
             
             self.onClickSearch = function(){
-                self.datasource(new oj.ArrayTableDataSource(array, {idAttribute: 'ReviewMonth'}));
+                self.datasource(new oj.ArrayTableDataSource(self.observableArray, {idAttribute: 'ReviewMonth'}));
             };
             self.onClickReset = function(){
                 self.reviewMonth(oj.IntlConverterUtils.dateToLocalIso(new Date()));
@@ -71,13 +75,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
                 return true;
             };
             self.onClickClose = function(){$("#AttachmentDialog").ojDialog("close");return true;};
-            self.onClickUpload = function(){
+            self.onClickUpload = function(item){
+                self.tmpCounterparty(item.Counterparty);
+                self.tmpReviewMonth(item.ReviewMonth);
                 $("#UploadDialog").ojDialog("open");
                 return true;
             };
             self.onClickCaga2 = function(){oj.Router.rootInstance.go('quarterly-review-caga-2');};
             self.onClickCaga1 = function(){oj.Router.rootInstance.go('quarterly-review-caga-1');};
-            self.onClickGenerate = function(){
+            self.onClickGenerate = function(item){
+//                var currentRow = $('#qrd-table').ojTable('option', 'currentRow');
+//                if (currentRow != null)
+//                {
+//                    self.observableArray.splice(currentRow['rowIndex'], 1, {
+//                         'Counterparty': item.Counterparty,
+//                         'ReviewMonth': item.ReviewMonth,
+//                         'Status': 'GENERATED'
+//                      });
+//                }
+                self.config.status = "GENERATED";
                 self.docDatasource(new oj.ArrayTableDataSource(docArray, {idAttribute: 'DocumentType'}));
             };
             
@@ -86,7 +102,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojinputtext',
                 return true;
             }
             self.onClickUploadPU = function(item){
-                //set status as UPLOAD
+                var currentRow = $('#qrdtable').ojTable('option', 'currentRow');
+                console.log("current rows : "+currentRow['rowIndex']);
+                if (currentRow != null)
+                {
+                    self.observableArray.splice(currentRow['rowIndex'], 1, {
+                         'Counterparty': self.tmpCounterparty(),
+                         'ReviewMonth': self.tmpReviewMonth(),
+                         'Status': 'UPLOAD'
+                      });
+                }
+                self.config.status = "UPLOAD";
+                $("#UploadDialog").ojDialog("close");
             };
             self.onClickViewDocument = function(item){
                 window.open(item.DocPath,'_blank');
