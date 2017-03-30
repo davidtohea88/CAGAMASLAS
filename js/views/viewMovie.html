@@ -1,0 +1,25 @@
+<div data-bind="with: movie">
+  <h1>Details for <span data-bind="text: title"></span></h1>
+
+  <div id="form-container">
+    <div class="oj-form oj-md-odd-cols-4 oj-md-labels-inline">
+      <div class="oj-row">
+        <div class="oj-col">Movie Title:</div>
+        <div class="oj-col"><span data-bind="text: title"></span></div>
+      </div>
+      <div class="oj-row">
+        <div class="oj-col">Director:</div>
+        <div class="oj-col"><span data-bind="text: director"></span></div>
+      </div>
+      <div class="oj-row">
+        <div class="oj-col">Release Year:</div>
+        <div class="oj-col"><span data-bind="text: releaseYear"></span></div>
+      </div>
+      <div class="oj-row">
+        <div class="oj-col">Movie Genre:</div>
+        <div class="oj-col"><span data-bind="text: genre"></span></div>
+      </div>
+    </div>
+  </div>
+  <button data-bind="click: function() {$parent.editMovie(_id)}, ojComponent: {component: 'ojButton', label: 'Edit'}"></button>
+</div>

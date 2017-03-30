@@ -1,0 +1,71 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div class="oj-form-layout page-content" id="form-container">
+  <div class="oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+               oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-4 oj-lg-even-cols-4">  
+
+    <h3 class="oj-header-border">Upload</h3>
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+                    <a onclick="openFileDialog();return;">Browse File</a>
+                    <input type="file" id="browseFile" value="Browse File" style=" top: -100em"/>
+      </div>
+      <div class="oj-flex-item">
+
+        <button  id= "btn_save" data-bind="click: loadTable, ojComponent: { component: 'ojButton', label: 'Upload' }">
+    </button>
+        <button  id= "btn_save" data-bind="click:function(){redirectToPI('LoanUploaded')}, ojComponent: { component: 'ojButton', label: 'Back' }">
+    </button>
+      </div>
+    </div>
+    </div>
+      <div class="oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+               oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">  
+
+    <h3 class="oj-header-border">Loan Detail</h3>
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <label for="B2control">Book Balanced Date</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="B2control" 
+               data-bind="ojComponent: {component: 'ojInputText', value:'27-03-2017'}">
+      </div>
+      <div class="oj-flex-item">
+        <label for="B2control">Forecasted Book Balanced Date</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="B2control" 
+               data-bind="ojComponent: {component: 'ojInputText', value:''}">
+      </div>
+    </div>
+  </div>
+</div>
+<div id="pagingControlDemo" class="page-content">
+    <table id="table" summary="Loan Detail" aria-label="Loan Detail"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
+            [{headerText: 'Loan Reference Number', field: 'LoanRefNum'},
+             {headerText: 'Branch Code', field: 'BranchCode'},
+             {headerText: 'Book Balance', field: 'BookBalance'},
+             {headerText: 'Forecasted Book Balance', field: 'ForecastedBookBalance'},
+             {headerText: 'Mortgage Rate', field: 'MortgageRate'},
+             {headerText: 'Mortgage Installment', field: 'MortgageInstallment'},
+             {headerText: 'Months in Arrear(s)', field: 'Month'}], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
+    </div>
+</div>
+
+<script type="text/html" id="view_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+        <button id= "btn_PI"
+            data-bind="click: $parent.buttonClick, 
+                       ojComponent: { component: 'ojButton', label: 'View Details' }">
+        </button>
+    </td>
+</script>

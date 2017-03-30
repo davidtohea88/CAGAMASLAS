@@ -1,0 +1,470 @@
+[
+    {
+        "attr" : {
+            "id" : "masterdatas",
+            "name" : "Master Data List",
+            "view" : "masterdatas"
+        },
+        "children" : [
+            {
+                "attr" : {
+                    "id" : "productgroup",
+                    "name" : "Product Group",
+                    "view" : "productgroup"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "producttype",
+                    "name" : "Product Type",
+                    "view" : "producttype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "product",
+                    "name" : "Product",
+                    "view" : "product"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "assettype",
+                    "name" : "Asset Type",
+                    "view" : "assettype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "paymentfreq",
+                    "name" : "Payment Frequency",
+                    "view" : "paymentfreq"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "ratetype",
+                    "name" : "Rate Type",
+                    "view" : "ratetype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "purchasemode",
+                    "name" : "Purchase Mode",
+                    "view" : "purchasemode"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "pricefactor",
+                    "name" : "Price Factor",
+                    "view" : "pricefactor"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "purchaseconstype",
+                    "name" : "Purchase Consideration Type",
+                    "view" : "purchaseconstype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "counterparty",
+                    "name" : "Counterparty",
+                    "view" : "counterparty"
+                }
+            }
+        ]
+    },
+    {  
+      "attr":{  
+         "id":"pwr",
+         "name":"Purchase With Recourse",
+         "view":""
+      },
+      "children":[  
+         {  
+            "attr":{  
+               "id":"origination-list",
+               "name":"Origination",
+               "view":"origination-list"
+            }
+         },
+         {  
+            "attr":{  
+               "id":"collection-servicing",
+               "name":"Collection & Servicing",
+               "view":""
+            },
+          "children":[  
+             {  
+                "attr":{  
+                   "id":"notifications-ui",
+                   "name":"QR Notification Dashboard",
+                   "view":"notifications-ui"
+                }
+             },
+             {  
+                "attr":{  
+                   "id":"quarterly-reviews-dashboard",
+                   "name":"Quarterly Reviews Dashboard",
+                   "view":"quarterly-reviews-dashboard"
+                }
+             }             
+          ]
+         },
+         {  
+            "attr":{  
+               "id":"closure-redemption",
+               "name":"Closure & Redemption",
+               "view":""
+            },
+          "children":[  
+             {  
+                "attr":{  
+                   "id":"repurchase-review-date",
+                   "name":"Repurchase Review Date",
+                   "view":"repurchase-review-date"
+                }
+             }, 
+             {  
+                "attr":{  
+                   "id":"rollover",
+                   "name":"Rollover",
+                   "view":"rollover"
+                }
+             }
+          ]
+         }
+      ]
+   },{  
+      "attr":{  
+         "id":"tcm",
+         "name":"TCM Access for COF Updates",
+         "view":""
+      },
+      "children":[  
+         {  
+            "attr":{  
+               "id":"is-and-simulations",
+               "name":"IS And Simulations",
+               "view":"is-and-simulations"
+            }
+         },
+         {
+            "attr":{  
+               "id":"weekly-cof",
+               "name":"Weekly COF",
+               "view":"weekly-cof"
+            }
+         },
+         {
+            "attr":{  
+               "id":"purchase-contract-specific-cof",
+               "name":"Purchase Contract Specific COF",
+               "view":"purchase-contract-specific-cof"
+            }
+         },
+         {
+            "attr":{  
+               "id":"publish-rate",
+               "name":"Published Rate",
+               "view":"publish-rate"
+            }
+         },
+         {
+            "attr":{  
+               "id":"pc-specific-conversion-final-cof",
+               "name":"PC Specific Conversion Final COF",
+               "view":"pc-specific-conversion-final-cof"
+            }
+         }
+      ]
+   },
+   {  
+      "attr":{  
+         "id":"fin-access",
+         "name":"Fin Access",
+         "view":""
+      },
+      "children":[{  
+      "attr":{  
+         "id":"reconciliation-dashboard",
+         "name":"Reconciliation",
+         "view":"reconciliation-dashboard"
+      }
+      }]
+   },
+    {
+        "attr" : {
+            "id" : "mgphome",
+            "name" : "MGP",
+            "view" : ""
+        },
+        "children" : [
+            {
+                "attr" : {
+                    "id" : "origination",
+                    "name" : "Origination",
+                    "view" : "mgpsummary"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "servicing",
+                    "name" : "Servicing",
+                    "view" : ""
+                },
+                "children" : [
+                     {
+                        "attr" : {
+                            "id" : "mgp-msad1-upd",
+                            "name" : "MASDP1 Upload Part1",
+                            "view" : "mgp-msad1-upd"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "mgp-msad1-validated",
+                            "name" : "MASDP1 Update Status",
+                            "view" : "mgp-msad1-validated"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "mgp-msad1-err",
+                            "name" : "MASDP1 Summary",
+                            "view" : "mgp-msad1-err"
+                        }
+                    },
+                    {
+                "attr" : {
+                    "id" : "mgp-arr-upload",
+                    "name" : "MGP ARR Report",
+                    "view" : "mgp-arr-upload"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "mgp-aging-report",
+                    "name" : "MASD Aging Report",
+                    "view" : "mgp-aging-report"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "mgp-fully-disp",
+                    "name" : "MGP Fully Disbursed Report",
+                    "view" : "mgp-fully-disp"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "mgp-disp-approved",
+                    "name" : "Disbursed Approved Report",
+                    "view" : "mgp-disp-approved"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "mgp-guarantee-review",
+                    "name" : "Guarantee Pay Review",
+                    "view" : "mgp-guarantee-review"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "mgp-guarantee-recom",
+                    "name" : "Guarantee Pay Recommendation",
+                    "view" : "mgp-guarantee-recom"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "mgp-guarantee-app",
+                    "name" : "Guarantee Pay Approval",
+                    "view" : "mgp-guarantee-app"
+                }
+            },{
+                "attr" : {
+                    "id" : "mgp-asset-delinquency",
+                    "name" : "Default Notice",
+                    "view" : "mgp-asset-delinquency"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "mgp-def-notice-sum",
+                    "name" : "Default Notice Summary",
+                    "view" : "mgp-def-notice-sum"
+                }
+            }
+                ]
+            },
+            {
+                "attr" : {
+                    "id" : "",
+                    "name" : "Closure and Redemption",
+                    "view" : ""
+                },
+                "children" : [
+                    {
+                        "attr" : {
+                            "id" : "masdpart2upload",
+                            "name" : "MASD Part 2",
+                            "view" : "masdpart2upload"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "masdpart2upload-sum",
+                            "name" : "MASD Part 2 Summary",
+                            "view" : "masdpart2upload-sum"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "masdpart3upload",
+                            "name" : "MASD Part 3",
+                            "view" : "masdpart3upload"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "creategen",
+                            "name" : "Guarantee Event Notice",
+                            "view" : "creategen"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "segenverification",
+                            "name" : "Guarantee Event Notice Verification",
+                            "view" : "segenverification"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "svpceoapproval",
+                            "name" : "Guarantee Event Notice Approval",
+                            "view" : "svpceoapproval"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "hodgenrecommendation",
+                            "name" : "Guarantee Event Notice Recommendation",
+                            "view" : "hodgenrecommendation"
+                        }
+                    }
+                ]
+            },
+            {
+                "attr" : {
+                    "id" : "status and monitoring",
+                    "name" : "Status Monitoring",
+                    "view" : ""
+                },
+                "children" : [
+                    {
+                        "attr" : {
+                            "id" : "status-monitoring-masd-aar-status",
+                            "name" : "MASD AAR Status",
+                            "view" : "status-monitoring-masd-aar-status"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "loanrecoverystatus",
+                            "name" : "Recovery Status",
+                            "view" : "loanrecoverystatus"
+                        }
+                    }
+                ]
+            },
+            {
+                "attr" : {
+                    "id" : "monthly cof",
+                    "name" : "Monthly Cost and Funds",
+                    "view" : ""
+                },
+                "children" : [
+                    {
+                        "attr" : {
+                            "id" : "guarantee-fund",
+                            "name" : "Guarantee Fund",
+                            "view" : "guarantee-fund"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "guarantee-fund-confirmation",
+                            "name" : "Guarantee Fund Confirmation",
+                            "view" : "guarantee-fund-confirmation"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "net-income",
+                            "name" : "Net Income",
+                            "view" : "net-income"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "net-income-confirmation",
+                            "name" : "Net Income Confirmation",
+                            "view" : "net-income-confirmation"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "cost",
+                            "name" : "Cost",
+                            "view" : "cost"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "cost-confirmation",
+                            "name" : "Cost Confirmation",
+                            "view" : "cost-confirmation"
+                        }
+                    }
+                ]
+            },
+            {
+                "attr" : {
+                    "id" : "payment",
+                    "name" : "Payment",
+                    "view" : ""
+                },
+                "children" : [
+                    {
+                        "attr" : {
+                            "id" : "mgp-payment-processing",
+                            "name" : "Payment Confirmation",
+                            "view" : "mgp-payment-processing"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "amortization-summary",
+                            "name" : "Amortization Summary",
+                            "view" : "amortization-summary"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "amortization-schedule",
+                            "name" : "Amortization Schedule",
+                            "view" : "amortization-schedule"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

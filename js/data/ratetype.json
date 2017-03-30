@@ -1,0 +1,73 @@
+{
+  "MdRateTyp" : [ {
+    "rateTypCd" : "01",
+    "rateTypName" : "FX",
+    "rateTypDesc" : "Fixed",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "rateTypCd" : "02",
+    "rateTypName" : "FL",
+    "rateTypDesc" : "Floating",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "rateTypCd" : "03",
+    "rateTypName" : "CT_FL2FX",
+    "rateTypDesc" : "Fixed Convertible to Floating",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "rateTypCd" : "04",
+    "rateTypName" : "CT_FX2FL",
+    "rateTypDesc" : "Floating Convertible to Fixed",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "rateTypCd" : "05",
+    "rateTypName" : "HB",
+    "rateTypDesc" : "Hybrid",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  } ]
+}

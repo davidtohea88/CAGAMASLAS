@@ -1,0 +1,822 @@
+<div class="oj-form-layout" id="form-container">
+    <div class="page-title">
+        <label class="white-color" data-bind="text:header"></label>
+        <button id= "btn_PI" data-bind="click: back, ojComponent: { component: 'ojButton', label: 'Back' }" style="float:right">
+        </button>
+    </div>
+    <div class="page-content oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+         oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">  
+        <div class="oj-flex" id="pc-row-1" data-bind="value:cpTypeDataSource">
+            <div style="width:100%;">
+                <h3 class="oj-header-border"></h3>
+                <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">
+                    <div class="oj-flex-item">
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="cpCd">Counterparty Code</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="cpCd"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:cpCd, required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">Counterparty Name</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:cpName, required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">Counterparty Group</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:grpName, required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">Counterparty Sector</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'sctrName', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Counterparty Type</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:cpType, required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">Quarterly Review End Month</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Qtr Ending Month 2,5,8,11', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">T7 Counterparty Code</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:t7, required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">T7 Counterparty Name</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:cpName, required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div id="PCI-col-2" class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-5 oj-lg-even-cols-6 oj-lg-labels-inline">
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">Counterparty Status</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:status, required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-inputdate-label">
+                                        <div class="oj-label-group">
+                                            <label for="purchaseDate">Bank Account Number</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:bank, required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="purchaseAmount">Quarterly Review Last Date</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'1 Feb 2017', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-inputdate-label">
+                                        <div class="oj-label-group">
+                                            <label for="reviewDate">Quarterly Review Next Date</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'1 May 2017', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Reporting Group</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Watchlist</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'No', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-5 oj-lg-even-cols-6 oj-lg-labels-inline">
+                            <!--<div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Shareholding Structure</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Holding Company', required: false, disabled:true}"/>
+                                </div>
+                            </div>-->
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Resident</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Resident Company', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Country</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Malaysia', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">State</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'K. LUMPUR', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">District</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Wilayah Persekutuan', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">City</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Wilayah Persekutuan', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol" >Postcode</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'02600', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">GST Registration No</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'001003', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="oj-header-border"></h3>
+        <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1" id="pc-row-2">
+            <div class="three-cols">
+                <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-5 oj-lg-even-cols-6 oj-lg-labels-inline">
+                    <h3 class="oj-header-border">Credit Limit</h3>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-inputdate-label">
+                                <div class="oj-label-group">
+                                    <label for="datepickercontrol">Counterparty Limit</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:cpLimit, required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-inputdate-label">
+                                <div class="oj-label-group">
+                                    <label for="datepickercontrol">Utilization</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:util, required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-inputdate-label">
+                                <div class="oj-label-group">
+                                    <label for="datepickercontrol">Available Limit</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:avail, required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-inputdate-label">
+                                <div class="oj-label-group">
+                                    <label for="datepickercontrol">Temporary Excess Amount</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-inputdate-label">
+                                <div class="oj-label-group">
+                                    <label for="datepickercontrol">Temporary Excess Date</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item">
+                            From <input id="purchaseDate"
+                                        data-bind="ojComponent: {component: 'ojInputDate',  required: false, disabled:true}"/>
+                            To <input id="purchaseDate"
+                                      data-bind="ojComponent: {component: 'ojInputDate', required: false, disabled:true}"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="three-cols">
+                <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">
+                    <h3 class="oj-header-border">Rating</h3>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">External Rating</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <a href="#" data-bind="click:viewRating">view details</a>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">BNM Risk Weight</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'2', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">Scorecard Rating</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'2', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">Cagamas Rating</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'2', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">Pricing Risk Weight</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'2', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="three-cols">
+                <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">
+                    <h3 class="oj-header-border">Details</h3>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-combobox-label">
+                                <div class="oj-label-group">
+                                    <a href="#" data-bind="click:viewProduct">View Products</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-combobox-label">
+                                <div class="oj-label-group">
+                                    <a href="#" data-bind="click:viewAgreement">View Agreements</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-combobox-label">
+                                <div class="oj-label-group">
+                                    <a href="#" data-bind="click:viewBranch">View Branch</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-combobox-label">
+                                <div class="oj-label-group" >
+                                    <a href="#">View Others Documents</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="oj-header-border"></h3>
+        <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1" id="pc-row-2">
+            <div class="three-cols">
+                <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-5 oj-lg-even-cols-6 oj-lg-labels-inline">
+                    <h3 class="oj-header-border">Contact Details</h3>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-inputdate-label">
+                                <div class="oj-label-group">
+                                    <label></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item">
+                            <a href="#" data-bind="click:viewContact">View Contact Person</a>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-inputdate-label">
+                                <div class="oj-label-group">
+                                    <label for="datepickercontrol">Email</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'email@email.com', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-inputdate-label">
+                                <div class="oj-label-group">
+                                    <label for="datepickercontrol">Phone</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'6058391093', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-inputdate-label">
+                                <div class="oj-label-group">
+                                    <label for="datepickercontrol">Fax</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'6058391094', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-inputdate-label">
+                                <div class="oj-label-group">
+                                    <label for="datepickercontrol">Web</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'https://bank.co.my', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-label oj-component oj-inputdate-label">
+                                <div class="oj-label-group">
+                                    <label for="datepickercontrol">Mailing Address</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'mgcc@bank.com.my.', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="three-cols">
+                <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">
+                    <h3 class="oj-header-border">&nbsp;</h3>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">Address</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <textarea id="text-area" disabled style="margin: 0px; width: 247px; height: 103px;"  aria-label="ojTextArea component no visible label">
+address                               
+
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">Guarantor Required</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'No', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">Guarantor Name</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">Guarantee Start Date</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">Guarantee End Date</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="three-cols">
+                <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">
+                    <h3 class="oj-header-border">Special Condition</h3>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                                <div class="oj-label-group">
+                                     <textarea id="text-area" disabled style="margin: 0px; width: 422px; height: 188px;"  aria-label="ojTextArea component no visible label"></textarea>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div style="display:none" id="viewProductDialog" title="Products" 
+         data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+                      rootAttributes: { style: 'width: 649px; height: 178px'}}">
+        <div class="oj-dialog-body">
+            <div id="CounterPartyPopUp">
+                <div class="oj-flex">
+                    <style type="text/css">
+                    .tg  {border-collapse:collapse;border-spacing:0;}
+                    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+                    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+                    .tg .tg-yw4l{vertical-align:top}
+                    </style>
+                    <table class="tg">
+                      <tr>
+                        <th class="tg-yw4l">Product</th>
+                        <th class="tg-yw4l">Product Description</th>
+                        <th class="tg-yw4l">Product Type</th>
+                        <th class="tg-yw4l">Asset Type</th>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">PWRc</td>
+                        <td class="tg-yw4l">Purchase With Recourse Conventional</td>
+                        <td class="tg-yw4l">PWR</td>
+                        <td class="tg-yw4l">Housing Loan, Hire Purchase</td>
+                      </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:none" id="viewContactDialog" title="Contacts" 
+         data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+                      rootAttributes: { style: 'width: 793px; height: 219px;'}}">
+        <div class="oj-dialog-body">
+            <div id="CounterPartyPopUp">
+                <div class="oj-flex">
+                    <style type="text/css">
+                    .tg  {border-collapse:collapse;border-spacing:0;}
+                    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+                    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+                    .tg .tg-yw4l{vertical-align:top}
+                    </style>
+                    <table class="tg">
+                      <tr>
+                        <th class="tg-yw4l">Name</th>
+                        <th class="tg-yw4l">Phone</th>
+                        <th class="tg-yw4l">Email</th>
+                        <th class="tg-yw4l">Address</th>
+                        <th class="tg-yw4l">Address 2</th>
+                        <th class="tg-yw4l">Department</th>
+                        <th class="tg-yw4l">Primary</th>
+                      </tr>
+                      <tr>
+                        <th class="tg-yw4l">John Doe</th>
+                        <th class="tg-yw4l">6093849291</th>
+                        <th class="tg-yw4l">john.doe@email.com</th>
+                        <th class="tg-yw4l">Address</th>
+                        <th class="tg-yw4l">Address 2</th>
+                        <th class="tg-yw4l">Loan and Financing</th>
+                        <th class="tg-yw4l">Yes</th>
+                      </tr>
+                      <tr>
+                        <th class="tg-yw4l">Farham J</th>
+                        <th class="tg-yw4l">600003003</th>
+                        <th class="tg-yw4l">farham.j@email.com</th>
+                        <th class="tg-yw4l">Address</th>
+                        <th class="tg-yw4l">Address 2</th>
+                        <th class="tg-yw4l">Risk</th>
+                        <th class="tg-yw4l">No</th>
+                      </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:none" id="viewAgreementDialog" title="Agreement" 
+         data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+                      rootAttributes: { style: 'width: 793px; height: 219px;'}}">
+        <div class="oj-dialog-body">
+            <div id="CounterPartyPopUp">
+                <div class="oj-flex">
+                    <style type="text/css">
+                    .tg  {border-collapse:collapse;border-spacing:0;}
+                    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+                    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+                    .tg .tg-yw4l{vertical-align:top}
+                    </style>
+                    <table class="tg">
+                      <tr>
+                        <th class="tg-yw4l">Agreement Type</th>
+                        <th class="tg-yw4l">Product</th>
+                        <th class="tg-yw4l">Asset Type</th>
+                        <th class="tg-yw4l">Agreement Number</th>
+                        <th class="tg-yw4l">Agreement Date</th>
+                      </tr>
+                      <tr>
+                          <td class="tg-yw4l"><a href="" data-bind="click:agreement">MSPA</a></td>
+                        <td class="tg-yw4l">Purchase With Recourse Conventional</td>
+                        <td class="tg-yw4l">Housing Loan</td>
+                        <td class="tg-yw4l">AGT003920495</td>
+                        <td class="tg-yw4l">17 September 2016</td>
+                      </tr>
+                      <tr>
+                          <td class="tg-yw4l"><a href="" data-bind="click:agreement">MSPA</a></td>
+                        <td class="tg-yw4l">Purchase With Recourse Conventional</td>
+                        <td class="tg-yw4l">Hire Purchase</td>
+                        <td class="tg-yw4l">AGT040505</td>
+                        <td class="tg-yw4l">1 August 2016</td>
+                      </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:none" id="viewBranchDialog" title="Branch" 
+         data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+                      rootAttributes: { style: 'width: 700px; height: 350px;'}}">
+        <div class="oj-dialog-body">
+            <div id="CounterPartyPopUp">
+                <div class="oj-flex">
+                    <style type="text/css">
+                    .tg  {border-collapse:collapse;border-spacing:0;}
+                    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+                    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+                    .tg .tg-yw4l{vertical-align:top}
+                    </style>
+                    <table class="tg">
+                      <tr>
+                        <th class="tg-yw4l" style="width:400px">State</th>
+                        <th class="tg-yw4l" style="width:250px">Branch Code</th>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">Johor</td>
+                        <td class="tg-yw4l">701</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">Johor</td>
+                        <td class="tg-yw4l">702</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">Johor</td>
+                        <td class="tg-yw4l">703</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">Johor</td>
+                        <td class="tg-yw4l">704</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">Kelantan</td>
+                        <td class="tg-yw4l">503</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">Kuala Lumpur</td>
+                        <td class="tg-yw4l">001</td>
+                      </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="display:none" id="viewRatingDialog" title="External Ratings" 
+           data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+                      rootAttributes: { style: 'width:900px; height: 400px;'}}">
+        <div class="oj-dialog-body">
+            <div id="CounterPartyPopUp">
+                <div class="oj-flex">
+                    <table class="tge">
+                      <tr>
+                        <td class="tg-yw4l" >Cagamas Rating</td>
+                        <td class="tg-yw4l">:2</td>
+                        <td class="tg-yw4l"style="width:150px"></td>
+                        <td class="tg-yw4l">Pricing Risk Weight</td>
+                        <td class="tg-yw4l">:2</td>
+                        <td class="tg-yw4l"style="width:150px"></td>
+                        <td class="tg-yw4l">Outlook</td>
+                        <td class="tg-yw4l">:2</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">BNM Risk Weight</td>
+                        <td class="tg-yw4l">:2</td>
+                        <td class="tg-yw4l"></td>
+                        <td class="tg-yw4l">Scorecard Rating</td>
+                        <td class="tg-yw4l">:2</td>
+                      </tr>
+                    </table>
+                </div>
+                <div class="oj-flex">&nbsp;</div>
+            <div class="oj-flex">
+                <table class="tg">
+                      <tr>
+                          <th class="tg-yw4l" style="width:200px">Credit Rating Agency</th>
+                        <th class="tg-yw4l" style="width:200px">Credit Rating</th>
+                        <th class="tg-yw4l" style="width:200px">Date</th>
+                        <th class="tg-yw4l" style="width:200px">Notes</th>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">R&I</td>
+                        <td class="tg-yw4l">A+</td>
+                        <td class="tg-yw4l">27-02-2017</td>
+                        <td class="tg-yw4l"></td>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">Standard & Poor</td>
+                        <td class="tg-yw4l">BBB+</td>
+                        <td class="tg-yw4l">27-02-2017</td>
+                        <td class="tg-yw4l"></td>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">Moody's</td>
+                        <td class="tg-yw4l">Baa2</td>
+                        <td class="tg-yw4l">27-02-2017</td>
+                        <td class="tg-yw4l"></td>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">Fitch</td>
+                        <td class="tg-yw4l">BBB+</td>
+                        <td class="tg-yw4l">27-02-2017</td>
+                        <td class="tg-yw4l"></td>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">MARCH</td>
+                        <td class="tg-yw4l">AA+</td>
+                        <td class="tg-yw4l">27-02-2017</td>
+                        <td class="tg-yw4l"></td>
+                      </tr>
+                      <tr>
+                        <td class="tg-yw4l">RAM</td>
+                        <td class="tg-yw4l">AA2</td>
+                        <td class="tg-yw4l">27-02-2017</td>
+                        <td class="tg-yw4l"></td>
+                      </tr>
+                    </table>
+            </div>
+          </div>
+          </div>
+      </div>
+    <div class="blank-footer">
+    </div>
+</div>

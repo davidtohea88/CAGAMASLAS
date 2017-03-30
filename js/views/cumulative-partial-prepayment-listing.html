@@ -1,0 +1,158 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div class="oj-form-layout page-content" id="form-container">
+
+<h3 class="oj-header-border">Cumulative Partial Prepayment Listing</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A1control">Counterparty</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A1control" data-bind="ojComponent: {
+                                                component: 'ojInputSearch',
+                                                value: eiName,
+                                                options: eitags}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A2control">Purchase Contract Number</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A2control" data-bind="ojComponent: {
+                                                component: 'ojInputSearch',
+                                                value: pcno,
+                                                options: pcnolist}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A3control">Loan Reference Number</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A3control" data-bind="ojComponent: {
+                                                component: 'ojInputText',
+                                                value: ''}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+          </div>
+          <div class="oj-flex-item">
+            <button  id= "btn_search" data-bind="ojComponent: { component: 'ojButton', label: 'Search' }"></button>
+            <button  id= "btn_reset" data-bind="ojComponent: { component: 'ojButton', label: 'Reset' }"></button>
+    </div>
+        </div>
+        </div>
+    </div>                               
+  </div>
+  
+    <h3 class="oj-header-border">Header</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A3control">Counterparty Name</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A3control" type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', value: 'CIMB Bank', disabled:true}">
+          </div>
+        </div>
+         <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Purchase Contract Number</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'T-127/000/2701/179074/TL1', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A5control">Loan Reference Number</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A5control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'101', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A5control">Total PP Amount</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A5control" 
+                   data-bind="ojComponent: {component: 'ojInputText',value:'', disabled:true}">
+          </div>
+        </div>
+        </div>
+    </div>                               
+    <div class="oj-flex-item">
+      <div class="oj-form oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6  oj-lg-labels-inline"> 
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B1control">Previous Total</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B1control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'100,000,000', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B2control">Repurchase</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B2control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'-'}">
+          </div>
+        </div> 
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B3control">Current</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B3control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'20,000,000', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B4control">Total</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'120,000,000', disabled:true}">
+          </div>
+        </div>        
+        </div>
+    </div>
+  </div>
+  
+      <h3 class="oj-header-border">Details</h3>
+      <div class="oj-flex">                      
+                <table id="table" summary="Loan Detail" aria-label="Loan Detail"
+                           data-bind="ojComponent: {component: 'ojTable', data: datasourceOpenTrx, columns:
+                            [
+                            {headerText: 'Purchase Contract Number', field: 'RentasTrxDate'},
+                            {headerText: 'Loan Reference Number', field: 'RentasTrxAmount'},
+                            {headerText: 'Branch Code', field: 'Currency'},
+                            {headerText: 'Partial Prepayment  Remittance Date', field: 'NonLasTrx'},
+                            {headerText: 'Partial Prepayment Value', field: 'RentasTrxDesc'},
+                            {headerText: 'Cumulative Partial Prepayment Value', field: 'RentasTrxDesc'},
+                            {headerText: 'Revised RDV', field: 'NonLasReason'},
+                            {headerText: 'PP Date', field: 'Status'},
+                            {headerText: 'Quarterly Ended Processing', field: 'Status'},
+                            {headerText: 'Status', field: 'Status'},
+                            {headerText: 'Remarks', field: 'Status'}
+                            ],
+                            scrollPolicy: 'loadMoreOnScroll',
+                            scrollPolicyOptions: {'fetchSize': 10}, 
+                             rootAttributes: {'style':'width: 100%;'}}">
+                    </table>            
+        </div>
+  </div>

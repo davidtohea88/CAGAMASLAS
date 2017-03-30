@@ -1,0 +1,520 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div class="oj-form-layout page-content" id="form-container">
+
+    <h3 class="oj-header-border">Counterparty</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Counterparty Name</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'CIMB Bank', disabled:true}">
+          </div>
+        </div>
+        </div>
+    </div>                               
+  </div>
+  
+        <h3 class="oj-header-border">CREDIT LIMIT</h3>
+        <div class="oj-flex" id="pwr-row-3">
+            <div class="oj-form-layout" style="width:100%;">
+                <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+                <div class="oj-flex-item">
+                  <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="pwrLimit">PWR Limit (RM Million)</label>
+                      </div>
+                      <div class="oj-flex-item currency-right">
+                        <input id="pwrLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: pwrLimit, disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="currUtilization">Current Utilization (RM Million)</label>
+                      </div>
+                      <div class="oj-flex-item currency-right">
+                        <input id="currUtilization"
+                               data-bind="ojComponent: {component: 'ojInputText', value: currUtilization, disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="avlLimit">Available Limit (RM Million)</label>
+                      </div>
+                      <div class="oj-flex-item currency-right">
+                        <input id="avlLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: avlLimit, disabled:true}"/>
+                      </div>
+                    </div>
+                    </div>
+                </div>                               
+              </div>
+            </div>
+        </div>
+        <div class="page-content oj-flex" id="pwr-row-4">
+            <table id="table"
+                    data-bind="ojComponent: {component: 'ojTable', 
+                            data: pwrDatasource, 
+                            columns: [{headerText: 'PWR Counterparty Type', 
+                                       field: 'pwrType'},
+                                      {headerText: 'Concentration Limit', 
+                                       field: 'concentrationLimit'},
+                                      {headerText: 'Exposures as at 31/1/2017', 
+                                       field: 'exposures'}],
+                                rootAttributes: {style:'width:100%;'}}">
+            </table>
+        </div>
+        <br>
+        <div class="page-content oj-flex" id="pwr-row-5">
+            <div style="width:100%;">
+                <table id="table"
+                        data-bind="ojComponent: {component: 'ojTable', 
+                                data: underlyingDatasource, 
+                                columns: [{headerText: 'Underlying Asset Type', 
+                                           field: 'underlyingType'},
+                                          {headerText: 'Concentration Limit', 
+                                           field: 'concentrationLimit'},
+                                          {headerText: 'Exposures as at 31/1/2017', 
+                                           field: 'exposures'}],
+                                rootAttributes: {style:'width:100%;'}}">
+                </table>
+            </div>
+            <div class="oj-flex" style="width:100%;">
+                <div class="two-cols">
+                    * Total Exposures = Total PWR + Total PWOR Outstanding Exposures
+                </div>
+                <div class="two-cols" style="text-align: right;">
+                    Exposures as at 31 January 2017
+                </div>
+            </div>
+        </div>
+    <h3 class="oj-header-border">Product</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Product Group</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'Conventional', disabled:true}">
+          </div>
+        </div>
+          <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Asset Type</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'Housing Loan', disabled:true}">
+          </div>
+        </div>
+        </div>
+    </div>                               
+  </div>
+  
+  
+  
+    <h3 class="oj-header-border">Facility Type</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Facility Type</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'Floating', disabled:true}">
+          </div>
+        </div>
+        </div>
+    </div>                               
+  </div>
+  <h3 class="oj-header-border">Tenure</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Tenure</label>
+          </div>
+          <div class="oj-flex-item">
+                            <input id="inputcontrol1"
+                                   data-bind="ojComponent: {component: 'ojInputText', value: '3', disabled:true, rootAttributes: {style:'width:20%;'}}"
+                                   type="number"/>
+                             Years 
+                            <input id="inputcontrol2"
+                                   data-bind="ojComponent: {component: 'ojInputText', value: '0', disabled:true, rootAttributes: {style:'width:20%;'}}"
+                                   type="number"/>
+                             Months
+          </div>
+        </div>
+        </div>
+    </div>                               
+  </div>
+  
+  
+  <h3 class="oj-header-border">Purchase/Transfer Detail</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Estimated Purchase Value</label>
+          </div>
+          <div class="oj-flex-item">
+ <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'RM 33.00 Million', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Purchase Date (PPC)</label>
+          </div>
+          <div class="oj-flex-item">
+ <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'03/27/2017', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Deemed Purchase Date</label>
+          </div>
+          <div class="oj-flex-item">
+ <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'03/27/2017', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Purchase Contract Date</label>
+          </div>
+          <div class="oj-flex-item">
+ <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'03/27/2017', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Purchase Contract number</label>
+          </div>
+          <div class="oj-flex-item">
+ <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'T-127/000/2810/159074/TL1/Q/C0-0/0', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Review Date</label>
+          </div>
+          <div class="oj-flex-item">
+ <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'03/27/2020', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Purchase Consideration</label>
+          </div>
+          <div class="oj-flex-item">
+ <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'Cash', disabled:true}">
+          </div>
+        </div>
+        
+    </div>
+    </div>                               
+  </div>
+  
+  
+  
+  <h3 class="oj-header-border">Repayment</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Replacement Option</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'Yes', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Repayment Type</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'P+I', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Replacement Frequency</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'Quarterly', disabled:true}">
+          </div>
+        </div>        
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Method of Pricing</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'Cost Plus (Bond Rate + Cagamas Margin)', disabled:true}">
+          </div>
+        </div>
+        </div>
+    </div>                               
+  </div>
+  
+  
+  <h3 class="oj-header-border">Rate</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Publish Rate</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Threshold Rate</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Bank Margin</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'', disabled:true}">
+          </div>
+        </div>        
+        </div>
+    </div>
+<div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Cagamas Rate</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'4.17%', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Cost of Fund</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'3.75', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Cagamas Margin</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'0.32', disabled:true}">
+          </div>
+        </div>        
+        </div>
+    </div>    
+<div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">OC (%)</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'N/A', disabled:true}">
+          </div>
+        </div>      
+        </div>
+    </div>    
+  </div>
+  
+  <h3 class="oj-header-border">For Floating Rate</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Margin</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">1st Reset Date</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Purchase Date on PC</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'', disabled:true}">
+          </div>
+        </div>        
+        </div>
+    </div>
+<div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Benchmark</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Review Date</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'', disabled:true}">
+          </div>
+        </div>      
+        </div>
+    </div>    
+  </div>
+  
+  
+  
+  <h3 class="oj-header-border">For Convertible Rate Purchase</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Conversion Date</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">1st COD</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">2nd COD</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'', disabled:true}">
+          </div>
+        </div>        
+        </div>
+    </div>                               
+  </div>
+  
+  
+  <h3 class="oj-header-border">Confirmed with Counterparty</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Name</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'John Doe'}">
+          </div>
+        </div>       
+        </div>
+    </div>
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Date</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control"
+                                   data-bind="ojComponent: {component: 'ojInputDate', required: true}"/>
+          </div>
+        </div>       
+        </div>
+    </div>      
+  </div>
+  
+  
+   <h3 class="oj-header-border">Confirmed with Cagamas</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Name</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control" data-bind="ojComponent: {component: 'ojInputText', value:'Steve King', disabled:true}">
+          </div>
+        </div>       
+         <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Signature</label>
+          </div>
+          <div class="oj-flex-item">
+          <br/><br/><br/><br/><br/>
+          </div>
+        </div>   
+        </div>
+    </div>
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Date</label>
+          </div>
+          <div class="oj-flex-item">
+             <input id="A4control"
+                                   data-bind="ojComponent: {component: 'ojInputDate', required: true}"/>
+          </div>
+        </div>       
+        </div>
+    </div>      
+  </div>
+</div>
+
+       <div style="clear:both;"></div>
+<hr/>
+<div class="demo-grid-sizes demo-flex-display">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-sm-12 oj-md-12 oj-lg-5 oj-flex-item"></div>
+    <div class="oj-sm-12 oj-md-6  oj-lg-3 oj-flex-item">
+<button  id= "btn_print" class="action-button-3" data-bind="ojComponent: { component: 'ojButton', label: 'Print' }">
+    </button>
+<button id= "btn_back" class="action-button-3" data-bind="click: redirectToPC, ojComponent: { component: 'ojButton', label: 'Back' }">
+    </button>
+
+    </div>
+    <div class="oj-sm-12 oj-md-6  oj-lg-4 oj-flex-item"></div>
+  </div>
+</div>

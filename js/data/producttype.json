@@ -1,0 +1,31 @@
+{
+  "MdProdTyp" : [ {
+    "prodTypCd" : "PT001",
+    "prodTypName" : "PWR",
+    "prodTypDesc" : "Purchase With Recourse",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:28.000+08:00",
+    "createDate" : "2017-02-24T15:22:28.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "prodTypCd" : "PT002",
+    "prodTypName" : "MGP",
+    "prodTypDesc" : "Mortgage Guarantee Programme",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:28.000+08:00",
+    "createDate" : "2017-02-24T15:22:28.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  } ]
+}

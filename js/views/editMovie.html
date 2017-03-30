@@ -1,0 +1,24 @@
+<div data-bind="with: movieModel">
+  <h1>Details for <span data-bind="text: attributes.title"></span></h1>
+  <div id="form-container">
+    <div class="oj-form oj-md-odd-cols-4 oj-md-labels-inline">
+      <div class="oj-row">
+        <div class="oj-col">Movie Title:</div>
+        <div class="oj-col"><input data-bind="value: attributes.title"></div>
+      </div>
+      <div class="oj-row">
+        <div class="oj-col">Director:</div>
+        <div class="oj-col"><input data-bind="value: attributes.director"></div>
+      </div>
+      <div class="oj-row">
+        <div class="oj-col">Release Year:</div>
+        <div class="oj-col"><input data-bind="value: attributes.releaseYear"></div>
+      </div>
+      <div class="oj-row">
+        <div class="oj-col">Movie Genre:</div>
+        <div class="oj-col"><input data-bind="value: attributes.genre"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<button data-bind="click: saveMovie, ojComponent: {component: 'ojButton', label: 'Save'}"></button>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<div id="form-container">
+    <div class="oj-flex">  
+        <div class="oj-flex-item">
+              <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >                                        
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">  
+                            <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >   
+                                <h3><b>Filter</b></h3>
+                                <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >    
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="EI">Eligible Institution</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="FI" data-bind="ojComponent: {component: 'ojSelect',options: EIs}"></select>
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="Contract">MGP Contract Number</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                   <input id="purchaseCnttNum" type="text" data-bind="ojComponent: {component : 'ojInputText',value: '',rootAttributes: {style:'max-width:15em'}}"/>
+                                                </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="Contract">&nbsp;</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <label for="Contract">&nbsp;</label>
+                                                    </div>
+                                                </div> 
+
+                                            </div>
+                                        </div>                            
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="Product">Product</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="product" data-bind="ojComponent: {component: 'ojSelect',options: products}"></select>
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="Contract">&nbsp;</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <label for="Contract">&nbsp;</label>
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">                       
+                                                    <div class="oj-flex-item">
+                                                        <button id= "button" data-bind="click: search,ojComponent: {component: 'ojButton', label: 'Seacrh' } ">
+                                                        </button>
+                                                    </div>
+                                                </div> 
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                    <div class="oj-flex-item">   
+                                        <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                            <div class="oj-flex">                        
+                                                <div class="oj-flex-item">
+                                                    <button id= "button" data-bind="click:create,ojComponent: { component: 'ojButton', label: 'Create' }">
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >                    
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <table id="table" summary="MGP Summary List" aria-label="MGP Summary"
+                                                               data-bind="ojComponent: {component: 'ojTable', 
+                                data: datasource, 
+                                display: 'grid',
+                                columns: [{headerText: 'Eligilble Institution', 
+                                           field: 'EId'},
+                                          {headerText: 'Contract Number', 
+                                           field: 'MGPContractNum'},
+                                          {headerText: 'Status', 
+                                           field: 'Status'},
+                                          {headerText: 'Trade/Transactional Start Date',field: 'startDate'},
+                                          {headerText: 'Schedule Termination Date',field: 'terminationDate'}],
+                                scrollPolicy: 'loadMoreOnScroll',
+                                scrollPolicyOptions: {'fetchSize': 10},
+                                rootAttributes: {'style':'height: 150px;'}}">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    </div>
+
+
+                                </div>                 
+
+                            </div>    
+                        </div>
+                    </div> 
+                    
+                </div>    
+                
+         
+        </div>
+    </div> 
+</div>
+

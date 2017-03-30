@@ -1,0 +1,31 @@
+{
+  "MdPrchsMode" : [ {
+    "prchsModeCd" : "D",
+    "prchsModeName" : "DIRECT",
+    "prchsModeDesc" : "Direct",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:56.000+08:00",
+    "createDate" : "2017-02-24T15:21:56.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "prchsModeCd" : "B",
+    "prchsModeName" : "B2BACK",
+    "prchsModeDesc" : "Back-to-Back",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:56.000+08:00",
+    "createDate" : "2017-02-24T15:21:56.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  } ]
+}

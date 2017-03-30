@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<div id="form-container">
+    <div class="oj-flex">  
+        <div class="oj-flex-item">
+            <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >                          
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">  
+                        <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >   
+                            <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >  
+                                <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+
+                                    <div class="oj-flex-item">   
+                                        <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-label-nowrap">
+
+                                            <div class="oj-flex">  
+                                                <div class="oj-flex-item">
+                                                    <label for="EISearch">Eligible Institution</label>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <input id="EISearchCmp" placeholder="Search EI..."
+                                                           data-bind="ojComponent: {
+                                                            component: 'ojInputSearch',
+                                                            value: eiName,
+                                                            options: eitags,
+                                                            rootAttributes: {style:'max-width: 15em'}}">
+                                                </div>  
+                                            </div> 
+
+                                            <div class="oj-flex">  
+                                                <div class="oj-flex-item">
+                                                    <label for="counterPartyGrp">Eligible Institution Group :</label>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <label for="counterPartyGrp" data-bind="text: counterPartyGrp"></label>
+                                                </div>
+                                            </div>                         
+                                            <div class="oj-flex">  
+                                                <div class="oj-flex-item">
+                                                    <label for="Product">Product</label>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <input id="prdSearch" placeholder="Search Product..."
+                                                           data-bind="ojComponent: {
+                                                            component: 'ojInputSearch',
+                                                            value: product,
+                                                            options: prdtags,
+                                                            rootAttributes: {style:'max-width: 15em'}}">
+                                                </div>
+                                            </div> 
+                                            <div class="oj-flex">  
+                                                <div class="oj-flex-item">
+                                                    <label for="EISearch">Contract Number</label>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <input id="EISearchCmp" placeholder="Search Account..."
+                                                           data-bind="ojComponent: {
+                                                            component: 'ojInputSearch',
+                                                            value: eiName,  
+                                                            options: eitags,
+                                                            rootAttributes: {style:'max-width: 15em'}}">
+                                                </div>  
+                                            </div> 
+                                            <div class="oj-flex">  
+                                                <div class="oj-flex-item">
+                                                    <label for="statusLbl">Status : </label>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <label for="status" data-bind="text: contractStauts"></label>
+                                                </div>
+                                            </div> 
+                                            <div class="oj-flex alignright">          
+                                                <br>
+                                                <div class="oj-flex-item">
+                                                    <button id= "search" data-bind="click:search,ojComponent: { component: 'ojButton', label: 'Search' }">
+                                                    </button>
+                                                    <button id= "Verify" data-bind="click: verify,ojComponent: { component: 'ojButton', label: 'Verify' }">
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>    
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+
+                                <div class="oj-flex-item">   
+                                    <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >  
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">                                        
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <label for="statusLbl">Guarantee Claim No : </label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <label data-bind="text: '1234567'"></label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <label for="statusLbl">Eligible Institution : </label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <label data-bind="text: 'CIMB Bank Berhad'"></label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <label for="statusLbl">Transaction Reference Number : </label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <label data-bind="text: '12345'"></label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <label for="statusLbl">Reference/Protected Obligation Identification No : </label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <label data-bind="text: '34567'"></label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <label for="statusLbl">Prepared By : </label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <label data-bind="text: 'OPE'"></label>
+                                                    </div>
+                                                </div>
+
+                                            </div>  
+                                        </div>
+                                    </div>   
+
+
+                                </div>     
+                                <div class="oj-flex">  
+                                    <div class="oj-flex-item">
+                                    </div></div>
+                                <div class="oj-flex-item">   
+                                    <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >  
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">                                        
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <label for="statusLbl">Guarantee Event Notice</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <button id= "Verify" data-bind="ojComponent: { component: 'ojButton', label: 'View' }">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <label for="statusLbl">Main Supporting Document</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <button id= "Verify" data-bind="ojComponent: { component: 'ojButton', label: 'View' }">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <label for="statusLbl">Default Notice</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <button id= "Verify" data-bind="ojComponent: { component: 'ojButton', label: 'View' }">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <label for="statusLbl">Account Transaction Activity</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <button id= "Verify" data-bind="ojComponent: { component: 'ojButton', label: 'View' }">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <label for="statusLbl">Statement of Account</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <button id= "Verify" data-bind="ojComponent: { component: 'ojButton', label: 'View' }">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <label for="statusLbl">Guarantee Event Notice Appraisal Report</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <button id= "Verify" data-bind="ojComponent: { component: 'ojButton', label: 'View' }">
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>  
+                                        </div>
+                                    </div>   
+
+
+                                </div>     
+
+
+                            </div>
+                            <div style="display:none" class="oj-flex" id="checklistpopup"  data-bind="ojComponent:{component: 'ojPopup'}">  
+                                <div class="oj-flex-item">  
+                                    <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >   
+                                        <h4><b>MGP Verification Sheet</b></h4>
+                                        <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >                                             
+                                            <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                                <div class="oj-flex-item">   
+                                                    <div class="oj-form  oj-md-labels-inline">
+                                                        <div class="oj-flex">  
+                                                            <div class="oj-flex-item">
+                                                                <div id="checkboxSetId" aria-labelledby="mainlabelid"
+                                                                     data-bind="ojComponent: {component: 'ojCheckboxset', value: ''}" >
+                                                                    <span class="oj-choice-row">
+                                                                        <input id="chklist1" type="checkbox" value="blue">
+                                                                        <label for="chklist1">GEN/KEY is signed by authorized signatories of the guaranteed</label>
+                                                                    </span>
+                                                                    <br>
+                                                                    <span class="oj-choice-row">
+                                                                        <input id="chklist2" type="checkbox" value="green">
+                                                                        <label for="chklist2">GEN/KEY is stamped with the Cagamas acknowledge of receipt</label>
+                                                                    </span>
+                                                                      <br>
+                                                                    <span class="oj-choice-row">
+                                                                        <input id="chklist3" type="checkbox" value="red">
+                                                                        <label for="chklist3">Guaranteed Submits default notice (DN) not later than 45 days upon accumulated 3 months, arrears/overdue installments </label>
+                                                                    </span>
+                                                                        <br>
+                                                                    <span class="oj-choice-row">
+                                                                        <input id="chklist4" type="checkbox" value="lime">
+                                                                        <label for="chklist4">Guarantee Event Type is valid</label>
+                                                                    </span>
+                                                                          <br>
+                                                                    <span class="oj-choice-row">
+                                                                        <input id="chklist5" type="checkbox" value="aqua">
+                                                                        <label for="chklist5">GEN is received within 1 month of the occurrence of such guarantee event </label>
+                                                                    </span>
+                                                                            <br>
+                                                                    <span class="oj-choice-row">
+                                                                        <input id="chklist6" type="checkbox" value="aqua">
+                                                                        <label for="chklist6">Asset does not fail with exception in SRP DB</label>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div> 
+
+
+                                                        
+                                                    </div>
+                                                </div>    
+                                                <div class="oj-flex-item">   
+                                                    <div class="oj-form  oj-md-labels-inline oj-label-nowrap">
+                                                        <div class="oj-flex">  
+                                                            <div class="oj-flex-item">
+                                                                <div id="checkboxSetId" aria-labelledby="mainlabelid"
+                                                                     data-bind="ojComponent: {component: 'ojCheckboxset', value: ''}" >
+                                                                    <span class="oj-choice-row">
+                                                                        <input id="chklist7" type="checkbox" value="blue">
+                                                                        <label for="chklist7">Maximum Asset period compliance</label>
+                                                                    </span>
+                                                                      <br>
+                                                                    <span class="oj-choice-row">
+                                                                        <input id="chklist8" type="checkbox" value="green">
+                                                                        <label for="chklist8">Maximum financing to income ratio compliance</label>
+                                                                    </span>
+                                                                        <br>
+                                                                    <span class="oj-choice-row">
+                                                                        <input id="chklist9" type="checkbox" value="red">
+                                                                        <label for="chklist9">Age compliance</label>
+                                                                    </span>
+                                                                          <br>
+                                                                    <span class="oj-choice-row">
+                                                                        <input id="chklist10" type="checkbox" value="lime">
+                                                                        <label for="chklist10">Income qualification compliance</label>
+                                                                    </span>
+                                                                            <br>
+                                                                    <span class="oj-choice-row">
+                                                                        <input id="chklist11" type="checkbox" value="aqua">
+                                                                        <label for="chklist11">Property value compliance</label>
+                                                                    </span>
+                                                                             <span class="oj-choice-row">
+                                                                        <input id="chklist12" type="checkbox" value="aqua">
+                                                                        <label for="chklist12">Minimum leasehold tenure compliance</label>
+                                                                    </span>
+                                                                               <br>
+                                                                </div>
+                                                            </div>
+
+                                                        </div> 
+
+                                                        <div class="oj-flex ">  
+                                                            <div class="oj-flex-item">
+                                                                <button id= "cancel" data-bind="click:cancel,ojComponent: { component: 'ojButton', label: 'Cancel' }">
+                                                                </button>
+                                                                <button id= "reject" data-bind="click: reject,ojComponent: { component: 'ojButton', label: 'Reject' }">
+                                                                </button>
+                                                                <button id= "verify" data-bind="ojComponent: { component: 'ojButton', label: 'Verify' }">
+                                                                </button>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div> 
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div> 
+
+                            </div>   
+
+                            <div style="display:none" class="oj-flex" id="approvalpopup"  data-bind="ojComponent:{component: 'ojPopup'}">  
+                                <div class="oj-flex-item">  
+                                    <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >   
+                                        <h4>Guarantee Event Notice - Approval</h4>
+                                        <div class="oj-panel oj-margin oj-panel-alt2 demo-mypanel" >  
+
+                                            <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                                <div class="oj-flex-item">   
+                                                    <div class="oj-form     oj-md-labels-inline oj-label-nowrap">
+
+                                                        <div class="oj-flex">                                                  
+                                                            <div class="oj-flex-item">
+                                                                <label for="suppdoc">Supporting Document : </label>
+                                                                <input type="file"/>
+                                                                <button id= "uploadsup" data-bind="ojComponent: { component: 'ojButton', label: '&nbsp;&nbsp;Upload' }">
+                                                                </button>
+                                                            </div>                                               
+                                                        </div> 
+
+                                                        <div class="oj-flex">                                                  
+                                                            <div class="oj-flex-item">
+                                                                <label for="suppdoc">Statement of Account : </label>
+                                                                <input type="file"/>
+                                                                <button id= "account" data-bind="ojComponent: { component: 'ojButton', label: '&nbsp;&nbsp;Upload' }">
+                                                                </button>
+                                                            </div>                                               
+                                                        </div> 
+                                                        <div class="oj-flex alignright">  
+                                                            <div class="oj-flex-item">
+                                                                <button id= "cancel" data-bind="click:cancel,ojComponent: { component: 'ojButton', label: 'Cancel' }">
+                                                                </button>
+                                                                <button id= "send" data-bind="click: justification,ojComponent: { component: 'ojButton', label: 'Send' }">
+                                                                </button>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>    
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div> 
+
+                            </div>   
+                            <script type="text/html" id="view_action_hdr">
+                                <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+                                    Action
+                                </th>
+                                </script>
+                                <script type="text/html" id="view_action">
+                                    <td>
+                                        <button id= "btn_PI"
+                                                data-bind="click: buttonClick, 
+                       ojComponent: { component: 'ojButton', label: 'View' }">
+                                        </button>
+                                    </td>
+                                    </script>

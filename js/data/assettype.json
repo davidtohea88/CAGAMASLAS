@@ -1,0 +1,612 @@
+{
+  "MdAssetTyp" : [ {
+    "assetTypCd" : "0001",
+    "assetTypName" : "HL",
+    "assetTypDesc" : "Housing Loan",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "HO",
+      "assetGrpName" : "Housing",
+      "assetTypDesc" : "Housing"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL",
+      "prodGrpDesc" : "Conventional"
+    }
+  }, {
+    "assetTypCd" : "0002",
+    "assetTypName" : "HPCL",
+    "assetTypDesc" : "Hire Purchase – Consumer Loan",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "HP",
+      "assetGrpName" : "Hire Purchase / Leasing",
+      "assetTypDesc" : "Hire Purchase / Leasing"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL",
+      "prodGrpDesc" : "Conventional"
+    }
+  }, {
+    "assetTypCd" : "0003",
+    "assetTypName" : "HPIL",
+    "assetTypDesc" : "Hire Purchase – Industrial Loan",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "HP",
+      "assetGrpName" : "Hire Purchase / Leasing",
+      "assetTypDesc" : "Hire Purchase / Leasing"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "ID",
+      "consTypName" : "Industrial",
+      "consTypDesc" : "Industrial"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL",
+      "prodGrpDesc" : "Conventional"
+    }
+  }, {
+    "assetTypCd" : "0004",
+    "assetTypName" : "HPLD",
+    "assetTypDesc" : "Leasing Debt",
+    "active" : "N",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "HP",
+      "assetGrpName" : "Hire Purchase / Leasing",
+      "assetTypDesc" : "Hire Purchase / Leasing"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "ID",
+      "consTypName" : "Industrial",
+      "consTypDesc" : "Industrial"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL",
+      "prodGrpDesc" : "Conventional"
+    }
+  }, {
+    "assetTypCd" : "0005",
+    "assetTypName" : "PL",
+    "assetTypDesc" : "Personal Loan",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "PS",
+      "assetGrpName" : "Personal",
+      "assetTypDesc" : "Personal"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL",
+      "prodGrpDesc" : "Conventional"
+    }
+  }, {
+    "assetTypCd" : "0006",
+    "assetTypName" : "CIPL",
+    "assetTypDesc" : "Commercial & Industrial Property Loan",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "CI",
+      "assetGrpName" : "Commercial & Industrial Property",
+      "assetTypDesc" : "Commercial & Industrial Property"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "ID",
+      "consTypName" : "Industrial",
+      "consTypDesc" : "Industrial"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL",
+      "prodGrpDesc" : "Conventional"
+    }
+  }, {
+    "assetTypCd" : "0007",
+    "assetTypName" : "CCR",
+    "assetTypDesc" : "Credit Card Receivable",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "CC",
+      "assetGrpName" : "Credit Card",
+      "assetTypDesc" : "Credit Card"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL",
+      "prodGrpDesc" : "Conventional"
+    }
+  }, {
+    "assetTypCd" : "0008",
+    "assetTypName" : "SMEL",
+    "assetTypDesc" : "SME Loan",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "SM",
+      "assetGrpName" : "Small Medium",
+      "assetTypDesc" : "Small Medium"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL",
+      "prodGrpDesc" : "Conventional"
+    }
+  }, {
+    "assetTypCd" : "0009",
+    "assetTypName" : "IFL",
+    "assetTypDesc" : "Infrastructure Loan",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "IL",
+      "assetGrpName" : "Infrastucture Loan",
+      "assetTypDesc" : "Infrastucture Loan"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL",
+      "prodGrpDesc" : "Conventional"
+    }
+  }, {
+    "assetTypCd" : "0010",
+    "assetTypName" : "CTL",
+    "assetTypDesc" : "Corporate Term Loan",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "CT",
+      "assetGrpName" : "Corporate Term",
+      "assetTypDesc" : "Corporate Term"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL",
+      "prodGrpDesc" : "Conventional"
+    }
+  }, {
+    "assetTypCd" : "0011",
+    "assetTypName" : "IHFF",
+    "assetTypDesc" : "Islamic House Financing Facilities",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "HO",
+      "assetGrpName" : "Housing",
+      "assetTypDesc" : "Housing"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC",
+      "prodGrpDesc" : "Islamic"
+    }
+  }, {
+    "assetTypCd" : "0012",
+    "assetTypName" : "IHPCF",
+    "assetTypDesc" : "Islamic Hire Purchase – Consumer Financing",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "HP",
+      "assetGrpName" : "Hire Purchase / Leasing",
+      "assetTypDesc" : "Hire Purchase / Leasing"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC",
+      "prodGrpDesc" : "Islamic"
+    }
+  }, {
+    "assetTypCd" : "0013",
+    "assetTypName" : "IHPIF",
+    "assetTypDesc" : "Islamic Hire Purchase – Industrial Financing",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "HP",
+      "assetGrpName" : "Hire Purchase / Leasing",
+      "assetTypDesc" : "Hire Purchase / Leasing"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "ID",
+      "consTypName" : "Industrial",
+      "consTypDesc" : "Industrial"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC",
+      "prodGrpDesc" : "Islamic"
+    }
+  }, {
+    "assetTypCd" : "0014",
+    "assetTypName" : "IHPIL",
+    "assetTypDesc" : "Islamic Leasing",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "HP",
+      "assetGrpName" : "Hire Purchase / Leasing",
+      "assetTypDesc" : "Hire Purchase / Leasing"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "ID",
+      "consTypName" : "Industrial",
+      "consTypDesc" : "Industrial"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC",
+      "prodGrpDesc" : "Islamic"
+    }
+  }, {
+    "assetTypCd" : "0015",
+    "assetTypName" : "IPF",
+    "assetTypDesc" : "Islamic Personal Financing",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "PS",
+      "assetGrpName" : "Personal",
+      "assetTypDesc" : "Personal"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC",
+      "prodGrpDesc" : "Islamic"
+    }
+  }, {
+    "assetTypCd" : "0016",
+    "assetTypName" : "ICIPF",
+    "assetTypDesc" : "Islamic Commercial & Industrial Property Financing",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "CI",
+      "assetGrpName" : "Commercial & Industrial Property",
+      "assetTypDesc" : "Commercial & Industrial Property"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "ID",
+      "consTypName" : "Industrial",
+      "consTypDesc" : "Industrial"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC",
+      "prodGrpDesc" : "Islamic"
+    }
+  }, {
+    "assetTypCd" : "0017",
+    "assetTypName" : "ICCR",
+    "assetTypDesc" : "Islamic Credit Card Receivables",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "CC",
+      "assetGrpName" : "Credit Card",
+      "assetTypDesc" : "Credit Card"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC",
+      "prodGrpDesc" : "Islamic"
+    }
+  }, {
+    "assetTypCd" : "0018",
+    "assetTypName" : "ISEMF",
+    "assetTypDesc" : "SME Financing",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "SM",
+      "assetGrpName" : "Small Medium",
+      "assetTypDesc" : "Small Medium"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC",
+      "prodGrpDesc" : "Islamic"
+    }
+  }, {
+    "assetTypCd" : "0019",
+    "assetTypName" : "IIFF",
+    "assetTypDesc" : "Islamic Infrastructure Financing Facilities",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "IL",
+      "assetGrpName" : "Infrastucture Loan",
+      "assetTypDesc" : "Infrastucture Loan"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC",
+      "prodGrpDesc" : "Islamic"
+    }
+  }, {
+    "assetTypCd" : "0020",
+    "assetTypName" : "ICTF",
+    "assetTypDesc" : "Islamic Corporate Term Financing",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "CT",
+      "assetGrpName" : "Corporate Term",
+      "assetTypDesc" : "Corporate Term"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC",
+      "prodGrpDesc" : "Islamic"
+    }
+  }, {
+    "assetTypCd" : "0021",
+    "assetTypName" : "RAHN",
+    "assetTypDesc" : "Ar-Rahn (Pawn)",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdAssetGrp" : {
+      "assetGrpCd" : "AR",
+      "assetGrpName" : "AR",
+      "assetTypDesc" : "AR"
+    },
+    "mdConsTyp" : {
+      "consTypCd" : "CS",
+      "consTypName" : "Consumer",
+      "consTypDesc" : "Consumer"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC",
+      "prodGrpDesc" : "Islamic"
+    }
+  } ]
+}

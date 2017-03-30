@@ -1,0 +1,122 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div style="width:100%;display: flex;">
+    <div class="three-cols" style="display:flex;">
+        <div style="margin-left:20px;width:40%;vertical-align:middle;line-height: 32px;">
+        Purchase Contract Number
+        </div>
+        <div style="width:60%;">
+            <div style="width:90%;" class="oj-inputsearch-choice">
+                <input class="oj-inputsearch-input" id="inputSearch" placeholder="Search by purchase contract number"
+                   type="search"/>
+                <a class="oj-inputsearch-search-button oj-inputsearch-search-icon oj-component-icon 
+                oj-clickable-icon-nocontext" role="button" aria-label="search"></a>
+            </div>
+        </div>
+    </div>
+    <div class="three-cols" style="display:flex;">
+        <div style="margin-left:20px;width:40%;vertical-align:middle;line-height: 32px;">
+        Counterparty Name
+        </div>
+        <div style="width:60%;">
+            <div style="width:90%;" class="oj-inputsearch-choice">
+                <input class="oj-inputsearch-input" id="inputSearch" placeholder="Search by counterpary name"
+                   type="search"/>
+                <a class="oj-inputsearch-search-button oj-inputsearch-search-icon oj-component-icon 
+                oj-clickable-icon-nocontext" role="button" aria-label="search"></a>
+            </div>
+        </div>
+    </div>
+    <div class="three-cols">
+        &nbsp;
+    </div>
+</div>
+<div style="width:100%;display: flex;">
+    <div class="three-cols" style="display:flex;">
+        <div style="margin-left:20px;width:40%;vertical-align:middle;line-height: 32px;">
+        Currency
+        </div>
+        <div style="width:60%;">
+            <div style="width:90%;" class="oj-inputsearch-choice">
+                <input class="oj-inputsearch-input" id="inputSearch" placeholder="Search by currency"
+                   type="search"/>
+                <a class="oj-inputsearch-search-button oj-inputsearch-search-icon oj-component-icon 
+                oj-clickable-icon-nocontext" role="button" aria-label="search"></a>
+            </div>
+        </div>
+    </div>
+    <div class="three-cols" style="display:flex;">
+        <div style="margin-left:20px;width:40%;vertical-align:middle;line-height: 32px;">
+        Status
+        </div>
+        <div style="width:60%;">
+            <div style="width:90%;" class="oj-inputsearch-choice">
+                <input class="oj-inputsearch-input" id="inputSearch" placeholder="Search by status"
+                   type="search"/>
+                <a class="oj-inputsearch-search-button oj-inputsearch-search-icon oj-component-icon 
+                oj-clickable-icon-nocontext" role="button" aria-label="search"></a>
+            </div>
+        </div>
+    </div>
+    <div class="three-cols">
+    </div>
+</div>
+<br/>
+<div style="width:100%;display: flex;">
+    <div class="three-cols" style="display:flex;padding-left: 3em;">
+         <button id= "rateISButton" class="action-button-h" style="float:right;margin-right:20px;"
+                data-bind="ojComponent: {component: 'ojButton', label: 'Search', childAttributes:{style:'white-space: normal;'}, disabled: self.rateISBtn}">
+        </button>
+        <button id= "rateISButton" class="action-button-h" style="float:right;margin-right:20px;"
+                data-bind="ojComponent: {component: 'ojButton', label: 'Reset', childAttributes:{style:'white-space: normal;'}, disabled: self.rateISBtn}">
+        </button>
+    </div>
+    <div class="three-cols" style="display:flex;">
+        
+    </div>
+    <div class="three-cols">
+    </div>
+</div>
+<br/><br/><br/>
+<div style="width:100%;display: flex;">
+    <div class="three-cols" style="display:flex;padding-left: 3em;">
+         <button id= "rateISButton" class="action-button-h" style="float:right;margin-right:20px;"
+                data-bind="click: onClickNew, 
+                    ojComponent: {component: 'ojButton', label: 'Create', childAttributes:{style:'white-space: normal;'}, disabled: self.rateISBtn}">
+        </button>
+    </div>
+    <div class="three-cols" style="display:flex;">
+        
+    </div>
+    <div class="three-cols">
+    </div>
+</div>
+
+ 
+<br>    
+<div id="pagingControlDemo" class="page-content">
+    <table id="table" summary="Origination List" aria-label="Origination Table"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
+            [{headerText: 'Purchase Contract Number', field: 'PurchaseContractID'},
+             {headerText: 'Counter Party Name', field: 'CounterPartyName'},
+             {headerText: 'Currency', field: 'Currency', style: 'width: 5%'},
+             {headerText: 'Purchase Amount', field: 'PurchaseAmount'},
+             {headerText: 'Status', field: 'OriginationStatus', style: 'width: 10%'},
+             {headerTemplate: 'view_action_hdr', template: 'view_action', style: 'width: 10%;text-align:center;'}], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
+    </div>
+</div>
+<script type="text/html" id="view_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+        <button id= "btn_PI"
+            data-bind="click: $parent.buttonClick, 
+                       ojComponent: { component: 'ojButton', label: 'View Details' }">
+        </button>
+    </td>
+</script>

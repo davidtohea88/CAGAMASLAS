@@ -1,0 +1,203 @@
+{
+  "MdProd" : [ {
+    "prodCd" : "PRD0001",
+    "prodName" : "PWRc",
+    "prodDesc" : "Purchase With Recourse (Conventional)",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:18.000+08:00",
+    "createDate" : "2017-02-24T15:22:18.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL"
+    },
+    "mdPymtFreq" : {
+      "@nil" : "true"
+    },
+    "mdProdTyp" : {
+      "prodTypCd" : "PT001",
+      "prodTypName" : "PWR"
+    }
+  }, {
+    "prodCd" : "PRD0002",
+    "prodName" : "PWRi",
+    "prodDesc" : "Purchase With Recourse (Islamic)",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:18.000+08:00",
+    "createDate" : "2017-02-24T15:22:18.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC"
+    },
+    "mdPymtFreq" : {
+      "@nil" : "true"
+    },
+    "mdProdTyp" : {
+      "prodTypCd" : "PT001",
+      "prodTypName" : "PWR"
+    }
+  }, {
+    "prodCd" : "PRD0003",
+    "prodName" : "MGPFIc",
+    "prodDesc" : "Mortgage Guarantee Programme for Financial Institutions (Conventional)",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:18.000+08:00",
+    "createDate" : "2017-02-24T15:22:18.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL"
+    },
+    "mdPymtFreq" : {
+      "@nil" : "true"
+    },
+    "mdProdTyp" : {
+      "prodTypCd" : "PT002",
+      "prodTypName" : "MGP"
+    }
+  }, {
+    "prodCd" : "PRD0004",
+    "prodName" : "MGPSPBc",
+    "prodDesc" : "Mortgage Guarantee Programme for Skim Perumahan Belia (Conventional)",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:18.000+08:00",
+    "createDate" : "2017-02-24T15:22:18.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL"
+    },
+    "mdPymtFreq" : {
+      "@nil" : "true"
+    },
+    "mdProdTyp" : {
+      "prodTypCd" : "PT002",
+      "prodTypName" : "MGP"
+    }
+  }, {
+    "prodCd" : "PRD0005",
+    "prodName" : "MGPSRPc",
+    "prodDesc" : "Mortgage Guarantee Programme for Skim Rumah Pertamaku (Conventional)",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:18.000+08:00",
+    "createDate" : "2017-02-24T15:22:18.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL"
+    },
+    "mdPymtFreq" : {
+      "@nil" : "true"
+    },
+    "mdProdTyp" : {
+      "prodTypCd" : "PT002",
+      "prodTypName" : "MGP"
+    }
+  }, {
+    "prodCd" : "PRD0006",
+    "prodName" : "MGPFIi",
+    "prodDesc" : "Mortgage Guarantee Programme for Financial Institutions (Islamic)",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:18.000+08:00",
+    "createDate" : "2017-02-24T15:22:18.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC"
+    },
+    "mdPymtFreq" : {
+      "@nil" : "true"
+    },
+    "mdProdTyp" : {
+      "prodTypCd" : "PT002",
+      "prodTypName" : "MGP"
+    }
+  }, {
+    "prodCd" : "PRD0007",
+    "prodName" : "MGPSPBi",
+    "prodDesc" : "Mortgage Guarantee Programme for Skim Perumahan Belia (Islamic)",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:18.000+08:00",
+    "createDate" : "2017-02-24T15:22:18.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC"
+    },
+    "mdPymtFreq" : {
+      "@nil" : "true"
+    },
+    "mdProdTyp" : {
+      "prodTypCd" : "PT002",
+      "prodTypName" : "MGP"
+    }
+  }, {
+    "prodCd" : "PRD0008",
+    "prodName" : "MGPSRPi",
+    "prodDesc" : "Mortgage Guarantee Programme for Skim Rumah Pertamaku (Islamic)",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:18.000+08:00",
+    "createDate" : "2017-02-24T15:22:18.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    },
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC"
+    },
+    "mdPymtFreq" : {
+      "@nil" : "true"
+    },
+    "mdProdTyp" : {
+      "prodTypCd" : "PT002",
+      "prodTypName" : "MGP"
+    }
+  } ]
+}

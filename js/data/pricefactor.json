@@ -1,0 +1,59 @@
+{
+  "MdPriceFctr" : [ {
+    "priceFctrCd" : "01",
+    "priceFctrName" : "PREMIUM",
+    "priceFctrDesc" : "Premium Price",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
+    "createDate" : "2017-02-24T15:22:12.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "priceFctrCd" : "02",
+    "priceFctrName" : "PAR",
+    "priceFctrDesc" : "Par Price",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
+    "createDate" : "2017-02-24T15:22:12.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "priceFctrCd" : "03",
+    "priceFctrName" : "DISCOUNT",
+    "priceFctrDesc" : "Discount Price",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
+    "createDate" : "2017-02-24T15:22:12.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "priceFctrCd" : "04",
+    "priceFctrName" : "OVER_COLLATERAL",
+    "priceFctrDesc" : "Over Collateralization",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
+    "createDate" : "2017-02-24T15:22:12.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  } ]
+}

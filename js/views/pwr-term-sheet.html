@@ -1,0 +1,336 @@
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;width:90%;margin:auto;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-ygl1{font-weight:bold;background-color:#9b9b9b}
+.tg .tg-7h0m{background-color:#9b9b9b}
+.tg .tg-x9s4{font-weight:bold;background-color:#9b9b9b;vertical-align:top}
+.tg .tg-d1kj{background-color:#9b9b9b;vertical-align:top}
+.tg .tg-yw4l{vertical-align:top}
+.tg .sign-col{
+    height:100px;
+}
+</style>
+<div class="oj-form-layout" id="form-container">
+    <div class="page-title">
+        <label class="white-color" data-bind="text:header"></label>
+    </div>
+    
+    <div class="page-content oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+                   oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">  
+        <div class="oj-flex" id="pwr-row-1">
+        <h1 class="oj-header-border text-center" style="font-weight:bold;">PURCHASE WITH RESOURCE (PWR) TRANSACTION TERM SHEET</h1>
+        </div>
+        <br>
+        <br>
+        <div class="oj-flex" id="pwr-row-2">
+            <div class="two-cols">
+            <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-3 oj-lg-even-cols-4 oj-lg-labels-inline">   
+                <div class="oj-flex">
+                <div class="oj-flex-item">
+                        <label for="pwrLimit">Conterparty Name</label>  
+                </div>
+                <div class="oj-flex-item">
+                    <input id="pwrLimit"
+                           data-bind="ojComponent: {component: 'ojInputText', value: 'CIMB Bank', disabled:true}"/>
+                </div>
+                </div>
+                </div>
+            </div>
+            <div class="two-cols">
+            <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-3 oj-lg-even-cols-4 oj-lg-labels-inline">   
+                <div class="oj-flex" style="float:right;">
+                    <div class="oj-flex-item">
+                            <label for="pwrLimit">Date :</label>  
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="pwrLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: currentDate, converter: longDateConverter, readOnly:true}"/>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="oj-header-border">CREDIT LIMIT</h3>
+        <div class="oj-flex" id="pwr-row-3">
+            <div class="oj-form-layout" style="width:100%;">
+                <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+                <div class="oj-flex-item">
+                  <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-2 oj-lg-even-cols-10 oj-lg-labels-inline">   
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="pwrLimit">PWR Limit (RM Million)</label>
+                      </div>
+                      <div class="oj-flex-item currency-right">
+                        <input id="pwrLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: pwrLimit, disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="currUtilization">Current Utilization (RM Million)</label>
+                      </div>
+                      <div class="oj-flex-item currency-right">
+                        <input id="currUtilization"
+                               data-bind="ojComponent: {component: 'ojInputText', value: currUtilization, disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="avlLimit">Available Limit (RM Million)</label>
+                      </div>
+                      <div class="oj-flex-item currency-right">
+                        <input id="avlLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: avlLimit, disabled:true}"/>
+                      </div>
+                    </div>
+                    </div>
+                </div>                               
+              </div>
+            </div>
+        </div>
+        <div class="page-content oj-flex" id="pwr-row-4">
+            <table id="table"
+                    data-bind="ojComponent: {component: 'ojTable', 
+                            data: pwrDatasource, 
+                            columns: [{headerText: 'PWR Counterparty Type', 
+                                       field: 'pwrType'},
+                                      {headerText: 'Concentration Limit', 
+                                       field: 'concentrationLimit'},
+                                      {headerText: 'Exposures as at 31/1/2017', 
+                                       field: 'exposures'}],
+                                rootAttributes: {style:'width:100%;'}}">
+            </table>
+        </div>
+        <br>
+        <div class="page-content oj-flex" id="pwr-row-5">
+            <div style="width:100%;">
+                <table id="table"
+                        data-bind="ojComponent: {component: 'ojTable', 
+                                data: underlyingDatasource, 
+                                columns: [{headerText: 'Underlying Asset Type', 
+                                           field: 'underlyingType'},
+                                          {headerText: 'Concentration Limit', 
+                                           field: 'concentrationLimit'},
+                                          {headerText: 'Exposures as at 31/1/2017', 
+                                           field: 'exposures'}],
+                                rootAttributes: {style:'width:100%;'}}">
+                </table>
+            </div>
+            <div class="oj-flex" style="width:100%;">
+                <div class="two-cols">
+                    * Total Exposures = Total PWR + Total PWOR Outstanding Exposures
+                </div>
+                <div class="two-cols" style="text-align: right;">
+                    Exposures as at 31 January 2017
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="oj-flex" id="pwr-row-6">
+            <div class="two-cols">
+                <h3 class="oj-header-border">PROPOSED TRANSACTION DETAILS</h3>
+                <div class="oj-form-layout" style="width:100%;">
+                <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+                <div class="oj-flex-item">
+                  <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">   
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="pwrLimit">Proposed Amount (RM Million)</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="pwrLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: 'RM 300.00 Mil', disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="currUtilization">Type</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="currUtilization"
+                               data-bind="ojComponent: {component: 'ojInputText', value: 'Conventional', disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="currUtilization">Underlying Receivable</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="currUtilization"
+                               data-bind="ojComponent: {component: 'ojInputText', value: 'Housing Loan', disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="avlLimit">Transaction Date</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="avlLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: '27/03/2017', disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="avlLimit">Repayment Type</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="avlLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: 'Principal + Interest', disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="avlLimit">Repayment Frequency</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="avlLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: 'Quarterly', disabled:true}"/>
+                      </div>
+                    </div>
+                    </div>
+                </div>                               
+              </div>
+            </div>
+            </div>
+            <div class="two-cols">
+                <h3 class="oj-header-border">RATES</h3>
+                <div class="oj-form-layout" style="width:100%;">
+                <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+                <div class="oj-flex-item">
+                  <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">   
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="pwrLimit">Tenure</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="pwrLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: '3 Years', disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="currUtilization">PWR Rate(%)</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="currUtilization"
+                               data-bind="ojComponent: {component: 'ojInputText', value: '0.1', disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="avlLimit" data-bind="text:'Cost of Fund (%) ' + cofDate"></label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="avlLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: '3.75', disabled:true}" />
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="avlLimit2" data-bind="text:'Final Cost of Fund (%) ' + finalCofDate"></label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="avlLimit2"
+                               data-bind="ojComponent: {component: 'ojInputText', value: '3.75', disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="avlLimit">Margin</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="avlLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: '0.32', disabled:true}"/>
+                      </div>
+                    </div>
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="avlLimit">OC (%)</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="avlLimit"
+                               data-bind="ojComponent: {component: 'ojInputText', value: 'N/A', disabled:true}"/>
+                      </div>
+                    </div>
+                    </div>
+                </div>                               
+              </div>
+            </div>
+            </div>
+        </div>
+        <br>
+        <div class="oj-flex" id="pwr-row-7">
+        <table class="tg">
+          <tr>
+            <th class="tg-ygl1">Name</th>
+            <th class="tg-ygl1">Signature</th>
+            <th class="tg-ygl1">Date</th>
+          </tr>
+          <tr>
+            <td class="tg-ygl1">*COF Confirmed by</td>
+            <td class="tg-7h0m"></td>
+            <td class="tg-7h0m"></td>
+          </tr>
+          <tr class="sign-col">
+            <td class="tg-031e"></td>
+            <td class="tg-031e"></td>
+            <td class="tg-031e"></td>
+          </tr>
+          <tr>
+            <td class="tg-x9s4">Proposed by</td>
+            <td class="tg-d1kj"></td>
+            <td class="tg-d1kj"></td>
+          </tr>
+          <tr class="sign-col">
+            <td class="tg-yw4l"></td>
+            <td class="tg-yw4l"></td>
+            <td class="tg-yw4l"></td>
+          </tr>
+          <tr>
+            <td class="tg-x9s4">Supported by</td>
+            <td class="tg-d1kj"></td>
+            <td class="tg-d1kj"></td>
+          </tr>
+          <tr class="sign-col">
+            <td class="tg-yw4l"></td>
+            <td class="tg-yw4l"></td>
+            <td class="tg-yw4l"></td>
+          </tr>
+          <tr class="sign-col">
+            <td class="tg-yw4l"></td>
+            <td class="tg-yw4l"></td>
+            <td class="tg-yw4l"></td>
+          </tr>
+          <tr>
+            <td class="tg-x9s4">Approved by</td>
+            <td class="tg-d1kj"></td>
+            <td class="tg-d1kj"></td>
+          </tr>
+          <tr class="sign-col">
+            <td class="tg-yw4l"></td>
+            <td class="tg-yw4l"></td>
+            <td class="tg-yw4l"></td>
+          </tr>
+        </table>
+        </div>
+        <div class="oj-flex" id="pwr-row-7">
+            <div style="margin:15px 60px 0 auto;width: 50%;">
+                <button id= "button" class="action-button" style="float:right"
+                        data-bind="click: onClickPrint, 
+                            ojComponent: {component: 'ojButton', label: 'PRINT', childAttributes:{style:'white-space: normal;'}}">
+                </button>
+                <button id= "button" class="action-button" style="float:right"
+                        data-bind="click: onClickSubmit, 
+                            ojComponent: {component: 'ojButton', label: 'SUBMIT', childAttributes:{style:'white-space: normal;'}}">
+                </button>
+                <button id= "button" class="action-button" style="float:right"
+                        data-bind="click: onClickBack, 
+                            ojComponent: {component: 'ojButton', label: 'BACK', childAttributes:{style:'white-space: normal;'}}">
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="blank-footer">
+    </div>
+</div>

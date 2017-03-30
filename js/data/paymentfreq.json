@@ -1,0 +1,143 @@
+{
+  "MdPymtFreq" : [ {
+    "pymtFreqCd" : "D",
+    "pymtFreqName" : "DAILY",
+    "pymtFreqDesc" : "Daily",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
+    "createDate" : "2017-02-24T15:22:41.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "pymtFreqCd" : "W",
+    "pymtFreqName" : "WEEKLY",
+    "pymtFreqDesc" : "Weekly",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
+    "createDate" : "2017-02-24T15:22:41.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "pymtFreqCd" : "F",
+    "pymtFreqName" : "FORTNIGHTLY",
+    "pymtFreqDesc" : "Fortnightly",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
+    "createDate" : "2017-02-24T15:22:41.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "pymtFreqCd" : "M",
+    "pymtFreqName" : "MONTHLY",
+    "pymtFreqDesc" : "Monthly",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
+    "createDate" : "2017-02-24T15:22:41.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "pymtFreqCd" : "Q",
+    "pymtFreqName" : "QUARTERLY",
+    "pymtFreqDesc" : "Quarterly",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
+    "createDate" : "2017-02-24T15:22:41.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "pymtFreqCd" : "H",
+    "pymtFreqName" : "HALF_YEARLY",
+    "pymtFreqDesc" : "Half Yearly",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
+    "createDate" : "2017-02-24T15:22:41.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "pymtFreqCd" : "Y",
+    "pymtFreqName" : "YEARLY",
+    "pymtFreqDesc" : "Yearly",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
+    "createDate" : "2017-02-24T15:22:41.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "pymtFreqCd" : "FD",
+    "pymtFreqName" : "FULL_DISBURSE",
+    "pymtFreqDesc" : "Upon Full Disbursement",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
+    "createDate" : "2017-02-24T15:22:41.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "pymtFreqCd" : "FFA",
+    "pymtFreqName" : "FULL_FIVE_ANNUAL",
+    "pymtFreqDesc" : "Payment to be made in 5 equal instalments starting from full disbursement date and followed by 1st, 2nd, 3rd and 4th anniversary of date of disbursement.",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
+    "createDate" : "2017-02-24T15:22:41.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  }, {
+    "pymtFreqCd" : "B",
+    "pymtFreqName" : "BULLET",
+    "pymtFreqDesc" : "Bullet Frequency",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
+    "createDate" : "2017-02-24T15:22:41.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : {
+      "@nil" : "true"
+    },
+    "lastUpdateBy" : {
+      "@nil" : "true"
+    }
+  } ]
+}

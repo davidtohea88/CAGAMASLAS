@@ -1,0 +1,245 @@
+<div class="oj-form-layout" id="form-container">
+    <div class="page-title">
+        <label class="white-color" data-bind="text:header"></label>
+    </div>
+    <div class="page-content oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+                   oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">  
+        <h3 class="oj-header-border" data-bind="text:subHeader">
+            &nbsp;
+        </h3>
+        <div class="page-content oj-flex" id="gf-row-0">
+            <div style="width: 100%;text-align: right;">
+                <button  id= "buttonSearch" data-bind="click: onClickClose, ojComponent: { component: 'ojButton', label: 'Close' }"></button>
+            </div>
+        </div>
+        <div class="page-content oj-flex" id="gf-row-1">
+            <div style="width:100%;">
+                <label for="select" style="margin-right:20px;">Period</label>
+                <select id="selectMonth" style="max-width: 10em;margin-right:5px;" data-bind="ojComponent: {component: 'ojSelect', options: months, value: selectedMonth, placeholder: 'Month'}"></select>
+                <select id="selectYear" style="max-width: 10em;margin-right:5px;" data-bind="ojComponent: {component: 'ojSelect', options: years, value: selectedYear, placeholder: 'Year'}"></select>
+                <button  id= "buttonSearch" data-bind="click: onClickSearch, ojComponent: { component: 'ojButton', label: 'Search' }">
+                </button>
+            </div>
+        </div>
+        <br>
+         <h3 class="oj-header-border">Cost</h3>
+        <div class="oj-flex" id="gf-row-2">
+            <button  id= "buttonSearch" data-bind="click: onClickNew, 
+                ojComponent: { component: 'ojButton', label: 'New' }">
+            </button>
+            <table id="table" summary="Cost Summary" aria-label="Cost Summary"
+                   data-bind="ojComponent: {component: 'ojTable', data: datasource, 
+                   columnsDefault: {sortable: 'none'}, columns:
+                    [{headerText: 'Month', field: 'Month', style: 'width: 10%'},
+                    {headerText: 'Year', field: 'Year', style: 'width: 10%'},
+                    {headerText: 'Other Administrative Expense (SRP)', field: 'oaeSRP', style: 'width: 15%'},
+                    {headerText: 'Other Administrative Expense (SPB)', field: 'oaeSPB', style: 'width: 15%'},
+                    {headerText: 'Cumulative Other Administrative Expense (SRP)', field: 'coaeSRP', style: 'width: 15%'},
+                    {headerText: 'Cumulative Other Administrative Expense (SPB)', field: 'coaeSPB', style: 'width: 15%'},
+                    {headerText: 'Status', field: 'Status', style: 'width: 10%'},
+                    {headerTemplate: 'action_hdr', template: 'action_item', style: 'width: 10%'}],
+                    rootAttributes: {'style':'width: 100%;'}}">
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="oj-flex" id="gf-row-0">
+        <div class="oj-flex page-content">                      
+            <div class="oj-flex-item">
+                <button id= "btn_search" data-bind="click : onExportClick, ojComponent: { component: 'ojButton', label: 'Export' }"></button>
+                <button id= "btn_search" data-bind="click : onPrintClick, ojComponent: { component: 'ojButton', label: 'Print' }"></button>
+            </div>
+        </div>
+    </div>
+    <div class="blank-footer">
+    </div>
+    <div style="display:none" id="UpdateDialog" title="Cost - Update"
+         data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',               rootAttributes: { style: 'width:900px; height: 450px;'}}">
+        <div class="oj-dialog-body">
+            <div id="CounterPartyPopUp">
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="pMonth">Month</label>
+                    </div>
+                    <div style="width:73%;">
+                        <select id="selectMonthPU" style="max-width: 10em;margin-right:5px;"
+                                data-bind="ojComponent: {component: 'ojSelect', options: months, value: inputMonth, placeholder: 'Month'}"></select>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="pYear">Year</label>
+                    </div>
+                    <div style="width:73%;">
+                        <select id="selectYearPU" style="max-width: 10em;margin-right:5px;"
+                                data-bind="ojComponent: {component: 'ojSelect', options: years, value: inputYear, placeholder: 'Year'}"></select>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="pYear">Other Administrative Expense (SRP)</label>
+                    </div>
+                    <div style="width:73%;">
+                        <input id="pYear" data-bind="ojComponent: {component: 'ojInputText', value: inputoaeSRP}"/>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="pYear">Other Administrative Expense (SPB)</label>
+                    </div>
+                    <div style="width:73%;">
+                        <input id="pYear" data-bind="ojComponent: {component: 'ojInputText', value: inputoaeSPB}"/>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="pJustification">Justification</label>
+                    </div>
+                    <div style="width:73%;">
+                        <textarea id="textareacontrol" rows="6"
+                                data-bind="ojComponent: {component: 'ojTextArea', 
+                                value: inputJustification, rootAttributes: {style:'max-width:30em;'}}">
+                        </textarea>
+                    </div>
+                </div>
+                <br/>
+                <div class="oj-flex" style='margin:10px 0 10px auto; width:45%;'>
+                    <button id="button" style='margin:5px;'
+                            data-bind="click: onClickSave,
+                            ojComponent: {component: 'ojButton', label: 'Save' }"></button>
+                    <button id="button" style='margin:5px;'
+                            data-bind="click: onClickCancel,
+                            ojComponent: {component: 'ojButton', label: 'Cancel' }"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:none" id="DeleteDialog" title="Cost - Delete"
+         data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',               rootAttributes: { style: 'width:900px; height: 450px;'}}">
+        <div class="oj-dialog-body">
+            <div id="CounterPartyPopUp">
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="pMonth">Month</label>
+                    </div>
+                    <div style="width:73%;">
+                        <select id="selectMonthPU" style="max-width: 10em;margin-right:5px;"
+                                data-bind="ojComponent: {component: 'ojSelect', options: months, value: inputMonth, disabled: true}"></select>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="pYear">Year</label>
+                    </div>
+                    <div style="width:73%;">
+                        <select id="selectYearPU" style="max-width: 10em;margin-right:5px;"
+                                data-bind="ojComponent: {component: 'ojSelect', options: years, value: inputYear, disabled: true}"></select>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="pYear">Other Administrative Expense (SRP)</label>
+                    </div>
+                    <div style="width:73%;">
+                        <input id="pYear" data-bind="ojComponent: {component: 'ojInputText', value: inputoaeSRP, disabled: true}"/>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="pYear">Other Administrative Expense (SPB)</label>
+                    </div>
+                    <div style="width:73%;">
+                        <input id="pYear" data-bind="ojComponent: {component: 'ojInputText', value: inputoaeSPB, disabled: true}"/>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="pJustification">Justification</label>
+                    </div>
+                    <div style="width:73%;">
+                        <textarea id="textareacontrol" rows="6"
+                                data-bind="ojComponent: {component: 'ojTextArea', 
+                                value: inputJustification, rootAttributes: {style:'max-width:30em;'}}">
+                        </textarea>
+                    </div>
+                </div>
+                <br/>
+                <div class="oj-flex" style='margin:10px 0 10px auto; width:45%;'>
+                    <button id="button" style='margin:5px;'
+                            data-bind="click: onClickSave,
+                            ojComponent: {component: 'ojButton', label: 'Save' }"></button>
+                    <button id="button" style='margin:5px;'
+                            data-bind="click: onClickCancel,
+                            ojComponent: {component: 'ojButton', label: 'Cancel' }"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:none" id="NewDialog" title="Cost"
+         data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',               rootAttributes: { style: 'width:900px; height: 450px;'}}">
+        <div class="oj-dialog-body">
+            <div id="CounterPartyPopUp">
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="selectNewMonthPU">Month</label>
+                    </div>
+                    <div class="newMonthSelect" style="width:73%;">
+                        <select id="selectNewMonthPU" style="max-width: 10em;margin-right:5px;"
+                                data-bind="ojComponent: {component: 'ojSelect', options: months, value: inputMonth, required: true, placeholder: 'Month'}"></select>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="selectYearPU">Year</label>
+                    </div>
+                    <div style="width:73%;">
+                        <select id="selectYearPU" style="max-width: 10em;margin-right:5px;"
+                                data-bind="ojComponent: {component: 'ojSelect', options: years, value: inputYear, required: true, placeholder: 'Year'}"></select>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="poaeSRP">Other Administrative Expense (SRP)</label>
+                    </div>
+                    <div style="width:73%;">
+                        <input id="poaeSRP" data-bind="ojComponent: {component: 'ojInputText', value: inputoaeSRP, required: true}"/>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:27%;">
+                        <label for="poaeSPB">Other Administrative Expense (SPB)</label>
+                    </div>
+                    <div style="width:73%;">
+                        <input id="poaeSPB" data-bind="ojComponent: {component: 'ojInputText', value: inputoaeSPB, required: true}"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="oj-flex" style='margin:10px 0 10px auto; width:45%;'>
+                    <button id="button" style='margin:5px;'
+                            data-bind="click: onClickSave,
+                            ojComponent: {component: 'ojButton', label: 'Save' }"></button>
+                    <button id="button" style='margin:5px;'
+                            data-bind="click: onClickCancel,
+                            ojComponent: {component: 'ojButton', label: 'Cancel' }"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="action_hdr">
+        <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+            Action
+        </th>
+    </script>
+    <script type="text/html" id="action_item">
+        <td>
+            <button id="button" style='margin:5px;'
+                                data-bind="click: $parent.onClickUpdate,
+                                ojComponent: {component: 'ojButton', label: 'Update' }">
+            </button>    
+            <button id="button" style='margin:5px;'
+                    data-bind="click: $parent.onClickDelete,
+                    ojComponent: {component: 'ojButton', label: 'Delete' }">
+            </button>
+        </td>
+    </script>
+</div>

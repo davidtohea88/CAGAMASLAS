@@ -1,0 +1,136 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div id="mgpmsad01Full" class="page-content">
+
+
+    
+
+<div class="demo-flex-display oj-flex-items-pad">
+  
+  <div class="oj-flex oj-sm-flex-items-initial   oj-sm-justify-content-center">
+    <div class="oj-flex-item">
+     
+ <div id="form-container">       
+     
+ 
+
+     
+        
+        MGP Contract No   <input id="partycombobox" list="msadparty"  title="Counter Party" 
+           data-bind="ojComponent: {component: 'ojCombobox',  value : partyVal , selected : partyVal , 
+                              
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="msadparty">
+		<option value="MY">H65487686</option>
+		<option value="IN">H65487664</option>
+		<option value="SIN">H8787686</option>
+		<option value="ST">H65487884</option>
+ 
+	</datalist>
+        
+<!--        Counter Party Group : <label data-bind="text: partyGrpVal() , width: '100px'" ></label>-->
+        
+        Asset Reference No   <input id="prdcombobox" list="msadprd"  title="Asset Reference No" 
+           data-bind="ojComponent: {component: 'ojCombobox',  
+                              
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="msadprd">
+		<option value="12">R2323424</option>
+		<option value="132">K234234I</option>	 
+		<option value="3453">L234223</option>
+ 
+	</datalist>
+        
+                <button id="j87gg"  style="margin:0px 10px"
+      data-bind=" ojComponent: {
+        component: 'ojButton',  
+        label: 'Search'}"></button>
+    </div>
+   
+    
+    </div>
+  </div>
+  <div class="oj-flex oj-sm-flex-items-initial 
+              oj-sm-only-justify-content-center oj-md-only-justify-content-center" >
+    <div class="oj-flex-item">
+
+
+    
+    </div>
+  </div>
+    
+    
+     
+    
+    
+    
+    <div class="oj-panel oj-margin demo-mypanel"   >
+ 
+        <h3 class="oj-header-border">Servicing Details
+         <button id="ff" 
+      data-bind=" ojComponent: {
+        component: 'ojButton',  
+        label: 'Export'}"></button>
+            
+              <button id="tprint" 
+      data-bind=" ojComponent: {
+        component: 'ojButton',  
+        label: 'Print'}"></button>
+        
+        </h3>
+        <div>
+       
+ 
+
+ 
+                
+            <div id="msad01Rg" class="page-content"  >
+            
+        <table id="msad01Tbl" summary=" MSAD Upload File" aria-label="MSAD Upload File"
+           data-bind="ojComponent: {component: 'ojTable', data: msad01DS, columns:
+            [
+ 
+ 
+   { headerText: 'S No'  ,  field: 'srlNo'}, 
+ 
+{ headerText: 'Loan Referance No'  ,  field: 'loanRefNo'}, 
+{ headerText: 'Purchase Contract No'  ,  field: 'contractNo'}, 
+{ headerText: 'Default Notice Date ' , field: 'loanApprovDate'}, 
+{ headerText: 'Outstanding Capital'  ,  field: 'lastOutstdCapAmt'}, 
+ 
+{ headerText: 'Arear Months'  ,  field: 'monArrears'}, 
+{ headerText: 'Approved Amount'  ,  field: 'apprvAmt'}, 
+ 
+{ headerText: '1st Reminder Date'  ,  field: 'intRateEffDate'}, 
+ 
+{ headerText: '2nd Reminder Date'  ,  field: 'reportDate'}, 
+{ headerText: '3rd Reminder Date'   ,  field: 'createDate'}, 
+{ headerText: 'Warning Letter Date'  ,  field: 'lastUpdateDate'} 
+         ],                                  
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="msad01Pg" data-bind="ojComponent: {component: 'ojPagingControl', data: msad01DS, pageSize: 15}">
+    </div>
+</div>
+    
+            
+            
+      </div>
+    </div>
+    
+    
+  
+  <script type="text/html" id="oracle_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Select
+    </th>
+</script>
+<script type="text/html" id="oracle_action">
+    <td> 
+        
+     
+           <input name="ddd" id="sdsd" value="Sdsds"  type="checkbox">  </input>
+    </td>
+</script> 
+
+</div>
+</div>

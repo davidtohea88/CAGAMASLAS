@@ -1,0 +1,52 @@
+<div id="form-container">
+    <div class="oj-form-layout">
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-md-labels-inline">
+            <div class="page-title">
+                <label class="white-color" data-bind="text:header"></label>
+            </div>
+            <h1 style="font-weight: bold; text-align: center;">Upload and Validation</h1>
+            <div class="oj-flex">
+                <div class="oj-flex-item">
+                    <label for="control1">Counterparty</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="control1"
+                           data-bind="ojComponent: {component: 'ojInputText',value:'Counterparty A', disabled: true}"/>
+                </div>
+            </div>
+            <br/>
+            <div class="oj-flex">
+                <div class="oj-flex-item">
+                    <label for="control2" style="float: right;margin-right: 7px;">Caga 1</label>
+                </div>
+                <div class="oj-flex-item">
+                    <a onclick="openFileDialog();return;">
+                        <img style="width: 16px;vertical-align: sub;" src="css/images/blue-plus-icon.png"/>Browse File</a>
+                     
+                    <input type="file" id="browseFile1" value="Browse File" style="position: fixed; top: -100em"/>
+                </div>
+            </div>
+            <div class="oj-flex">
+                <div class="oj-flex-item">
+                    <label for="control3" style="float: right;margin-right: 7px;">Caga 2</label>
+                </div>
+                <div class="oj-flex-item">
+                    <a onclick="openFileDialog();return;">
+                        <img style="width: 16px;vertical-align: sub;" src="css/images/blue-plus-icon.png"/>Browse File</a>
+                     
+                    <input type="file" id="browseFile2" value="Browse File" style="position: fixed; top: -100em"/>
+                </div>
+            </div>
+            <br/>
+             
+            <br/>
+            <div class="oj-flex" style="width: 50%; margin-left: auto; margin-right: 12%;">
+                <button id="button" class="action-button"
+                        data-bind="click: onClickUpload,                              ojComponent: {component: 'ojButton', label: 'Upload', childAttributes:{style:'white-space: normal;'}}"></button>
+                 
+                <button id="button" class="action-button"
+                        data-bind="click: onClickBack,                              ojComponent: {component: 'ojButton', label: 'Back', childAttributes:{style:'white-space: normal;'}}"></button>
+            </div>
+        </div>
+    </div>
+</div>

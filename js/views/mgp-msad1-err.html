@@ -1,0 +1,232 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div id="mgpmsad01Full" class="page-content">
+
+
+    
+
+<div class="demo-flex-display oj-flex-items-pad">
+  
+  <div class="oj-flex oj-sm-flex-items-initial   oj-sm-justify-content-center">
+    <div class="oj-flex-item">
+     
+ <div id="form-container" style="width:60em">       
+     MGP Contract Number   <input id="prdcombobox" list="msadprd"  title="" 
+           data-bind="ojComponent: {component: 'ojCombobox',  
+                              
+                                    rootAttributes: {style:'max-width:15em'}}"/>
+	<datalist id="msadprd">
+		<option value="108/MGPSRP/0317/150">108/MGPSRP/0317/150</option>
+		<option value="108/MGPSRP/0317/151">108/MGPSRP/0317/151</option>	  
+	</datalist>
+        Month   <input id="prdcombobox" list="month"  title="" 
+           data-bind="ojComponent: {component: 'ojCombobox',  
+                              
+                                    rootAttributes: {style:'max-width:5em'}}"/>
+	<datalist id="month">
+		<option value="January">January</option>
+		<option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+	</datalist>
+        Year   <input id="prdcombobox" list="year"  title="" 
+           data-bind="ojComponent: {component: 'ojCombobox',  
+                              
+                                    rootAttributes: {style:'max-width:5em'}}"/>
+	<datalist id="year">
+                <option value="2014">2014</option>
+		<option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+		
+	</datalist>
+         <button  id="changeLabel2"  
+                
+                data-bind="click: doSearch, ojComponent:{component:'ojButton', label: 'Search'}"    ></button>
+
+    </div>
+   
+    
+    </div>
+  </div>
+  <div class="oj-flex oj-sm-flex-items-initial 
+              oj-sm-only-justify-content-center oj-md-only-justify-content-center" >
+    <div class="oj-flex-item">
+
+
+    
+    </div>
+  </div>
+    
+    
+     
+    
+    
+  <div   class="oj-flex oj-sm-flex-items-initial 
+              oj-lg-justify-content-center" >
+    <div class="oj-flex-item" >
+
+          <div id="radioSetId"   
+               aria-labelledby="radiosetlabel"
+               data-bind="ojComponent: {
+                 component: 'ojRadioset'}">
+            
+              
+                  <span class="oj-choice-row-inline">
+              <input id="bluet" type="radio" name="rbb" 
+                     value="C">
+              <label for="bluet">Closed Asset</label>
+            </span>
+              
+                  <span class="oj-choice-row-inline">
+              <input id="bwwt" type="radio" name="rbb" 
+                     value="V">
+              <label for="blueopt">Validated Asset</label>
+            </span>
+              
+              
+            <span class="oj-choice-row-inline">
+              <input id="greenopt" type="radio" name="rbb" 
+                     value="F">
+              <label for="greenopt">Failed Asset</label>
+            </span>
+            <span class="oj-choice-row-inline">
+              <input id="redopt" type="radio" name="rbb" 
+                     value="A" checked>
+              <label for="redopt">All Asset</label>
+            </span>
+       
+      </div>
+        
+        
+    </div>
+  </div>
+    
+    
+    
+    
+    <div class="oj-panel oj-margin demo-mypanel"   >
+ 
+        <h3 class="oj-header-border">Servicing Details
+          
+             <button id="ff" 
+      data-bind=" ojComponent: {
+        component: 'ojButton',  
+        label: 'Export'}"></button>
+              <button id="tprint" 
+      data-bind=" ojComponent: {
+        component: 'ojButton',  
+        label: 'Print'}"></button>
+        
+        </h3>
+        <div>
+       
+ 
+
+ 
+                
+            <div id="msad01Rg" class="page-content"  >
+            
+        <table id="msad01Tbl" summary=" MSAD Upload File" aria-label="MSAD Upload File"
+           data-bind="ojComponent: {component: 'ojTable', data: msad01DS, columns:
+            [
+     
+   { headerText: 'S No'  ,  field: 'srlNo'}, 
+{ headerText: 'Asset Referance No'  ,  field: 'loanRefNo'}, 
+{ headerText: 'Purchase Contract No'  ,  field: 'contractNo'}, 
+{ headerText: 'Asset Approve Date ' , field: 'loanApprovDate'}, 
+{ headerText: 'Approved Amount'  ,  field: 'apprvAmt'}, 
+{ headerText: 'Fully Disbursed'  ,  field: 'fullyDibs'}, 
+{ headerText: 'Fully Disbursed Date'  ,  field: 'fullyDibsDate'}, 
+
+{ headerText: 'Arear Months'  ,  field: 'monArrears'}, 
+{ headerText: 'Total Arear Amount'  ,  field: 'totAmtArrears'}, 
+{ headerText: 'Proection Terminated'  ,  field: 'protectionTerminated'}, 
+{ headerText: 'Terminated Reason'  ,  field: 'terminatedReason'}, 
+{ headerText: 'Exception'  ,  value : 'Error'}
+   ],                                  
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="msad01Pg" data-bind="ojComponent: {component: 'ojPagingControl', data: msad01DS, pageSize: 15}">
+    </div>
+</div>
+    
+            
+            
+      </div>
+    </div>
+    
+  <div style="display:none" id="modalDialog1" title="Update Status" 
+       data-bind="ojComponent:{component: 'ojDialog',  }">
+     <div class="oj-dialog-body">
+    
+         
+         <div class="oj-form-layout">
+
+    <div class="oj-form oj-sm-odd-cols-120 oj-md-odd-cols-6 oj-md-labels-inline
+                oj-form-cols-labels-inline oj-form-cols-max4"    >
+      <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label for="inputcontrol">Termination Reasons</label>
+        </div>
+        <div class="oj-flex-item">
+         <input id="termcombobox" list="termlist"  title="Terminate Reason" 
+           data-bind="ojComponent: {component: 'ojCombobox',  required: true  ,
+                              
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="termlist">
+		<option value="MY">Low Income</option>
+		<option value="IN">Default</option>
+		<option value="SIN">Cheque Return</option>
+	 
+ 
+	</datalist>
+        </div>
+      </div>
+      <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label for="textareacontrol">Termination Comments </label>
+        </div>
+        <div class="oj-flex-item">
+          <textarea id="textareacontrol" rows="6"
+                    data-bind="ojComponent: {component: 'ojTextArea', required: true,
+                                             value: ' ',}"></textarea>
+        </div>
+      </div>
+     
+ 
+        
+    </div>
+         </div>
+         
+         
+     </div>
+     <div class="oj-dialog-footer">
+        <button id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Submit'}"> </button>
+          <button id="canelButton" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+      </div>
+  </div>
+    
+  
+  <script type="text/html" id="oracle_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Select
+    </th>
+</script>
+<script type="text/html" id="oracle_action">
+    <td> 
+        
+     
+           <input name="ddd" id="sdsd" value="Sdsds"  type="checkbox">  </input>
+    </td>
+</script> 
+
+</div>
+</div>

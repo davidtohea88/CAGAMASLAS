@@ -1,0 +1,185 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div id="mgpmsad01Full" class="page-content">
+
+
+    
+
+<div class="demo-flex-display oj-flex-items-pad">
+  
+  <div class="oj-flex oj-sm-flex-items-initial   oj-sm-justify-content-center">
+    <div class="oj-flex-item">
+     
+ <div id="form-container" style="width:60em">       
+     
+ 
+
+     
+        
+        Asset Reference Number   <input id="partycombobox" list="msadparty"  title="Asset Reference Number" 
+           data-bind="ojComponent: {component: 'ojCombobox',  value : partyVal , selected : partyVal , 
+                              
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="msadparty">
+		<option value="H1601210123">H1601210123</option>
+		<option value="H1601210124">H1601210124</option>
+		<option value="H1601210125">H1601210125</option>
+		<option value="H1601210126">H1601210126</option>
+ 
+	</datalist>
+        
+<!--        Counter Party Group : <label data-bind="text: partyGrpVal() , width: '100px'" ></label>-->
+        
+        MGP Contract Number   <input id="prdcombobox" list="msadprd"  title="" 
+           data-bind="ojComponent: {component: 'ojCombobox',  
+                              
+                                    rootAttributes: {style:'max-width:15em'}}"/>
+	<datalist id="msadprd">
+		<option value="108/MGPSRP/0317/150">108/MGPSRP/0317/150</option>
+		<option value="108/MGPSRP/0317/151">108/MGPSRP/0317/151</option>	  
+	</datalist>
+         <button  id="changeLabel2"  
+                
+                data-bind="click: doSearch, ojComponent:{component:'ojButton', label: 'Search'}"    ></button>
+    </div>
+   
+    
+    </div>
+  </div>
+  <div class="oj-flex oj-sm-flex-items-initial 
+              oj-sm-only-justify-content-center oj-md-only-justify-content-center" >
+    <div class="oj-flex-item">
+
+
+    
+    </div>
+  </div>
+    
+    
+     
+    
+    
+      
+    
+    
+    
+    <div class="oj-panel oj-margin demo-mypanel"   >
+ 
+        <h3 class="oj-header-border">Servicing Details
+         <button  class="diaOpener"
+      data-bind=" ojComponent: {
+        component: 'ojButton',  
+        label: 'Terminate'}"></button>
+             <button id="ff" 
+      data-bind=" ojComponent: {
+        component: 'ojButton',  
+        label: 'Export'}"></button>
+              <button id="tprint" 
+      data-bind=" ojComponent: {
+        component: 'ojButton',  
+        label: 'Print'}"></button>
+        
+        </h3>
+        <div>
+       
+ 
+
+ 
+                
+            <div id="msad01Rg" class="page-content"  >
+            
+        <table id="msad01Tbl" summary=" MSAD Upload File" aria-label="MSAD Upload File"
+           data-bind="ojComponent: {component: 'ojTable', data: msad01DS, columns:
+            [
+           {headerTemplate: 'oracle_action_hdr', template: 'oracle_action', style: 'width: 10%;text-align:center;'},      
+   { headerText: 'S No'  ,  field: 'srlNo'}, 
+{ headerText: 'Asset Referance No'  ,  field: 'loanRefNo'}, 
+{ headerText: 'Purchase Contract No'  ,  field: 'contractNo'}, 
+{ headerText: 'Asset Approve Date ' , field: 'loanApprovDate'}, 
+{ headerText: 'Approved Amount'  ,  field: 'apprvAmt'}, 
+{ headerText: 'Fully Disbursed'  ,  field: 'fullyDibs'}, 
+{ headerText: 'Fully Disbursed Date'  ,  field: 'fullyDibsDate'}, 
+
+{ headerText: 'Arear Months'  ,  field: 'monArrears'}, 
+{ headerText: 'Total Arear Amount'  ,  field: 'totAmtArrears'}, 
+{ headerText: 'Terminated Reason'  ,  field: 'terminatedReason'},
+{ headerText: 'Comment'  ,  field: 'comment'},
+   ],                                  
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="msad01Pg" data-bind="ojComponent: {component: 'ojPagingControl', data: msad01DS, pageSize: 15}">
+    </div>
+</div>
+    
+            
+            
+      </div>
+    </div>
+    
+  <div style="display:none" id="modalDialog1" title="Update Status" 
+       data-bind="ojComponent:{component: 'ojDialog',  }">
+     <div class="oj-dialog-body">
+    
+         
+         <div class="oj-form-layout">
+
+    <div class="oj-form oj-sm-odd-cols-120 oj-md-odd-cols-6 oj-md-labels-inline
+                oj-form-cols-labels-inline oj-form-cols-max4"    >
+      <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label for="inputcontrol">Termination Reasons</label>
+        </div>
+        <div class="oj-flex-item">
+         <input id="termcombobox" list="termlist"  title="Terminate Reason" 
+           data-bind="ojComponent: {component: 'ojCombobox',  required: true  ,
+                              
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="termlist">
+		<option value="MY">Loan/Facility Fully Settled </option>
+		<option value="IN">Assets Fall Below Protection Amount</option>
+		<option value="SIN">Breach of EC</option>
+                <option value="SI">Others</option>
+                <option value="SI">Guaranteed Amount is settled by Cagamas SRP Berhad</option>
+ 
+	</datalist>
+        </div>
+      </div>
+      <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label for="textareacontrol">Termination Comments </label>
+        </div>
+        <div class="oj-flex-item">
+          <textarea id="textareacontrol" rows="6"
+                    data-bind="ojComponent: {component: 'ojTextArea', required: true,
+                                             value: ' ',}"></textarea>
+        </div>
+      </div>
+     
+ 
+        
+    </div>
+         </div>
+         
+         
+     </div>
+     <div class="oj-dialog-footer">
+        <button id="okButton" data-bind="click: doSubmit,ojComponent: {component: 'ojButton', label: 'Submit'}"> </button>
+          <button id="canelButton" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+      </div>
+  </div>
+    
+  
+  <script type="text/html" id="oracle_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Select
+    </th>
+</script>
+<script type="text/html" id="oracle_action">
+    <td> 
+        
+     
+           <input name="ddd" id="sdsd" value="Sdsds"  type="checkbox">  </input>
+    </td>
+</script> 
+
+</div>
+</div>

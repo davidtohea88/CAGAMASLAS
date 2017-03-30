@@ -1,0 +1,231 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div id="mgpmsad01Full" class="page-content">
+
+
+    
+
+<div class="demo-flex-display oj-flex-items-pad">
+  
+  <div class="oj-flex oj-sm-flex-items-initial   oj-sm-justify-content-center">
+    <div class="oj-flex-item">
+     
+ 
+   
+    
+    </div>
+  </div>
+ 
+    
+    
+      
+    
+    
+    <div class="oj-panel oj-margin demo-mypanel"   >
+ 
+        <h3 class="oj-header-border">Servicing Details
+ 
+        
+        </h3>
+        
+   
+        
+        
+        
+        
+        
+        <div>
+       
+ 
+  <div class="oj-form-layout">
+    <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline" >
+      <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label  >Period
+
+</label>
+        </div>
+        <div class="oj-flex-item">
+            : <label> March 2017 </label>
+            
+<!--             <input id="mnthcombobox" list="msadmonths"  title="Period" 
+           data-bind="ojComponent: {component: 'ojCombobox', 
+                              
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="msadmonths">
+		<option value="Jan">Jan 2012</option>
+		<option value="Feb">Feb 2015</option>
+		<option value="March">March 2015</option>
+		<option value="April">April 2015</option>
+		<option value="May">May 2015</option>
+	</datalist>-->
+        </div>
+      </div>
+        
+         <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label  >Status
+</label>
+        </div>
+        <div class="oj-flex-item">
+         :   Pending Approval
+        </div>
+      </div>
+        
+        
+         <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label  >Total Conventional Fee
+</label>
+        </div>
+        <div class="oj-flex-item">
+            :   345345345
+        </div>
+      </div>
+        
+         <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label  >Total Islamic Fee
+            
+</label>
+        </div>
+        <div class="oj-flex-item">
+            :   3453453
+        </div>
+      </div>
+        
+         <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label  >Total Fee Amount
+</label>
+        </div>
+        <div class="oj-flex-item">
+            :   12313
+        </div>
+      </div>
+ 
+ 
+         <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label  >  Requested by
+
+              
+</label>
+        </div>
+        <div class="oj-flex-item">
+            :   Monica
+        </div>
+      </div>
+        
+           <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label  >  Reviewed by
+
+              
+</label>
+        </div>
+        <div class="oj-flex-item">
+            :   Pipit
+        </div>
+      </div> 
+            
+         <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label  >Recommended by
+
+
+</label>
+        </div>
+             
+        <div class="oj-flex-item">
+            :   Ezhil
+        </div>
+      </div>
+            
+            
+         <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label  >Approver 1
+
+
+</label>
+        </div>
+        <div class="oj-flex-item">
+            :   David
+        </div>
+      </div>
+            
+        
+                 <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label  >Approver 2
+
+
+</label>
+        </div>
+        <div class="oj-flex-item">
+           :   Rahul
+        </div>
+      </div>
+        <h3  style="font-variant-caps: initial" class="oj-header-border">
+           <a > Approval Memo : </a>
+            <button  data-bind="ojComponent: {component: 'ojButton', label: 'View Document'}"> </button>
+        
+        </h3>         
+              <button class="diaOpener"  data-bind="ojComponent: {component: 'ojButton', label: 'Approve'}"> </button>
+                   <button  class="diaOpener" data-bind="ojComponent: {component: 'ojButton', label: 'Reject'}"> </button>
+      </div>
+      
+       
+        
+    </div>
+    
+    
+    
+  <div style="display:none ;  " id="modalDialog1"     title="Guarantee Fee Approval" 
+       data-bind="ojComponent:{component: 'ojDialog',  }">
+     <div     class="oj-dialog-body">
+    
+         
+         <div   >
+
+    <div    >
+        
+              <div class="oj-flex">
+        <div class="oj-flex-item">
+          <label for="textareacontrol"> Comments </label>
+        </div>
+        <div class="oj-flex-item">
+          <textarea id="textareacontrol" rows="6"
+                    data-bind="ojComponent: {component: 'ojTextArea', 
+                                             value: ' ',}"></textarea>
+        </div>
+        
+ 
+        
+    </div>
+         </div>
+         
+         
+     </div>
+     <div class="oj-dialog-footer">
+        <button id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Submit'}"> </button>
+          <button id="canelButton" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+      </div>
+  </div>
+    
+   
+  <script type="text/html" id="oracle_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Select
+    </th>
+</script>
+<script type="text/html" id="oracle_action">
+    <td> 
+        
+     
+           <input name="ddd" id="sdsd" value="Sdsds"  type="checkbox">  </input>
+    </td>
+</script> 
+
+</div>
+</div>

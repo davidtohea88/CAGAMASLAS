@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<div class="oj-form-layout" id="form-container">
+    <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+</div>
+<div class="page-content oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+     oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">
+    <div class="oj-flex" id="cp-row-1">
+        <div style="width:100%;padding-left:0%">
+            <h3 class="oj-header-border">Filter</h3>
+            <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout">                      
+                <div class="oj-flex-item">   
+                    <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                        <div class="oj-flex">  
+                            <div class="oj-flex-item">
+                                <label>Counterparty Name</label>
+                            </div>
+                            <div class="oj-flex-item">
+                                <div class="oj-inputtext oj-form-control oj-component"><input id="searchName" data-bind="ojComponent: {component: 'ojInputText', value:''}" type="text" placeholder="" class="oj-inputtext-input oj-component-initnode"></div>
+                            </div>
+                        </div> 
+                        <div class="oj-flex">  
+                            <div class="oj-flex-item">
+                                <label>Counterparty Group</label>
+                            </div>
+                            <div class="oj-flex-item">
+                                <div class="oj-inputtext oj-form-control oj-component"><input id="searchGroup" data-bind="value:nameSearch,ojComponent: {component: 'ojInputText', value:''}" type="text" placeholder="" class="oj-inputtext-input oj-component-initnode"></div>
+                            </div>
+                        </div> 
+                        <div class="oj-flex">  
+                            <div class="oj-flex-item">
+                                <label>Counterparty Type</label>
+                            </div>
+                            <div class="oj-flex-item">
+                                <div class="oj-inputtext oj-form-control oj-component">
+                                    <select id="searchType" data-bind="ojComponent: {component: 'ojSelect',options: cpTypeDataSource}"></select>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="oj-flex">                       
+                            <div class="oj-flex-item">
+                                <button id="button" data-bind="click: clickSearchBtn,ojComponent: {component: 'ojButton', label: 'Search' } " class="oj-button oj-component oj-enabled oj-default oj-button-full-chrome oj-button-text-only oj-component-initnode" aria-labelledby="ui-id-67"></button>
+                                <button id="button" data-bind="click: clickResetBtn,ojComponent: {component: 'ojButton', label: 'Reset' } " class="oj-button oj-component oj-enabled oj-default oj-button-full-chrome oj-button-text-only oj-component-initnode" aria-labelledby="ui-id-68"></button>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="oj-flex-item">   </div>                            
+            </div>
+        </div>
+    </div>
+    <div class="oj-flex" id="cp-row-2">
+
+    </div>
+    <div class="oj-flex" id="cp-row-3" style="margin-top: 5%">
+        <div style="width:100%;">
+            <div id="pagingControlDemo" class="page-content">
+                <table id="table" summary="Origination List" aria-label="Origination Table"
+                       data-bind="ojComponent: {component: 'ojTable', data: cpDataSource, columns:
+            [{headerText: 'Counterparty Code', field: 'cpCd'},
+             {headerText: 'Counterparty Name', field: 'cpName',style: 'width: 5%'},
+             {headerText: 'Counterparty Type', field: 'cpType', style: 'width: 5%'},
+             {headerText: 'Counterparty Group', field: 'grpName', style: 'width: 5%'},
+             {headerText: 'Counterparty Sector', field: 'sctrName'},
+             {headerText: 'Status', field: 'status', style: 'width: 10%'},
+             {headerTemplate: 'view_action_hdr', template: 'view_action', style: 'width: 10%;text-align:center;'}], 
+             rootAttributes: {'style':'width: 100%;'},
+                rowTemplate: 'row_template'}">
+                </table>
+                <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cpDataSource, pageSize: 10}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="row_template">
+  <tr data-bind="click: $parent.buttonClick">
+     The $data check is for when the field doesn't exists. If no value has been specified for a field then the web service might exclude that field from the reponse. 
+    <td data-bind="text: $data.cpCd       ? cpCd : ''"></td>
+    <td data-bind="text: $data.cpName    ? cpName    : ''"></td>
+    <td data-bind="text: $data.cpType ? cpType : ''"></td>
+    <td data-bind="text: $data.grpName ? grpName : ''"></td>
+    <td data-bind="text: $data.sctrName ? sctrName : ''"></td>
+    <td data-bind="text: $data.status == '0' ? 'Deactive' : $data.status == '1' ? 'Active' : 'Inactive'"></td>
+    <td>
+        <button id= "btn_PI"
+                data-bind="click: $parent.buttonClick, 
+                       ojComponent: { component: 'ojButton', label: 'View Details' }">
+        </button>
+    </td>
+  </tr>
+</script>
+<script type="text/html" id="view_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+        <button id= "btn_PI"
+                data-bind="click: $parent.buttonClick, 
+                       ojComponent: { component: 'ojButton', label: 'View Details' }">
+        </button>
+    </td>
+</script>
