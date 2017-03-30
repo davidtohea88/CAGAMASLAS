@@ -60,5 +60,6 @@ function(oj, ko, $,configService)
         return true;
     };
   }
+  
   return viewModel;
 });
