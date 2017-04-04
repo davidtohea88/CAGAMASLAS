@@ -71,7 +71,14 @@ require(['ojs/ojcore',
 ],
         function (oj, ko, $, utils) {
             var router = oj.Router.rootInstance;
+            
+            function getMasterDataPath(path) {
+                return 'masterData/' + path.substr(path.lastIndexOf('/') + 1);
+              }
             router.configure({
+                'productgroup': {value:getMasterDataPath('productgroup'), label: 'Product Group'},
+                'producttype': {value:getMasterDataPath('producttype'), label: 'Product Type'},
+                'product': {value:getMasterDataPath('product'), label: 'Product'},
                 'landing': {label: 'landing', isDefault:true},
                 'viewMovie': {label: "View Movie", value: "viewMovie"},
                   'editMovie': {label: "Edit Movie", value: "editMovie"},
@@ -327,9 +334,6 @@ require(['ojs/ojcore',
                 'cost': {label: 'cost'},
                 'cost-confirmation': {label: 'cost-confirmation'},
                 'net-income': {label: 'net-income'},
-                'productgroup': {label: 'Product Group'},
-                'producttype': {label: 'Product Type'},
-                'product': {label: 'Product'},
                 'assettype': {label: 'Asset Type'},
                 'paymentfreq': {label: 'Payment Frequency'},
                 'ratetype': {label: 'Rate Type'},
