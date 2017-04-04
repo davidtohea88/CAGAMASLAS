@@ -6,8 +6,8 @@ define(['ojs/ojcore', 'knockout', 'viewModels/GetRest', 'ojs/ojmodel', 'ojs/ojta
 function(oj, ko, GetRest) {
 
   var viewModel = {
-    movieCollection: GetRest.createCollection("js/data/productgroup.json","prodGrpCd"),
-//    movieCollection: GetRest.createCollection("http://movieapp-sitepointdemos.rhcloud.com/api/movies","_id"),
+//    movieCollection: GetRest.createCollection("js/data/productgroup.json","prodGrpCd"),
+    movieCollection: GetRest.createCollection("http://movieapp-sitepointdemos.rhcloud.com/api/movies","_id"),
     dataSource: ko.observable(),
 
     // Called each time the view is shown to the user.
@@ -17,6 +17,7 @@ function(oj, ko, GetRest) {
     },
 
     viewMovie: function(movieId) {
+        console.log(movieId);
       oj.Router.rootInstance.store(movieId);
       oj.Router.rootInstance.go("viewMovie");
     },

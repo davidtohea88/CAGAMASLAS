@@ -15,7 +15,7 @@ function(oj, ko, MovieFactory) {
       }
 
       // Get the movie      
-      var movie = MovieFactory.createMovieModel();
+      var movie = MovieFactory.createMovieModel("http://movieapp-sitepointdemos.rhcloud.com/api/movies","_id");
       movie.id = movieId;
       movie.fetch({
         success: function(model) {

@@ -2,17 +2,17 @@
   <h1>All Movies</h1>
 
   <table id="table"
-                                                           summary="Demo Table"
-                                                           data-bind="ojComponent: {component:'ojTable',
+        summary="Demo Table"
+        data-bind="ojComponent: {component:'ojTable',
                                  data: dataSource,
-                                 columnsDefault: {sortable: 'enabled'},
-                                 columns: [{headerText: 'Product Group Code',  field: 'prodGrpCd'},
-                                           {headerText: 'Product Group Name',     field: 'prodGrpName'},
-                                           {headerText: 'Product Group Description', field: 'prodGrpDesc'},
-                                           {headerText: 'Active',  field: 'active'},
-                                           {headerText: 'Effective Date',  field: 'effectiveDate'}],
-                                            rowTemplate: 'row_template'}">
-                                                    </table>
+                                 columns: [{headerText: 'Movie Title',  field: 'title'},
+                                           {headerText: 'Director',     field: 'director'},
+                                           {headerText: 'Release Year', field: 'releaseYear'},
+                                           {headerText: 'Movie Genre',  field: 'genre'},
+                                           {headerText: '',             field: 'operations'}], 
+                                                         rootAttributes: {'style':'width: 100%;'},
+                                                            rowTemplate: 'row_template'}">
+  </table>
   <div>
     <br>
     <button data-bind="click: addMovie, ojComponent: {component: 'ojButton', label: 'Add New Movie'}"></button>
@@ -21,13 +21,14 @@
 
 <script type="text/html" id="row_template">
   <tr>
-    <!-- The $data check is for when the field doesn't exists. If no value has been specified for a field then the web service might exclude that field from the reponse. -->
-    <td data-bind="text: $data.prodGrpCd       ? prodGrpCd : ''"></td>
-    <td data-bind="text: $data.prodGrpName    ? prodGrpName    : ''"></td>
-    <td data-bind="text: $data.prodGrpDesc ? prodGrpDesc : ''"></td>
-    <td data-bind="text: $data.active == 'Y'       ? 'Active'       : 'Deactive'"></td>
-    <td data-bind="text: $data.effectiveDate       ? effectiveDate       : ''"></td>
-    <!--<td data-bind="text: $data.lastUpdateDate       ? lastUpdateDate       : ''"></td>-->
-    <!--<td data-bind="text: $data.lastUpdateBy       ? lastUpdateBy       : ''"></td>-->
+    
+    <td data-bind="text: $data.title       ? title       : ''"></td>
+    <td data-bind="text: $data.director    ? director    : ''"></td>
+    <td data-bind="text: $data.releaseYear ? releaseYear : ''"></td>
+    <td data-bind="text: $data.genre       ? genre       : ''"></td>
+    <td>
+      <button data-bind="click: function() {$parent.viewMovie(_id)}, ojComponent: {component: 'ojButton', label: 'View'}"></button>
+      <button data-bind="click: function() {$parent.deleteMovie($parent, _id)}, ojComponent: {component: 'ojButton', label: 'Delete'}"></button>
+    </td>
   </tr>
 </script>

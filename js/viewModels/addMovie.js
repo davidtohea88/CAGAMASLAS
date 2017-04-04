@@ -5,7 +5,7 @@ function(oj, ko, MovieFactory) {
     movieModel: ko.observable(),
 
     initialize: function(params) {
-      this.movieModel(MovieFactory.createMovieModel());
+      this.movieModel(MovieFactory.createMovieModel("http://movieapp-sitepointdemos.rhcloud.com/api/movies","_id"));
     },
 
     // Save the movie and then redirect to main page.

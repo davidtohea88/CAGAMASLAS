@@ -72,6 +72,10 @@ require(['ojs/ojcore',
         function (oj, ko, $, utils) {
             var router = oj.Router.rootInstance;
             router.configure({
+                'landing': {label: 'landing', isDefault:true},
+                'viewMovie': {label: "View Movie", value: "viewMovie"},
+                  'editMovie': {label: "Edit Movie", value: "editMovie"},
+                  'addMovie':  {label: "Add Movie",  value: "addMovie"},
                 'masterdatas': {label: 'Master Data List', isDefault:true},
                 'pwr': {label: 'Purchase With Recourse'},
                 'upload-loan-detail': {label: 'Upload Loan Detail'},
