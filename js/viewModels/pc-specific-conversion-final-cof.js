@@ -26,6 +26,8 @@ function(oj, ko, $)
     self.onSearch = function(item){
         self.datasource(new oj.ArrayTableDataSource(self.arrObservableArray, {idAttribute: 'Counterparty'}));
         self.pagingDatasourceNew(new oj.ArrayTableDataSource(self.ObservableArrayNew, {idAttribute: 'Counterparty'}));    
+        $('#btn_save').show();
+        $('#btn_cancel').show();
     };
     redirectToPC= function(item) {
       oj.Router.rootInstance.go('origination-pc');
