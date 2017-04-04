@@ -75,6 +75,12 @@ require(['ojs/ojcore',
             function getMasterDataPath(path) {
                 return 'masterData/' + path.substr(path.lastIndexOf('/') + 1);
               }
+            function getPWRPath(path) {
+                return 'pwr/' + path.substr(path.lastIndexOf('/') + 1);
+              }
+            function getMGPPath(path) {
+                return 'mgp/' + path.substr(path.lastIndexOf('/') + 1);
+              }
             router.configure({
                 'productgroup': {value:getMasterDataPath('productgroup'), label: 'Product Group'},
                 'producttype': {value:getMasterDataPath('producttype'), label: 'Product Type'},
