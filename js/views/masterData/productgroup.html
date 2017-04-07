@@ -79,8 +79,7 @@
                                                     <div style="width:100%;">
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="ProductGroupTable" summary="Origination List" aria-label="Origination Table"
-                                                                   data-bind="ojComponent: {component: 'ojTable', data: dataSource, 
-                                                    selectionMode: {row: 'single', column:'single'}, 
+                                                                   data-bind="ojComponent: {component: 'ojTable', data: prodGrpDataSource, 
                                                         columns:[{headerText: 'Product Group Code',  field: 'prodGrpCd'},
                                                         {headerText: 'Product Group Name',     field: 'prodGrpName'},
                                                         {headerText: 'Product Group Description', field: 'prodGrpDesc'},
@@ -89,7 +88,7 @@
                                                          rootAttributes: {'style':'width: 100%;'},
                                                             rowTemplate: 'row_template'}">
                                                             </table>
-<!--                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 10}">-->
+                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: prodGrpDataSource, pageSize: 10}">
                                                             </div>
                                                         </div>
                                                     </div>

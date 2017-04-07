@@ -8,286 +8,175 @@ define(['ojs/ojcore', 'knockout', 'viewModels/GetRest', 'jquery', 'ojs/ojrouter'
     'ojs/ojpagingtabledatasource', 'moment'],
         function (oj, ko, GetRest, $)
         {
-//            function prodgroupMainViewModel() {
-//                var self = this;
-//                self.productGroupModel = ko.observable('');
-//                self.header = "Product Group";
-//                self.allPeople = ko.observableArray([{prodGrpCd: "Fetching data"}]);
-//                self.tempPeople = ko.observableArray([{prodGrpCd: "Fetching data"}]);
-//                self.prodGrpDataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allPeople, {idAttribute: 'prodGrpCd'}));
-//                self.codeSearch = ko.observable('');
-//                self.nameSearch = ko.observable('');
-//                self.descSearch = ko.observable('');
-//                
-//                self.codeItem =  ko.observable('');
-//                self.nameItem =  ko.observable('');
-//                self.descItem =  ko.observable('');
-//                self.statusItem =  ko.observable('');
-//                self.effectiveDateItem =  ko.observable('');
-//
-//                self.productGroupCollection = GetRest.createCollection("js/data/productgroup.json","prodGrpCd"),
-//                self.dataSource = ko.observable();
-//
-//                /*this.buildModel = function()
-//                {
-//                    return {
-//                        'CODE': this.codeItem(),
-//                        'NAME': this.nameItem(),
-//                        'DESCRIPTION': this.descItem(),
-//                        'STATUS': this.statusItem(),
-//                        'EFFECTIVE_DATE': this.effectiveDateItem()
-//                    };
-//                }; */
-//        
-//                clickResetBtn = function () {
-//                    self.codeSearch('');
-//                    self.nameSearch('');
-//                    self.descSearch('');
-//                    self.initRefresh();
-//                };
-//                
-//                self.init = function(){
-//                  self.dataSource(new oj.CollectionTableDataSource(self.productGroupCollection));
-//                  self.productGroupCollection.fetch();  
-//                };
-//
-//                self.initRefresh = function () {
-//                    console.log("fetching data");
-//                    var jsonUrl = "js/data/productgroup.json";
-////                    var hostname = "https://yourCRMServer.domain.com";
-////                    var queryString = "/salesApi/resources/latest/opportunities?onlyData=true&fields=OptyNumber,Name,Revenue,TargetPartyName,StatusCode&q=StatusCode=OPEN&limit=10&offset=" + offset;
-////                    console.log(queryString);
-////                    $.ajax(hostname + queryString,
-//                    $.ajax(jsonUrl,
-//                            {
-//                                method: "GET",
-//                                dataType: "json",
-////                                headers: {"Authorization": "Basic " + btoa("username:password")},
-//                                // Alternative Headers if using JWT Token
-//                                // headers : {"Authorization" : "Bearer "+ jwttoken; 
-//                                success: function (data)
-//                                {
-//                                    console.log(data);
-//                                    self.allPeople(data);
-//                                    self.tempPeople(data);
-////                                    console.log('Data returned ' + JSON.stringify(data.MdAssetTyp));
-////                                    console.log("Rows Returned" + self.allPeople().length);
-////                                    // Enable / Disable the next/prev button based on results of query
-////                                    if (self.optyList().length < limit)
-////                                    {
-////                                        $('#nextButton').attr("disabled", true);
-////                                    } else
-////                                    {
-////                                        $('#nextButton').attr("disabled", false);
-////                                    }
-////                                    if (self.offset === 0)
-////                                        $('#prevButton').attr("disabled", true);
-//                                },
-//                                error: function (jqXHR, textStatus, errorThrown)
-//                                {
-//                                    console.log(textStatus, errorThrown);
-//                                }
-//                            }
-//                    );
-//                };
-//                
-//
-//                self.clickSearchBtn = function () {
-//                    var peopleFilter = new Array();
-//                    ko.utils.arrayFilter(self.tempPeople(),
-//                            function (r) {
-//                                var codeSearch = self.codeSearch().toString().toLowerCase();
-//                                var nameSearch = self.nameSearch().toString().toLowerCase();
-//                                var descSearch = self.descSearch().toString().toLowerCase();
-//                                if ((r.prodGrpCd.toString().toLowerCase().indexOf(codeSearch) > -1) &&
-//                                    (r.prodGrpName.toString().toLowerCase().indexOf(nameSearch) > -1) &&
-//                                    (r.prodGrpDesc.toString().toLowerCase().indexOf(descSearch) > -1)) {
-//                                    peopleFilter.push(r);
-//
-//                                }
-//                            });
-//                    self.allPeople(peopleFilter);
-//                };
-//
-//                self.onCreateBtn = function(){
-//                    self.codeItem('');
-//                    self.nameItem('');
-//                    self.descItem('');
-//                    self.statusItem('');
-//                    self.effectiveDateItem('');
-//                    $('#btn_create').show();
-//                    $('#btn_edit').hide();
-//                    $("#DataDialog").ojDialog("open");
-//                    return true;};
-//                self.onEditBtn = function(){
-//                    $('#btn_create').hide();
-//                    $('#btn_edit').show();             
-//                    self.productGroupModel(GetRest.createModel("js/data/productgroup.json","prodGrpCd"));
-//                    self.productGroupModel().id = self.codeItem();
-//                    self.productGroupModel().fetch({
-//                      success: function(model) {
-//                        self.productGroupModel(model);
-//                      },
-//                      error: function(model) {
-//                        console.log("Fetch error: ", model);
-//                      }
-//                    });
-//                    
-//                    $("#DataDialog").ojDialog("open");
-//                    return true;
-//                };
-//                self.onRowClick = function(data,event)
-//                {
-//                    self.codeItem(data.prodGrpCd);
-//                    self.nameItem(data.prodGrpName);
-//                    self.descItem(data.prodGrpDesc);
-//                    self.statusItem(data.active);
-//                    self.effectiveDateItem(data.effectiveDate);                  
-//                    
-//                };
-//                self.onStatusBtn = function () {
-//
-//                };
-//
-//                self.onCreate = function () {
-//                    console.log(self.codeItem());
-//                    console.log(self.nameItem());
-//                    console.log(self.descItem());
-//                    console.log(self.statusItem());
-//                    console.log(self.effectiveDateItem());
-//                    $("#DataDialog").ojDialog("close");
-//                };
-//                self.onEdit = function () {
-//
-//                };
-//                self.onCancel = function () {
-//                    self.codeItem('');
-//                    self.nameItem('');
-//                    self.descItem('');
-//                    self.statusItem('');
-//                    self.effectiveDateItem('');
-//                    $("#DataDialog").ojDialog("close");
-//
-//                };
-//
-//                self.exportxls = function () {
-//
-//                };
-//                
-//                self.init();
-//            }
-//            return prodgroupMainViewModel();
-        
-        var prodgroupMainViewModel = 
-        {
-            header : "Product Group",
-            codeSearch : ko.observable(''),
-            nameSearch : ko.observable(''),
-            descSearch : ko.observable(''),
-            
-            codeItem :  ko.observable(''),
-            nameItem :  ko.observable(''),
-            descItem :  ko.observable(''),
-            statusItem :  ko.observable(''),
-            effectiveDateItem :  ko.observable(''),
-            allPeople : ko.observableArray([{prodGrpCd: "Fetching data"}]),
-            tempPeople : ko.observableArray([{prodGrpCd: "Fetching data"}]),
-            selectedRow :  ko.observable(), 
-
-            productGroupCollection : GetRest.createCollection("js/data/productgroup.json","prodGrpCd"),
-            dataSource: ko.observable(),
-            productGroupModel : ko.observable(),            
-
-            initialize : function()
-            {
+            function prodgroupMainViewModel() {
                 var self = this;
-                this.allPeople(new oj.CollectionTableDataSource(this.productGroupCollection));
-                this.tempPeople(new oj.CollectionTableDataSource(this.productGroupCollection));
-                this.dataSource(new oj.CollectionTableDataSource(this.productGroupCollection));
-                this.productGroupCollection.fetch();
-            },
-            clickSearchBtn : function () {
+                self.productGroupModel = ko.observable('');
+                self.header = "Product Group";
+                self.allPeople = ko.observableArray([{prodGrpCd: "Fetching data"}]);
+                self.tempPeople = ko.observableArray([{prodGrpCd: "Fetching data"}]);
+                self.prodGrpDataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allPeople, {idAttribute: 'prodGrpCd'}));
+                self.codeSearch = ko.observable('');
+                self.nameSearch = ko.observable('');
+                self.descSearch = ko.observable('');
                 
-                var peopleFilter = new Array();
-                var peopleFilter = ko.utils.arrayFilter(this.tempPeople(),
-                        function (r) {
-                            var codeSearch = this.codeSearch().toString().toLowerCase();
-                            var nameSearch = this.nameSearch().toString().toLowerCase();
-                            var descSearch = this.descSearch().toString().toLowerCase();
-                            if ((r.prodGrpCd.toString().toLowerCase().indexOf(codeSearch) > -1) &&
-                                (r.prodGrpName.toString().toLowerCase().indexOf(nameSearch) > -1) &&
-                                (r.prodGrpDesc.toString().toLowerCase().indexOf(descSearch) > -1)) {
-                                return r;
+                self.codeItem =  ko.observable('');
+                self.nameItem =  ko.observable('');
+                self.descItem =  ko.observable('');
+                self.statusItem =  ko.observable('');
+                self.effectiveDateItem =  ko.observable('');
 
+                self.productGroupCollection = GetRest.createCollection("js/data/productgroup.json","prodGrpCd"),
+                self.dataSource = ko.observable();
+
+                /*this.buildModel = function()
+                {
+                    return {
+                        'CODE': this.codeItem(),
+                        'NAME': this.nameItem(),
+                        'DESCRIPTION': this.descItem(),
+                        'STATUS': this.statusItem(),
+                        'EFFECTIVE_DATE': this.effectiveDateItem()
+                    };
+                }; */
+        
+                clickResetBtn = function () {
+                    self.codeSearch('');
+                    self.nameSearch('');
+                    self.descSearch('');
+                    self.initRefresh();
+                };
+                
+                self.init = function(){
+                  self.dataSource(new oj.CollectionTableDataSource(self.productGroupCollection));
+                  self.productGroupCollection.fetch();  
+                };
+
+                self.initRefresh = function () {
+                    console.log("fetching data");
+                    var jsonUrl = "js/data/productgroup.json";
+//                    var hostname = "https://yourCRMServer.domain.com";
+//                    var queryString = "/salesApi/resources/latest/opportunities?onlyData=true&fields=OptyNumber,Name,Revenue,TargetPartyName,StatusCode&q=StatusCode=OPEN&limit=10&offset=" + offset;
+//                    console.log(queryString);
+//                    $.ajax(hostname + queryString,
+                    $.ajax(jsonUrl,
+                            {
+                                method: "GET",
+                                dataType: "json",
+//                                headers: {"Authorization": "Basic " + btoa("username:password")},
+                                // Alternative Headers if using JWT Token
+                                // headers : {"Authorization" : "Bearer "+ jwttoken; 
+                                success: function (data)
+                                {
+                                    console.log(data);
+                                    self.allPeople(data);
+                                    self.tempPeople(data);
+//                                    console.log('Data returned ' + JSON.stringify(data.MdAssetTyp));
+//                                    console.log("Rows Returned" + self.allPeople().length);
+//                                    // Enable / Disable the next/prev button based on results of query
+//                                    if (self.optyList().length < limit)
+//                                    {
+//                                        $('#nextButton').attr("disabled", true);
+//                                    } else
+//                                    {
+//                                        $('#nextButton').attr("disabled", false);
+//                                    }
+//                                    if (self.offset === 0)
+//                                        $('#prevButton').attr("disabled", true);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown)
+                                {
+                                    console.log(textStatus, errorThrown);
+                                }
                             }
-                        });
-                this.allPeople(peopleFilter);
-            },
-            clickResetBtn : function () {
-                this.codeSearch('');
-                this.nameSearch('');
-                this.descSearch('');
-            },
-            onCreateBtn : function(){
-                this.productGroupModel(GetRest.createModel("js/data/productgroup.json","prodGrpCd"));
-                $('#btn_create').show();
-                $('#btn_edit').hide();
-                $("#DataDialog").ojDialog("open");
-                return true;
-            },
-            
-            onEditBtn : function(){
-                console.log(this.selectedRow());
-                if(this.selectedRow()!=null){
+                    );
+                };
+                
+
+                self.clickSearchBtn = function () {
+                    var peopleFilter = new Array();
+                    ko.utils.arrayFilter(self.tempPeople(),
+                            function (r) {
+                                var codeSearch = self.codeSearch().toString().toLowerCase();
+                                var nameSearch = self.nameSearch().toString().toLowerCase();
+                                var descSearch = self.descSearch().toString().toLowerCase();
+                                if ((r.prodGrpCd.toString().toLowerCase().indexOf(codeSearch) > -1) &&
+                                    (r.prodGrpName.toString().toLowerCase().indexOf(nameSearch) > -1) &&
+                                    (r.prodGrpDesc.toString().toLowerCase().indexOf(descSearch) > -1)) {
+                                    peopleFilter.push(r);
+
+                                }
+                            });
+                    self.allPeople(peopleFilter);
+                };
+
+                self.onCreateBtn = function(){
+                    self.codeItem('');
+                    self.nameItem('');
+                    self.descItem('');
+                    self.statusItem('');
+                    self.effectiveDateItem('');
+                    $('#btn_create').show();
+                    $('#btn_edit').hide();
+                    $("#DataDialog").ojDialog("open");
+                    return true;};
+                self.onEditBtn = function(){
                     $('#btn_create').hide();
-                    $('#btn_edit').show();        
-                    console.log(this.codeItem());
-                    this.productGroupModel(GetRest.createModel("js/data/productgroup.json","prodGrpCd"));
-                    this.productGroupModel().id = this.codeItem();
-                    this.productGroupModel().fetch({
+                    $('#btn_edit').show();             
+                    self.productGroupModel(GetRest.createModel("js/data/productgroup.json","prodGrpCd"));
+                    self.productGroupModel().id = self.codeItem();
+                    self.productGroupModel().fetch({
                       success: function(model) {
-                        console.log(model);
+                        self.productGroupModel(model);
                       },
                       error: function(model) {
                         console.log("Fetch error: ", model);
                       }
                     });
-
+                    
                     $("#DataDialog").ojDialog("open");
                     return true;
-                }
-                else
+                };
+                self.onRowClick = function(data,event)
                 {
-                    return false;
-                }
-            },
-            onCreate : function () {
-                console.log(this.codeItem());
-                console.log(this.nameItem());
-                console.log(this.descItem());
-                console.log(this.statusItem());
-                console.log(this.effectiveDateItem());
-                this.productGroupModel().save();
-                $("#DataDialog").ojDialog("close");
-            },
-            onStatusBtn : function () {
+                    self.codeItem(data.prodGrpCd);
+                    self.nameItem(data.prodGrpName);
+                    self.descItem(data.prodGrpDesc);
+                    self.statusItem(data.active);
+                    self.effectiveDateItem(data.effectiveDate);                  
+                    
+                };
+                self.onStatusBtn = function () {
 
-            },
-            exportxls : function () {
+                };
 
-            },
-            onRowClick : function(data,event)
-            {
-                this.selectedRow(data);
-                this.codeItem(data.prodGrpCd);
-                this.nameItem(data.prodGrpName);
-                this.descItem(data.prodGrpDesc);
-                this.statusItem(data.active);
-                this.effectiveDateItem(data.effectiveDate);                  
+                self.onCreate = function () {
+                    console.log(self.codeItem());
+                    console.log(self.nameItem());
+                    console.log(self.descItem());
+                    console.log(self.statusItem());
+                    console.log(self.effectiveDateItem());
+                    $("#DataDialog").ojDialog("close");
+                };
+                self.onEdit = function () {
 
-            },
-        }
+                };
+                self.onCancel = function () {
+                    self.codeItem('');
+                    self.nameItem('');
+                    self.descItem('');
+                    self.statusItem('');
+                    self.effectiveDateItem('');
+                    $("#DataDialog").ojDialog("close");
+
+                };
+
+                self.exportxls = function () {
+
+                };
+                
+                self.initRefresh();
+            }
+            return prodgroupMainViewModel();
         
-        return prodgroupMainViewModel;
         }
 ); 
