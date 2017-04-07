@@ -21,17 +21,20 @@ define(['ojs/ojcore', 'knockout', 'viewModels/GetRest', 'jquery', 'ojs/ojrouter'
             selectedRow :  ko.observable(), 
             objCollection : GetRest.createCollection("http://movieapp-sitepointdemos.rhcloud.com/api/movies","_id"),
             productGroupCollection : ko.observableArray(),
-            allPeople : ko.observableArray(),
-            tempPeople : ko.observableArray(),            
+            productGroupCollection2 : ko.observableArray(),
+            allPeople : ko.observableArray([]),
+            tempPeople : ko.observableArray([]),            
             productGroupModel : ko.observable(),            
             dataSource : ko.observableArray(),
             currentFilter : ko.observable(),
             
             initialize : function()
             {
+                
                 this.productGroupCollection(this.objCollection);
-                this.dataSource(new oj.CollectionTableDataSource(this.productGroupCollection()));
-                this.productGroupCollection().fetch();
+                console.log(this.productGroupCollection().length);
+               this.dataSource(new oj.CollectionTableDataSource(this.productGroupCollection()));
+
             },
             onRefresh : function(){    
                 this.objCollection = GetRest.createCollection("http://movieapp-sitepointdemos.rhcloud.com/api/movies","_id"),
@@ -39,20 +42,18 @@ define(['ojs/ojcore', 'knockout', 'viewModels/GetRest', 'jquery', 'ojs/ojrouter'
                 this.dataSource(new oj.CollectionTableDataSource(this.productGroupCollection()));
             },
             clickSearchBtn : function () {
-                
-                var peopleFilter = new Array();
-                var nameSearchres = this.nameSearch().toString().toLowerCase();
-                var descSearchres = this.descSearch().toString().toLowerCase();
-                console.log(this.dataSource().length);
-                    ko.utils.arrayFilter(this.dataSource(),
-                            function (r) {
-                                console.log(r);
-                                
-                                if (r.prodTypDesc.toString().toLowerCase().indexOf(nameSearchres) !== -1 || r.prodTypName.toString().toLowerCase().indexOf(nameSearchres) !== -1) {
-                                    peopleFilter.push(r);
-
-                                }
-                            });
+                console.log(this.objCollection);
+                console.log(this.productGroupCollection());
+                console.log(this.dataSource());
+//                this.objCollection = GetRest.createCollection("http://movieapp-sitepointdemos.rhcloud.com/api/movies","_id"),
+//                this.productGroupCollection(this.objCollection);                
+//                this.productGroupCollection2(this.objCollection);   
+//                console.log(this.productGroupCollection2    );
+//                this.productGroupCollection2 = ko.computed(function(){
+//                    return ko.utils.arrayFilter(this.productGroupCollection, function(item){
+//                        return true;
+//                    });
+//                }, this);
 
             },
             clickResetBtn : function () {
