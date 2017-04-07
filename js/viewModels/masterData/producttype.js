@@ -35,6 +35,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'ojs/ojrouter', 'ojs/oj
                                 success: function (data)
                                 {
                                     self.allPeople(data.MdProdTyp);
+                                    console.log(self.allPeople());
                                     self.tempPeople(data.MdProdTyp);
 //                                    console.log('Data returned ' + JSON.stringify(data.MdAssetTyp));
 //                                    console.log("Rows Returned" + self.allPeople().length);
@@ -59,6 +60,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'ojs/ojrouter', 'ojs/oj
 
                 self.clickSearchBtn = function () {
                     var peopleFilter = new Array();
+                    console.log(self.tempPeople());
                     ko.utils.arrayFilter(self.tempPeople(),
                             function (r) {
                                 var nameSearch = self.nameSearch().toString().toLowerCase();

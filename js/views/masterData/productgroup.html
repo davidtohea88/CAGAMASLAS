@@ -19,7 +19,7 @@
                                                         <label for="searchCode">Product Group Code</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText', value:''}">
+                                                        <input id="seachCode" data-bind="value: codeSearch, ojComponent: {component: 'ojInputText'}">
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">  
@@ -56,11 +56,11 @@
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">                        
                                                     <div class="oj-flex-item">
-                                                        <button id= "button" data-bind="click:create,ojComponent: { component: 'ojButton', label: 'Create' }">
+                                                        <button id= "button" data-bind="click:onCreateBtn,ojComponent: { component: 'ojButton', label: 'Create' }">
                                                         </button>
-                                                        <button id= "button" data-bind="click:activedeactive,ojComponent: { component: 'ojButton', label: 'Active/Deactive' }">
+                                                        <button id= "button" data-bind="click:onStatusBtn,ojComponent: { component: 'ojButton', label: 'Active/Deactive' }">
                                                         </button>
-                                                        <button id= "button" data-bind="click:edit,ojComponent: { component: 'ojButton', label: 'Edit' }">
+                                                        <button id= "button" data-bind="click:onEditBtn,ojComponent: { component: 'ojButton', label: 'Edit' }">
                                                         </button>
                                                         <button id= "button" data-bind="click:exportxls,ojComponent: { component: 'ojButton', label: 'Export' }">
                                                         </button>
@@ -78,17 +78,18 @@
                                                 <div class="oj-flex">                        
                                                     <div style="width:100%;">
                                                         <div id="pagingControlDemo" class="page-content">
-                                                            <table id="table" summary="Origination List" aria-label="Origination Table"
-                                                                   data-bind="ojComponent: {component: 'ojTable', data: prodGrpDataSource, columns:
-                                                        [{headerText: 'Product Group Code',  field: 'prodGrpCd'},
-                                           {headerText: 'Product Group Name',     field: 'prodGrpName'},
-                                           {headerText: 'Product Group Description', field: 'prodGrpDesc'},
-                                           {headerText: 'Active',  field: 'active'},
-                                           {headerText: 'Effective Date',  field: 'effectiveDate'}], 
+                                                            <table id="ProductGroupTable" summary="Origination List" aria-label="Origination Table"
+                                                                   data-bind="ojComponent: {component: 'ojTable', data: dataSource, 
+                                                    selectionMode: {row: 'single', column:'single'}, 
+                                                        columns:[{headerText: 'Product Group Code',  field: 'prodGrpCd'},
+                                                        {headerText: 'Product Group Name',     field: 'prodGrpName'},
+                                                        {headerText: 'Product Group Description', field: 'prodGrpDesc'},
+                                                        {headerText: 'Status',  field: 'active'},
+                                                        {headerText: 'Effective Date',  field: 'effectiveDate'}], 
                                                          rootAttributes: {'style':'width: 100%;'},
                                                             rowTemplate: 'row_template'}">
                                                             </table>
-                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: prodGrpDataSource, pageSize: 10}">
+<!--                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 10}">-->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -107,14 +108,89 @@
     </div>
 </div>
 
+<div style="display:none" id="DataDialog" title="Product Group Data" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:600px; height: 400px;'}
+		  }">
+     <div class="oj-dialog-body" data-bind="with: productGroupModel">
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-6 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchCode">Product Group Code</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="seachCode" data-bind="text: attributes.prodGrpCd">
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchName">Product Group Name</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="seachName" data-bind="text: attributes.prodGrpName">
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchDesc">Product Group Description</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="seachDesc" data-bind="text :attributes.prodGrpDesc">
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchDesc">Status</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <div class='oj-flex-bar-middle'>                 
+                                                        <!-- You need to set the aria-labelledby attribute to make 
+                                                        this accessible. -->
+                                                        <div data-bind="ojComponent: {component: 'ojRadioset', value:attributes.active}" 
+                                                             aria-labelledby="mainlabelid">
+                                                            <span class="oj-choice-row-inline">
+                                                                <input id="rbtn_active" type="radio" 
+                                                                       value="Y" name="status">
+                                                                <label for="rbtn_active">Active</label>
+                                                            </span>
+                                                            <span class="oj-choice-row-inline">
+                                                                <input id="rbtn_inactive" type="radio" 
+                                                                       value="N" name="status">
+                                                                <label for="rbtn_inactive">Inactive</label>
+                                                            </span>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchDesc">Effective Date</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                    <input id="purchaseDate"
+                                                           data-bind="ojComponent: {component: 'ojInputDate', value:attributes.effectiveDate, required: true}"/>
+                                                    </div>
+                                                </div>                                                 
+                                                <div class="oj-flex">                       
+                                                    <div class="oj-flex-item">
+                                                        <button id= "btn_create" data-bind="click: $parent.onCreate,ojComponent: {component: 'ojButton', label: 'Create' } "></button>
+                                                        <button id= "btn_edit" data-bind="click: $parent.onEdit,ojComponent: {component: 'ojButton', label: 'Edit' } "></button>
+                                                        <button id= "btn_cancel" data-bind="click: $parent.onCancel,ojComponent: {component: 'ojButton', label: 'Cancel' } "></button>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>    
+                                        <div class="oj-flex-item"></div>
+                                    </div>
+
 <script type="text/html" id="row_template">
     <tr>
         <!-- The $data check is for when the field doesn't exists. If no value has been specified for a field then the web service might exclude that field from the reponse. -->
-        <td data-bind="text: $data.prodGrpCd       ? prodGrpCd : ''"></td>
-        <td data-bind="text: $data.prodGrpName    ? prodGrpName    : ''"></td>
-        <td data-bind="text: $data.prodGrpDesc ? prodGrpDesc : ''"></td>
-        <td data-bind="text: $data.active == 'Y'       ? 'Active'       : 'Deactive'"></td>
-        <td data-bind="text: $data.effectiveDate       ? effectiveDate       : ''"></td>
+        <td data-bind="text: $data.prodGrpCd       ? prodGrpCd : '', click: function(data, event){$parent.onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.prodGrpName    ? prodGrpName    : '', click: function(data, event){$parent.onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.prodGrpDesc ? prodGrpDesc : '', click: function(data, event){$parent.onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.active == 'Y'       ? 'Active'       : 'Inactive', click: function(data, event){$parent.onRowClick(data,event)}"></td>
+        <td data-bind="text: moment($data.effectiveDate).format('Do MMMM YYYY'), click: function(data, event){$parent.onRowClick(data,event)}"></td>
         <!--<td data-bind="text: $data.lastUpdateDate       ? lastUpdateDate       : ''"></td>-->
         <!--<td data-bind="text: $data.lastUpdateBy       ? lastUpdateBy       : ''"></td>-->
     </tr>

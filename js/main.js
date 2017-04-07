@@ -14,6 +14,7 @@ requirejs.config({
      {
         'knockout': 'libs/knockout/knockout-3.4.0',
         'jquery': 'libs/jquery/jquery-3.1.0.min',
+        'jlinq': 'libs/jlinq/jlinq',
         'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0.min',
         'promise': 'libs/es6-promise/es6-promise.min',
         'ojs': 'libs/oj/v2.3.0/min',
@@ -83,6 +84,7 @@ require(['ojs/ojcore',
               }
             router.configure({
                 'productgroup': {value:getMasterDataPath('productgroup'), label: 'Product Group'},
+                'productgrouprest': {value:getMasterDataPath('productgrouprest'), label: 'Product Group Rest'},
                 'producttype': {value:getMasterDataPath('producttype'), label: 'Product Type'},
                 'product': {value:getMasterDataPath('product'), label: 'Product'},
                 'landing': {label: 'landing', isDefault:true},
