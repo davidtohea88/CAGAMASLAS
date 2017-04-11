@@ -10,7 +10,7 @@ define(['ojs/ojcore', 'knockout', 'viewModels/GetRest', 'jquery', 'ojs/ojrouter'
         {
             function prodgroupMainViewModel() {
                 var self = this;
-                self.productGroupModel = ko.observable('');
+                self.productGroupModel = ko.observable();
                 self.header = "Product Group";
                 self.allPeople = ko.observableArray([{prodGrpCd: "Fetching data"}]);
                 self.tempPeople = ko.observableArray([{prodGrpCd: "Fetching data"}]);
@@ -110,6 +110,7 @@ define(['ojs/ojcore', 'knockout', 'viewModels/GetRest', 'jquery', 'ojs/ojrouter'
                 };
 
                 self.onCreateBtn = function(){
+                    self.productGroupModel(GetRest.createModel("http://movieapp-sitepointdemos.rhcloud.com/api/movies","_id"));
                     self.codeItem('');
                     self.nameItem('');
                     self.descItem('');
@@ -122,7 +123,7 @@ define(['ojs/ojcore', 'knockout', 'viewModels/GetRest', 'jquery', 'ojs/ojrouter'
                 self.onEditBtn = function(){
                     $('#btn_create').hide();
                     $('#btn_edit').show();             
-                    self.productGroupModel(GetRest.createModel("js/data/productgroup.json","prodGrpCd"));
+                    self.productGroupModel(GetRest.createModel("js/data/productgroup.json","prodTypCd"));
                     self.productGroupModel().id = self.codeItem();
                     self.productGroupModel().fetch({
                       success: function(model) {

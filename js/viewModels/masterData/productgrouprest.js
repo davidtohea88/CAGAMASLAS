@@ -43,6 +43,7 @@ define(['ojs/ojcore', 'knockout', 'viewModels/GetRest', 'jquery', 'ojs/ojrouter'
             },
             clickSearchBtn : function () {
                 console.log(this.objCollection);
+                this.dataSource
                 console.log(this.productGroupCollection());
                 console.log(this.dataSource());
 //                this.objCollection = GetRest.createCollection("http://movieapp-sitepointdemos.rhcloud.com/api/movies","_id"),

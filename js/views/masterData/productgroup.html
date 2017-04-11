@@ -84,7 +84,9 @@
                                                         {headerText: 'Product Group Name',     field: 'prodGrpName'},
                                                         {headerText: 'Product Group Description', field: 'prodGrpDesc'},
                                                         {headerText: 'Status',  field: 'active'},
-                                                        {headerText: 'Effective Date',  field: 'effectiveDate'}], 
+                                                        {headerText: 'Effective Date',  field: 'effectiveDate'}, 
+                                                        {headerText: 'Last Modified Date',  field: 'lastUpdateDate'}, 
+                                                        {headerText: 'Last Modified By',  field: 'lastUpdateBy'}], 
                                                          rootAttributes: {'style':'width: 100%;'},
                                                             rowTemplate: 'row_template'}">
                                                             </table>
@@ -172,25 +174,25 @@
                                                 </div>                                                 
                                                 <div class="oj-flex">                       
                                                     <div class="oj-flex-item">
-                                                        <button id= "btn_create" data-bind="click: $parent.onCreate,ojComponent: {component: 'ojButton', label: 'Create' } "></button>
-                                                        <button id= "btn_edit" data-bind="click: $parent.onEdit,ojComponent: {component: 'ojButton', label: 'Edit' } "></button>
-                                                        <button id= "btn_cancel" data-bind="click: $parent.onCancel,ojComponent: {component: 'ojButton', label: 'Cancel' } "></button>
+                                                        <button id= "btn_create" data-bind="click: onCreate,ojComponent: {component: 'ojButton', label: 'Create' } "></button>
+                                                        <button id= "btn_edit" data-bind="click: onEdit,ojComponent: {component: 'ojButton', label: 'Edit' } "></button>
+                                                        <button id= "btn_cancel" data-bind="click: onCancel,ojComponent: {component: 'ojButton', label: 'Cancel' } "></button>
                                                     </div>
                                                 </div> 
                                             </div>
                                         </div>    
                                         <div class="oj-flex-item"></div>
-                                    </div>
+</div>
 
 <script type="text/html" id="row_template">
     <tr>
         <!-- The $data check is for when the field doesn't exists. If no value has been specified for a field then the web service might exclude that field from the reponse. -->
-        <td data-bind="text: $data.prodGrpCd       ? prodGrpCd : '', click: function(data, event){$parent.onRowClick(data,event)}"></td>
-        <td data-bind="text: $data.prodGrpName    ? prodGrpName    : '', click: function(data, event){$parent.onRowClick(data,event)}"></td>
-        <td data-bind="text: $data.prodGrpDesc ? prodGrpDesc : '', click: function(data, event){$parent.onRowClick(data,event)}"></td>
-        <td data-bind="text: $data.active == 'Y'       ? 'Active'       : 'Inactive', click: function(data, event){$parent.onRowClick(data,event)}"></td>
-        <td data-bind="text: moment($data.effectiveDate).format('Do MMMM YYYY'), click: function(data, event){$parent.onRowClick(data,event)}"></td>
-        <!--<td data-bind="text: $data.lastUpdateDate       ? lastUpdateDate       : ''"></td>-->
-        <!--<td data-bind="text: $data.lastUpdateBy       ? lastUpdateBy       : ''"></td>-->
+        <td data-bind="text: $data.prodGrpCd       ? prodGrpCd : '', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.prodGrpName    ? prodGrpName    : '', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.prodGrpDesc ? prodGrpDesc : '', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.active == 'Y'       ? 'Active'       : 'Inactive', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.effectiveDate ? moment($data.effectiveDate).format('Do MMMM YYYY'):'', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.lastUpdateDate ? lastUpdateDate : '', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.lastUpdateBy ? lastUpdateBy.by       : '', click: function(data, event){onRowClick(data,event)}"></td>
     </tr>
 </script>
