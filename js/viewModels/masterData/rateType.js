@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery','data/data', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource','ojs/ojselectcombobox'],
-        function (oj, ko, $,data)
+define(['ojs/ojcore', 'knockout', 'data/data', 'jquery','services/rendererService', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource'],
+        function (oj, ko, data, $, rendererService)
         {
-            function assetViewModel() {
+            function rateTypeViewModel() {
                 var self = this;
-                self.header = "Asset Type";
-                self.allPeople = ko.observableArray([{assetTypCd: "Fetching data"}]);
-                self.tempPeople = ko.observableArray([{assetTypCd: "Fetching data"}]);
-//                self.dataSource = new oj.ArrayTableDataSource(self.allPeople, {idAttribute: 'assetTypCd'});
-                self.assetTypDataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allPeople, {idAttribute: 'assetTypCd'}));
+                self.header = "Rate Type";
+                self.allData = ko.observableArray([{rateTypCd: "Fetching data"}]);
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'rateTypCd'}));
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
 
@@ -19,9 +17,23 @@ define(['ojs/ojcore', 'knockout', 'jquery','data/data', 'ojs/ojknockout', 'ojs/o
                     self.descSearch('');
                 };
 
+                self.activeRenderer = function(context) 
+                {
+                    return rendererService.activeConverter(context.data);
+                };
+                
+                self.dateTimeRenderer = function(context) 
+                {
+                    return rendererService.dateTimeConverter.format(context.data);
+                };
+                
+                self.dateRenderer = function(context) 
+                {
+                    return rendererService.dateConverter.format(context.data);
+                };
                 self.initRefresh = function () {
                     console.log("fetching data");
-                    var jsonUrl = "js/data/assettype.json";
+                    var jsonUrl = "js/data/rateType.json";
 //                    var hostname = "https://yourCRMServer.domain.com";
 //                    var queryString = "/salesApi/resources/latest/opportunities?onlyData=true&fields=OptyNumber,Name,Revenue,TargetPartyName,StatusCode&q=StatusCode=OPEN&limit=10&offset=" + offset;
 //                    console.log(queryString);
@@ -35,8 +47,7 @@ define(['ojs/ojcore', 'knockout', 'jquery','data/data', 'ojs/ojknockout', 'ojs/o
                                 // headers : {"Authorization" : "Bearer "+ jwttoken; 
                                 success: function (data)
                                 {
-                                    self.allPeople(data.MdAssetTyp);
-                                    self.tempPeople(data.MdAssetTyp);
+                                    self.allData(data.MdRateTyp);
 //                                    console.log('Data returned ' + JSON.stringify(data.MdAssetTyp));
 //                                    console.log("Rows Returned" + self.allPeople().length);
 //                                    // Enable / Disable the next/prev button based on results of query
@@ -64,15 +75,16 @@ define(['ojs/ojcore', 'knockout', 'jquery','data/data', 'ojs/ojknockout', 'ojs/o
                             function (r) {
                                 var nameSearch = self.nameSearch().toString().toLowerCase();
                                 var descSearch = self.descSearch().toString().toLowerCase();
-                                if (r.assetTypDesc.toString().toLowerCase().indexOf(nameSearch) !== -1 || r.assetTypName.toString().toLowerCase().indexOf(nameSearch) !== -1) {
+                                if (r.rateTypDesc.toString().toLowerCase().indexOf(nameSearch) !== -1 || r.rateTypName.toString().toLowerCase().indexOf(nameSearch) !== -1) {
                                     peopleFilter.push(r);
 
                                 }
                             });
-                    self.allPeople(peopleFilter);
+                    self.allData(peopleFilter);
                 };
 
                 self.create = function () {
+                    
 
                 };
 
@@ -87,9 +99,10 @@ define(['ojs/ojcore', 'knockout', 'jquery','data/data', 'ojs/ojknockout', 'ojs/o
                 self.exportxls = function () {
 
                 };
+                
 
                 self.initRefresh();
             }
-            return assetViewModel();
+            return rateTypeViewModel();
         }
 ); 

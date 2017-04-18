@@ -7,12 +7,8 @@
     "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
     "createDate" : "2017-02-24T15:21:49.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    },
+    "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "",
     "mdProdGrp" : {
       "prodGrpCd" : "C",
       "prodGrpName" : "CONVENTIONAL"
@@ -25,12 +21,8 @@
     "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
     "createDate" : "2017-02-24T15:21:49.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    },
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS",
     "mdProdGrp" : {
       "prodGrpCd" : "C",
       "prodGrpName" : "CONVENTIONAL"
@@ -43,12 +35,8 @@
     "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
     "createDate" : "2017-02-24T15:21:49.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    },
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS",
     "mdProdGrp" : {
       "prodGrpCd" : "C",
       "prodGrpName" : "CONVENTIONAL"
@@ -61,12 +49,8 @@
     "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
     "createDate" : "2017-02-24T15:21:49.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    },
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS",
     "mdProdGrp" : {
       "prodGrpCd" : "I",
       "prodGrpName" : "ISLAMIC"
@@ -79,12 +63,8 @@
     "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
     "createDate" : "2017-02-24T15:21:49.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    },
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS",
     "mdProdGrp" : {
       "prodGrpCd" : "I",
       "prodGrpName" : "ISLAMIC"
@@ -97,12 +77,8 @@
     "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
     "createDate" : "2017-02-24T15:21:49.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    },
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS",
     "mdProdGrp" : {
       "prodGrpCd" : "I",
       "prodGrpName" : "ISLAMIC"

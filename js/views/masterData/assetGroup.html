@@ -16,7 +16,7 @@
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchCode">Price Factor Code</label>
+                                                        <label for="searchCode">Asset Group Code</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText', value:''}">
@@ -24,7 +24,7 @@
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchName">Price Factor Name</label>
+                                                        <label for="searchName">Asset Group Name</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachName" data-bind="value: nameSearch, ojComponent: {component: 'ojInputText'}">
@@ -32,7 +32,7 @@
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchDesc">Price Factor Description</label>
+                                                        <label for="searchDesc">Asset Group Description</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachDesc" data-bind="value: descSearch,ojComponent: {component: 'ojInputText'}">
@@ -79,17 +79,17 @@
                                                     <div style="width:100%;">
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
-                                                                   data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: priceFctrDataSource, columns:
-                                                                    [{headerText: 'Code',  field: 'priceFctrCd', style: 'width: 10%'},
-                                                                    {headerText: 'Name', field: 'priceFctrName', style: 'width: 30%'},
-                                                                    {headerText: 'Description', field: 'priceFctrDesc',style: 'width: 20%'},
+                                                                   data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
+                                                                    [{headerText: 'Code',  field: 'assetGrpCd', style: 'width: 10%'},
+                                                                    {headerText: 'Name', field: 'assetGrpName', style: 'width: 30%'},
+                                                                    {headerText: 'Description', field: 'assetGrpDesc',style: 'width: 20%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'lastUpdateBy',style: 'width: 10%'},
                                                                     {headerText: 'Last Updated Date',  field: 'lastUpdateDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
                                                          rootAttributes: {'style':'width: 100%;'}}">
                                                             </table>
-                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: priceFctrDataSource, pageSize: 10}">
+                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 10}">
                                                             </div>
                                                         </div>
                                                     </div>

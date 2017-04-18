@@ -1,18 +1,8 @@
 {
-  "MdPriceFctr" : [ {
-    "priceFctrCd" : "01",
-    "priceFctrName" : "PREM",
-    "priceFctrDesc" : "Premium Price",
-    "active" : "Y",
-    "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
-    "createDate" : "2017-02-24T15:22:12.000+08:00",
-    "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:12.000+08:00",
-    "lastUpdateBy" : ""
-  }, {
-    "priceFctrCd" : "02",
-    "priceFctrName" : "PAR",
-    "priceFctrDesc" : "Par Price",
+  "MdConsumerType" : [ {
+    "consumerTypeCd" : "01",
+    "consumerTypeName" : "Private",
+    "consumerTypeDesc" : "Private Consumer",
     "active" : "Y",
     "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
     "createDate" : "2017-02-24T15:22:12.000+08:00",
@@ -20,9 +10,9 @@
     "lastUpdateDate" : "2017-02-24T15:22:12.000+08:00",
     "lastUpdateBy" : "LAS"
   }, {
-    "priceFctrCd" : "03",
-    "priceFctrName" : "DISCOUNT",
-    "priceFctrDesc" : "Discount Price",
+    "consumerTypeCd" : "02",
+    "consumerTypeName" : "Corporate",
+    "consumerTypeDesc" : "Corporate Consumer",
     "active" : "Y",
     "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
     "createDate" : "2017-02-24T15:22:12.000+08:00",
@@ -30,14 +20,14 @@
     "lastUpdateDate" : "2017-02-24T15:22:12.000+08:00",
     "lastUpdateBy" : "LAS"
   }, {
-    "priceFctrCd" : "04",
-    "priceFctrName" : "OVER_COLLATERAL",
-    "priceFctrDesc" : "Over Collateralization",
-    "active" : "Y",
+    "consumerTypeCd" : "03",
+    "consumerTypeName" : "Foundation",
+    "consumerTypeDesc" : "Foundation Consumer",
+    "active" : "N",
     "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
     "createDate" : "2017-02-24T15:22:12.000+08:00",
     "createBy" : "LAS",
     "lastUpdateDate" : "2017-02-24T15:22:12.000+08:00",
     "lastUpdateBy" : "LAS"
-  } ]
+  }]
 }

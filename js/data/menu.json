@@ -29,6 +29,13 @@
             },
             {
                 "attr" : {
+                    "id" : "assetgroup",
+                    "name" : "Asset Group",
+                    "view" : "assetgroup"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "assettype",
                     "name" : "Asset Type",
                     "view" : "assettype"
@@ -74,6 +81,13 @@
                     "id" : "counterparty",
                     "name" : "Counterparty",
                     "view" : "counterparty"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "consumerType",
+                    "name" : "Consumer Type",
+                    "view" : "consumerType"
                 }
             }
         ]

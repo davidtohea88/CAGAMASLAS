@@ -1,0 +1,73 @@
+{
+  "MdAssetGrp" : [ {
+    "assetGrpCd" : "HO",
+    "assetGrpName" : "Housing",
+    "assetGrpDesc" : "Housing",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS"
+  }, {
+    "assetGrpCd" : "CS",
+    "assetGrpName" : "Customer",
+    "assetGrpDesc" : "Customer",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS"
+  }, {
+    "assetGrpCd" : "HP",
+    "assetGrpName" : "Hire Purchase / Leasing",
+    "assetGrpDesc" : "Hire Purchase / Leasing",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "",
+    "lastUpdateBy" : ""
+  }, {
+    "assetGrpCd" : "ID",
+    "assetGrpName" : "Industrial",
+    "assetGrpDesc" : "Industrial",
+    "active" : "N",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "",
+    "lastUpdateBy" : ""
+  }, {
+    "assetGrpCd" : "PS",
+    "assetGrpName" : "Personal",
+    "assetGrpDesc" : "Personal",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "",
+    "lastUpdateBy" : ""
+  }, {
+    "assetGrpCd" : "CI",
+    "assetGrpName" : "CIPL",
+    "assetGrpDesc" : "Commercial & Industrial Property",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "",
+    "lastUpdateBy" : ""
+  }, {
+    "assetGrpCd" : "CC",
+    "assetGrpName" : "Credit Card",
+    "assetGrpDesc" : "Credit Card",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "",
+    "lastUpdateBy" : ""
+  } ]
+}

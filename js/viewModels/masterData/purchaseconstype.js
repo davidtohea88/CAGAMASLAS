@@ -1,8 +1,10 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource'],
-        function (oj, ko, data, $)
+define(['ojs/ojcore', 'knockout', 'data/data', 'jquery','services/rendererService', 'ojs/ojrouter', 'ojs/ojknockout', 'promise',
+        'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 'ojs/ojarraytabledatasource', 
+        'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource'],
+        function (oj, ko, data, $, rendererService)
         {
             function prchsConsTypMainViewModel() {
                 var self = this;
@@ -12,10 +14,25 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'ojs/ojrouter', 'ojs/oj
                 self.prchsConsTypDataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allPeople, {idAttribute: 'prchsConsTypCd'}));
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
-
+                
                 clickResetBtn = function () {
                     self.nameSearch('');
                     self.descSearch('');
+                };
+                
+                self.activeRenderer = function(context) 
+                {
+                    return rendererService.activeConverter(context.data);
+                };
+                
+                self.dateTimeRenderer = function(context) 
+                {
+                    return rendererService.dateTimeConverter.format(context.data);
+                };
+                
+                self.dateRenderer = function(context) 
+                {
+                    return rendererService.dateConverter.format(context.data);
                 };
 
                 self.initRefresh = function () {
@@ -34,6 +51,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'ojs/ojrouter', 'ojs/oj
                                 // headers : {"Authorization" : "Bearer "+ jwttoken; 
                                 success: function (data)
                                 {
+                                    console.log(data);
                                     self.allPeople(data.MdPrchsConsTyp);
                                     self.tempPeople(data.MdPrchsConsTyp);
 //                                    console.log('Data returned ' + JSON.stringify(data.MdAssetTyp));

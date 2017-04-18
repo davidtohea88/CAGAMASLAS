@@ -79,14 +79,16 @@
                                                     <div style="width:100%;">
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
-                                                                   data-bind="ojComponent: {component: 'ojTable', data: prchsConsTypDataSource, columns:
-                                                        [{headerText: 'Purchase Consideration Type Code',  field: 'prchsConsTypCd'},
-                                           {headerText: 'Purchase Consideration Type Name',     field: 'prchsConsTypName'},
-                                           {headerText: 'Purchase Consideration Type Description', field: 'prchsConsTypDesc'},
-                                           {headerText: 'Active',  field: 'active'},
-                                           {headerText: 'Effective Date',  field: 'effectiveDate'}], 
-                                                         rootAttributes: {'style':'width: 100%;'},
-                                                            rowTemplate: 'row_template'}">
+                                                                   data-bind="ojComponent: {component: 'ojTable', data: prchsConsTypDataSource, display: 'grid',columns:
+                                                                    [{headerText: 'Code',  field: 'prchsConsTypCd',style: 'width: 10%'},
+                                                                    {headerText: 'Name',     field: 'prchsConsTypName',style: 'width: 20%'},
+                                                                    {headerText: 'Description', field: 'prchsConsTypDesc',style: 'width: 30%'},
+                                                                    {headerText: 'Active',  field: 'active',style: 'width: 5%', renderer: activeRenderer},
+                                                                    {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
+                                                                    {headerText: 'Last Modified By',  field: 'lastUpdateBy',style: 'width: 10%'},
+                                                                    {headerText: 'Last Modified Date',  field: 'lastUpdateDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
+                                                         rootAttributes: {'style':'width: 100%;'}
+                                                            }">
                                                             </table>
                                                             <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: prchsConsTypDataSource, pageSize: 10}">
                                                             </div>
@@ -106,16 +108,3 @@
         </div> 
     </div>
 </div>
-
-<script type="text/html" id="row_template">
-    <tr>
-        <!-- The $data check is for when the field doesn't exists. If no value has been specified for a field then the web service might exclude that field from the reponse. -->
-        <td data-bind="text: $data.prchsConsTypCd       ? prchsConsTypCd : ''"></td>
-        <td data-bind="text: $data.prchsConsTypName    ? prchsConsTypName    : ''"></td>
-        <td data-bind="text: $data.prchsConsTypDesc ? prchsConsTypDesc : ''"></td>
-        <td data-bind="text: $data.active == 'Y'       ? 'Active'       : 'Deactive'"></td>
-        <td data-bind="text: $data.effectiveDate       ? effectiveDate       : ''"></td>
-        <!--<td data-bind="text: $data.lastUpdateDate       ? lastUpdateDate       : ''"></td>-->
-        <!--<td data-bind="text: $data.lastUpdateBy       ? lastUpdateBy       : ''"></td>-->
-    </tr>
-</script>
