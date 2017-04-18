@@ -1,0 +1,87 @@
+{
+  "MdprchsConsSubTyp" : [ {
+    "prchsConsSubTypCd" : "01",
+    "prchsConsSubTypName" : "CASH",
+    "prchsConsSubTypDesc" : "Cash",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
+    "createDate" : "2017-02-24T15:21:49.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "",
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL"
+    }
+  }, {
+    "prchsConsSubTypCd" : "02",
+    "prchsConsSubTypName" : "BOND",
+    "prchsConsSubTypDesc" : "Bond",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
+    "createDate" : "2017-02-24T15:21:49.000+08:00",
+    "createBy" : "LAS",
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL"
+    }
+  }, {
+    "prchsConsSubTypCd" : "03",
+    "prchsConsSubTypName" : "MIXED",
+    "prchsConsSubTypDesc" : "Mixed (Cash + Bond)",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
+    "createDate" : "2017-02-24T15:21:49.000+08:00",
+    "createBy" : "LAS",
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "mdProdGrp" : {
+      "prodGrpCd" : "C",
+      "prodGrpName" : "CONVENTIONAL"
+    }
+  }, {
+    "prchsConsSubTypCd" : "04",
+    "prchsConsSubTypName" : "ISL_SUKUK",
+    "prchsConsSubTypDesc" : "Sukuk",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
+    "createDate" : "2017-02-24T15:21:49.000+08:00",
+    "createBy" : "LAS",
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC"
+    }
+  }, {
+    "prchsConsSubTypCd" : "05",
+    "prchsConsSubTypName" : "ISL_MIXED",
+    "prchsConsSubTypDesc" : "Mixed (Cash + Sukuk)",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
+    "createDate" : "2017-02-24T15:21:49.000+08:00",
+    "createBy" : "LAS",
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC"
+    }
+  }, {
+    "prchsConsSubTypCd" : "06",
+    "prchsConsSubTypName" : "ISL_COMMOD",
+    "prchsConsSubTypDesc" : "Commodity/Other Assets",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:49.000+08:00",
+    "createDate" : "2017-02-24T15:21:49.000+08:00",
+    "createBy" : "LAS",
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "mdProdGrp" : {
+      "prodGrpCd" : "I",
+      "prodGrpName" : "ISLAMIC"
+    }
+  } ]
+}

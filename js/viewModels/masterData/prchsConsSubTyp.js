@@ -8,10 +8,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery','services/rendererServic
         {
             function prchsConsTypMainViewModel() {
                 var self = this;
-                self.header = "Purchase Consideration Type";
-                self.allPeople = ko.observableArray([{prchsConsTypCd: "Fetching data"}]);
-                self.tempPeople = ko.observableArray([{prchsConsTypCd: "Fetching data"}]);
-                self.prchsConsTypDataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allPeople, {idAttribute: 'prchsConsTypCd'}));
+                self.header = "Purchase Consideration Sub Type";
+                self.allData = ko.observableArray([{prchsConsSubTypCd: "Fetching data"}]);
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'prchsConsSubTypCd'}));
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
                 
@@ -37,7 +36,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery','services/rendererServic
 
                 self.initRefresh = function () {
                     console.log("fetching data");
-                    var jsonUrl = "js/data/purchaseconsiderationtype.json";
+                    var jsonUrl = "js/data/prchsConsSubTyp.json";
 //                    var hostname = "https://yourCRMServer.domain.com";
 //                    var queryString = "/salesApi/resources/latest/opportunities?onlyData=true&fields=OptyNumber,Name,Revenue,TargetPartyName,StatusCode&q=StatusCode=OPEN&limit=10&offset=" + offset;
 //                    console.log(queryString);
@@ -52,8 +51,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery','services/rendererServic
                                 success: function (data)
                                 {
                                     console.log(data);
-                                    self.allPeople(data.MdPrchsConsTyp);
-                                    self.tempPeople(data.MdPrchsConsTyp);
+                                    self.allData(data.MdprchsConsSubTyp);
 //                                    console.log('Data returned ' + JSON.stringify(data.MdAssetTyp));
 //                                    console.log("Rows Returned" + self.allPeople().length);
 //                                    // Enable / Disable the next/prev button based on results of query
@@ -86,7 +84,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery','services/rendererServic
 
                                 }
                             });
-                    self.allPeople(peopleFilter);
+                    self.allData(peopleFilter);
                 };
 
                 self.create = function () {

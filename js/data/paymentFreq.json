@@ -7,12 +7,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS"
   }, {
     "pymtFreqCd" : "W",
     "pymtFreqName" : "WEEKLY",
@@ -21,12 +17,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    }
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS"
   }, {
     "pymtFreqCd" : "F",
     "pymtFreqName" : "FORTNIGHTLY",
@@ -35,12 +27,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    }
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS"
   }, {
     "pymtFreqCd" : "M",
     "pymtFreqName" : "MONTHLY",
@@ -49,12 +37,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    }
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS"
   }, {
     "pymtFreqCd" : "Q",
     "pymtFreqName" : "QUARTERLY",
@@ -63,12 +47,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    }
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS"
   }, {
     "pymtFreqCd" : "H",
     "pymtFreqName" : "HALF_YEARLY",
@@ -77,12 +57,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    }
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS"
   }, {
     "pymtFreqCd" : "Y",
     "pymtFreqName" : "YEARLY",
@@ -91,12 +67,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    }
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS"
   }, {
     "pymtFreqCd" : "FD",
     "pymtFreqName" : "FULL_DISBURSE",
@@ -105,26 +77,18 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    }
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS"
   }, {
     "pymtFreqCd" : "FFA",
     "pymtFreqName" : "FULL_FIVE_ANNUAL",
-    "pymtFreqDesc" : "Payment to be made in 5 equal instalments starting from full disbursement date and followed by 1st, 2nd, 3rd and 4th anniversary of date of disbursement.",
+    "pymtFreqDesc" : "Payment to be made in 5 equal instalments",
     "active" : "Y",
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    }
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS"
   }, {
     "pymtFreqCd" : "B",
     "pymtFreqName" : "BULLET",
@@ -133,11 +97,7 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : {
-      "@nil" : "true"
-    },
-    "lastUpdateBy" : {
-      "@nil" : "true"
-    }
+     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
+    "lastUpdateBy" : "LAS"
   } ]
 }

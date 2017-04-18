@@ -78,6 +78,13 @@
             },
             {
                 "attr" : {
+                    "id" : "purchaseconssubtype",
+                    "name" : "Purchase Consideration Sub Type",
+                    "view" : "purchaseconssubtype"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "counterparty",
                     "name" : "Counterparty",
                     "view" : "counterparty"
@@ -85,9 +92,9 @@
             },
             {
                 "attr" : {
-                    "id" : "consumerType",
+                    "id" : "consumertype",
                     "name" : "Consumer Type",
-                    "view" : "consumerType"
+                    "view" : "consumertype"
                 }
             }
         ]
