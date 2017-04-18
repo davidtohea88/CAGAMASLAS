@@ -96,6 +96,20 @@
                     "name" : "Consumer Type",
                     "view" : "consumertype"
                 }
+            },
+            {
+                "attr" : {
+                    "id" : "country",
+                    "name" : "Country",
+                    "view" : "country"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "state",
+                    "name" : "State",
+                    "view" : "state"
+                }
             }
         ]
     },
