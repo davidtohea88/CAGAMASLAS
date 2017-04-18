@@ -14,7 +14,8 @@ define(['jquery','ojs/ojcore' ,'knockout'], function($,oj,ko) {
          */
         var self = this;
         self.status = "temp-new";
-        self.loanStatus = "not validated";       
+        self.loanStatus = "not validated"; 
+        self.serviceUrl = 'http://localhost:3000/'; 
         
         //self.notificationDailogModel = new NotificationDailogModel(); 
     };
