@@ -1,0 +1,38 @@
+{
+  "MDOrgHierachy" : [ {
+    "orgHrchId" : 1,
+    "org": {
+        "orgCd" : "CAG_SRP",
+        "orgName" : "Cagamas SRP berhad"
+    },
+    "orgLevel" : "1",
+    "orgParent" : {
+        "orgCd" : "CAG_BHD",
+        "orgName" : "Cagamas Berhad"     
+    },
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
+    "lastUpdateBy" : "LAS"
+  }, {
+    "orgHrchId" : 2,
+    "org": {
+        "orgCd" : "CAG_SME",
+        "orgName" : "Cagamas SME berhad"
+    },
+    "orgLevel" : "1",
+    "orgParent" : {
+        "orgCd" : "CAG_BHD",
+        "orgName" : "Cagamas Berhad"     
+    },
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
+    "lastUpdateBy" : "LAS"
+  }
+   ]
+}

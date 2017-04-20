@@ -134,6 +134,13 @@
             },
             {
                 "attr" : {
+                    "id" : "organizationhierarchy",
+                    "name" : "Organization Hierarchy",
+                    "view" : "organizationhierarchy"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "blank",
                     "name" : "blank",
                     "view" : "blank"
