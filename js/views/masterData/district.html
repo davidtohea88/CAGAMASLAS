@@ -16,7 +16,7 @@
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchCode">Asset Type Code</label>
+                                                        <label for="searchCode">District Name</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText', value:''}">
@@ -24,7 +24,7 @@
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchName">Asset Type Name</label>
+                                                        <label for="searchName">State Name</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachName" data-bind="value: nameSearch, ojComponent: {component: 'ojInputText'}">
@@ -32,10 +32,10 @@
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchDesc">Asset Type Description</label>
+                                                        <label for="searchName">Country Name</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachDesc" data-bind="value: descSearch,ojComponent: {component: 'ojInputText'}">
+                                                        <input id="seachName" data-bind="value: nameSearch, ojComponent: {component: 'ojInputText'}">
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">                       
@@ -79,16 +79,16 @@
                                                     <div style="width:100%;">
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
-                                                                   data-bind="ojComponent: {component: 'ojTable', data: assetTypDataSource, columns:
-                                                        [{headerText: 'Asset Type Code',  field: 'assetTypCd'},
-                                           {headerText: 'Asset Type Name',     field: 'assetTypName'},
-                                           {headerText: 'Asset Type Description', field: 'assetTypDesc'},
-                                           {headerText: 'Active',  field: 'active'},
-                                           {headerText: 'Effective Date',  field: 'effectiveDate'}], 
-                                                         rootAttributes: {'style':'width: 100%;'},
-                                                            rowTemplate: 'row_template'}">
+                                                                   data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
+                                                                    [{headerText: 'District',  field: 'districtName', style: 'width: 20%'},
+                                                                    {headerText: 'State',  field: 'state', style: 'width: 20%', renderer: stateNameRenderer},
+                                                                    {headerText: 'Country',  field: 'country', style: 'width: 20%', renderer: countryNameRenderer},
+                                                                    {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
+                                                                    {headerText: 'Last Updated By',  field: 'lastUpdateBy',style: 'width: 10%'},
+                                                                    {headerText: 'Last Updated Date',  field: 'lastUpdateDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
+                                                         rootAttributes: {'style':'width: 100%;'}}">
                                                             </table>
-                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: assetTypDataSource, pageSize: 10}">
+                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 10}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -106,14 +106,3 @@
         </div> 
     </div>
 </div>
-
-<script type="text/html" id="row_template">
-  <tr>
-     The $data check is for when the field doesn't exists. If no value has been specified for a field then the web service might exclude that field from the reponse. 
-    <td data-bind="text: $data.assetTypCd       ? assetTypCd : ''"></td>
-    <td data-bind="text: $data.assetTypName    ? assetTypName    : ''"></td>
-    <td data-bind="text: $data.assetTypDesc ? assetTypDesc : ''"></td>
-    <td data-bind="text: $data.active == 'Y'       ? 'Active'       : 'Deactive'"></td>
-    <td data-bind="text: $data.effectiveDate       ? effectiveDate       : ''"></td>
-  </tr>
-</script>

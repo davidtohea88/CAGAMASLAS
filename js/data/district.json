@@ -1,0 +1,63 @@
+{
+  "MDDistrict" : [ {
+    "districtName" : "Johor",
+    "active" : "Y",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "country" :{
+        "countryCd": "MY",
+        "countryName": "Malaysia"
+    },
+    "state" :{
+        "stateCd": "JH",
+        "stateName": "Johor"
+    }
+  }, {
+    "districtName" : "Kuala Lumpur",
+    "active" : "Y",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "country" :{
+        "countryCd": "MY",
+        "countryName": "Malaysia"
+    },
+    "state" :{
+        "stateCd": "JH",
+        "stateName": "Johor"
+    }
+  },{
+    "districtName" : "Jakarta",
+    "active" : "Y",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "country" :{
+        "countryCd": "ID",
+        "countryName": "Indonesia"
+    },
+    "state" :{
+        "stateCd": "DKI",
+        "stateName": "DKI Jakarta"
+    }
+  }, {
+    "districtName" : "Medan",
+    "active" : "Y",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "country" :{
+        "countryCd": "ID",
+        "countryName": "Indonesia"
+    },
+    "state" :{
+        "stateCd": "SUMUT",
+        "stateName": "Sumatera Utara"
+    }
+  } ]
+}

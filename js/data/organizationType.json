@@ -1,0 +1,23 @@
+{
+  "MDOrganizationType" : [ {
+    "orgTypCd": "HC",
+    "orgTypName": "Holding Company",
+    "orgTypDesc": "Holding Company",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
+    "lastUpdateBy" : "LAS"
+  }, {
+    "orgTypCd": "SC",
+    "orgTypName": "Sister Company",
+    "orgTypDesc": "Sister Company",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
+    "lastUpdateBy" : "LAS"
+  }]
+}

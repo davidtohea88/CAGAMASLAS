@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<div id="container" >
+    <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+    <div class="page-content" style="margin:0 auto">
+        <div class="oj-flex">  
+            <div class="oj-flex-item">
+                <div class="oj-margin oj-panel-alt demo-mypanel" >          
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">  
+                            <div class="oj-margin oj-panel-alt demo-mypanel" >   
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >  
+                                    <h3><b>Filter</b></h3>
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchCode">Organization Code</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText', value:''}">
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchName">Organization Name</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="seachName" data-bind="value: nameSearch, ojComponent: {component: 'ojInputText'}">
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchDesc">Organization Description</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="seachDesc" data-bind="value: descSearch,ojComponent: {component: 'ojInputText'}">
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">                       
+                                                    <div class="oj-flex-item">
+                                                        <button id= "button" data-bind="click: clickSearchBtn,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
+                                                        <button id= "button" data-bind="click: clickResetBtn,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>    
+                                        <div class="oj-flex-item"></div>
+                                    </div>
+                                </div>
+
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" > 
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <button id= "button" data-bind="click:create,ojComponent: { component: 'ojButton', label: 'Create' }">
+                                                        </button>
+                                                        <button id= "button" data-bind="click:activedeactive,ojComponent: { component: 'ojButton', label: 'Active/Deactive' }">
+                                                        </button>
+                                                        <button id= "button" data-bind="click:edit,ojComponent: { component: 'ojButton', label: 'Edit' }">
+                                                        </button>
+                                                        <button id= "button" data-bind="click:exportxls,ojComponent: { component: 'ojButton', label: 'Export' }">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >                    
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">                        
+                                                    <div style="width:100%;">
+                                                        <div id="pagingControlDemo" class="page-content">
+                                                            <table id="table" summary="Origination List" aria-label="Origination Table"
+                                                                   data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
+                                                                    [{headerText: 'Code',  field: 'orgCd', style: 'width: 10%'},
+                                                                    {headerText: 'Name', field: 'orgName', style: 'width: 30%'},
+                                                                    {headerText: 'Description', field: 'orgDesc',style: 'width: 20%'},
+                                                                    {headerText: 'Type', field: 'orgType',style: 'width: 20%', renderer: orgTypeRenderer},
+                                                                    {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
+                                                                    {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
+                                                                    {headerText: 'Last Updated By',  field: 'lastUpdateBy',style: 'width: 10%'},
+                                                                    {headerText: 'Last Updated Date',  field: 'lastUpdateDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
+                                                         rootAttributes: {'style':'width: 100%;'}}">
+                                                            </table>
+                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 10}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>                 
+
+                            </div>    
+                        </div>
+                    </div> 
+                </div>    
+            </div>
+        </div> 
+    </div>
+</div>

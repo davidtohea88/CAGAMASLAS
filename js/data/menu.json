@@ -110,6 +110,34 @@
                     "name" : "State",
                     "view" : "state"
                 }
+            },
+            {
+                "attr" : {
+                    "id" : "district",
+                    "name" : "District",
+                    "view" : "district"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "organization",
+                    "name" : "Organization",
+                    "view" : "organization"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "organizationtype",
+                    "name" : "Organization Type",
+                    "view" : "organizationtype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "blank",
+                    "name" : "blank",
+                    "view" : "blank"
+                }
             }
         ]
     },
