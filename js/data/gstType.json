@@ -1,0 +1,23 @@
+{
+  "MdGstType" : [ {
+    "gstTypCd" : "0001",
+    "gstTypName" : "SR",
+    "gstTypDesc" : "Standard Rates",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS"
+  }, {
+    "gstTypCd" : "0002",
+    "gstTypName" : "OS",
+    "gstTypDesc" : "Out of Scopes",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "admin"
+  }]
+}

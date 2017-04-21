@@ -92,6 +92,34 @@
             },
             {
                 "attr" : {
+                    "id" : "counterpartytype",
+                    "name" : "Counterparty Type",
+                    "view" : "counterpartytype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "counterpartysect",
+                    "name" : "Counterparty Sector",
+                    "view" : "counterpartysect"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "counterpartygrptype",
+                    "name" : "Counterparty Group Type",
+                    "view" : "counterpartygrptype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "counterpartygrp",
+                    "name" : "Counterparty Group",
+                    "view" : "counterpartygrp"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "consumertype",
                     "name" : "Consumer Type",
                     "view" : "consumertype"
@@ -137,6 +165,41 @@
                     "id" : "organizationhierarchy",
                     "name" : "Organization Hierarchy",
                     "view" : "organizationhierarchy"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "gsttype",
+                    "name" : "GST Type",
+                    "view" : "gsttype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "gstfeetype",
+                    "name" : "GST Fee Type",
+                    "view" : "gstfeetype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "gstchrgtype",
+                    "name" : "GST Charge Type",
+                    "view" : "gstchrgtype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "gstcode",
+                    "name" : "GST Code",
+                    "view" : "gstcode"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "gstorganization",
+                    "name" : "GST Organization",
+                    "view" : "gstorganization"
                 }
             },
             {

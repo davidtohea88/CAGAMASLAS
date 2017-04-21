@@ -16,7 +16,7 @@
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchCode">Organization Type Code</label>
+                                                        <label for="searchCode">Fee Type Code</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText', value:''}">
@@ -24,7 +24,7 @@
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchName">Organization Type Name</label>
+                                                        <label for="searchName">Fee Type Name</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachName" data-bind="value: nameSearch, ojComponent: {component: 'ojInputText'}">
@@ -32,7 +32,7 @@
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchDesc">Organization Type Description</label>
+                                                        <label for="searchDesc">Fee Type Description</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachDesc" data-bind="value: descSearch,ojComponent: {component: 'ojInputText'}">
@@ -80,9 +80,9 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                    [{headerText: 'Code',  field: 'orgTypCd', style: 'width: 10%'},
-                                                                    {headerText: 'Name', field: 'orgTypName', style: 'width: 30%'},
-                                                                    {headerText: 'Description', field: 'orgTypDesc',style: 'width: 20%'},
+                                                                    [{headerText: 'Code',  field: 'gstFeeTypCd', style: 'width: 10%'},
+                                                                    {headerText: 'Name', field: 'gstFeeTypName', style: 'width: 30%'},
+                                                                    {headerText: 'Description', field: 'gstFeeTypDesc',style: 'width: 20%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'lastUpdateBy',style: 'width: 10%'},

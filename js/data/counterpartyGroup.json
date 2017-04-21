@@ -1,0 +1,23 @@
+{
+  "MdCounterPrtyGrp" : [ {
+    "counterPrtyGrpCd" : "001",
+    "counterPrtyGrpName" : "DEFAULT_GRP",
+    "counterPrtyGrpDesc" : "Default Group",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS" 
+  }, {
+    "counterPrtyGrpCd" : "002",
+    "counterPrtyGrpName" : "AMB_GRP",
+    "counterPrtyGrpDesc" : "AM Bank Group",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS"
+  }]
+}

@@ -1,7 +1,9 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource'],
+define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'ojs/ojrouter', 
+    'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
+    'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource','ojs/ojdatetimepicker'],
         function (oj, ko, data, $, rendererService)
         {
             function assetTypeMainViewModel() {
@@ -70,7 +72,15 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
 
                 self.create = function () {
-
+                    $("#CreateEditDialog").ojDialog("open");
+                };
+                
+                self.cancel = function () {
+                    $("#CreateEditDialog").ojDialog("close");
+                };
+                
+                self.save = function () {
+                   
                 };
 
                 self.activedeactive = function () {

@@ -87,7 +87,7 @@
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'lastUpdateBy',style: 'width: 10%'},
                                                                     {headerText: 'Last Updated Date',  field: 'lastUpdateDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
-                                                         rootAttributes: {'style':'width: 100%;'}}">
+                                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} }">
                                                             </table>
                                                             <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 10}">
                                                             </div>

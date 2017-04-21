@@ -4,11 +4,11 @@
 define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource'],
         function (oj, ko, data, $, rendererService)
         {
-            function priceFctrMainViewModel() {
+            function counterpartyGroupMainViewModel() {
                 var self = this;
-                self.header = "Price Factor";
-                self.allData = ko.observableArray([{priceFctrCd: "Fetching data"}]);
-                self.priceFctrDataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'priceFctrCd'}));
+                self.header = "Counterparty Group";
+                self.allData = ko.observableArray([{counterPrtyGrpCd: "Fetching data"}]);
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'counterPrtyGrpCd'}));
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
 
@@ -34,11 +34,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     
                 self.initRefresh = function () {
                     console.log("fetching data");
-                    var jsonUrl = "js/data/pricefactor.json";
-//                    var hostname = "https://yourCRMServer.domain.com";
-//                    var queryString = "/salesApi/resources/latest/opportunities?onlyData=true&fields=OptyNumber,Name,Revenue,TargetPartyName,StatusCode&q=StatusCode=OPEN&limit=10&offset=" + offset;
-//                    console.log(queryString);
-//                    $.ajax(hostname + queryString,
+                    var jsonUrl = "js/data/counterpartyGroup.json";
+
                     $.ajax(jsonUrl,
                             {
                                 method: "GET",
@@ -48,19 +45,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                                 // headers : {"Authorization" : "Bearer "+ jwttoken; 
                                 success: function (data)
                                 {
-                                    self.allData(data.MdPriceFctr);
-//                                    console.log('Data returned ' + JSON.stringify(data.MdAssetTyp));
-//                                    console.log("Rows Returned" + self.allPeople().length);
-//                                    // Enable / Disable the next/prev button based on results of query
-//                                    if (self.optyList().length < limit)
-//                                    {
-//                                        $('#nextButton').attr("disabled", true);
-//                                    } else
-//                                    {
-//                                        $('#nextButton').attr("disabled", false);
-//                                    }
-//                                    if (self.offset === 0)
-//                                        $('#prevButton').attr("disabled", true);
+                                    self.allData(data.MdCounterPrtyGrp);
                                 },
                                 error: function (jqXHR, textStatus, errorThrown)
                                 {
@@ -102,6 +87,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
 
                 self.initRefresh();
             }
-            return priceFctrMainViewModel();
+            return counterpartyGroupMainViewModel();
         }
 ); 

@@ -1,0 +1,36 @@
+{
+  "MdCounterPrtyType" : [ {
+    "counterPrtyTypCd" : "CPT_TYP_001",
+    "counterPrtyTypName" : "Government",
+    "counterPrtyTypDesc" : "Government",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "remarks" : ""        
+  }, {
+    "counterPrtyTypCd" : "CPT_TYP_002",
+    "counterPrtyTypName" : "Corporate",
+    "counterPrtyTypDesc" : "Corporate",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "remarks" : ""    
+  }, {
+    "counterPrtyTypCd" : "CPT_TYP_003",
+    "counterPrtyTypName" : "Insurance",
+    "counterPrtyTypDesc" : "Insurance",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "remarks" : "Insurance company"    
+  } ]
+}

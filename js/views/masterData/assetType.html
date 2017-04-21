@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 
+<!-- MAIN -->
 <div id="container" >
     <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
     <div class="page-content" style="margin:0 auto">
@@ -87,7 +88,7 @@
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'lastUpdateBy',style: 'width: 10%'},
                                                                     {headerText: 'Last Updated Date',  field: 'lastUpdateDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
-                                                         rootAttributes: {'style':'width: 100%;'}}">
+                                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} }">
                                                             </table>
                                                             <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 10}">
                                                             </div>
@@ -105,5 +106,78 @@
                 </div>    
             </div>
         </div> 
+    </div>
+</div>
+
+<!-- DIALOG -->
+<div id="dialogWrapper">
+    <div style="display:none" id="CreateEditDialog" title="Create/Edit"
+            data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',
+                rootAttributes: { style: 'min-width:400px; height: 350px;'}}">
+        <div class="oj-dialog-body">
+            <div class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="code">Asset Type Code</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText', required: true}" >
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="name">Asset Type Name</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText', required: true}" >
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="desc">Asset Type Description</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText', required: true}">
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="status2">Status</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class='oj-flex-bar-middle'>                 
+                        <!-- You need to set the aria-labelledby attribute to make 
+                        this accessible. -->
+                        <div data-bind="ojComponent: {component: 'ojRadioset', required: true}" 
+                             aria-labelledby="status1">
+                            <span class="oj-choice-row-inline">
+                                <input id="rbtn_active" type="radio" 
+                                       value="Y" name="status">
+                                <label for="rbtn_active">Active</label>
+                            </span>
+                            <span class="oj-choice-row-inline">
+                                <input id="rbtn_inactive" type="radio" 
+                                       value="N" name="status">
+                                <label for="rbtn_inactive">Inactive</label>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="effectiveDate">Effective Date</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input id="effectiveDate" style="width: 100%;"
+                           data-bind="ojComponent: {component: 'ojInputDate', required: true }"/>
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="saveButton" data-bind="click:save,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
+            <button id="cancelButton" data-bind="click:cancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+        </div>
     </div>
 </div>

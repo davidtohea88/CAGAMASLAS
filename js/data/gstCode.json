@@ -1,0 +1,31 @@
+{
+  "MdGstCode" : [ {
+    "gstCodeCd" : "0001",
+    "gstCodeName" : "SR",
+    "gstCodeDesc" : "Standard Rates",
+    "gstCodeShortDesc" : "Standard Rates",
+    "gstCodeAcctTyp" : "Acct",
+    "gstCodeTrxTypShortDesc" : "Trx",
+    "gstCodeTrxTypDesc" : "Transaction",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS"
+  }, {
+    "gstCodeCd" : "0002",
+    "gstCodeName" : "OS",
+    "gstCodeDesc" : "Out of Scopes",
+    "gstCodeShortDesc" : "Standard Rates",
+    "gstCodeAcctTyp" : "Acct",
+    "gstCodeTrxTypShortDesc" : "Trx",
+    "gstCodeTrxTypDesc" : "Transaction",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "admin"
+  }]
+}

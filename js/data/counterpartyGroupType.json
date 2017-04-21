@@ -1,0 +1,23 @@
+{
+  "MdCounterPrtyGrpType" : [ {
+    "counterPrtyGrpTypCd" : "001",
+    "counterPrtyGrpTypName" : "BANK",
+    "counterPrtyGrpTypDesc" : "Bank",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS" 
+  }, {
+    "counterPrtyGrpTypCd" : "002",
+    "counterPrtyGrpTypName" : "NON BANK",
+    "counterPrtyGrpTypDesc" : "Non Bank",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS"
+  }]
+}

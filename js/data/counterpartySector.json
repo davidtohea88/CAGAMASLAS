@@ -1,0 +1,29 @@
+{
+  "MdCounterPrtySector" : [ {
+    "counterPrtySectCd" : "CPT_SECT_001",
+    "counterPrtySectName" : "SCTR_DEFAULT",
+    "counterPrtySectDesc" : "Default Sector",
+    "counterPrtySectT7Cd" : "S",
+    "counterPrtySectT7Name" : "Sector",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "remarks" : ""        
+  }, {
+    "counterPrtySectCd" : "CPT_SECT_002",
+    "counterPrtySectName" : "COM_BANK",
+    "counterPrtySectDesc" : "Commercial Banking",
+    "counterPrtySectT7Cd" : "SCB",
+    "counterPrtySectT7Name" : "COMMERCIAL BANK",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
+    "lastUpdateBy" : "LAS",
+    "remarks" : ""    
+  }]
+}
