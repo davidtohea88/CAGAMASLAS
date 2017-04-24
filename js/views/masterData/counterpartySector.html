@@ -87,8 +87,8 @@
                                                                     {headerText: 'T7 Sector Code', field: 'counterPrtySectT7Cd',style: 'width: 10%'},
                                                                     {headerText: 'T7 Sector Name', field: 'counterPrtySectT7Name',style: 'width: 10%'},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
-                                                                    {headerText: 'Last Updated By',  field: 'lastUpdateBy',style: 'width: 10%'},
-                                                                    {headerText: 'Last Updated Date',  field: 'lastUpdateDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
+                                                                    {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
+                                                                    {headerText: 'Last Updated Date',  field: 'updatedDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
                                                                     rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} }">
                                                             </table>
                                                             <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 10}">

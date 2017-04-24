@@ -7,8 +7,8 @@
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS",
     "orgType" :{
         "orgTypCd": "HC",
         "orgTypName": "Holding Company"
@@ -21,8 +21,8 @@
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS",
     "orgType" :{
         "orgTypCd": "SC",
         "orgTypName": "Sister Company"
@@ -35,8 +35,8 @@
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS",
     "orgType" : ""
   }, {
     "orgCd" : "CAG_SRP",
@@ -46,8 +46,8 @@
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS",
     "orgType" : ""
   }
    ]

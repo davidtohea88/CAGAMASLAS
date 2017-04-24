@@ -7,8 +7,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
-    "lastUpdateBy" : "LAS"
+     "updatedDate" : "2017-02-24T15:21:49.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "pymtFreqCd" : "W",
     "pymtFreqName" : "WEEKLY",
@@ -17,8 +17,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
-    "lastUpdateBy" : "LAS"
+     "updatedDate" : "2017-02-24T15:21:49.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "pymtFreqCd" : "F",
     "pymtFreqName" : "FORTNIGHTLY",
@@ -27,8 +27,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
-    "lastUpdateBy" : "LAS"
+     "updatedDate" : "2017-02-24T15:21:49.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "pymtFreqCd" : "M",
     "pymtFreqName" : "MONTHLY",
@@ -37,8 +37,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
-    "lastUpdateBy" : "LAS"
+     "updatedDate" : "2017-02-24T15:21:49.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "pymtFreqCd" : "Q",
     "pymtFreqName" : "QUARTERLY",
@@ -47,8 +47,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
-    "lastUpdateBy" : "LAS"
+     "updatedDate" : "2017-02-24T15:21:49.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "pymtFreqCd" : "H",
     "pymtFreqName" : "HALF_YEARLY",
@@ -57,8 +57,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
-    "lastUpdateBy" : "LAS"
+     "updatedDate" : "2017-02-24T15:21:49.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "pymtFreqCd" : "Y",
     "pymtFreqName" : "YEARLY",
@@ -67,8 +67,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
-    "lastUpdateBy" : "LAS"
+     "updatedDate" : "2017-02-24T15:21:49.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "pymtFreqCd" : "FD",
     "pymtFreqName" : "FULL_DISBURSE",
@@ -77,8 +77,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
-    "lastUpdateBy" : "LAS"
+     "updatedDate" : "2017-02-24T15:21:49.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "pymtFreqCd" : "FFA",
     "pymtFreqName" : "FULL_FIVE_ANNUAL",
@@ -87,8 +87,8 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
-    "lastUpdateBy" : "LAS"
+     "updatedDate" : "2017-02-24T15:21:49.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "pymtFreqCd" : "B",
     "pymtFreqName" : "BULLET",
@@ -97,7 +97,7 @@
     "effectiveDate" : "2017-02-24T15:22:41.000+08:00",
     "createDate" : "2017-02-24T15:22:41.000+08:00",
     "createBy" : "LAS",
-     "lastUpdateDate" : "2017-02-24T15:21:49.000+08:00",
-    "lastUpdateBy" : "LAS"
+     "updatedDate" : "2017-02-24T15:21:49.000+08:00",
+    "updatedBy" : "LAS"
   } ]
 }

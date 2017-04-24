@@ -11,8 +11,8 @@
     "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
     "createDate" : "2017-02-24T15:21:13.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
-    "lastUpdateBy" : "LAS"
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "gstCodeCd" : "0002",
     "gstCodeName" : "OS",
@@ -25,7 +25,7 @@
     "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
     "createDate" : "2017-02-24T15:21:13.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
-    "lastUpdateBy" : "admin"
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "admin"
   }]
 }

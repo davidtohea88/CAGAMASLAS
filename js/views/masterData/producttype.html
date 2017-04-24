@@ -86,8 +86,8 @@
                                            {headerText: 'Product Type Description', field: 'prodTypDesc'},
                                            {headerText: 'Active',  field: 'active'},
                                            {headerText: 'Effective Date',  field: 'effectiveDate'},
-                                                                                               {headerText: 'Last Modified Date',  field: 'lastUpdateDate'}, 
-                                                        {headerText: 'Last Modified By',  field: 'lastUpdateBy'}], 
+                                                                                               {headerText: 'Last Modified Date',  field: 'updatedDate'}, 
+                                                        {headerText: 'Last Modified By',  field: 'updatedBy'}], 
                                                          rootAttributes: {'style':'width: 100%;'},
                                                             rowTemplate: 'row_template'}">
                                                             </table>
@@ -194,7 +194,7 @@
         <td data-bind="text: $data.prodTypDesc ? prodTypDesc : '', click: function(data, event){onRowClick(data,event)}"></td>
         <td data-bind="text: $data.active == 'Y'       ? 'Active'       : 'Deactive', click: function(data, event){onRowClick(data,event)}"></td>
         <td data-bind="text: $data.effectiveDate       ? moment($data.effectiveDate).format('Do MMMM YYYY')       : '', click: function(data, event){onRowClick(data,event)}"></td>
-        <td data-bind="text: $data.lastUpdateDate       ? lastUpdateDate       : '', click: function(data, event){onRowClick(data,event)}"></td>
-        <td data-bind="text: $data.lastUpdateBy       ? lastUpdateBy       : '', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.updatedDate       ? updatedDate       : '', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.updatedBy       ? updatedBy       : '', click: function(data, event){onRowClick(data,event)}"></td>
     </tr>
 </script>

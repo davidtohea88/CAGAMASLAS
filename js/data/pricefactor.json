@@ -7,8 +7,8 @@
     "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
     "createDate" : "2017-02-24T15:22:12.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:12.000+08:00",
-    "lastUpdateBy" : ""
+    "updatedDate" : "2017-02-24T15:22:12.000+08:00",
+    "updatedBy" : ""
   }, {
     "priceFctrCd" : "02",
     "priceFctrName" : "PAR",
@@ -17,8 +17,8 @@
     "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
     "createDate" : "2017-02-24T15:22:12.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:12.000+08:00",
-    "lastUpdateBy" : "LAS"
+    "updatedDate" : "2017-02-24T15:22:12.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "priceFctrCd" : "03",
     "priceFctrName" : "DISCOUNT",
@@ -27,8 +27,8 @@
     "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
     "createDate" : "2017-02-24T15:22:12.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:12.000+08:00",
-    "lastUpdateBy" : "LAS"
+    "updatedDate" : "2017-02-24T15:22:12.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "priceFctrCd" : "04",
     "priceFctrName" : "OVER_COLLATERAL",
@@ -37,7 +37,7 @@
     "effectiveDate" : "2017-02-24T15:22:12.000+08:00",
     "createDate" : "2017-02-24T15:22:12.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:12.000+08:00",
-    "lastUpdateBy" : "LAS"
+    "updatedDate" : "2017-02-24T15:22:12.000+08:00",
+    "updatedBy" : "LAS"
   } ]
 }

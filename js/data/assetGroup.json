@@ -7,8 +7,8 @@
     "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
     "createDate" : "2017-02-24T15:21:13.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
-    "lastUpdateBy" : "LAS"
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "assetGrpCd" : "CS",
     "assetGrpName" : "Customer",
@@ -17,8 +17,8 @@
     "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
     "createDate" : "2017-02-24T15:21:13.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:21:13.000+08:00",
-    "lastUpdateBy" : "LAS"
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "assetGrpCd" : "HP",
     "assetGrpName" : "Hire Purchase / Leasing",
@@ -27,8 +27,8 @@
     "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
     "createDate" : "2017-02-24T15:21:13.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "",
-    "lastUpdateBy" : ""
+    "updatedDate" : "",
+    "updatedBy" : ""
   }, {
     "assetGrpCd" : "ID",
     "assetGrpName" : "Industrial",
@@ -37,8 +37,8 @@
     "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
     "createDate" : "2017-02-24T15:21:13.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "",
-    "lastUpdateBy" : ""
+    "updatedDate" : "",
+    "updatedBy" : ""
   }, {
     "assetGrpCd" : "PS",
     "assetGrpName" : "Personal",
@@ -47,8 +47,8 @@
     "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
     "createDate" : "2017-02-24T15:21:13.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "",
-    "lastUpdateBy" : ""
+    "updatedDate" : "",
+    "updatedBy" : ""
   }, {
     "assetGrpCd" : "CI",
     "assetGrpName" : "CIPL",
@@ -57,8 +57,8 @@
     "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
     "createDate" : "2017-02-24T15:21:13.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "",
-    "lastUpdateBy" : ""
+    "updatedDate" : "",
+    "updatedBy" : ""
   }, {
     "assetGrpCd" : "CC",
     "assetGrpName" : "Credit Card",
@@ -67,7 +67,7 @@
     "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
     "createDate" : "2017-02-24T15:21:13.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "",
-    "lastUpdateBy" : ""
+    "updatedDate" : "",
+    "updatedBy" : ""
   } ]
 }

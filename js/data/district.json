@@ -4,8 +4,8 @@
     "active" : "Y",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS",
     "country" :{
         "countryCd": "MY",
         "countryName": "Malaysia"
@@ -19,8 +19,8 @@
     "active" : "Y",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS",
     "country" :{
         "countryCd": "MY",
         "countryName": "Malaysia"
@@ -34,8 +34,8 @@
     "active" : "Y",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS",
     "country" :{
         "countryCd": "ID",
         "countryName": "Indonesia"
@@ -49,8 +49,8 @@
     "active" : "Y",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS",
     "country" :{
         "countryCd": "ID",
         "countryName": "Indonesia"

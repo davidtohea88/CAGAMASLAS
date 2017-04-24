@@ -7,8 +7,8 @@
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS"
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "rateTypCd" : "02",
     "rateTypName" : "FL",
@@ -17,8 +17,8 @@
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS"
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "rateTypCd" : "03",
     "rateTypName" : "CT_FL2FX",
@@ -27,8 +27,8 @@
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS"
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "rateTypCd" : "04",
     "rateTypName" : "CT_FX2FL",
@@ -37,8 +37,8 @@
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS"
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
   }, {
     "rateTypCd" : "05",
     "rateTypName" : "HB",
@@ -47,7 +47,7 @@
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
     "createBy" : "LAS",
-    "lastUpdateDate" : "2017-02-24T15:22:51.000+08:00",
-    "lastUpdateBy" : "LAS"
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
   } ]
 }
