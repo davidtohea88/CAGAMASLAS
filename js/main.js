@@ -25,7 +25,11 @@ requirejs.config({
         'hammerjs': 'libs/hammer/hammer-2.0.8.min',
         'moment': 'libs/moment/moment.min',
         'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
-        'class': 'libs/las/v1.0.0/Class'
+        'class': 'libs/las/v1.0.0/Class',
+        'blobjs': 'libs/sheetjs/Blob.min',
+        'file-saverjs': 'libs/sheetjs/FileSaver.min',
+        'jzip': 'libs/sheetjs/jszip',
+        'xlsx-js': 'libs/sheetjs/xlsx'
     }
     //endinjector
     ,
