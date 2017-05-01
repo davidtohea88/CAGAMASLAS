@@ -19,7 +19,7 @@
                                                         <label for="searchCode">Rate Type Code</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText', value:''}">
+                                                        <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText', value: codeSearch}">
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">  
@@ -27,7 +27,7 @@
                                                         <label for="searchName">Rate Type Name</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachName" data-bind="value: nameSearch, ojComponent: {component: 'ojInputText'}">
+                                                        <input id="seachName" data-bind="ojComponent: {component: 'ojInputText', value: nameSearch}">
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">  
@@ -35,13 +35,13 @@
                                                         <label for="searchDesc">Rate Type Description</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachDesc" data-bind="value: descSearch,ojComponent: {component: 'ojInputText'}">
+                                                        <input id="seachDesc" data-bind="ojComponent: {component: 'ojInputText', value: descSearch}">
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">                       
                                                     <div class="oj-flex-item">
-                                                        <button id= "button" data-bind="click: clickSearchBtn,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
-                                                        <button id= "button" data-bind="click: clickResetBtn,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
+                                                        <button id= "button" data-bind="click: onSearch,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
+                                                        <button id= "button" data-bind="click: onReset,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
                                                     </div>
                                                 </div> 
                                             </div>
@@ -57,11 +57,11 @@
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">                        
                                                     <div class="oj-flex-item">
-                                                        <button id= "button" data-bind="click:create,ojComponent: { component: 'ojButton', label: 'Create' }">
+                                                        <button id= "button" data-bind="click:onCreate,ojComponent: { component: 'ojButton', label: 'Create' }">
                                                         </button>
-                                                        <button id= "button" data-bind="click:activedeactive,ojComponent: { component: 'ojButton', label: 'Active/Deactive' }">
+                                                        <button id= "button" data-bind="click:onActivateDeactivate,ojComponent: { component: 'ojButton', label: 'Active/Deactive' }">
                                                         </button>
-                                                        <button id= "button" data-bind="click:edit,ojComponent: { component: 'ojButton', label: 'Edit' }">
+                                                        <button id= "button" data-bind="click:onEdit,ojComponent: { component: 'ojButton', label: 'Edit' }">
                                                         </button>
                                                         <button id= "button" data-bind="click:exportxls,ojComponent: { component: 'ojButton', label: 'Export' }">
                                                         </button>
@@ -81,14 +81,15 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', data: dataSource, display: 'grid', columns:
-                                                        [{headerText: 'Rate Type Code',  field: 'rateTypCd', style: 'width: 10%'},
-                                                        {headerText: 'Rate Type Name',     field: 'rateTypName', style: 'width: 20%'},
-                                                        {headerText: 'Rate Type Description', field: 'rateTypDesc', style: 'width: 30%'},
-                                                        {headerText: 'Active',  field: 'active', style: 'width: 10%',renderer: activeRenderer},
-                                                        {headerText: 'Effective Date',  field: 'effectiveDate', style: 'width: 10%',  renderer: dateRenderer},
-                                                        {headerText: 'Last Modified By',  field: 'updatedBy',style: 'width: 10%'},
-                                                                    {headerText: 'Last Modified Date',  field: 'updatedDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
-                                                         rootAttributes: {'style':'width: 100%;'}}">
+                                                                        [{headerText: 'Rate Type Code',  field: 'rateTypCd', style: 'width: 10%'},
+                                                                        {headerText: 'Rate Type Name',     field: 'rateTypName', style: 'width: 20%'},
+                                                                        {headerText: 'Rate Type Description', field: 'rateTypDesc', style: 'width: 30%'},
+                                                                        {headerText: 'Active',  field: 'active', style: 'width: 10%',renderer: activeRenderer},
+                                                                        {headerText: 'Effective Date',  field: 'effectiveDate', style: 'width: 10%',  renderer: dateRenderer},
+                                                                        {headerText: 'Last Modified By',  field: 'updatedBy',style: 'width: 10%'},
+                                                                        {headerText: 'Last Modified Date',  field: 'updatedDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
+                                                                        rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'},
+                                                                        beforeCurrentRow: onSelectRow}">
                                                             </table>
                                                             <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 10}">
                                                             </div>
@@ -106,5 +107,65 @@
                 </div>    
             </div>
         </div> 
+    </div>
+</div>
+
+
+<!-- DIALOG -->
+<div id="dialogWrapper">
+    <div style="display:none" id="CreateEditDialog" title=""
+            data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modeless', 
+                    cancelBehavior: 'escape',resizeBehavior: 'none', 
+                rootAttributes: { style: 'min-width:420px; min-height: 330px;'}}">
+        <div class="oj-dialog-header oj-helper-clearfix">
+            <span id="dialogTitleId" class="oj-dialog-title" data-bind="text:dialogTitle"> </span> 
+        </div>
+        <div class="oj-dialog-body">
+            <form data-bind="submit: onSave, with: rateTypeModel">
+                <div class="oj-form oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="code">Rate Type Code</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="code" style="width: 100%;" data-bind="value: rateTypCd" >
+                        </div>
+                    </div> 
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="name">Rate Type Name</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="name" style="width: 100%;" data-bind="value: rateTypName" >
+                        </div>
+                    </div>
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="desc">Rate Type Description</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="desc" style="width: 100%;" data-bind="value: rateTypDesc" >
+                        </div>
+                    </div> 
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label id="statusLbl">Status</label>
+                        </div>
+                    </div>
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="effectiveDt">Effective Date</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="effectiveDt" style="width: 100%;" data-bind="value: effectiveDate" >
+                        </div>
+                    </div> 
+                </div>
+            </form>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="saveButton" type="submit" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
+            <button id="cancelButton" data-bind="click:cancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+        </div>
     </div>
 </div>

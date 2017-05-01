@@ -1,5 +1,6 @@
 {
   "MdRateTyp" : [ {
+    "rateTypId" : 1,
     "rateTypCd" : "01",
     "rateTypName" : "FX",
     "rateTypDesc" : "Fixed",
@@ -10,6 +11,7 @@
     "updatedDate" : "2017-02-24T15:22:51.000+08:00",
     "updatedBy" : "LAS"
   }, {
+    "rateTypId" : 2,
     "rateTypCd" : "02",
     "rateTypName" : "FL",
     "rateTypDesc" : "Floating",
@@ -20,6 +22,7 @@
     "updatedDate" : "2017-02-24T15:22:51.000+08:00",
     "updatedBy" : "LAS"
   }, {
+    "rateTypId" : 3,
     "rateTypCd" : "03",
     "rateTypName" : "CT_FL2FX",
     "rateTypDesc" : "Fixed Convertible to Floating",
@@ -30,6 +33,7 @@
     "updatedDate" : "2017-02-24T15:22:51.000+08:00",
     "updatedBy" : "LAS"
   }, {
+    "rateTypId" : 4,
     "rateTypCd" : "04",
     "rateTypName" : "CT_FX2FL",
     "rateTypDesc" : "Floating Convertible to Fixed",
@@ -40,6 +44,7 @@
     "updatedDate" : "2017-02-24T15:22:51.000+08:00",
     "updatedBy" : "LAS"
   }, {
+    "rateTypId" : 5,
     "rateTypCd" : "05",
     "rateTypName" : "HB",
     "rateTypDesc" : "Hybrid",

@@ -12,8 +12,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 self.header = "Country";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.countryModel = ko.observable();
-                self.allData = ko.observableArray([{countryCd: "Fetching data"}]);
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'countryCd'}));
+                self.allData = ko.observableArray();
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'countryId'}));
                 self.codeSearch = ko.observable('');
                 self.nameSearch = ko.observable('');
 
@@ -32,7 +32,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     return rendererService.activeConverter(context.data);
                 };
                     
-                self.refreshData = function () {
+                self.refreshData = function (fnSuccess) {
                     console.log("fetching data");
                     var jsonUrl = "js/data/country.json";
 
@@ -45,7 +45,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                                 // headers : {"Authorization" : "Bearer "+ jwttoken; 
                                 success: function (data)
                                 {
-                                    self.allData(data.MdCountry);
+                                    fnSuccess(data);
                                 },
                                 error: function (jqXHR, textStatus, errorThrown)
                                 {
@@ -56,13 +56,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
 
                 self.search = function (code, name) {
-                    self.refreshData();
                     var temp = ko.utils.arrayFilter(self.allData(),
                         function (rec) {
                             return ((code.length ===0 || (code.length > 0 && rec.countryCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
                                     (name.length ===0 || (name.length > 0 && rec.countryName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
                         });
-                    console.log(temp);
                     self.allData(temp);
                 };
                 
@@ -100,18 +98,23 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 self.onReset = function(){
                     self.codeSearch('');
                     self.nameSearch('');
-                    self.search(self.codeSearch,self.nameSearch);
+                    self.refreshData(function(data){
+                        self.allData(data.MdCountry);
+                    });
                 };
                 
                 self.onSearch = function(){
-                    self.search(self.codeSearch(),self.nameSearch());
+                    self.refreshData(function(data){
+                        self.allData(data.MdCountry);
+                        self.search(self.codeSearch(),self.nameSearch());
+                    });
                 };
                 
                 self.onCreate = function(){
                     var country = { countryId: undefined,
                         countryName: "",
                         countryCd: "",
-                        status: "Y"};
+                        active: "Y"};
                     self.createOrEdit(country);
                 };
                 
@@ -139,7 +142,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                    self.exportxls(); 
                 };
 
-                self.refreshData();
+                self.refreshData(function(data){
+                    self.allData(data.MdCountry);
+                });
             }
             return countryMainViewModel();
         }

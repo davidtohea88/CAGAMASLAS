@@ -1,5 +1,6 @@
 {
   "MdState" : [ {
+    "stateId" : 1,
     "stateCd" : "JHR",
     "stateName" : "Johor",
     "active" : "Y",

@@ -1,23 +1,22 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'ojs/ojrouter', 
-    'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
-    'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource','ojs/ojdatetimepicker'],
-        function (oj, ko, data, $, rendererService)
+define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService', 'ojs/ojrouter',
+        'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
+        'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
+        'ojs/ojdatetimepicker','ojs/ojradioset'],
+        function (oj, ko, data, $, rendererService, configService, exportService)
         {
             function assetTypeMainViewModel() {
                 var self = this;
                 self.header = "Asset Type";
-                self.allData = ko.observableArray([{assetTypCd: "Fetching data"}]);
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'assetTypCd'}));
+                self.dialogTitle = "Create/edit "+self.header;
+                self.allData = ko.observableArray();
+                self.assetTypeModel = ko.observable();
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'assetTypId'}));
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
-
-                clickResetBtn = function () {
-                    self.nameSearch('');
-                    self.descSearch('');
-                };
+                self.codeSearch = ko.observable('');
 
                 self.dateTimeRenderer = function(context) 
                 {
@@ -34,7 +33,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     return rendererService.activeConverter(context.data);
                 };
                     
-                self.initRefresh = function () {
+                self.refreshData = function (fnSuccess) {
                     console.log("fetching data");
                     var jsonUrl = "js/data/assetType.json";
 
@@ -47,7 +46,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                                 // headers : {"Authorization" : "Bearer "+ jwttoken; 
                                 success: function (data)
                                 {
-                                    self.allData(data.MdAssetTyp);
+                                    fnSuccess(data);
                                 },
                                 error: function (jqXHR, textStatus, errorThrown)
                                 {
@@ -57,21 +56,18 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     );
                 };
 
-                self.clickSearchBtn = function () {
-                    var peopleFilter = new Array();
-                    ko.utils.arrayFilter(self.tempPeople(),
-                            function (r) {
-                                var nameSearch = self.nameSearch().toString().toLowerCase();
-                                var descSearch = self.descSearch().toString().toLowerCase();
-                                if (r.priceFctrDesc.toString().toLowerCase().indexOf(nameSearch) !== -1 || r.priceFctrName.toString().toLowerCase().indexOf(nameSearch) !== -1) {
-                                    peopleFilter.push(r);
-
-                                }
-                            });
-                    self.allPeople(peopleFilter);
+                self.search = function (code, name, desc) {
+                    var temp = ko.utils.arrayFilter(self.allData(),
+                        function (rec) {
+                            return ((code.length ===0 || (code.length > 0 && rec.assetTypCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                    (name.length ===0 || (name.length > 0 && rec.assetTypName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                    (desc.length ===0 || (desc.length > 0 && rec.assetTypDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                        });
+                    self.allData(temp);
                 };
-
-                self.create = function () {
+                
+                self.createOrEdit = function (model) {
+                    self.assetTypeModel(model);
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
@@ -79,23 +75,81 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     $("#CreateEditDialog").ojDialog("close");
                 };
                 
-                self.save = function () {
-                   
+                self.save = function (model) {
+                   console.log("Saving ");
+                   console.log(model);
                 };
 
-                self.activedeactive = function () {
-
-                };
-
-                self.edit = function () {
-
+                self.activateDeactivate = function (model) {
+                    if (model.active === 'Y'){
+                        model.active = 'N';
+                    }else if (model.active === 'N'){
+                        model.active = 'Y';
+                    }
+                    self.save(model);
                 };
 
                 self.exportxls = function () {
-
+                    exportService.export($("#table").ojTable("option","columns"),self.allData(),'xlsx','data.xlsx');
+                };
+                
+                self.selectedRow = undefined;
+                
+                // ===============  EVENT HANDLER  ==============
+                
+                self.onReset = function(){
+                    self.codeSearch('');
+                    self.nameSearch('');
+                    self.descSearch('');
+                    self.refreshData(function(data){
+                        self.allData(data.MdAssetTyp);
+                    });
+                };
+                
+                self.onSearch = function(){
+                    self.refreshData(function(data){
+                        self.allData(data.MdAssetTyp);
+                        self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                    });
+                };
+                
+                self.onCreate = function(){
+                    var assetType = { assetTypId: undefined,
+                        assetTypCd: "",
+                        assetTypName: "",
+                        assetTypDesc: "",
+                        active: "Y",
+                        effectiveDate: ""};
+                    self.createOrEdit(assetType);
+                };
+                
+                self.onEdit = function(){
+                    self.createOrEdit(self.selectedRow);
+                };
+                
+                self.onSave = function(model){
+                    self.save(model);
+                };
+                
+                self.onActivateDeactivate = function(){
+                    self.activateDeactivate(self.selectedRow);
+                }
+                
+                self.onSelectRow = function(event, ui){
+                    var idx = ui.currentRow.rowIndex;
+                    self.dataSource.at(idx).
+                        then(function (obj) {
+                            self.selectedRow = obj.data;
+                        });
+                };
+                
+                self.onExport = function(){
+                   self.exportxls(); 
                 };
 
-                self.initRefresh();
+                self.refreshData(function(data){
+                    self.allData(data.MdAssetTyp);
+                });
             }
             return assetTypeMainViewModel();
         }
