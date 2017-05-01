@@ -17,18 +17,15 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 self.codeSearch = ko.observable('');
                 self.nameSearch = ko.observable('');
 
-                self.dateTimeRenderer = function(context) 
-                {
+                self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
                 };
                 
-                self.dateRenderer = function(context) 
-                {
+                self.dateRenderer = function(context){
                     return rendererService.dateConverter.format(context.data);
                 };
                 
-                self.activeRenderer = function(context) 
-                {
+                self.activeRenderer = function(context){
                     return rendererService.activeConverter(context.data);
                 };
                     
@@ -88,10 +85,18 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
 
                 self.exportxls = function () {
-                    exportService.export($("#table").ojTable("option","columns"),self.allData(),'xlsx','data.xlsx');
+                    exportService.export($("#table").ojTable("option","columns"),self.allData(),'xlsx','data.xlsx', function(field,value){
+                        if (field === 'active'){
+                            return rendererService.activeConverter(value);
+                        }else if (field === 'updatedDate'){
+                            return rendererService.dateTimeConverter.format(value)
+                        }else{
+                            return value;
+                        }
+                    });
                 };
                 
-                self.selectedRow = undefined;
+                self.selectedRow = ko.observable(undefined);
                 
                 // ===============  EVENT HANDLER  ==============
                 
@@ -99,6 +104,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     self.codeSearch('');
                     self.nameSearch('');
                     self.refreshData(function(data){
+                        self.selectedRow(undefined);
                         self.allData(data.MdCountry);
                     });
                 };
@@ -119,7 +125,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
                 
                 self.onEdit = function(){
-                    self.createOrEdit(self.selectedRow);
+                    self.createOrEdit(self.selectedRow());
                 };
                 
                 self.onSave = function(model){
@@ -127,14 +133,14 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
                 
                 self.onActivateDeactivate = function(){
-                    self.activateDeactivate(self.selectedRow);
-                }
+                    self.activateDeactivate(self.selectedRow());
+                };
                 
                 self.onSelectRow = function(event, ui){
                     var idx = ui.currentRow.rowIndex;
                     self.dataSource.at(idx).
                         then(function (obj) {
-                            self.selectedRow = obj.data;
+                            self.selectedRow(obj.data);
                         });
                 };
                 
@@ -142,9 +148,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                    self.exportxls(); 
                 };
 
-                self.refreshData(function(data){
-                    self.allData(data.MdCountry);
-                });
+                self.onReset();
             }
             return countryMainViewModel();
         }

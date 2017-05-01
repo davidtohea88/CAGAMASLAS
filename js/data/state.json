@@ -8,9 +8,16 @@
     "createBy" : "LAS",
     "updatedDate" : "2017-02-24T15:22:51.000+08:00",
     "updatedBy" : "LAS",
-    "country" :{
-        "countryCd": "MY",
-        "countryName": "Malaysia"
-    }
+    "countryId" : 1
+  },{
+    "stateId" : 2,
+    "stateCd" : "DKI",
+    "stateName" : "Jakarta",
+    "active" : "Y",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS",
+    "countryId" : 2
   } ]
 }

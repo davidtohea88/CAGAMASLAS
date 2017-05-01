@@ -18,19 +18,16 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 self.descSearch = ko.observable('');
                 self.codeSearch = ko.observable('');
                 
-                self.activeRenderer = function(context) 
-                {
-                    return rendererService.activeConverter(context.data);
-                };
-                
-                self.dateTimeRenderer = function(context) 
-                {
+                self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
                 };
                 
-                self.dateRenderer = function(context) 
-                {
+                self.dateRenderer = function(context){
                     return rendererService.dateConverter.format(context.data);
+                };
+                
+                self.activeRenderer = function(context){
+                    return rendererService.activeConverter(context.data);
                 };
 
                 self.refreshData = function (fnSuccess) {
@@ -144,7 +141,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 
                 self.onActivateDeactivate = function(){
                     self.activateDeactivate(self.selectedRow());
-                }
+                };
                 
                 self.onSelectRow = function(event, ui){
                     var idx = ui.currentRow.rowIndex;

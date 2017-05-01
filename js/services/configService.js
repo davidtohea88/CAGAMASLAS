@@ -7,18 +7,19 @@
 /*
  *  Global Settings and Config service
  */
-define(['jquery','ojs/ojcore' ,'knockout'], function($,oj,ko) {
-    var ConfigServiceUtilities = function() {
-        /**
-         * @private
-         */
-        var self = this;
-        self.status = "temp-new";
-        self.loanStatus = "not validated"; 
-        self.serviceUrl = 'http://localhost:3000/'; 
-        
-        //self.notificationDailogModel = new NotificationDailogModel(); 
-    };
-    return new ConfigServiceUtilities();
+define(['jquery','ojs/ojcore' ,'knockout'],
+    function($,oj,ko) {
+        var ConfigServiceUtilities = function() {
+            /**
+             * @private
+             */
+            var self = this;
+            self.status = "temp-new";
+            self.loanStatus = "not validated"; 
+            self.serviceUrl = 'http://localhost:3000/'; 
+
+            //self.notificationDailogModel = new NotificationDailogModel(); 
+        };
+        return new ConfigServiceUtilities();
 });
 
