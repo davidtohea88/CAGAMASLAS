@@ -7,12 +7,8 @@
     "effectiveDate" : "2017-02-24T15:21:56.000+08:00",
     "createDate" : "2017-02-24T15:21:56.000+08:00",
     "createBy" : "LAS",
-    "updatedDate" : {
-      "@nil" : "true"
-    },
-    "updatedBy" : {
-      "@nil" : "true"
-    }
+    "updatedDate" :"",
+    "updatedBy" : ""
   }, {
     "prchsModeCd" : "B",
     "prchsModeName" : "B2BACK",
@@ -21,11 +17,7 @@
     "effectiveDate" : "2017-02-24T15:21:56.000+08:00",
     "createDate" : "2017-02-24T15:21:56.000+08:00",
     "createBy" : "LAS",
-    "updatedDate" : {
-      "@nil" : "true"
-    },
-    "updatedBy" : {
-      "@nil" : "true"
-    }
+    "updatedDate" :"",
+    "updatedBy" : ""
   } ]
 }

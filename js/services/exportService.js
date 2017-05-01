@@ -16,7 +16,7 @@ define(['xlsx-js','file-saverjs','blobjs'],
                 return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
             };
 
-            self.sheet_from_array_of_arrays = function(columns, data, opts) {
+            self.sheet_from_array_of_arrays = function(columns, data, fnRenderer) {
                 var ws = {};
                 var C = 0, R = 0;
                 
@@ -40,7 +40,7 @@ define(['xlsx-js','file-saverjs','blobjs'],
                     for(C = 0; C < columns.length; ++C) {
                         var value = undefined;
                         if (data[R].hasOwnProperty(columns[C].field)){
-                            value = data[R][columns[C].field];
+                            value = fnRenderer(columns[C].field,data[R][columns[C].field]);
                         }
                         var cell = {v: value };
                         var cell_ref = XLSX.utils.encode_cell({c:C,r:R+1});
@@ -74,9 +74,9 @@ define(['xlsx-js','file-saverjs','blobjs'],
                 return buf;
             };
 
-            self.export = function(header,data, type, filename){
+            self.export = function(header,data, type, filename, fnRenderer){
                
-                var wb = new self.Workbook(), ws = self.sheet_from_array_of_arrays(header,data);
+                var wb = new self.Workbook(), ws = self.sheet_from_array_of_arrays(header,data,fnRenderer);
                 
                 var mime = undefined;
                 if (type === 'csv'){

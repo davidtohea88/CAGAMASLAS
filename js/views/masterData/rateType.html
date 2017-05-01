@@ -19,7 +19,7 @@
                                                         <label for="searchCode">Rate Type Code</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText', value: codeSearch}">
+                                                        <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearch, valueUpdate: 'afterkeydown'}">
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">  
@@ -27,7 +27,7 @@
                                                         <label for="searchName">Rate Type Name</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachName" data-bind="ojComponent: {component: 'ojInputText', value: nameSearch}">
+                                                        <input id="seachName" data-bind="ojComponent: {component: 'ojInputText', value: nameSearch, valueUpdate: 'afterkeydown'}">
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">  
@@ -35,7 +35,7 @@
                                                         <label for="searchDesc">Rate Type Description</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachDesc" data-bind="ojComponent: {component: 'ojInputText', value: descSearch}">
+                                                        <input id="seachDesc" data-bind="ojComponent: {component: 'ojInputText', value: descSearch, valueUpdate: 'afterkeydown'}">
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">                       
@@ -59,11 +59,11 @@
                                                     <div class="oj-flex-item">
                                                         <button id= "button" data-bind="click:onCreate,ojComponent: { component: 'ojButton', label: 'Create' }">
                                                         </button>
-                                                        <button id= "button" data-bind="click:onActivateDeactivate,ojComponent: { component: 'ojButton', label: 'Active/Deactive' }">
+                                                        <button id= "button" data-bind="click:onActivateDeactivate,ojComponent: { component: 'ojButton', label: 'Active/Deactive', disabled: !selectedRow() }">
                                                         </button>
-                                                        <button id= "button" data-bind="click:onEdit,ojComponent: { component: 'ojButton', label: 'Edit' }">
+                                                        <button id= "button" data-bind="click:onEdit,ojComponent: { component: 'ojButton', label: 'Edit', disabled: !selectedRow() }">
                                                         </button>
-                                                        <button id= "button" data-bind="click:exportxls,ojComponent: { component: 'ojButton', label: 'Export' }">
+                                                        <button id= "button" data-bind="click:onExport,ojComponent: { component: 'ojButton', label: 'Export' }">
                                                         </button>
                                                     </div>
                                                 </div>
@@ -113,7 +113,7 @@
 
 <!-- DIALOG -->
 <div id="dialogWrapper">
-    <div style="display:none" id="CreateEditDialog" title=""
+    <div id="CreateEditDialog" title=""
             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modeless', 
                     cancelBehavior: 'escape',resizeBehavior: 'none', 
                 rootAttributes: { style: 'min-width:420px; min-height: 330px;'}}">
@@ -149,7 +149,22 @@
                     </div> 
                     <div class="oj-flex">  
                         <div class="oj-flex-item">
-                            <label id="statusLbl">Status</label>
+                            <label for="statusGroup">Status</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <div class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: active}" 
+                                 aria-labelledby="statusGroup">
+                                <span class="oj-choice-item">
+                                    <input id="rbtn_active" type="radio" 
+                                           value="Y" name="status">
+                                    <label for="rbtn_active">Active</label>
+                                </span>
+                                <span class="oj-choice-item">
+                                    <input id="rbtn_inactive" type="radio" 
+                                           value="N" name="status">
+                                    <label for="rbtn_inactive">Inactive</label>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="oj-flex">  
@@ -157,7 +172,7 @@
                             <label for="effectiveDt">Effective Date</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="effectiveDt" style="width: 100%;" data-bind="value: effectiveDate" >
+                            <input id="effectiveDt" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputDate',value: effectiveDate}" >
                         </div>
                     </div> 
                 </div>

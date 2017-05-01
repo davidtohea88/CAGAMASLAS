@@ -1,30 +1,42 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource'],
-        function (oj, ko, data, $)
+define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService', 'ojs/ojrouter',
+        'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
+        'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
+        'ojs/ojdatetimepicker','ojs/ojradioset'],
+        function (oj, ko, data, $, rendererService, configService, exportService)
         {
             function prchsModeMainViewModel() {
                 var self = this;
                 self.header = "Purchase Mode";
-                self.allPeople = ko.observableArray([{prchsModeCd: "Fetching data"}]);
-                self.tempPeople = ko.observableArray([{prchsModeCd: "Fetching data"}]);
-                self.prchsModeDataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allPeople, {idAttribute: 'prchsModeCd'}));
+                self.dialogTitle = "Create/edit "+self.header;
+                self.allData = ko.observableArray();
+                self.purchaseModeModel = ko.observable();
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'prchsModeCd'}));
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
+                self.codeSearch = ko.observable('');
 
-                clickResetBtn = function () {
-                    self.nameSearch('');
-                    self.descSearch('');
+                self.activeRenderer = function(context) 
+                {
+                    return rendererService.activeConverter(context.data);
                 };
-
-                self.initRefresh = function () {
+                
+                self.dateTimeRenderer = function(context) 
+                {
+                    return rendererService.dateTimeConverter.format(context.data);
+                };
+                
+                self.dateRenderer = function(context) 
+                {
+                    return rendererService.dateConverter.format(context.data);
+                };
+                
+                self.refreshData = function (fnSuccess) {
                     console.log("fetching data");
                     var jsonUrl = "js/data/purchasemode.json";
-//                    var hostname = "https://yourCRMServer.domain.com";
-//                    var queryString = "/salesApi/resources/latest/opportunities?onlyData=true&fields=OptyNumber,Name,Revenue,TargetPartyName,StatusCode&q=StatusCode=OPEN&limit=10&offset=" + offset;
-//                    console.log(queryString);
-//                    $.ajax(hostname + queryString,
+
                     $.ajax(jsonUrl,
                             {
                                 method: "GET",
@@ -34,20 +46,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'ojs/ojrouter', 'ojs/oj
                                 // headers : {"Authorization" : "Bearer "+ jwttoken; 
                                 success: function (data)
                                 {
-                                    self.allPeople(data.MdPrchsMode);
-                                    self.tempPeople(data.MdPrchsMode);
-//                                    console.log('Data returned ' + JSON.stringify(data.MdAssetTyp));
-//                                    console.log("Rows Returned" + self.allPeople().length);
-//                                    // Enable / Disable the next/prev button based on results of query
-//                                    if (self.optyList().length < limit)
-//                                    {
-//                                        $('#nextButton').attr("disabled", true);
-//                                    } else
-//                                    {
-//                                        $('#nextButton').attr("disabled", false);
-//                                    }
-//                                    if (self.offset === 0)
-//                                        $('#prevButton').attr("disabled", true);
+                                    fnSuccess(data);
                                 },
                                 error: function (jqXHR, textStatus, errorThrown)
                                 {
@@ -57,37 +56,109 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'ojs/ojrouter', 'ojs/oj
                     );
                 };
 
-                self.clickSearchBtn = function () {
-                    var peopleFilter = new Array();
-                    ko.utils.arrayFilter(self.tempPeople(),
-                            function (r) {
-                                var nameSearch = self.nameSearch().toString().toLowerCase();
-                                var descSearch = self.descSearch().toString().toLowerCase();
-                                if (r.prchsModeDesc.toString().toLowerCase().indexOf(nameSearch) !== -1 || r.prchsModeName.toString().toLowerCase().indexOf(nameSearch) !== -1) {
-                                    peopleFilter.push(r);
-
-                                }
-                            });
-                    self.allPeople(peopleFilter);
+                self.search = function (code, name, desc) {
+                    var temp = ko.utils.arrayFilter(self.allData(),
+                        function (rec) {
+                            return ((code.length ===0 || (code.length > 0 && rec.prchsModeCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                    (name.length ===0 || (name.length > 0 && rec.prchsModeName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                    (desc.length ===0 || (desc.length > 0 && rec.prchsModeDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                        });
+                    self.allData(temp);
+                };
+                
+                self.createOrEdit = function (model) {
+                    self.purchaseModeModel(model);
+                    $("#CreateEditDialog").ojDialog("open");
+                };
+                
+                self.cancel = function () {
+                    $("#CreateEditDialog").ojDialog("close");
+                };
+                
+                self.save = function (model) {
+                   console.log("Saving ");
+                   console.log(model);
                 };
 
-                self.create = function () {
-
-                };
-
-                self.activedeactive = function () {
-
-                };
-
-                self.edit = function () {
-
+                self.activateDeactivate = function (model) {
+                    if (model.active === 'Y'){
+                        model.active = 'N';
+                    }else if (model.active === 'N'){
+                        model.active = 'Y';
+                    }
+                    self.save(model);
                 };
 
                 self.exportxls = function () {
-
+                    exportService.export($("#table").ojTable("option","columns"),self.allData(),'xlsx','data.xlsx', function(field,value){
+                        if (field === 'active'){
+                            return rendererService.activeConverter(value);
+                        }else if (field === 'effectiveDate'){
+                            return rendererService.dateConverter.format(value);
+                        }else if (field === 'updatedDate'){
+                            return rendererService.dateTimeConverter.format(value)
+                        }else{
+                            return value;
+                        }
+                    });
+                };
+                
+                self.selectedRow = ko.observable(undefined);
+                
+                // ===============  EVENT HANDLER  ==============
+                
+                self.onReset = function(){
+                    self.codeSearch('');
+                    self.nameSearch('');
+                    self.descSearch('');
+                    self.refreshData(function(data){
+                        self.selectedRow(undefined);
+                        self.allData(data.MdPrchsMode);
+                    });
+                };
+                
+                self.onSearch = function(){
+                    self.refreshData(function(data){
+                        self.allData(data.MdPrchsMode);
+                        self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                    });
+                };
+                
+                self.onCreate = function(){
+                    var newRec = { prchsModeId: undefined,
+                        prchsModeCd: "",
+                        prchsModeName: "",
+                        prchsModeDesc: "",
+                        active: "Y",
+                        effectiveDate: ""};
+                    self.createOrEdit(newRec);
+                };
+                
+                self.onEdit = function(){
+                    self.createOrEdit(self.selectedRow());
+                };
+                
+                self.onSave = function(model){
+                    self.save(model);
+                };
+                
+                self.onActivateDeactivate = function(){
+                    self.activateDeactivate(self.selectedRow());
+                }
+                
+                self.onSelectRow = function(event, ui){
+                    var idx = ui.currentRow.rowIndex;
+                    self.dataSource.at(idx).
+                        then(function (obj) {
+                            self.selectedRow(obj.data);
+                        });
+                };
+                
+                self.onExport = function(){
+                   self.exportxls(); 
                 };
 
-                self.initRefresh();
+                self.onReset();
             }
             return prchsModeMainViewModel();
         }
