@@ -1,5 +1,6 @@
 {
   "MDOrganization" : [ {
+    "orgId" : 1,
     "orgCd" : "CAG_BHD",
     "orgName" : "Cagamas Berhad",
     "orgDesc" : "Cagamas Berhad",
@@ -14,6 +15,7 @@
         "orgTypName": "Holding Company"
     }
   }, {
+    "orgId" : 2,
     "orgCd" : "CAG_CMBS",
     "orgName" : "Cagamas CMBS Berhad",
     "orgDesc" : "Cagamas CMBS Berhad",
@@ -28,6 +30,7 @@
         "orgTypName": "Sister Company"
     }
   }, {
+    "orgId" : 3,
     "orgCd" : "CAG_SME",
     "orgName" : "Cagamas SME Berhad",
     "orgDesc" : "Cagamas SME Berhad",
@@ -39,6 +42,7 @@
     "updatedBy" : "LAS",
     "orgType" : ""
   }, {
+    "orgId" : 4,
     "orgCd" : "CAG_SRP",
     "orgName" : "Cagamas SRP Berhad",
     "orgDesc" : "Cagamas SRP Berhad",

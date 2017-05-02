@@ -1,15 +1,11 @@
 {
-  "MDOrgHierachy" : [ {
-    "orgHrchId" : 1,
-    "org": {
-        "orgCd" : "CAG_SRP",
-        "orgName" : "Cagamas SRP berhad"
-    },
-    "orgLevel" : "1",
-    "orgParent" : {
-        "orgCd" : "CAG_BHD",
-        "orgName" : "Cagamas Berhad"     
-    },
+  "MdOrgHier" : [ {
+    "orgHierId" : 1,
+    "orgId": 2,
+    "orgLvlCd" : "CAG_CMBS",
+    "orgLvlName" : "Cagamas CMBS Berhad",
+    "orgLvlDesc" : "Cagamas CMBS Berhad",
+    "parentOrgId" : 1,
     "active" : "Y",
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
     "createDate" : "2017-02-24T15:22:51.000+08:00",
@@ -17,16 +13,12 @@
     "updatedDate" : "2017-02-24T15:22:51.000+08:00",
     "updatedBy" : "LAS"
   }, {
-    "orgHrchId" : 2,
-    "org": {
-        "orgCd" : "CAG_SME",
-        "orgName" : "Cagamas SME berhad"
-    },
-    "orgLevel" : "1",
-    "orgParent" : {
-        "orgCd" : "CAG_BHD",
-        "orgName" : "Cagamas Berhad"     
-    },
+    "orgHierId" : 2,
+    "orgId": 3,
+    "orgLvlCd" : "CAG_SME",
+    "orgLvlName" : "Cagamas SME Berhad",
+    "orgLvlDesc" : "Cagamas SME Berhad",
+    "parentOrgId" : 2,
     "active" : "Y",
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
     "createDate" : "2017-02-24T15:22:51.000+08:00",

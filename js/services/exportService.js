@@ -40,7 +40,11 @@ define(['xlsx-js','file-saverjs','blobjs'],
                     for(C = 0; C < columns.length; ++C) {
                         var value = undefined;
                         if (data[R].hasOwnProperty(columns[C].field)){
-                            value = fnRenderer(columns[C].field,data[R][columns[C].field]);
+                            if (fnRenderer){
+                                value = fnRenderer(columns[C].field,data[R][columns[C].field]);
+                            }else{
+                                value = data[R][columns[C].field];
+                            }
                         }
                         var cell = {v: value };
                         var cell_ref = XLSX.utils.encode_cell({c:C,r:R+1});
