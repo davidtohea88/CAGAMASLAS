@@ -48,13 +48,13 @@
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">                        
                                                     <div class="oj-flex-item">
-                                                        <button id= "button" data-bind="click:onCreate,ojComponent: { component: 'ojButton', label: 'Create' }">
+                                                        <button id= "btnCreate" data-bind="click:onCreate,ojComponent: { component: 'ojButton', label: 'Create' }">
                                                         </button>
-                                                        <button id= "button" data-bind="click:onActivateDeactivate,ojComponent: { component: 'ojButton', label: 'Active/Deactive', disabled: !selectedRow() }">
+                                                        <button id= "btnActivate" style="display: none;" data-bind="click:onActivateDeactivate,ojComponent: { component: 'ojButton', label: 'Active/Deactive' }">
                                                         </button>
-                                                        <button id= "button" data-bind="click:onEdit,ojComponent: { component: 'ojButton', label: 'Edit', disabled: !selectedRow() }">
+                                                        <button id= "btnEdit" style="display: none;" data-bind="click:onEdit,ojComponent: { component: 'ojButton', label: 'Edit' }">
                                                         </button>
-                                                        <button id= "button" data-bind="click:onExport,ojComponent: { component: 'ojButton', label: 'Export' }">
+                                                        <button id= "btnExport" data-bind="click:onExport,ojComponent: { component: 'ojButton', label: 'Export' }">
                                                         </button>
                                                     </div>
                                                 </div>
