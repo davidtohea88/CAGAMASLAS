@@ -94,7 +94,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                         }else if (field === 'effectiveDate'){
                             return rendererService.dateConverter.format(value);
                         }else if (field === 'updatedDate'){
-                            return rendererService.dateTimeConverter.format(value)
+                            return rendererService.dateTimeConverter.format(value);
                         }else{
                             return value;
                         }
@@ -112,6 +112,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     self.refreshData(function(data){
                         self.selectedRow(undefined);
                         self.allData(data.MdPymtFreq);
+                        $('#btnEdit').hide();
+                        $('#btnActivate').hide();
                     });
                 };
                 
@@ -149,6 +151,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     self.dataSource.at(idx).
                         then(function (obj) {
                             self.selectedRow(obj.data);
+                            $('#btnEdit').show();
+                            $('#btnActivate').show();
                         });
                 };
                 

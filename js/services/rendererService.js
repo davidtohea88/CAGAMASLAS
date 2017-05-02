@@ -14,7 +14,7 @@ define(['jquery','ojs/ojcore' ,'knockout'], function($,oj,ko) {
         self.dateTimeConverter = oj.Validation.converterFactory("datetime").createConverter({pattern: 'dd-MM-yyyy HH:mm:ss'});
         self.dateConverter = oj.Validation.converterFactory("datetime").createConverter({pattern: 'dd-MM-yyyy'});
         self.activeConverter = function(str){
-            return (str==="Y")?"Active": "Deactive";
+            return (str==="Y")?"Active": "Inactive";
         }
     };
     return new RendererServiceUtilities();
