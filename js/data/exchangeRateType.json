@@ -1,0 +1,23 @@
+{
+  "MDExchangeRateType" : [ {
+    "orgTypCd": "DA",
+    "orgTypName": "Daily",
+    "orgTypDesc": "Daily rate type will be valid only for a given day",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "orgTypCd": "PA",
+    "orgTypName": "Period Average",
+    "orgTypDesc": "Period Average will be average rate for the period",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }]
+}

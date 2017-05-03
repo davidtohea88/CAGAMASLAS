@@ -1,0 +1,51 @@
+{
+  "MDExchangeRate" : [ {
+    "ExRateCd": "GAG_TREASURY",
+    "ExRateName": "GAG_TREASURY",
+    "Precision": "1.0",
+    "ExRateType":"Daily",
+    "ExRateSource":"Treasury",
+    "active" : "Y",
+    "effectiveDate" : "2017-05-02T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "ExRateCd": "ABC_TREASURY",
+    "ExRateName": "ABC_TREASURY",
+    "Precision": "2.0",
+    "ExRateType":"Daily",
+    "ExRateSource":"Treasury",
+    "active" : "Y",
+    "effectiveDate" : "2017-05-02T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "ExRateCd": "DEF_TREASURY",
+    "ExRateName": "DEF_TREASURY",
+    "Precision": "1.0",
+    "ExRateType":"Daily",
+    "ExRateSource":"Treasury",
+    "active" : "Y",
+    "effectiveDate" : "2017-05-03T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "ExRateCd": "HIJ_TREASURY",
+    "ExRateName": "HIJ_TREASURY",
+    "Precision": "2.0",
+    "ExRateType":"Period Average",
+    "ExRateSource":"Treasury",
+    "active" : "Y",
+    "effectiveDate" : "2017-05-03T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }]
+}
