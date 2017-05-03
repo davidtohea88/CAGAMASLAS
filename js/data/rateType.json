@@ -1,8 +1,8 @@
 {
   "MdRateTyp" : [ {
-    "rateTypId" : 1,
-    "rateTypCd" : "01",
-    "rateTypName" : "FX",
+    "rateTypeId" : 1,
+    "rateTypeCd" : "01",
+    "rateTypeName" : "FX",
     "rateTypDesc" : "Fixed",
     "active" : "Y",
     "effectiveDate" : "2017-02-24T15:22:51.000+08:00",

@@ -5,66 +5,49 @@
  */
 "use strict";
 
-define(['jquery','ojs/ojcore' ,'knockout', 'services/configService'],
-    function($,oj,ko,config) {
+define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
+    function(oj,ko,config) {
         var rateTypeService = function() {
             /**
              * @private
              */
             var self = this;
             
-            var restUrl= "/MD_RateType/RateTypeRestPS";
+            var restUrl= "rateType";
             
-            self.RateType  = oj.Model.extend({
-                urlRoot: config.serviceUrl+"/"+restUrl,
-                customUrl: function(operation,model,options){
+            var RateType  = oj.Model.extend({
+                urlRoot: config.serviceUrl+restUrl,
+                customURL: function(operation,model,options){
                     if (operation === 'create'){
-                        return {url: urlRoot, type: 'PUT'};
+                        return {url: config.serviceUrl+restUrl, type: 'PUT'};
                     }else if (operation === 'update'){
-                        return {url: urlRoot, type: 'PUT'};
+                        return {url: config.serviceUrl+restUrl+"?rateTypeId="+options.recordID, type: 'PUT'};
                     }else if (operation === 'get'){
-                        return {url: urlRoot+"?rateTypeId="+options.recordID, type: 'GET'};
+                        return {url: config.serviceUrl+restUrl+"?rateTypeId="+options.recordID, type: 'GET'};
                     }
                 },
                 idAttribute: "rateTypeId",
-                parse: function(resp){
-                    var rates = resp.MdRateType;
-                    if (rates.length>0){
-                        return resp.MdRateType[0];
-                    }
-                    return undefined;
-                },
                 parseSave: function(rec){
                     return {MdRateType: [rec]};
                 }
             });
-            self.RateTypes = oj.Collection.extend({
-                url:   config.serviceUrl+"/"+restUrl,
-                model: new RateType()
+            var RateTypes = oj.Collection.extend({
+                url:   config.serviceUrl+restUrl,
+                model: new RateType(),
+                initialize: function(){
+                    console.log("init");
+                },
+                parse: function(resp){
+                    var rates = resp.MdRateType;
+                    if (rates.length>0){
+                        return rates;
+                    }
+                    return undefined;
+                }
             });
             
-            self.save = function(model){
-                var entity = new RateType();
-
-                entity.attributes.rateTypeId = model.rateTypeId;
-                entity.attributes.rateTypeCd = model.rateTypeCd;
-                entity.attributes.rateTypeName = model.rateTypeName;
-                entity.attributes.rateTypeDesc = model.rateTypeDesc;
-                entity.attributes.active = model.active;
-                entity.attributes.effectiveDate = model.effectiveDate;
-                entity.attributes.createdDate = model.createdDate;
-                entity.attributes.createdby = model.createdby;
-                entity.attributes.updatedDate = "2008-09-29T01:49:45";
-                entity.attributes.updatedBy = 'LAS';
-                
-                entity.save(false,{success: function(model,resp){
-                    console.log(model);
-                    console.log(resp);
-                }});
-            };
-            
             self.fetchAsLOV = function(labelProperty,valueProperty){
-                var all = new RateTypes();
+                var all = new self.RateTypes();
                 var result = [];
                 ko.utils.arrayForEach(all,function(item){
                     if (item.active ==='Y'){
@@ -76,10 +59,13 @@ define(['jquery','ojs/ojcore' ,'knockout', 'services/configService'],
                 return result;
             };
             
-            self.fetchAll = function(){
+            self.createCollection = function(){
                 return new RateTypes();
             };
             
+            self.createModel = function(){
+                return new RateType();
+            };
         };
         return new rateTypeService();
 });
