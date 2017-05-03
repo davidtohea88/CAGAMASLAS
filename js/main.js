@@ -29,7 +29,8 @@ requirejs.config({
         'blobjs': 'libs/sheetjs/Blob.min',
         'file-saverjs': 'libs/sheetjs/FileSaver.min',
         'jzip': 'libs/sheetjs/jszip',
-        'xlsx-js': 'libs/sheetjs/xlsx'
+        'xlsx-js': 'libs/sheetjs/xlsx',
+        'cagutils': 'services/utils'
     }
     //endinjector
     ,

@@ -3,7 +3,7 @@
  * The Universal Permissive License (UPL), Version 1.0
  */
 
-    define(['ojs/ojcore', 'knockout', 'jquery',
+    define(['ojs/ojcore', 'knockout', 'jquery','cagutils',
         'ojs/ojknockout', 'ojs/ojinputtext', 'ojs/ojinputnumber',
         'ojs/ojradioset', 'ojs/ojcheckboxset', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojarraytabledatasource','ojs/ojnavigationlist',
         'ojs/ojselectcombobox', 'ojs/ojtrain', 'ojs/ojdialog',
