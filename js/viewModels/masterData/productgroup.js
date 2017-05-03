@@ -1,183 +1,320 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'viewModels/GetRest', 'jquery', 'ojs/ojrouter', 
-    'ojs/ojradioset','ojs/ojdialog', 'ojs/ojknockout', 'promise', 
-    'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
-    'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol','ojs/ojdatetimepicker',
-    'ojs/ojpagingtabledatasource', 'moment'],
-        function (oj, ko, GetRest, $)
+define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configService', 
+    'services/exportService', 'services/models/customURL', 'jquery', 'ojs/ojrouter',
+    'ojs/ojradioset', 'ojs/ojdialog', 'ojs/ojknockout', 'promise',
+    'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton',
+    'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojdatetimepicker',
+    'ojs/ojpagingtabledatasource', 'ojs/ojknockout-validation', 'moment'],
+        function (oj, ko, rendererService, configService, exportService, customURL, $)
         {
-            function prodgroupMainViewModel() {
+            function productgroupMainViewModel() {
                 var self = this;
+                self.tracker = ko.observable();
+                
+                var restUrl = configService.serviceUrl + "MdProdGrp/";
                 self.productGroupModel = ko.observable();
                 self.header = "Product Group";
-                self.allPeople = ko.observableArray([{prodGrpCd: "Fetching data"}]);
-                self.tempPeople = ko.observableArray([{prodGrpCd: "Fetching data"}]);
-                self.prodGrpDataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allPeople, {idAttribute: 'prodGrpCd'}));
+                self.allData = ko.observableArray();
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'prodGrpCd'}));
+                
                 self.codeSearch = ko.observable('');
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
+
+                self.inputProdGrpCd = ko.observable();
+                self.inputProdGrpName = ko.observable('');
+                self.inputProdGrpDesc = ko.observable('');
+                self.inputActive = ko.observable('');
+                self.inputEffectiveDate = ko.observable('');
+
+                self.idItem = ko.observable('');
+                self.codeItem = ko.observable('');
+                self.nameItem = ko.observable('');
+                self.descItem = ko.observable('');
+                self.statusItem = ko.observable('');
+                self.effectiveDateItem = ko.observable('');
+                self.createByItem = ko.observable('');
+                self.createDateItem = ko.observable('');
+                self.updatedByItem = ko.observable('');
+                self.updatedDateItem = ko.observable('');               
                 
-                self.codeItem =  ko.observable('');
-                self.nameItem =  ko.observable('');
-                self.descItem =  ko.observable('');
-                self.statusItem =  ko.observable('');
-                self.effectiveDateItem =  ko.observable('');
+                var model = oj.Model.extend({
+                    urlRoot: restUrl, 
+                    idAttribute: "prodGrpId"
+                });
 
-                self.productGroupCollection = GetRest.createCollection("js/data/productgroup.json","prodGrpCd"),
-                self.dataSource = ko.observable();
-
-                /*this.buildModel = function()
-                {
-                    return {
-                        'CODE': this.codeItem(),
-                        'NAME': this.nameItem(),
-                        'DESCRIPTION': this.descItem(),
-                        'STATUS': this.statusItem(),
-                        'EFFECTIVE_DATE': this.effectiveDateItem()
-                    };
-                }; */
-        
-                clickResetBtn = function () {
-                    self.codeSearch('');
-                    self.nameSearch('');
-                    self.descSearch('');
-                    self.initRefresh();
+                self.dateTimeRenderer = function(context){
+                    return rendererService.dateTimeConverter.format(context.data);
                 };
                 
-                self.init = function(){
-                  self.dataSource(new oj.CollectionTableDataSource(self.productGroupCollection));
-                  self.productGroupCollection.fetch();  
+                self.dateRenderer = function(context){
+                    return rendererService.dateConverter.format(context.data);
                 };
-
+                
+                self.activeRenderer = function(context){
+                    return rendererService.activeConverter(context.data);
+                };
+                    
                 self.initRefresh = function () {
                     console.log("fetching data");
-                    var jsonUrl = "js/data/productgroup.json";
-//                    var hostname = "https://yourCRMServer.domain.com";
-//                    var queryString = "/salesApi/resources/latest/opportunities?onlyData=true&fields=OptyNumber,Name,Revenue,TargetPartyName,StatusCode&q=StatusCode=OPEN&limit=10&offset=" + offset;
-//                    console.log(queryString);
-//                    $.ajax(hostname + queryString,
-                    $.ajax(jsonUrl,
+                    $.ajax(restUrl,
                             {
                                 method: "GET",
                                 dataType: "json",
-//                                headers: {"Authorization": "Basic " + btoa("username:password")},
-                                // Alternative Headers if using JWT Token
-                                // headers : {"Authorization" : "Bearer "+ jwttoken; 
-                                success: function (data)
-                                {
+                                success: function (data) {
                                     console.log(data);
-                                    self.allPeople(data);
-                                    self.tempPeople(data);
-//                                    console.log('Data returned ' + JSON.stringify(data.MdAssetTyp));
-//                                    console.log("Rows Returned" + self.allPeople().length);
-//                                    // Enable / Disable the next/prev button based on results of query
-//                                    if (self.optyList().length < limit)
-//                                    {
-//                                        $('#nextButton').attr("disabled", true);
-//                                    } else
-//                                    {
-//                                        $('#nextButton').attr("disabled", false);
-//                                    }
-//                                    if (self.offset === 0)
-//                                        $('#prevButton').attr("disabled", true);
+                                    self.allData(data);
                                 },
-                                error: function (jqXHR, textStatus, errorThrown)
-                                {
+                                error: function (jqXHR, textStatus, errorThrown) {
                                     console.log(textStatus, errorThrown);
                                 }
                             }
                     );
                 };
-                
 
-                self.clickSearchBtn = function () {
-                    var peopleFilter = new Array();
-                    ko.utils.arrayFilter(self.tempPeople(),
+                self.selectedRow = ko.observable(undefined);
+                
+                self.onRowClick = function (data, event) {
+                    self.idItem(data.prodGrpId);
+                    self.codeItem(data.prodGrpCd);
+                    self.nameItem(data.prodGrpName);
+                    self.descItem(data.prodGrpDesc);
+                    self.statusItem(data.active);
+                    self.effectiveDateItem(data.effectiveDate);
+                    self.createByItem(data.createBy);
+                    self.createDateItem(data.createDate);
+                    self.updatedByItem(data.updatedBy);
+                    self.updatedDateItem(data.updatedDate);
+                    self.selectedRow(data);
+                };
+
+                self.shouldDisableCreate = function () {
+                    var trackerObj = ko.utils.unwrapObservable(self.tracker),
+                            hasInvalidComponents = ko.utils.unwrapObservable(trackerObj["invalidShown"]);
+                    return  hasInvalidComponents;
+                };
+        
+                self._showComponentValidationErrors = function (trackerObj) {
+                    trackerObj.showMessages();
+                    if (trackerObj.focusOnFirstInvalid())
+                        return false;
+                    return true;
+                };
+                
+                self.onCreate = function (data, event) {
+                    var trackerObj = ko.utils.unwrapObservable(self.tracker);
+                    if (!self._showComponentValidationErrors(trackerObj)){
+                        return;
+                    }
+                    
+                    var productGroupModelNew = new model();
+                    productGroupModelNew.attributes.prodGrpCd = self.inputProdGrpCd();
+                    productGroupModelNew.attributes.prodGrpName = self.inputProdGrpName();
+                    productGroupModelNew.attributes.prodGrpDesc = self.inputProdGrpDesc();
+                    productGroupModelNew.attributes.active = self.inputActive();
+                    productGroupModelNew.attributes.effectiveDate = self.inputEffectiveDate();
+                    productGroupModelNew.attributes.createDate = new Date();
+                    productGroupModelNew.attributes.createBy = "LAS";
+                    productGroupModelNew.attributes.updatedDate = "";
+                    productGroupModelNew.attributes.updatedBy = "";
+                    
+                    productGroupModelNew.save(undefined, {
+                        success: function (model) {
+                            alert("Data : " + productGroupModelNew.attributes.prodGrpCd + "  Created Successfully");
+                            self.initRefresh();
+                        }, error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Error");
+                        }}
+                    );
+                    $("#DataDialog").ojDialog("close");
+                };
+                
+                self.onEdit = function () {
+                    var trackerObj = ko.utils.unwrapObservable(self.tracker);
+                    if (!self._showComponentValidationErrors(trackerObj)){
+                        return;
+                    }
+                    
+                    var model = oj.Model.extend({
+                        urlRoot: restUrl + self.idItem(),
+                        idAttribute: "prodGrpId",
+                        customURL: function (operation, model) {
+                            var url;
+                            var customURLObj;
+                            url = restUrl + self.idItem();
+                            customURLObj = new customURL({url: url, type: "PUT"});
+                            return customURLObj;
+                        }
+                    });
+                    
+                    var productGroupModelNew = new model();
+                    productGroupModelNew.attributes.prodGrpId = self.idItem();
+                    productGroupModelNew.attributes.prodGrpCd = self.inputProdGrpCd();
+                    productGroupModelNew.attributes.prodGrpName = self.inputProdGrpName();
+                    productGroupModelNew.attributes.prodGrpDesc = self.inputProdGrpDesc();
+                    productGroupModelNew.attributes.active = self.inputActive();
+                    productGroupModelNew.attributes.effectiveDate = self.inputEffectiveDate();
+                    productGroupModelNew.attributes.createDate = self.createDateItem;
+                    productGroupModelNew.attributes.createBy = self.createByItem;
+                    productGroupModelNew.attributes.updatedDate = new Date();
+                    productGroupModelNew.attributes.updatedBy = "LAS";
+
+                    productGroupModelNew.save(undefined, {"success": function () {
+                            alert("Data : " + productGroupModelNew.attributes.prodGrpCd + "  Edited Successfully");
+                            self.initRefresh();
+                        }, "error": function (jqXHR, textStatus, errorThrown) {
+                            console.log("Error");
+                        }});
+                    $("#DataDialog").ojDialog("close");
+
+                };
+                
+                self.resetDialogValue = function () {
+                    self.idItem('');
+                    self.codeItem('');
+                    self.nameItem('');
+                    self.descItem('');
+                    self.statusItem('');
+                    self.effectiveDateItem('');
+                    self.createByItem('');
+                    self.createDateItem('');
+                    self.updatedByItem('');
+                    self.updatedDateItem('');
+                    
+                    self.inputProdGrpCd('');
+                    self.inputProdGrpName('');
+                    self.inputProdGrpDesc('');
+                    self.inputActive('');
+                    self.inputEffectiveDate('');
+                };
+                
+                self.onCancel = function () {
+                    self.resetDialogValue();
+                    self.selectedRow(undefined);
+                    $("#DataDialog").ojDialog("close");
+                };
+                
+                self.exportxls = function () {
+                    exportService.export($("#table").ojTable("option","columns"),self.allData(),'xlsx','data.xlsx', function(field,value){
+                        if (field === 'active'){
+                            return rendererService.activeConverter(value);
+                        }else if (field === 'updatedDate'){
+                            return rendererService.dateTimeConverter.format(value)
+                        }else{
+                            return value;
+                        }
+                    });
+                };
+                
+                // ===============  EVENT HANDLER  ==============
+                
+                self.onSearchBtn = function () {
+                    var dataFilter = new Array();
+                    ko.utils.arrayFilter(self.allData(),
                             function (r) {
                                 var codeSearch = self.codeSearch().toString().toLowerCase();
                                 var nameSearch = self.nameSearch().toString().toLowerCase();
                                 var descSearch = self.descSearch().toString().toLowerCase();
                                 if ((r.prodGrpCd.toString().toLowerCase().indexOf(codeSearch) > -1) &&
-                                    (r.prodGrpName.toString().toLowerCase().indexOf(nameSearch) > -1) &&
-                                    (r.prodGrpDesc.toString().toLowerCase().indexOf(descSearch) > -1)) {
-                                    peopleFilter.push(r);
+                                        (r.prodGrpName.toString().toLowerCase().indexOf(nameSearch) > -1) &&
+                                        (r.prodGrpDesc.toString().toLowerCase().indexOf(descSearch) > -1)) {
+                                    dataFilter.push(r);
 
                                 }
                             });
-                    self.allPeople(peopleFilter);
+                    self.allData(dataFilter);
                 };
 
-                self.onCreateBtn = function(){
-                    self.productGroupModel(GetRest.createModel("http://movieapp-sitepointdemos.rhcloud.com/api/movies","_id"));
-                    self.codeItem('');
-                    self.nameItem('');
-                    self.descItem('');
-                    self.statusItem('');
-                    self.effectiveDateItem('');
+                self.onResetBtn = function () {
+                    self.codeSearch('');
+                    self.nameSearch('');
+                    self.descSearch('');
+                    self.selectedRow(undefined);
+                    self.initRefresh();
+                };
+
+                self.onCreateBtn = function () {
+                    self.productGroupModel(new model());
+                    self.resetDialogValue();
                     $('#btn_create').show();
                     $('#btn_edit').hide();
                     $("#DataDialog").ojDialog("open");
-                    return true;};
-                self.onEditBtn = function(){
-                    $('#btn_create').hide();
-                    $('#btn_edit').show();             
-                    self.productGroupModel(GetRest.createModel("js/data/productgroup.json","prodTypCd"));
-                    self.productGroupModel().id = self.codeItem();
-                    self.productGroupModel().fetch({
-                      success: function(model) {
-                        self.productGroupModel(model);
-                      },
-                      error: function(model) {
-                        console.log("Fetch error: ", model);
-                      }
+                    return true;
+                };
+
+                self.onStatusBtn = function () {
+                    var model = oj.Model.extend({
+                        urlRoot: restUrl + self.idItem(),
+                        idAttribute: "prodGrpId",
+                        customURL: function (operation, model) {
+                            var url;
+                            var customURLObj;
+                            url = restUrl + self.idItem();
+                            customURLObj = new customURL({url: url, type: "PUT"});
+                            return customURLObj;
+                        }
                     });
                     
+                    var status = "";
+                    if (self.statusItem() === "N") {
+                        status = "Y";
+                    } else {
+                        status = "N";
+                    }
+                    
+                    var productGroupModelNew = new model();
+                    productGroupModelNew.attributes.prodGrpId = self.idItem();
+                    productGroupModelNew.attributes.prodGrpCd = self.codeItem();
+                    productGroupModelNew.attributes.prodGrpName = self.nameItem();
+                    productGroupModelNew.attributes.prodGrpDesc = self.descItem();
+                    productGroupModelNew.attributes.active = status;
+                    productGroupModelNew.attributes.effectiveDate = self.effectiveDateItem();
+                    productGroupModelNew.attributes.createDate = self.createDateItem();
+                    productGroupModelNew.attributes.createBy = self.createByItem();
+                    productGroupModelNew.attributes.updatedDate = new Date();
+                    productGroupModelNew.attributes.updatedBy = "LAS";
+
+                    productGroupModelNew.save(undefined, {
+                        success: function () {
+                            alert("Data : " + productGroupModelNew.attributes.prodGrpCd + "  Edited Status Successfully");
+                            self.initRefresh();
+                        }, error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Error");
+                        }});
+
+                };
+
+                self.onEditBtn = function () {
+                    self.productGroupModel(new model());
+                    self.inputProdGrpCd(self.codeItem());
+                    self.inputProdGrpName(self.nameItem());
+                    self.inputProdGrpDesc(self.descItem());
+                    self.inputActive(self.statusItem());
+                    self.inputEffectiveDate(self.effectiveDateItem());
+
+                    $('#btn_create').hide();
+                    $('#btn_edit').show();
                     $("#DataDialog").ojDialog("open");
                     return true;
                 };
-                self.onRowClick = function(data,event)
-                {
-                    self.codeItem(data.prodGrpCd);
-                    self.nameItem(data.prodGrpName);
-                    self.descItem(data.prodGrpDesc);
-                    self.statusItem(data.active);
-                    self.effectiveDateItem(data.effectiveDate);                  
-                    
-                };
-                self.onStatusBtn = function () {
 
+                self.onExportBtn = function(){
+                   self.exportxls(); 
                 };
 
-                self.onCreate = function () {
-                    console.log(self.codeItem());
-                    console.log(self.nameItem());
-                    console.log(self.descItem());
-                    console.log(self.statusItem());
-                    console.log(self.effectiveDateItem());
-                    $("#DataDialog").ojDialog("close");
-                };
-                self.onEdit = function () {
-
-                };
-                self.onCancel = function () {
-                    self.codeItem('');
-                    self.nameItem('');
-                    self.descItem('');
-                    self.statusItem('');
-                    self.effectiveDateItem('');
-                    $("#DataDialog").ojDialog("close");
-
-                };
-
-                self.exportxls = function () {
-
-                };
-                
                 self.initRefresh();
+                
             }
-            return prodgroupMainViewModel();
-        
+
+            return productgroupMainViewModel();
+
+            $(document).ready(
+                function () {
+                    ko.applybindings(new productgroupMainViewModel(), document.getElementById("validator"));
+                }
+            );
+
         }
 ); 
