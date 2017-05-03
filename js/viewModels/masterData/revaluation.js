@@ -127,6 +127,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                                 AccountNo: valNo,
                                 AccountName: valName
                             };
+                            console.log(self.selectedGainAccountList.indexOf('Account'));
                             self.selectedGainAccountList.push(res);
                         };
                     };
@@ -142,7 +143,19 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                             };
                             self.selectedLossAccountList.push(res);
                         };
-                    };                
+                    };        
+                self.onRemoveGain = function(data)
+                {
+                    self.selectedGainAccountList.remove(function(item) {
+                        return item.AccountNo == data.AccountNo;
+                    });
+                };
+                self.onRemoveLoss = function(data)
+                {
+                    self.selectedLossAccountList.remove(function(item) {
+                        return item.AccountNo == data.AccountNo;
+                    });
+                };
 
                 //self.onLoad();
                 self.GetGLAccount();

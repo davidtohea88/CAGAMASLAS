@@ -82,17 +82,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="oj-flex">
-                                                    <div class="oj-flex-item">Selected Realized Gain Account
-                                                    </div>
                                                     <div class="oj-flex-item">
-                                                    <table id="table" summary="Department List" aria-label="Departments Table"
+                                                    <table id="table" summary="Department List" aria-label="Departments Table" style="width:100%;"
                                                             data-bind="ojComponent: {component: 'ojTable', 
                                                             data: selectedGainAccountDataSource, 
                                                             columnsDefault: {sortable: 'none'}, 
                                                             columns: [{headerText: 'Account No', 
-                                                                       field: 'AccountNo'},
+                                                                       field: 'AccountNo',style: 'width: 20%'},
                                                                       {headerText: 'Account Name', 
-                                                                       field: 'AccountName'}]}">
+                                                                       field: 'AccountName',style: 'width: 50%'},
+                                                               {headerTemplate: 'delete_gain_hdr', template: 'delete_gain', style: 'width: 10%;text-align:center;'}]}">
                                                          </table>                                                    </div>
 
                                                 </div>
@@ -120,8 +119,6 @@
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">
-                                                    <div class="oj-flex-item">Selected Realized Loss Account
-                                                    </div>
                                                     <div class="oj-flex-item">
                                                     <table id="table" summary="Department List" aria-label="Departments Table"
                                                             data-bind="ojComponent: {component: 'ojTable', 
@@ -130,7 +127,8 @@
                                                             columns: [{headerText: 'Account No', 
                                                                        field: 'AccountNo'},
                                                                       {headerText: 'Account Name', 
-                                                                       field: 'AccountName'}]}">
+                                                                       field: 'AccountName'},
+                                                               {headerTemplate: 'delete_loss_hdr', template: 'delete_loss', style: 'width: 10%;text-align:center;'}]}">
                                                          </table>                                                    </div>
 
                                                 </div>
@@ -138,7 +136,9 @@
                                         </div>
                                     </div>
                                 <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-flex-end" style="margin-top:50px;">
-                                 <div class="oj-flex-item"><button id= "button" data-bind="click: onRun,ojComponent: {component: 'ojButton', label: 'Run Revaluation' } "></button></div>
+                                 <div class="oj-flex-item">
+                                     <button id= "button" data-bind="click: onRun,ojComponent: {component: 'ojButton', label: 'Run Revaluation' } "></button>
+                                 </div>
                                </div>
                                 </div>
                                 
@@ -162,3 +162,27 @@
           </span>
         </div>
   </script>
+<script type="text/html" id="delete_gain_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="delete_gain">
+    <td>
+        <button id= "btn_Vendor" 
+            data-bind="click: onRemoveGain, ojComponent: { component: 'ojButton', label: 'Remove' }">
+        </button>
+    </td>
+</script>
+<script type="text/html" id="delete_loss_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="delete_loss">
+    <td>
+        <button id= "btn_Vendor" 
+            data-bind="click: onRemoveLoss, ojComponent: { component: 'ojButton', label: 'Remove' }">
+        </button>
+    </td>
+</script>
