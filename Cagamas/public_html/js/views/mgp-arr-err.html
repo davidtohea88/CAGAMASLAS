@@ -1,0 +1,194 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div id="mgpmsad01Full" class="page-content">
+
+
+    
+
+<div class="demo-flex-display oj-flex-items-pad">
+  
+  <div class="oj-flex oj-sm-flex-items-initial   oj-sm-justify-content-center">
+    <div class="oj-flex-item">
+     
+ <div id="form-container">       
+     
+ 
+
+     
+        
+        Counter Party   <input id="partycombobox" list="msadparty"  title="Counter Party" 
+           data-bind="ojComponent: {component: 'ojCombobox',  value : partyVal , selected : partyVal , 
+                              
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="msadparty">
+		<option value="MY">Malaysia bank</option>
+		<option value="IN">Indian Bank</option>
+		<option value="SIN">Singapore Bank</option>
+		<option value="ST">Standard Chartered</option>
+ 
+	</datalist>
+        
+<!--        Counter Party Group : <label data-bind="text: partyGrpVal() , width: '100px'" ></label>-->
+        
+        Product   <input id="prdcombobox" list="msadprd"  title="" 
+           data-bind="ojComponent: {component: 'ojCombobox',  
+                              
+                                    rootAttributes: {style:'max-width:10em'}}"/>
+	<datalist id="msadprd">
+		<option value="MY">MGP SRP</option>
+		<option value="IN">MGP RI</option>	 
+		<option value="ST">MGP TT</option>
+ 
+	</datalist>
+    </div>
+   
+    
+    </div>
+  </div>
+  <div class="oj-flex oj-sm-flex-items-initial 
+              oj-sm-only-justify-content-center oj-md-only-justify-content-center" >
+    <div class="oj-flex-item">
+
+
+    
+    </div>
+  </div>
+    
+    
+     
+    
+    
+  <div   class="oj-flex oj-sm-flex-items-initial 
+              oj-lg-justify-content-center" >
+    <div class="oj-flex-item" >
+        <span  >
+       <input  type="file"/>
+       
+             <button  id="flUpload"  
+                
+                data-bind=" ojComponent:{component:'ojButton', label: 'Upload'}"    ></button>
+     
+       
+      <button id="changeLabel" 
+      data-bind="click: sendNotification,  ojComponent: {
+        component: 'ojButton',  
+        label: 'Send Notification'}"></button>
+        
+       <button  id="changeLabel2"  
+                
+                data-bind="click: doUpload, ojComponent:{component:'ojButton', label: 'Validate Asset'}"    ></button>
+        </span>
+        
+        <br>
+        
+       
+          <div id="radioSetId"   
+               aria-labelledby="radiosetlabel"
+               data-bind="ojComponent: {
+                 component: 'ojRadioset'}">
+            <span class="oj-choice-row-inline">
+              <input id="blueopt" type="radio" name="rbb" 
+                     value="D">
+              <label for="blueopt">Fully Disbursed Asset</label>
+            </span>
+              
+                  <span class="oj-choice-row-inline">
+              <input id="bluet" type="radio" name="rbb" 
+                     value="C">
+              <label for="bluet">Closed Asset</label>
+            </span>
+              
+                  <span class="oj-choice-row-inline">
+              <input id="bwwt" type="radio" name="rbb" 
+                     value="V">
+              <label for="blueopt">Validated Asset</label>
+            </span>
+              
+              
+            <span class="oj-choice-row-inline">
+              <input id="greenopt" type="radio" name="rbb" 
+                     value="F">
+              <label for="greenopt">Failed Asset</label>
+            </span>
+            <span class="oj-choice-row-inline">
+              <input id="redopt" type="radio" name="rbb" 
+                     value="A" checked>
+              <label for="redopt">All Asset</label>
+            </span>
+       
+      </div>
+        
+        
+    </div>
+  </div>
+    
+    
+    
+    
+    <div class="oj-panel oj-margin demo-mypanel"   >
+ 
+        <h3 class="oj-header-border">Servicing Details
+         <button id="ff" 
+      data-bind=" ojComponent: {
+        component: 'ojButton',  
+        label: 'Export'}"></button>
+            
+              <button id="tprint" 
+      data-bind=" ojComponent: {
+        component: 'ojButton',  
+        label: 'Print'}"></button>
+        
+        </h3>
+        <div>
+       
+ 
+
+ 
+                
+            <div id="msad01Rg" class="page-content"  >
+            
+        <table id="msad01Tbl" summary=" MSAD Upload File" aria-label="MSAD Upload File"
+           data-bind="ojComponent: {component: 'ojTable', data: msad01DS, columns:
+            [
+        
+
+  { headerText: 'SRL NO'  ,  field: 'Sno'}, 
+{ headerText: 'I/C NUMBER'  ,  field: 'IcNo'}, 
+{ headerText: 'APPLICATION DATE'  ,  field: 'AppDate'}, 
+ 
+{ headerText: 'Status'  ,  field: 'Status'}, 
+{ headerText: 'REJECT REASON'  ,  field: 'RejectReason'}, 
+{ headerText: 'REJECT Eligibility  REASON'  ,  field: 'RejectElibility'}, 
+{ headerText: 'REMARKS'  ,  field: 'Remarks'},
+{ headerText: 'EXCEPTION'  ,  field: 'Remarks'}
+ 
+ 
+  
+         ],                                  
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="msad01Pg" data-bind="ojComponent: {component: 'ojPagingControl', data: msad01DS, pageSize: 15}">
+    </div>
+</div>
+    
+            
+            
+      </div>
+    </div>
+    
+    
+  
+  <script type="text/html" id="oracle_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Select
+    </th>
+</script>
+<script type="text/html" id="oracle_action">
+    <td> 
+        
+     
+           <input name="ddd" id="sdsd" value="Sdsds"  type="checkbox">  </input>
+    </td>
+</script> 
+
+</div>
+</div>

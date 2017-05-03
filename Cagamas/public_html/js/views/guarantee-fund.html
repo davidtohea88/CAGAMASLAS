@@ -1,0 +1,165 @@
+<div class="oj-form-layout" id="form-container">
+    <div class="page-title">
+        <label class="white-color" data-bind="text:header"></label>
+    </div>
+    <div class="page-content oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+                   oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">  
+        <h3 class="oj-header-border" data-bind="text:subHeader"></h3>
+        <div class="page-content oj-flex" id="gf-row-1">
+            <div style="width:100%;">
+                <label for="select" style="margin-right:20px;">Period</label>
+                <select id="selectMonth" style="max-width: 10em;margin-right:5px;" data-bind="ojComponent: {component: 'ojSelect', options: months, value: selectedMonth, placeholder: 'Month'}"></select>
+                <select id="selectYear" style="max-width: 10em;margin-right:5px;" data-bind="ojComponent: {component: 'ojSelect', options: years, value: selectedYear, placeholder: 'Year'}"></select>
+                <button  id= "buttonSearch" data-bind="click: onClickSearch, ojComponent: { component: 'ojButton', label: 'Search' }">
+                </button>
+            </div>
+        </div>
+        <br>
+        <h3 class="oj-header-border">Guarantee Fund Summary</h3>
+        <div class="page-content oj-flex" id="gf-row-2">
+            <div class="two-cols oj-form oj-sm-odd-cols-12 oj-md-odd-cols-6 oj-md-labels-inline oj-form-no-dividers">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <label for="spinnercontrol">Initial Guarantee Fund</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="initialGuaranteeFundInput"
+                               data-bind="ojComponent: {component: 'ojInputText',
+                               value: inputInitialGuaranteeFund, required: false, disabled:true}"/>
+                    </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">Guarantee Fund Treshold (%)</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="guaranteeFundTresInput"
+                                   data-bind="ojComponent: {component: 'ojInputText', value: inputGuaranteeFundTres, required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="inputcontrol">Current Available Guarantee Fund</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="currAvlGuaranteeFundInput"
+                                   data-bind="ojComponent: {component: 'ojInputText', value: inputCurrAvlGuaranteeFund, required: false, disabled:true}"/>
+                        </div>
+                    </div>
+                    <button id= "updateButton" style='margin:5px;float:right;'
+                            data-bind="click: onClickUpdate, 
+                                ojComponent: {component: 'ojButton', label: 'Update', disabled: true}">
+                    </button>
+            </div>
+        </div>
+        <br>
+        <h3 class="oj-header-border">Guarantee Fund List</h3>
+        <div class="page-content oj-flex" id="gf-row-3">
+            <table id="table" summary="Guarantee Fund List" aria-label="Guarantee Fund List"
+                   data-bind="ojComponent: {component: 'ojTable', data: datasourceGF, 
+                   columnsDefault: {sortable: 'none'}, columns:
+                    [{headerText: 'Month', field: 'Month'},
+                    {headerText: 'Year', field: 'Year'},
+                    {headerText: 'Initial Guarantee Fund', field: 'InitialGuaranteeFund'},
+                    {headerText: 'Additional Fund', field: 'AdditionalFund'},
+                    {headerText: 'Available Guarantee Fund', field: 'AvailableGuaranteeFund'},
+                    {headerText: 'Status', field: 'Status'},
+                    {headerText: 'Effective Period', field: 'EffectivePeriod'}],
+                    rootAttributes: {'style':'width: 100%;'},
+                    rowTemplate: 'row_template'}">
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="oj-flex" id="gf-row-0">
+        <div class="oj-flex page-content">                      
+            <div class="oj-flex-item">
+                <button id= "btn_search" data-bind="click : onExportClick, ojComponent: { component: 'ojButton', label: 'Export' }"></button>
+                <button id= "btn_search" data-bind="click : onPrintClick, ojComponent: { component: 'ojButton', label: 'Print' }"></button>
+            </div>
+        </div>
+    </div>
+    <div class="blank-footer">
+    </div>
+    <div style="display:none" id="UpdateDialog" title="Guarantee Fund - Update"
+         data-bind="ojComponent: {component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',               rootAttributes: { style: 'width:900px; height: 400px;'}}">
+        <div class="oj-dialog-body">
+            <div id="CounterPartyPopUp">
+                <div class="oj-flex">
+                    <div style="width:25%;">
+                        <label for="pInitialFund">Initial Guarantee Fund</label>
+                    </div>
+                    <div style="width:75%;">
+                        <input id="pInitialFund"
+                               data-bind="ojComponent: {component: 'ojInputText', value: inputInitialGuaranteeFund, disabled: true}"/>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:25%;">
+                        <label for="pGuaranteeFund">Guarantee Fund Treshold (%)</label>
+                    </div>
+                    <div style="width:75%;">
+                        <input id="pGuaranteeFund" data-bind="ojComponent: {component: 'ojInputText', value: inputGuaranteeFundTresPU}"/>
+                    </div>
+                </div>
+                <br/>
+                 
+                <br/>
+                 
+                <h3 class="oj-header-border">Additional Guarantee Fund</h3>
+                <div class="oj-flex">
+                    <div style="width:25%;">
+                        <label for="pInitialFund">Additional Fund Amount (Top Up)</label>
+                    </div>
+                    <div style="width:75%;">
+                        <input id="pInitialFund"
+                               data-bind="ojComponent: {component: 'ojInputText', value: inputAdditionalFund}"/>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div style="width:25%;">
+                        <label for="pEffectivePeriod">Effective Period</label>
+                    </div>
+                    <div style="width:75%;">
+                        <select id="pEffectivePeriod" style="max-width: 10em;margin-right:5px;"
+                                data-bind="ojComponent: {component: 'ojSelect', options: months, value: inputPeriodMonth, 
+                                        placeholder: 'Month', required: true}"></select>
+                         
+                        <select id="pEffectivePeriod" style="max-width: 10em;margin-right:5px;"
+                                data-bind="ojComponent: {component: 'ojSelect', options: years, value: inputPeriodYear, placeholder: 'Year', required: true}"></select>
+                    </div>
+                </div>
+                <div class="oj-flex" style='margin:10px 0 10px auto; width:45%;'>
+                    <button id="button" style='margin:5px;'
+                            data-bind="click: onClickSave,                      ojComponent: {component: 'ojButton', label: 'Save' }"></button>
+                     
+                    <button id="button" style='margin:5px;'
+                            data-bind="click: onClickCancel,                      ojComponent: {component: 'ojButton', label: 'Cancel' }"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script type="text/html" id="view_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+        <button id= "btn_select" 
+            data-bind="click: selectClick, ojComponent: { component: 'ojButton', label: 'Select' }">
+        </button>
+    </td>
+</script>-->
+<script type="text/html" id="row_template">
+    <tr data-bind="click: $parent.rowClick">
+        <td data-bind="text: $data.Month ? Month : ''"></td>
+        <td data-bind="text: $data.Year ? Year : ''"></td>
+        <td data-bind="text: $data.InitialGuaranteeFund ? InitialGuaranteeFund : ''"></td>
+        <td data-bind="text: $data.AdditionalFund ? AdditionalFund : ''"></td>
+        <td data-bind="text: $data.AvailableGuaranteeFund ? AvailableGuaranteeFund : ''"></td>
+        <td data-bind="text: $data.Status ? Status : ''"></td>
+        <td data-bind="text: $data.EffectivePeriod ? EffectivePeriod : ''"></td>
+      </tr>
+</script>

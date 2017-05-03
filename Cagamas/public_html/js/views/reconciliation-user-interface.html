@@ -1,0 +1,205 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div class="oj-form-layout page-content" id="form-container">
+    <div class="oj-form oj-lg-odd-cols-5 oj-lg-even-cols-5">  
+        <h3 class="oj-header-border">Search</h3>
+        <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+            <div class="oj-flex-item">
+                    <div class="oj-flex"> 
+                      <div class="oj-flex-item">
+                        <label for="A5control">Date</label>
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="A5control" 
+                               data-bind="ojComponent: {component: 'ojInputDate',value:startDate}">
+                      </div>
+                      <div class="oj-flex-item">
+                      </div>
+                      <div class="oj-flex-item">
+                        <input id="A5control" 
+                               data-bind="ojComponent: {component: 'ojInputDate',value:endDate}">
+                      </div>
+                    </div>
+            </div>
+            <div class="oj-flex-item">
+                          <button  id= "btn_search"  data-bind="click:onSearch, ojComponent: { component: 'ojButton', label: 'Search', childAttributes:{style:'white-space: normal;'} }">
+                            </button>
+                        <button id= "btn_reset" data-bind="click:onReset, ojComponent: { component: 'ojButton', label: 'Reset' }">
+                            </button>
+                        <button id= "btn_back" data-bind="click:onBack, ojComponent: { component: 'ojButton', label: 'Back' }">
+                            </button>
+                    </div>
+        </div>    
+
+<h3 class="oj-header-border">Filter Options</h3>
+        <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+            <div class="oj-flex-item">
+                    <div data-bind="ojComponent: {component: 'ojRadioset', value: filterOption}" 
+                       aria-labelledby="mainlabelid">
+                      <span class="oj-choice-row-inline">
+                          <input id="rbtn_open" type="radio" 
+                                 value="open" name="fixedrateoptions">
+                          <label for="rbtn_open">Open</label>
+                      </span>
+                      <span class="oj-choice-row-inline">
+                          <input id="rbtn_match" type="radio" 
+                                 value="match" name="fixedrateoptions">
+                          <label for="rbtn_match">Match</label>
+                      </span>
+                      <span class="oj-choice-row-inline">
+                          <input id="rbtn_partial" type="radio" 
+                                 value="partial" name="fixedrateoptions">
+                          <label for="rbtn_partial">Partial</label>
+                      </span>
+                      <span class="oj-choice-row-inline">
+                          <input id="rbtn_auto" type="radio" 
+                                 value="auto" name="fixedrateoptions">
+                          <label for="rbtn_auto">Auto</label>
+                      </span>
+                  </div>
+            </div>
+        </div>        
+
+<h3 class="oj-header-border">Installment Schedule Details</h3>
+        <div class="oj-flex">                      
+                <table id="table" summary="Loan Detail" aria-label="Loan Detail"
+                           data-bind="ojComponent: {component: 'ojTable', data: datasource, columns:
+                            [
+                            {headerTemplate: 'view_action_hdr', template: 'view_action'},            
+                            {headerText: 'Installment Due Date', field: 'InstallmentDueDate'},
+                            {headerText: 'Purchase Contract Number', field: 'ContractNumber'},
+                            {headerText: 'Counterparty Name', field: 'CPName'},
+                            {headerText: 'Installment Amount', field: 'InstallmentAmount'},
+                            {headerText: 'Currency', field: 'Currency'},
+                            {headerText: 'Remarks', field: 'Remarks'},
+                            {headerText: 'Partial Amount Matched', field: 'PartialAmountMatched'},
+                            {headerText: 'PartialAmountOpen', field: 'PartialAmountOpen'},
+                            {headerText: 'Status', field: 'Status'},
+                            ],
+                            scrollPolicy: 'loadMoreOnScroll',
+                            scrollPolicyOptions: {'fetchSize': 10}, 
+                             rootAttributes: {'style':'width: 100%;'}}">
+                    </table>            
+        </div>
+  <div class="oj-flex-bar ">
+    <div class="oj-flex-bar-end ">
+        <div>
+            <button id= "btn_reconcile" class="action-button-3" style="margin-top:10px;" data-bind="click:onReconcile, ojComponent: { component: 'ojButton', label: 'Reconcile' }"></button>
+            <button id= "btn_confirm" class="action-button-3" style="margin-top:10px;" data-bind=" ojComponent: { component: 'ojButton', label: 'Confirm' }"></button>
+        </div>
+    </div>
+  </div>
+        
+
+<h3 class="oj-header-border">RENTAS Matched Details</h3>
+        <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+            <div class="oj-flex-item">
+                        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-md-labels-inline oj-form-no-dividers">
+
+        <div class="oj-flex">
+            <div class="oj-flex-item">
+               <label for="A1control">RENTAS Counterparty Name</label>
+            </div>
+            <div class="oj-flex-item">
+              <input id="A1control" type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', value: 'Counterparty Name', disabled:true}">
+            </div>
+         </div>
+        <div class="oj-flex">
+            <div class="oj-flex-item">
+               <label for="A2control">RENTAS Transaction Date</label>
+            </div>
+            <div class="oj-flex-item">
+              <input id="A2control" type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', value: '', disabled:true}">
+            </div>
+         </div>
+         <div class="oj-flex">
+            <div class="oj-flex-item">
+               <label for="A2control">RENTAS Transaction Amount</label>
+            </div>
+            <div class="oj-flex-item">
+              <input id="A2control" type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', value: '', disabled:true}">
+            </div>
+         </div>
+        <div class="oj-flex">
+            <div class="oj-flex-item">
+               <label for="A2control">RENTAS Transaction Description</label>
+            </div>
+            <div class="oj-flex-item">
+              <input id="A2control" type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', value: '', disabled:true}">
+            </div>
+         </div>         
+         </div>
+            </div>
+         </div>
+<h3 class="oj-header-border">RENTAS Open Transactions</h3>
+<div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+            <div class="oj-flex-item">
+                    <div data-bind="ojComponent: {component: 'ojRadioset', value: filterOption}" 
+                       aria-labelledby="mainlabelid">
+                      <span class="oj-choice-row-inline">
+                          <input id="rbtn_open" type="radio" 
+                                 value="open" name="fixedrateoptions">
+                          <label for="rbtn_open">Open</label>
+                      </span>
+                      <span class="oj-choice-row-inline">
+                          <input id="rbtn_auto" type="radio" 
+                                 value="auto" name="fixedrateoptions">
+                          <label for="rbtn_auto">Auto</label>
+                      </span>
+                      <span class="oj-choice-row-inline">
+                          <input id="rbtn_nonlas" type="radio" 
+                                 value="nonlas" name="fixedrateoptions">
+                          <label for="rbtn_nonlas">Non LAS</label>
+                      </span>
+                  </div>
+            </div>
+        </div>  
+        <div class="oj-flex">                      
+                <table id="table" summary="Loan Detail" aria-label="Loan Detail"
+                           data-bind="ojComponent: {component: 'ojTable', data: datasourceOpenTrx, columns:
+                            [
+                            {headerTemplate: 'view_action_hdr', template: 'view_action'},            
+                            {headerText: 'Rentas Counterparty Name', field: 'RentasCPName'},
+                            {headerText: 'Rentas Transaction Date', field: 'RentasTrxDate'},
+                            {headerText: 'Rentas Transaction Amount', field: 'RentasTrxAmount'},
+                            {headerText: 'Currency', field: 'Currency'},
+                            {headerText: 'Rentas Transaction Description', field: 'RentasTrxDesc'},
+                            {headerText: 'Non LAS Transaction', field: 'NonLasTrx'},
+                            {headerText: 'Non LAS Reason', field: 'NonLasReason'},
+                            {headerText: 'Status', field: 'Status'},
+                            ],
+                            scrollPolicy: 'loadMoreOnScroll',
+                            scrollPolicyOptions: {'fetchSize': 10}, 
+                             rootAttributes: {'style':'width: 100%;'}}">
+                    </table>            
+        </div>
+          <div class="oj-flex-bar ">
+    <div class="oj-flex-bar-end ">
+        <div>
+            <button id= "btn_remove" class="action-button-3" style="margin-top:10px;" data-bind="click:onRemove, ojComponent: { component: 'ojButton', label: 'Remove' }"></button>
+        </div>
+    </div>
+  </div>
+
+    </div>
+</div>
+
+<script type="text/html" id="view_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Select
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+<div id="checkboxSetAgreeId" aria-labelledby="agreeId" 
+           data-bind=
+           "ojComponent: {component: 'ojCheckboxset', 
+            value: selected, disabled:checkdisabled}" >
+        <span class="oj-choice-row">
+          <input id="selected" type="checkbox" value=selected>
+        </span>
+      </div>    </td>
+</script>

@@ -1,0 +1,185 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+        
+
+<div class="oj-form-layout page-content" id="form-container">
+  <div class="oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+               oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-5 oj-lg-even-cols-5">  
+
+    <h3 class="oj-header-border">Repurchase</h3>
+    <div class="oj-flex-bar ">
+    <div class="oj-flex-bar-end">
+        <div>
+            <button id= "btn_save" style="margin-top:10px;" data-bind="click:onSave, ojComponent: { component: 'ojButton', label: 'Save' }"></button>
+            <button id= "btn_generate" style="margin-top:10px;" data-bind="click:onClickGenerate,ojComponent: { component: 'ojButton', label: 'Generate', disabled:generateButton }"></button>
+            <button id= "btn_back" style="margin-top:10px;" data-bind="click:onClickBack, ojComponent: { component: 'ojButton', label: 'Back' }"></button>
+        </div>
+    </div>
+  </div>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-5 oj-lg-even-cols-7 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A1control">Counterparty Name</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A1control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: 'OCBC Bank (M) Berhad', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A2control">Counterparty Type</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A2control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: 'Financial Institution', disabled:true}">
+          </div>
+        </div>        
+        <div class="oj-flex" > 
+          <div class="oj-flex-item">
+            <label for="A3control">Purchase Contract Number</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A3control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: '103/000/2230/131434/TL1/Q/C0-0/0', disabled:true}">
+        </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Asset Type</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: 'Housing Loan', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Review Date</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: '24/03/2017', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Outstanding Balance</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: '28,270,186.68', disabled:true}">
+          </div>
+        </div>
+        
+    </div>
+    </div>                               
+    <div class="oj-flex-item">
+      <div class="oj-form oj-sm-odd-cols-5 oj-lg-odd-cols-5 oj-lg-even-cols-7  oj-lg-labels-inline"> 
+        <div class="oj-flex" > 
+          <div class="oj-flex-item">
+            <label for="B1control">Tenure</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B1control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: '3 Years 0 Months', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B4control">Indicative Caga Rate</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'4,13', disabled:true}">
+          </div>
+        </div>       
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B7control">Rollover</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B7control" 
+                   data-bind="ojComponent: {component: 'ojCombobox', value: '', options: rollover, optionChange: rolloverOptionChangedHandler}">
+          </div>
+        </div>
+        <div class="oj-flex" id="repurchaseDate"> 
+          <div class="oj-flex-item">
+            <label for="C2control">Repurchase Date</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="C2control" 
+                   data-bind="ojComponent: {
+                   component: 'ojInputDate', value: oj.IntlConverterUtils.dateToLocalIso(new Date(2017, 2, 24))}">
+          </div>
+        </div>
+        <!--<div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B9control">Status</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B9control"
+                   data-bind="ojComponent: {component: 'ojInputText', value: 'Status'}">
+          </div>
+        </div>-->
+        </div>
+    </div>
+  </div>
+  
+  </div>
+  <hr/>
+<h3 class="oj-header-border">Attachment</h3>
+            <div class="oj-flex">
+              <div id="uploadBar" class="oj-flex-item">
+        <a onclick="openFileDialog();return;">Browse File</a>
+        <input type="file" id="browseFile" value="Browse File" style=" top: -100em"/>
+                    
+                    <input type="file" id="browseFile" value="Browse File" style="position: fixed; top: -100em"/>
+                        <select id="selectDocumentType" data-bind="ojComponent: {component: 'ojSelect', options: documentType, placeholder: 'Document Type', value: selectedDocType}"></select>
+                        
+                    <input id="purchaseDate" data-bind="ojComponent: {component: 'ojInputDate', value: '', required: true}"/>
+                                   
+                    <button id= "uploadButton"
+                            data-bind="click: onClickUpload, 
+                                ojComponent: {component: 'ojButton', label: 'Upload' }">
+                    </button>
+              </div>
+              </div>
+            <div class="oj-flex">
+              <div class="oj-flex-item">
+                <table id="table"
+                        data-bind="ojComponent: {component: 'ojTable', 
+                                data: datasource, 
+                                columns: [{headerText: 'File Name', 
+                                           field: 'FileName', style:'width: 20%;'},
+                                          {headerText: 'Description', 
+                                           field: 'Description', style:'width: 20%;'},
+                                          {headerText: 'Type', 
+                                           field: 'Type', style:'width: 10%;'},
+                                          {headerText: 'Version', 
+                                           field: 'Version', style:'width: 10%;'},
+                                          {headerText: 'Date', 
+                                           field: 'Date', style:'width: 20%;'},
+                                          {headerTemplate: 'delete_hdr', template: 'delete_action', style:'width: 20%;'}],
+                                          rootAttributes: {'style':'width: 100%;'}}">
+                </table>
+              </div>
+              </div>
+</div>
+
+<script type="text/html" id="delete_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Delete
+    </th>
+</script>
+<script type="text/html" id="delete_action">
+    <td>
+        <!--<button id= "deleteButton"
+                data-bind="click: $parent.onClickDelete, 
+                    ojComponent: {component: 'ojButton', label: 'Delete' }">
+        </button>-->
+
+        <a onclick="deleteRow();"><img style="width: 20px;vertical-align: sub;" src="css/images/Block_Icon.png"></a>
+    </td>
+</script>

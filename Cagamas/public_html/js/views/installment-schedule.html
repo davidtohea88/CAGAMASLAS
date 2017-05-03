@@ -1,0 +1,129 @@
+<div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+<div class="oj-form-layout page-content" id="form-container">
+
+    <h3 class="oj-header-border">Header</h3>
+    <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">                      
+    <div class="oj-flex-item">
+      <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">   
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A3control">Counterparty Code</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A3control" type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', value: 'CPT0025', disabled:true}">
+          </div>
+        </div>
+         <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A4control">Counterparty Name</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A4control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'CIMB Niaga', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A5control">Purchase Contract Number</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A5control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value:'T-127/000/2810/159074/TL1/Q/C0-0/0', disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A5control">Purchase Contract Date</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A5control" 
+                   data-bind="ojComponent: {component: 'ojInputDate',value:oj.IntlConverterUtils.dateToLocalIso(new Date(2017, 2, 27)), disabled:true}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="A5control">Purchase Consideration</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="A5control" 
+                   data-bind="ojComponent: {component: 'ojInputText',value:'Commodity', disabled:true}">
+          </div>
+        </div>
+        </div>
+    </div>                               
+    <div class="oj-flex-item">
+      <div class="oj-form oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6  oj-lg-labels-inline"> 
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B1control">Purchase Contract Value</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B1control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: purchContractValue}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B2control">Cagamas Rate</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B2control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: cagamasRate}">
+          </div>
+        </div>       
+       <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B3control">Review Date Value</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B3control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: reviewDateValue}">
+          </div>
+        </div>
+        <div class="oj-flex"> 
+          <div class="oj-flex-item">
+            <label for="B3control">Deferred Purchase Value for Cagamas</label>
+          </div>
+          <div class="oj-flex-item">
+            <input id="B3control" 
+                   data-bind="ojComponent: {component: 'ojInputText', value: defPurchValue}">
+          </div>
+        </div>
+        </div>
+    </div>
+  </div>
+    <h3 class="oj-header-border">Line</h3>
+</div>
+<div id="pagingControlDemo" class="page-content">
+    <table id="table" summary="Loan Detail" aria-label="Loan Detail"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
+            [{headerText: 'Installment Date', field: 'InstallmentDate'},
+             {headerText: 'Opening Balance', field: 'OpeningBalance'},
+             {headerText: 'CagamasRate', field: 'CagamasRate'},
+             {headerText: 'Mortgage Installment', field: 'MortgageInstallment'},
+             {headerText: 'Deferred Purchase Value', field: 'DeferredPurchaseValue'}, 
+             {headerText: 'Cagamas Installment', field: 'CagamasInstallment'}, 
+             {headerText: 'Principal', field: 'Principal'}, 
+             {headerText: 'Interest Payable', field: 'InterestPayable'}, 
+             {headerText: 'Closing Balance', field: 'ClosingBalance'}, 
+             {headerText: 'Total', field: 'Total'}], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 15}">
+    </div>
+</div>
+       <div style="clear:both;"></div>
+<hr/>
+<div class="demo-grid-sizes demo-flex-display">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-sm-12 oj-md-12 oj-lg-5 oj-flex-item"></div>
+    <div class="oj-sm-12 oj-md-6  oj-lg-3 oj-flex-item">
+<button  id= "btn_back" class="action-button-3" data-bind="ojComponent: { component: 'ojButton', label: 'Export' }">
+    </button>
+<button  id= "btn_back" class="action-button-3" data-bind="click: redirectToPC, ojComponent: { component: 'ojButton', label: 'Back' }">
+    </button>
+    </div>
+    <div class="oj-sm-12 oj-md-6  oj-lg-4 oj-flex-item"></div>
+  </div>
+</div>
