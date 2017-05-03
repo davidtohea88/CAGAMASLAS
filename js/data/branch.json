@@ -1,0 +1,51 @@
+{
+  "MdBranch" : [ {
+    "branchId" : 1,
+    "branchCd" : "BRANCH_101",
+    "branchName" : "BRANCH_101",
+    "branchDesc" : "BRANCH_101",
+    "replBranchCd" : "BRANCH_100",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "branchId" : 2,
+    "branchCd" : "BRANCH_102",
+    "branchName" : "BRANCH_102",
+    "branchDesc" : "BRANCH_102",
+    "replBranchCd" : "BRANCH_200",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "branchId" : 3,
+    "branchCd" : "BRANCH_104",
+    "branchName" : "BRANCH_104",
+    "branchDesc" : "BRANCH_104",
+    "replBranchCd" : "BRANCH_400",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "branchId" : 4,
+    "branchCd" : "BRANCH_103",
+    "branchName" : "BRANCH_103",
+    "branchDesc" : "BRANCH_103",
+    "replBranchCd" : "",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "LAS"
+  }]
+}

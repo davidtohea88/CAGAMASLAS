@@ -1,23 +1,23 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/masterData/rateTypeService',
-        'services/exportService','ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
         'ojs/ojdatetimepicker','ojs/ojradioset'],
-        function (oj, ko, data, $, rendererService, restService, exportService)
+        function (oj, ko, data, $, rendererService, configService, exportService)
         {
-            function rateTypeViewModel() {
+            function assetTypeMainViewModel() {
                 var self = this;
-                self.header = "Rate Type";
+                self.header = "Day Count Convention";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.allData = ko.observableArray();
-                self.rateTypeModel = ko.observable();
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'rateTypId'}));
+                self.dayCountModel = ko.observable();
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'dayCountId'}));
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
-                self.codeSearch = ko.observable('');
+                self.numeratorSearch = ko.observable('');
+                self.denumeratorSearch = ko.observable('');
 
                 self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
@@ -30,19 +30,43 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 self.activeRenderer = function(context){
                     return rendererService.activeConverter(context.data);
                 };
+                    
+                self.refreshData = function (fnSuccess) {
+                    console.log("fetching data");
+                    var jsonUrl = "js/data/dayCount.json";
 
-                self.search = function (code, name, desc) {
+                    $.ajax(jsonUrl,
+                            {
+                                method: "GET",
+                                dataType: "json",
+//                                headers: {"Authorization": "Basic " + btoa("username:password")},
+                                // Alternative Headers if using JWT Token
+                                // headers : {"Authorization" : "Bearer "+ jwttoken; 
+                                success: function (data)
+                                {
+                                    fnSuccess(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown)
+                                {
+                                    console.log(textStatus, errorThrown);
+                                }
+                            }
+                    );
+                };
+
+                self.search = function (name, desc, numerator, denumerator) {
                     var temp = ko.utils.arrayFilter(self.allData(),
                         function (rec) {
-                            return ((code.length ===0 || (code.length > 0 && rec.rateTypCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                    (name.length ===0 || (name.length > 0 && rec.rateTypName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                    (desc.length ===0 || (desc.length > 0 && rec.rateTypDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                            return ((name.length ===0 || (name.length > 0 && rec.dayCountName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                    (desc.length ===0 || (desc.length > 0 && rec.dayCountDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)) &&
+                                    (numerator && rec.dayCountNumerator === numerator ) &&
+                                    (denumerator && rec.dayCountDenumerator=== denumerator ));
                         });
                     self.allData(temp);
                 };
                 
                 self.createOrEdit = function (model) {
-                    self.rateTypeModel(model);
+                    self.dayCountModel(model);
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
@@ -83,25 +107,31 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 // ===============  EVENT HANDLER  ==============
                 
                 self.onReset = function(){
-                    self.codeSearch('');
                     self.nameSearch('');
                     self.descSearch('');
-                    self.allData(restService.fetchAll());
-                    self.selectedRow(undefined);
-                    $('#btnEdit').hide();
-                    $('#btnActivate').hide();
+                    self.numeratorSearch(undefined);
+                    self.denumeratorSearch(undefined);
+                    self.refreshData(function(data){
+                        self.selectedRow(undefined);
+                        self.allData(data.MdBranch);
+                        $('#btnEdit').hide();
+                        $('#btnActivate').hide();
+                    });
                 };
                 
                 self.onSearch = function(){
-                    self.allData(restService.fetchAll());
-                    self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                    self.refreshData(function(data){
+                        self.allData(data.MdBranch);
+                        self.search(self.nameSearch(),self.descSearch(),self.numeratorSearch(),self.denumeratorSearch());
+                    });
                 };
                 
                 self.onCreate = function(){
-                    var newRec = { rateTypeId: undefined,
-                        rateTypeCd: "",
-                        rateTypeName: "",
-                        rateTypeDesc: "",
+                    var newRec = { branchId: undefined,
+                        branchCd: undefined,
+                        branchName: undefined,
+                        branchDesc: undefined,
+                        replBranchCd: undefined,
                         active: "Y",
                         effectiveDate: ""};
                     self.createOrEdit(newRec);
@@ -134,7 +164,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
 
                 self.onReset();
+                
             }
-            return rateTypeViewModel();
+            return assetTypeMainViewModel();
         }
 ); 

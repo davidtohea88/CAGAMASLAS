@@ -1,0 +1,47 @@
+{
+  "MdAgreementTyp" : [ {
+    "agreementTypId" : 1,
+    "agreementTypCd" : "001",
+    "agreementTypName" : "Agreement 1",
+    "agreementTypDesc" : "Agreement 1",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "agreementTypId" : 2,
+    "agreementTypCd" : "002",
+    "agreementTypName" : "Agreement 2",
+    "agreementTypDesc" : "Agreement 2",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "agreementTypId" : 3,
+    "agreementTypCd" : "003",
+    "agreementTypName" : "Agreement 3",
+    "agreementTypDesc" : "Agreement 3",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "agreementTypId" : 4,
+    "agreementTypCd" : "004",
+    "agreementTypName" : "Agreement 4",
+    "agreementTypDesc" : "Agreement 4",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:21:13.000+08:00",
+    "createDate" : "2017-02-24T15:21:13.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:21:13.000+08:00",
+    "updatedBy" : "LAS"
+  }]
+}

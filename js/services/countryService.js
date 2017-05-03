@@ -17,10 +17,6 @@ define(['jquery','ojs/ojcore' ,'knockout', 'services/configService'],
                 var jsonUrl = "js/data/country.json";
                 $.ajax(jsonUrl,{ method: "GET", dataType: "json",
                     success: function (data){
-                        /*var tmp = [];
-                        ko.utils.arrayForEach(data.MdCountry,function(item){
-                            tmp.push({label: item.countryName, value: item.countryId});
-                        });*/
                         lov(data.MdCountry);
                     },
                     error: function (jqXHR, textStatus, errorThrown){

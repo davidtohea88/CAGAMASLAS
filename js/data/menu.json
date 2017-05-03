@@ -204,6 +204,20 @@
             },
             {
                 "attr" : {
+                    "id" : "branch",
+                    "name" : "Branch",
+                    "view" : "branch"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "agreementtype",
+                    "name" : "Agreement Type",
+                    "view" : "agreementtype"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "blank",
                     "name" : "blank",
                     "view" : "blank"

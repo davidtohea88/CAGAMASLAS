@@ -87,17 +87,17 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
 
                 self.exportxls = function () {
-                    exportService.export($("#table").ojTable("option","columns"),self.allData(),'xlsx','data.xlsx', function(field,value){
-                        if (field === 'active'){
-                            return rendererService.activeConverter(value);
-                        }else if (field === 'effectiveDate'){
-                            return rendererService.dateConverter.format(value);
-                        }else if (field === 'updatedDate'){
-                            return rendererService.dateTimeConverter.format(value);
-                        }else{
-                            return value;
-                        }
-                    });
+exportService.export($("#table").ojTable("option","columns"),self.allData(),'xlsx','data.xlsx', function(field,value){
+    if (field === 'active'){
+        return rendererService.activeConverter(value);
+    }else if (field === 'effectiveDate'){
+        return rendererService.dateConverter.format(value);
+    }else if (field === 'updatedDate'){
+        return rendererService.dateTimeConverter.format(value);
+    }else{
+        return value;
+    }
+});
                 };
                 
                 self.selectedRow = ko.observable(undefined);
