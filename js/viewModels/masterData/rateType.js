@@ -1,15 +1,16 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/masterData/rateTypeService',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/BaseRestService',
         'services/exportService','ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
         'ojs/ojdatetimepicker','ojs/ojradioset'],
-        function (oj, ko, $, rendererService, restService, exportService)
+        function (oj, ko, $, rendererService, BaseRestService, exportService)
         {
             function rateTypeViewModel() {
                 var self = this;
+                var restService = new BaseRestService("rateType","rateTypeId","MdRateType");
                 self.header = "Rate Type";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.collection = ko.observable(restService.createCollection());
