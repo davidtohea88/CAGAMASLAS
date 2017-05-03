@@ -15,7 +15,17 @@ define(['jquery','ojs/ojcore' ,'knockout'], function($,oj,ko) {
         self.dateConverter = oj.Validation.converterFactory("datetime").createConverter({pattern: 'dd-MM-yyyy'});
         self.activeConverter = function(str){
             return (str==="Y")?"Active": "Inactive";
-        }
+        };
+        self.LOVConverter = function(LOV,id){
+            var filtered = ko.utils.arrayFirst(LOV,function(item){
+                return item.value === id;
+            });
+            if (filtered){
+                return filtered.label;
+            }else{
+                return id;
+            }
+        };
     };
     return new RendererServiceUtilities();
 });

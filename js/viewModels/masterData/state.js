@@ -1,22 +1,22 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/BaseRestService','services/exportService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
         'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox'],
-        function (oj, ko, $, rendererService, BaseRestService, exportService)
+        function (oj, ko, $, rendererService, RestService, exportService)
         {
             function stateMainViewModel() {
                 var self = this;
                 
-                var countryService = new BaseRestService("country","countryId","MdCountry");
+                var countryService = RestService.countryService();
                 self.countryLOV = ko.observableArray();
                 countryService.fetchAsLOV('countryName','countryId').then(function(data){
                     self.countryLOV(data);
                 });
                 
-                var restService = new BaseRestService("state","stateId","MdState");
+                var restService = RestService.stateService();
                 self.header = "State";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.collection = ko.observable(restService.createCollection());
@@ -30,13 +30,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.countryNameRenderer = function(context){
                     if (context.data){
                         var id = context.data;
-                        var filtered = ko.utils.arrayFirst(self.countryLOV(),function(item){
-                            return item.value === id;
-                        });
-                        if (filtered){
-                            return filtered.label;
-                        }
-                        
+                        return rendererService.LOVConverter(self.countryLOV(),id);
                     }
                     return '';
                 };
@@ -109,14 +103,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         }else if (field === 'updatedDate'){
                             return rendererService.dateTimeConverter.format(value);
                         }else if (field === 'countryId'){
-                            var id = value;
-                            var filtered = ko.utils.arrayFirst(self.countryLOV(),function(item){
-                                return item.value === id;
-                            });
-                            if (filtered){
-                                return filtered.label;
-                            }
-                            return "";
+                            return rendererService.LOVConverter(self.countryLOV(),value);
                         }else{
                             return value;
                         }
