@@ -1,0 +1,26 @@
+{
+  "MdFundingSource" : [ {
+    "FundSrcId" : 1,
+    "FundSrcCd" : "CAG_CMBS",
+    "FundSrcName" : "Cagamas CMBS Berhad",
+    "FundSrcDesc" : "Cagamas CMBS Berhad",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "FundSrcId" : 2,
+    "FundSrcCd" : "CAG_Bhd",
+    "FundSrcName" : "Cagamas Berhad",
+    "FundSrcDesc" : "Cagamas Berhad",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }
+   ]
+}
