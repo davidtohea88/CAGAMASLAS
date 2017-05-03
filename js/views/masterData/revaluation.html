@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<div id="container" >
+    <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+    <div class="page-content" style="margin:0 auto">
+        <div class="oj-flex">  
+            <div class="oj-flex-item">
+                <div class="oj-margin oj-panel-alt demo-mypanel" >          
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">  
+                            <div class="oj-margin oj-panel-alt demo-mypanel" >   
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >  
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="company">Company</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="company" data-bind="ojComponent: {component: 'ojSelect',
+                                                                                placeholder: emptyPlaceholder() ? '' : 'Select a company',
+                                                                                value: company,
+                                                                                options: companyData}">
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="dbcode">Database Code</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="dbcode" data-bind="ojComponent: {component: 'ojSelect',
+                                                                                placeholder: emptyPlaceholder() ? '' : 'Select a database code',
+                                                                                value: dbCode,
+                                                                                options: dbCodeData}">
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>    
+                                        <div class="oj-flex-item">
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="product">Product</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="product" data-bind="ojComponent: {component: 'ojSelect',
+                                                                                placeholder: emptyPlaceholder() ? '' : 'Select a product',
+                                                                                value: selectedProduct,
+                                                                                options: productData}">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >  
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="gainAccount">Add Realized Gain Account</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="gainAccountList"
+                                                            data-bind="ojComponent: {
+                                                                component: 'ojSelect',
+                                                                placeholder: emptyPlaceholder() ? '' : 'Select an account',
+                                                                options: accountData,
+                                                                optionChange: gainAccountChangeHandler, 
+                                                                optionsKeys: {
+                                                                    value: 'Account',
+                                                                    label: 'Account'
+                                                                },
+                                                                value:selectedGainAccount,
+                                                                optionTemplate: 'optionTemplate'}">
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item">Selected Realized Gain Account
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                    <table id="table" summary="Department List" aria-label="Departments Table"
+                                                            data-bind="ojComponent: {component: 'ojTable', 
+                                                            data: selectedGainAccountDataSource, 
+                                                            columnsDefault: {sortable: 'none'}, 
+                                                            columns: [{headerText: 'Account No', 
+                                                                       field: 'AccountNo'},
+                                                                      {headerText: 'Account Name', 
+                                                                       field: 'AccountName'}]}">
+                                                         </table>                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="oj-flex-item">
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="lossAccount">Add Realized Loss Account</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="lossAccountList"
+                                                            data-bind="ojComponent: {
+                                                                component: 'ojSelect',
+                                                                placeholder: emptyPlaceholder() ? '' : 'Select an account',
+                                                                options: accountData,
+                                                                optionChange: lossAccountChangeHandler, 
+                                                                optionsKeys: {
+                                                                    value: 'Account',
+                                                                    label: 'Account'
+                                                                },
+                                                                value:selectedLossAccount,
+                                                                optionTemplate: 'optionTemplate'}">
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item">Selected Realized Loss Account
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                    <table id="table" summary="Department List" aria-label="Departments Table"
+                                                            data-bind="ojComponent: {component: 'ojTable', 
+                                                            data: selectedLossAccountDataSource, 
+                                                            columnsDefault: {sortable: 'none'}, 
+                                                            columns: [{headerText: 'Account No', 
+                                                                       field: 'AccountNo'},
+                                                                      {headerText: 'Account Name', 
+                                                                       field: 'AccountName'}]}">
+                                                         </table>                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-flex-end" style="margin-top:50px;">
+                                 <div class="oj-flex-item"><button id= "button" data-bind="click: onRun,ojComponent: {component: 'ojButton', label: 'Run Revaluation' } "></button></div>
+                               </div>
+                                </div>
+                                
+                                
+                                                
+                                
+                            </div>    
+                        </div>
+                    </div> 
+                </div>    
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+<script type="text/html" id="optionTemplate">
+        <div>
+          <span class="oj-listbox-highlighter-section">
+            <span data-bind="text: Account"></span>
+          </span>
+        </div>
+  </script>

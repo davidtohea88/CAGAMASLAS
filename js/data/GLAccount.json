@@ -1,0 +1,39 @@
+{
+  "MdGLAccount" : [ {
+    "AccountId" : 1,
+    "AccountNo" : "2710011",
+    "AccountName" : "Deferred Guarantee Fee-MGP",
+    "active" : "Y",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  },{
+    "AccountId" : 2,
+    "AccountNo" : "2710012",
+    "AccountName" : "Deferred Guarantee Fee-YHS",
+    "active" : "Y",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  },{
+    "AccountId" : 3,
+    "AccountNo" : "27200",
+    "AccountName" : "Provision for guarantee event",
+    "active" : "Y",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  },{
+    "AccountId" : 4,
+    "AccountNo" : "272003",
+    "AccountName" : "Guarantee fee",
+    "active" : "Y",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  } ]
+}
