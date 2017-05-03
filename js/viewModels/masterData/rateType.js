@@ -14,12 +14,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.dialogTitle = "Create/edit "+self.header;
                 self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
-                
-                // fetch from rest service
-                self.collection().refresh().then(function(){
-                    self.allData(self.collection().toJSON());
-                });
-                
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'rateTypeId'}));
                 
                 self.rateTypeModel = ko.observable();
@@ -37,6 +31,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.activeRenderer = function(context){
                     return rendererService.activeConverter(context.data);
+                };
+                
+                self.refreshData = function(){
+                    // fetch from rest service
+                    self.collection().refresh().then(function(){
+                        self.allData(self.collection().toJSON());
+                    });  
                 };
                 
                 self.search = function (code, name, desc) {
@@ -62,7 +63,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             updatedBy: user,
                             updatedDate: currentDate
                         };
-                    model.save(defaultAttributes);
+                    model.save(defaultAttributes,{
+                        success: function(model,resp){
+                            self.refreshData();
+                        },
+                        error: function(){
+                            console.log("failed saving");
+                        }
+                    });
+                    
                 };
 
                 self.activateDeactivate = function (model) {
@@ -93,9 +102,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 // ===============  EVENT HANDLER  ==============
                 
                 self.onReset = function(){
-                    self.collection().refresh().then(function (){
-                        self.allData(self.collection().toJSON());
-                    });
+                    self.refreshData();
                     
                     self.codeSearch('');
                     self.nameSearch('');
@@ -107,7 +114,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSearch = function(){
-                    
                     self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
                 };
                 
@@ -122,10 +128,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSave = function(){
-                    console.log("save");
-                   
                     self.save(self.rateTypeModel());
-                     $("#CreateEditDialog").ojDialog("close");
+                    $("#CreateEditDialog").ojDialog("close");
                 };
                 
                 self.onActivateDeactivate = function(){
@@ -150,6 +154,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onCancel = function () {
                     $("#CreateEditDialog").ojDialog("close");
                 };
+                
+                self.refreshData();
                 
             }
             return rateTypeViewModel();

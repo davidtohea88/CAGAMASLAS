@@ -13,7 +13,7 @@ define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
              */
             var self = this;
             
-            var restUrl= "rateType";//"MD_RateType/RateTypeRestPS";
+            var restUrl= "MD_RateType/RateTypeRestPS";
             
             var RateType  = oj.Model.extend({
                 urlRoot: config.serviceUrl+restUrl,
@@ -26,16 +26,16 @@ define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
                         return {url: config.serviceUrl+restUrl+"?rateTypeId="+options.recordID, type: 'GET'};
                     }
                 },
-                idAttribute: "rateTypeId",
+                idAttribute: "countryTypeId",
                 parseSave: function(rec){
-                    return {MdRateType: [rec]};
+                    return {MdCountry: [rec]};
                 }
             });
             var RateTypes = oj.Collection.extend({
                 url:   config.serviceUrl+restUrl,
                 model: new RateType(),
                 parse: function(resp){
-                    var rates = resp.MdRateType;
+                    var rates = resp.MdCountry;
                     if (rates.length>0){
                         return rates;
                     }
