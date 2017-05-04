@@ -21,6 +21,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.productTypeService = function(){
                 return new BaseRestService("productType","prodTypeId","MdProdType");
             };
+            self.productGroupService = function(){
+                return new BaseRestService("productGroup","prodGrpId","MdProdGrp");
+            };
             self.agreementTypeService = function(){
                 return new BaseRestService("agreementType","agreementTypId","MdAgreementTyp");
             };
@@ -32,6 +35,12 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             };
             self.consumerTypeService = function(){
                 return new BaseRestService("consumerType","consmrTypeId","MdConsumerType");
+            };
+            self.purchaseModeService = function(){
+                return new BaseRestService("purchaseMode","prchsModeId","MdPrchsMode");
+            };
+            self.purchaseConsTypeService = function(){
+                return new BaseRestService("purchaseConsType","consTypeId","MdConsType");
             };
         };
         return new RestService();

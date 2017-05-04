@@ -70,7 +70,8 @@ define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
                     collection.fetch({
                         success: function(coll,resp){
                             var allData = collection.toJSON();
-                            var result = [];
+                            var result = [{label: '--Please Select--', value: undefined}];
+                            
                             ko.utils.arrayForEach(allData,function(item){
                                 if (item.active ==='Y'){
                                     var lbl = item[labelProperty];
