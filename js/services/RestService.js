@@ -21,6 +21,18 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.productTypeService = function(){
                 return new BaseRestService("productType","prodTypeId","MdProdType");
             };
+            self.agreementTypeService = function(){
+                return new BaseRestService("agreementType","agreementTypId","MdAgreementTyp");
+            };
+            self.assetTypeService = function(){
+                return new BaseRestService("assetType","assetTypeId","MdAssetType");
+            };
+            self.assetGroupService = function(){
+                return new BaseRestService("assetGroup","assetGrpId","MdAssetGrp");
+            };
+            self.consumerTypeService = function(){
+                return new BaseRestService("consumerType","consmrTypeId","MdConsumerType");
+            };
         };
         return new RestService();
 });
