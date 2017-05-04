@@ -13,7 +13,7 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                 var self = this;
                 self.tracker = ko.observable();
                 
-                var restUrl = configService.serviceUrl + "Product/";
+                var restUrl = configService.serviceUrl + "MD_Product_Group/ProductGroupRestPS/";
                 self.productGroupModel = ko.observable();
                 self.header = "Product Group";
                 self.allData = ko.observableArray();
