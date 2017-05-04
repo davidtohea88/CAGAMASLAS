@@ -15,7 +15,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.dialogTitle = "Create/edit "+self.header;
                 self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'rateTypeId'}));
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
                 
                 self.rateTypeModel = ko.observable();
                 self.nameSearch = ko.observable('');
@@ -142,7 +142,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     var idx = ui.currentRow.rowIndex;
                     self.dataSource.at(idx).
                         then(function (obj) {
-                            self.selectedRow(obj.data.rateTypeId);
+                            self.selectedRow(obj.data[self.collection().model.idAttribute]);
                             $('#btnEdit').show();
                             $('#btnActivate').show();
                         });

@@ -18,7 +18,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.rateTypeService = function(){
                 return new BaseRestService("rateType","rateTypeId","MdRateType");
             };
-            
+            self.productTypeService = function(){
+                return new BaseRestService("productType","prodTypeId","MdProdType");
+            };
         };
         return new RestService();
 });

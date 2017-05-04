@@ -15,7 +15,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 self.countryModel = ko.observable();
                 self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'countryId'}));
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
                 
                 self.codeSearch = ko.observable('');
                 self.nameSearch = ko.observable('');
@@ -138,7 +138,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     var idx = ui.currentRow.rowIndex;
                     self.dataSource.at(idx).
                         then(function (obj) {
-                            self.selectedRow(obj.data.countryId);
+                            self.selectedRow(obj.data[self.collection().model.idAttribute]);
                             $('#btnEdit').show();
                             $('#btnActivate').show();
                         });

@@ -27,6 +27,19 @@ define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
                         }
                     },
                     idAttribute: self.propertyId,
+                    parse: function(resp){
+                        var rec = {};
+                        for(var prop in resp){
+                            if (resp.hasOwnProperty(prop)){
+                                if (resp[prop].hasOwnProperty("@nil") && resp[prop]["@nil"] === "true"){
+                                    rec[prop] = undefined;
+                                }else{
+                                    rec[prop] = resp[prop];
+                                }
+                            }
+                        }
+                        return rec;
+                    },
                     parseSave: function(rec){
                         var item = {};
                         item[self.objectEnclosure] = [rec];
