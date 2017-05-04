@@ -1,0 +1,30 @@
+{
+  "MdNonBusinessDayConvention" : [ {
+    "NDBConvId" : 1,
+    "ConvName" : "Cagamas CMBS Berhad",
+    "HolidayName" : "Cagamas CMBS Berhad",
+    "FixedDate" : "2017-05-01T15:22:51.000+08:00",
+    "Year" : "2016",
+    "BusinessRule" : "Business Rule 1",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "NDBConvId" : 2,
+    "ConvName" : "Cagamas CMBS Berhad 2",
+    "HolidayName" : "Cagamas CMBS Berhad 2",
+    "FixedDate" : "2017-06-01T15:22:51.000+08:00",
+    "Year" : "2017",
+    "BusinessRule" : "Business Rule 2",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }
+   ]
+}

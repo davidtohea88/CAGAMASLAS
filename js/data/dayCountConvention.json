@@ -1,0 +1,30 @@
+{
+  "MdDayCountConvention" : [ {
+    "DCConvId" : 1,
+    "DCConvCd" : "CAG_CMBS",
+    "DCConvName" : "Cagamas CMBS Berhad",
+    "DCConvDesc" : "Cagamas CMBS Berhad",
+    "Numerator" : "30",
+    "Denominator" : "360",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }, {
+    "DCConvId" : 2,
+    "DCConvCd" : "CAG_CMBS",
+    "DCConvName" : "Cagamas CMBS Berhad 2",
+    "DCConvDesc" : "Cagamas CMBS Berhad 2",
+    "Numerator" : "30",
+    "Denominator" : "365",
+    "active" : "Y",
+    "effectiveDate" : "2017-02-24T15:22:51.000+08:00",
+    "createDate" : "2017-02-24T15:22:51.000+08:00",
+    "createBy" : "LAS",
+    "updatedDate" : "2017-02-24T15:22:51.000+08:00",
+    "updatedBy" : "LAS"
+  }
+   ]
+}
