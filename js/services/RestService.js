@@ -42,6 +42,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.purchaseConsTypeService = function(){
                 return new BaseRestService("purchaseConsType","consTypeId","MdConsType");
             };
+            self.gstChargeTypeService = function(){
+                return new BaseRestService("gstChargeType","gstCrgtypeId","MdGstcrgType");
+            };
         };
         return new RestService();
 });

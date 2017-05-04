@@ -19,6 +19,7 @@ define(['ojs/ojcore', 'knockout', 'jquery','services/rendererService', 'services
                 self.nameSearch = ko.observable('');
                 self.codeSearch = ko.observable('');
                 self.descSearch =  ko.observable('');
+                self.dateConverter = rendererService.dateConverter;
 
                 self.dateTimeRenderer = function(context){
                     var data = context.data;

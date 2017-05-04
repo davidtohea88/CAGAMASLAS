@@ -19,6 +19,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
                 self.codeSearch = ko.observable('');
+                self.dateConverter = rendererService.dateConverter;
 
                 self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
@@ -56,7 +57,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.save = function (model) {
                     var user = "LAS";
-                    var currentDate = new Date();
+                    var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
                             createdDate: model.isNew()?currentDate:model.attributes.createdDate,
                             updatedBy: user,
