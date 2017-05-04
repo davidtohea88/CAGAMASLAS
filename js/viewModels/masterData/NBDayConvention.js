@@ -4,36 +4,54 @@
 define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset'],
+        'ojs/ojdatetimepicker','ojs/ojradioset', 'ojs/ojselectcombobox'],
         function (oj, ko, data, $, rendererService, configService, exportService)
         {
-            function assetTypeMainViewModel() {
+            function organizationMainViewModel() {
                 var self = this;
-                self.header = "Day Count Convention";
+                self.header = "Non Business Day Convention";
                 self.dialogTitle = "Create/edit "+self.header;
+                self.emptyPlaceholder = ko.observable(false);
                 self.allData = ko.observableArray();
-                self.dayCountModel = ko.observable();
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'dayCountId'}));
+                self.NBDConvModel = ko.observable();
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'NDBConvId'}));
                 self.nameSearch = ko.observable('');
-                self.descSearch = ko.observable('');
-                self.numeratorSearch = ko.observable('');
-                self.denumeratorSearch = ko.observable('');
+                self.yearSearch = ko.observable('');
+                self.fixedDateValue = ko.observable('');
+                self.toDateValue = ko.observable('');
+                self.yearList = ko.observableArray([ 
+                    {value: "2017", label: "2017"},  
+                    {value: "2016", label: "2016"},
+                    {value: "2015", label: "2015"},
+                    {value: "2014", label: "2014"}
+                ]);
 
-                self.dateTimeRenderer = function(context){
+                self.orgRenderer = function(context) 
+                {
+                    if (context.data){
+                        return context.data.orgName;
+                    }
+                    return '';
+                };
+
+                self.dateTimeRenderer = function(context) 
+                {
                     return rendererService.dateTimeConverter.format(context.data);
                 };
                 
-                self.dateRenderer = function(context){
+                self.dateRenderer = function(context) 
+                {
                     return rendererService.dateConverter.format(context.data);
                 };
                 
-                self.activeRenderer = function(context){
+                self.activeRenderer = function(context) 
+                {
                     return rendererService.activeConverter(context.data);
                 };
                     
                 self.refreshData = function (fnSuccess) {
                     console.log("fetching data");
-                    var jsonUrl = "js/data/dayCount.json";
+                    var jsonUrl = "js/data/nonBusinessConvention.json";
 
                     $.ajax(jsonUrl,
                             {
@@ -54,19 +72,20 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     );
                 };
 
-                self.search = function (name, desc, numerator, denumerator) {
+                self.search = function (name, year, from, to) {
                     var temp = ko.utils.arrayFilter(self.allData(),
                         function (rec) {
-                            return ((name.length ===0 || (name.length > 0 && rec.dayCountName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                    (desc.length ===0 || (desc.length > 0 && rec.dayCountDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)) &&
-                                    (numerator && rec.dayCountNumerator === numerator ) &&
-                                    (denumerator && rec.dayCountDenumerator=== denumerator ));
+                            return ((name.length ===0 || (name.length > 0 && rec.HolidayName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                    (year.length ===0 || (year.length > 0 && rec.Year.toLowerCase().indexOf(year.toString().toLowerCase()) > -1)) &&
+                                    (from.length ===0 || (from.length > 0 && rec.FixedDate>from.toString())) &&
+                                    (to.length ===0 || (to.length > 0 && rec.FixedDate<to.toString())));
+                        
                         });
                     self.allData(temp);
                 };
                 
                 self.createOrEdit = function (model) {
-                    self.dayCountModel(model);
+                    self.NBDConvModel(model);
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
@@ -96,6 +115,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                             return rendererService.dateConverter.format(value);
                         }else if (field === 'updatedDate'){
                             return rendererService.dateTimeConverter.format(value);
+                        
                         }else{
                             return value;
                         }
@@ -108,12 +128,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 
                 self.onReset = function(){
                     self.nameSearch('');
-                    self.descSearch('');
-                    self.numeratorSearch(undefined);
-                    self.denumeratorSearch(undefined);
                     self.refreshData(function(data){
                         self.selectedRow(undefined);
-                        self.allData(data.MdBranch);
+                        self.allData(data.MdNonBusinessDayConvention);
                         $('#btnEdit').hide();
                         $('#btnActivate').hide();
                     });
@@ -121,17 +138,18 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 
                 self.onSearch = function(){
                     self.refreshData(function(data){
-                        self.allData(data.MdBranch);
-                        self.search(self.nameSearch(),self.descSearch(),self.numeratorSearch(),self.denumeratorSearch());
+                        self.allData(data.MdNonBusinessDayConvention);
+                        self.search(self.nameSearch(),self.yearSearch(),self.fixedDateValue(),self.toDateValue());
                     });
                 };
                 
                 self.onCreate = function(){
-                    var newRec = { branchId: undefined,
-                        branchCd: undefined,
-                        branchName: undefined,
-                        branchDesc: undefined,
-                        replBranchCd: undefined,
+                    var newRec = { NDBConvId: undefined,
+                        ConvName: undefined,
+                        HolidayName: undefined,
+                        FixedDate: undefined,
+                        Year: undefined,
+                        BusinessRule: undefined,
                         active: "Y",
                         effectiveDate: ""};
                     self.createOrEdit(newRec);
@@ -164,8 +182,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
 
                 self.onReset();
-                
             }
-            return assetTypeMainViewModel();
+            return organizationMainViewModel();
         }
 ); 

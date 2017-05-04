@@ -1,23 +1,27 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/masterData/rateTypeService',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService',
         'services/exportService','ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
         'ojs/ojdatetimepicker','ojs/ojradioset'],
-        function (oj, ko, data, $, rendererService, restService, exportService)
+        function (oj, ko, $, rendererService, RestService, exportService)
         {
             function rateTypeViewModel() {
                 var self = this;
+                var restService = RestService.rateTypeService();
                 self.header = "Rate Type";
                 self.dialogTitle = "Create/edit "+self.header;
+                self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
+                
                 self.rateTypeModel = ko.observable();
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'rateTypId'}));
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
                 self.codeSearch = ko.observable('');
+                self.dateConverter = rendererService.dateConverter;
 
                 self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
@@ -30,15 +34,22 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 self.activeRenderer = function(context){
                     return rendererService.activeConverter(context.data);
                 };
-
+                
+                self.refreshData = function(){
+                    // fetch from rest service
+                    self.collection().refresh().then(function(){
+                        self.allData(self.collection().toJSON());
+                    });  
+                };
+                
                 self.search = function (code, name, desc) {
-                    var temp = ko.utils.arrayFilter(self.allData(),
-                        function (rec) {
-                            return ((code.length ===0 || (code.length > 0 && rec.rateTypCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                    (name.length ===0 || (name.length > 0 && rec.rateTypName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                    (desc.length ===0 || (desc.length > 0 && rec.rateTypDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
-                        });
-                    self.allData(temp);
+                    var tmp = self.collection().filter(function(rec){
+                        return ((code.length ===0 || (code.length > 0 && rec.attributes.rateTypeCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.rateTypeName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.rateTypeDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                    });
+                    self.collection().reset(tmp);
+                    self.allData(self.collection().toJSON());
                 };
                 
                 self.createOrEdit = function (model) {
@@ -46,20 +57,30 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
-                self.cancel = function () {
-                    $("#CreateEditDialog").ojDialog("close");
-                };
-                
                 self.save = function (model) {
-                   console.log("Saving ");
-                   console.log(model);
+                    var user = "LAS";
+                    var currentDate = new Date().toISOString();
+                    var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
+                            createdDate: model.isNew()?currentDate:model.attributes.createdDate,
+                            updatedBy: user,
+                            updatedDate: currentDate
+                        };
+                    model.save(defaultAttributes,{
+                        success: function(model,resp){
+                            self.refreshData();
+                        },
+                        error: function(){
+                            console.log("failed saving");
+                        }
+                    });
+                    
                 };
 
                 self.activateDeactivate = function (model) {
-                    if (model.active === 'Y'){
-                        model.active = 'N';
-                    }else if (model.active === 'N'){
-                        model.active = 'Y';
+                    if (model.attributes.active === 'Y'){
+                        model.attributes.active = 'N';
+                    }else if (model.attributes.active === 'N'){
+                        model.attributes.active = 'Y';
                     }
                     self.save(model);
                 };
@@ -83,57 +104,61 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 // ===============  EVENT HANDLER  ==============
                 
                 self.onReset = function(){
+                    self.refreshData();
+                    
                     self.codeSearch('');
                     self.nameSearch('');
                     self.descSearch('');
-                    self.allData(restService.fetchAll());
+                    
                     self.selectedRow(undefined);
                     $('#btnEdit').hide();
                     $('#btnActivate').hide();
                 };
                 
                 self.onSearch = function(){
-                    self.allData(restService.fetchAll());
                     self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
                 };
                 
                 self.onCreate = function(){
-                    var newRec = { rateTypeId: undefined,
-                        rateTypeCd: "",
-                        rateTypeName: "",
-                        rateTypeDesc: "",
-                        active: "Y",
-                        effectiveDate: ""};
-                    self.createOrEdit(newRec);
+                    var model = restService.createModel();
+                    self.createOrEdit(model);
                 };
                 
                 self.onEdit = function(){
-                    self.createOrEdit(self.selectedRow());
+                    var model = self.collection().get(self.selectedRow());
+                    self.createOrEdit(model);
                 };
                 
-                self.onSave = function(model){
-                    self.save(model);
+                self.onSave = function(){
+                    self.save(self.rateTypeModel());
+                    $("#CreateEditDialog").ojDialog("close");
                 };
                 
                 self.onActivateDeactivate = function(){
-                    self.activateDeactivate(self.selectedRow());
+                    var model = self.collection().get(self.selectedRow());
+                    self.activateDeactivate(model);
                 };
                 
                 self.onSelectRow = function(event, ui){
                     var idx = ui.currentRow.rowIndex;
                     self.dataSource.at(idx).
                         then(function (obj) {
-                            self.selectedRow(obj.data);
+                            self.selectedRow(obj.data[self.collection().model.idAttribute]);
                             $('#btnEdit').show();
                             $('#btnActivate').show();
                         });
                 };
                 
                 self.onExport = function(){
-                   self.exportxls(); 
+                    self.exportxls(); 
                 };
-
-                self.onReset();
+                
+                self.onCancel = function () {
+                    $("#CreateEditDialog").ojDialog("close");
+                };
+                
+                self.refreshData();
+                
             }
             return rateTypeViewModel();
         }

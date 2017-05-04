@@ -11,11 +11,21 @@ define(['jquery','ojs/ojcore' ,'knockout'], function($,oj,ko) {
          * @private
          */
         var self = this;
-        self.dateTimeConverter = oj.Validation.converterFactory("datetime").createConverter({pattern: 'dd-MM-yyyy HH:mm:ss'});
-        self.dateConverter = oj.Validation.converterFactory("datetime").createConverter({pattern: 'dd-MM-yyyy'});
+        self.dateTimeConverter = oj.Validation.converterFactory("datetime").createConverter({pattern: 'dd-MMM-yyyy HH:mm:ss'});
+        self.dateConverter = oj.Validation.converterFactory("datetime").createConverter({pattern: 'dd-MMM-yyyy'});
         self.activeConverter = function(str){
             return (str==="Y")?"Active": "Inactive";
-        }
+        };
+        self.LOVConverter = function(LOV,id){
+            var filtered = ko.utils.arrayFirst(LOV,function(item){
+                return item.value === id;
+            });
+            if (filtered){
+                return filtered.label;
+            }else{
+                return id;
+            }
+        };
     };
     return new RendererServiceUtilities();
 });
