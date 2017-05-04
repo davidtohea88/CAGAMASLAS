@@ -156,12 +156,12 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                     }
                     
                     var model = oj.Model.extend({
-                        urlRoot: restUrl + self.idItem(),
+                        urlRoot: restUrl,
                         idAttribute: "prodGrpId",
                         customURL: function (operation, model) {
                             var url;
                             var customURLObj;
-                            url = restUrl + self.idItem();
+                            url = restUrl;
                             customURLObj = new customURL({url: url, type: "PUT"});
                             return customURLObj;
                         }
@@ -270,12 +270,12 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
 
                 self.onStatusBtn = function () {
                     var model = oj.Model.extend({
-                        urlRoot: restUrl + self.idItem(),
+                        urlRoot: restUrl,
                         idAttribute: "prodGrpId",
                         customURL: function (operation, model) {
                             var url;
                             var customURLObj;
-                            url = restUrl + self.idItem();
+                            url = restUrl;
                             customURLObj = new customURL({url: url, type: "PUT"});
                             return customURLObj;
                         }
