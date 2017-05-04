@@ -21,6 +21,12 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.productTypeService = function(){
                 return new BaseRestService("productType","prodTypeId","MdProdType");
             };
+            self.exchangeRateTypeService = function(){
+                return new BaseRestService("exchangeRateType","exRateTypeId","MdExchangeRateType");
+            };
+            self.currencyService = function(){
+                return new BaseRestService("currency","currencyId","MdCurrency");
+            };
         };
         return new RestService();
 });
