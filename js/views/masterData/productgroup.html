@@ -171,7 +171,7 @@
                     <input id="inputEffectiveDate" required data-bind="ojComponent: {component: 'ojInputDate', value: inputEffectiveDate, invalidComponentTracker: tracker}"/>
                 </div>
             </div>                                                 
-            <div class="oj-flex">                       
+            <div class="oj-dialog-footer">                       
                 <div class="oj-flex-item">
                     <button id= "btn_create" data-bind="click: onCreate,ojComponent: {component: 'ojButton', label: 'Create', disabled: shouldDisableCreate() } "></button>
                     <button id= "btn_edit" data-bind="click: onEdit,ojComponent: {component: 'ojButton', label: 'Edit', disabled: shouldDisableCreate() } "></button>
@@ -181,6 +181,34 @@
         </div>
     </div>    
     <div class="oj-flex-item"></div>
+</div>
+
+<div id="ConfirmDialog" class="ojDialog" title="Confirmation" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:400px;'}
+		  }">
+    <div class="oj-dialog-body">
+        <p>Are you sure ?</p>
+    </div>
+    <div class="oj-dialog-footer">
+       <button id="buttonCancel" data-bind="click: onConfirmOK, ojComponent:
+             { component: 'ojButton', label: 'OK'}"> </button>
+       <button data-bind="click: onConfirmCancel, ojComponent:
+             { component: 'ojButton', label: 'Cancel'}"> </button>
+    </div>
+</div>
+
+<div id="AlertDialog" class="ojDialog" title="Information" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:400px;'}
+		  }">
+    <div class="oj-dialog-body">
+        <div>  
+            <span data-bind="text: value"/>  
+        </div>     
+    </div>
+    <div class="oj-dialog-footer">
+        <button id="buttonCancel" data-bind="click: onAlertOK, ojComponent:
+             { component: 'ojButton', label: 'OK'}"> </button>
+    </div>
 </div>
 
 <script type="text/html" id="row_template">
