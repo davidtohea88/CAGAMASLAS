@@ -49,12 +49,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
 
 
                 self.search = function (name, curr,start, end) {
-                    var tmp = ko.utils.arrayFilter(self.allData(),
-                        function (rec) {
-                            return ((name.length ===0 || (name.length > 0 && rec.ExRateName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                    (start.length ===0 || (start.length > 0 && rec.StartDate.toLowerCase().indexOf(start.toString().toLowerCase()) > -1)) &&
-                                    (end.length ===0 || (end.length > 0 && rec.EndDate.toLowerCase().indexOf(end.toString().toLowerCase()) > -1)) &&
-                                    (curr.length ===0 || curr.length > 0 && rec.OrgCurr.toLowerCase().indexOf(curr.toString().toLowerCase()) > -1));
+                    console.log(start);
+                    var tmp = self.collection().filter(function(rec){
+                            return ((name.length ===0 || (name.length > 0 && rec.attributes.ExRateName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                    (start.length ===0 || (start.length > 0 && rec.attributes.StartDate.indexOf(start) > -1)) &&
+                                    (end.length ===0 || (end.length > 0 && rec.attributes.EndDate.indexOf(end) > -1)) &&
+                                    (curr.length ===0 || curr.length > 0 && rec.attributes.OrgCurr.toLowerCase().indexOf(curr.toString().toLowerCase()) > -1));
                         });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
