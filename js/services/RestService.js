@@ -24,6 +24,15 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.productGroupService = function(){
                 return new BaseRestService("productGroup","prodGrpId","MdProdGrp");
             };
+            self.counterpartySectorService = function(){
+                return new BaseRestService("cptySector","cptSctrId","MdCptSctr");
+            };
+            self.counterpartyTypeService = function(){
+                return new BaseRestService("cptyType","cptTypeId","MdCptType");
+            };
+            self.counterpartyGroupService = function(){
+                return new BaseRestService("cptyGroup","cptGrpId","MdCptGrouo");
+            };
             self.agreementTypeService = function(){
                 return new BaseRestService("agreementType","agreementTypId","MdAgreementTyp");
             };
@@ -39,14 +48,32 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.purchaseModeService = function(){
                 return new BaseRestService("purchaseMode","prchsModeId","MdPrchsMode");
             };
+            self.purchaseConsSubTypeService = function(){
+                return new BaseRestService("purchaseConsSubType","consSubtypeId","MdConsSubType");
+            };
             self.purchaseConsTypeService = function(){
                 return new BaseRestService("purchaseConsType","consTypeId","MdConsType");
+            };
+            self.priceFactorService = function(){
+                return new BaseRestService("priceFactor","priceFctrId","MdPriceFctr");
+            };
+            self.organizationTypeService = function(){
+                return new BaseRestService("organizationType","orgTypeId","MDOrganizationType");
+            };
+            self.organizationService = function(){
+                return new BaseRestService("organization","orgId","MDOrganization");
             };
             self.gstChargeTypeService = function(){
                 return new BaseRestService("gstChargeType","gstCrgtypeId","MdGstcrgType");
             };
             self.gstFeeTypeService = function(){
                 return new BaseRestService("gstFeeType","gstFeetypeId","MdGstfeeType");
+            };
+            self.gstCodeService = function(){
+                return new BaseRestService("gstCode","gstCodeId","MdGstCode");
+            };
+            self.gstTypeService = function(){
+                return new BaseRestService("gstType","gstTypeId","MdGstType");
             };
             self.paymentFrequencyService = function(){
                 return new BaseRestService("paymentFrequency","pymtFreqId","MdPymtFreq");

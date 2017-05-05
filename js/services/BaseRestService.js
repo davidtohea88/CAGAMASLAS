@@ -54,9 +54,9 @@ define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
                     url:   config.serviceUrl+self.baseUrl,
                     model: new self.createModel(),
                     parse: function(resp){
-                        var rates = resp[self.objectEnclosure];
-                        if (rates.length>0){
-                            return rates;
+                        if (resp.hasOwnProperty(self.objectEnclosure)){
+                            var objs = resp[self.objectEnclosure];
+                            return objs;
                         }
                         return undefined;
                     }

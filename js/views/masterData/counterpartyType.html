@@ -80,14 +80,13 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                    [{headerText: 'Code',  field: 'counterPrtyTypCd', style: 'width: 10%'},
-                                                                    {headerText: 'Name', field: 'counterPrtyTypName', style: 'width: 20%'},
-                                                                    {headerText: 'Description', field: 'counterPrtyTypDesc',style: 'width: 20%'},
+                                                                    [{headerText: 'Code',  field: 'cptTypeCd', style: 'width: 10%'},
+                                                                    {headerText: 'Name', field: 'cptTypeName', style: 'width: 20%'},
+                                                                    {headerText: 'Description', field: 'cptTypeDesc',style: 'width: 20%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
-                                                                    {headerText: 'Last Updated Date',  field: 'updatedDate',style: 'width: 10%', renderer: dateTimeRenderer},
-                                                                    {headerText: 'Remarks',  field: 'remarks',style: 'width: 20%'}], 
+                                                                    {headerText: 'Last Updated Date',  field: 'updatedDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
                                                                     rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'}  ,
                                                                         beforeCurrentRow: onSelectRow}">
                                                             </table>
@@ -119,76 +118,66 @@
         <div class="oj-dialog-header oj-helper-clearfix">
             <span id="dialogTitleId" class="oj-dialog-title" data-bind="text:dialogTitle"> </span> 
         </div>
-        <div class="oj-dialog-body">
-            <form data-bind="submit: onSave, with: counterpartyTypeModel">
-                <div class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
-                    <div class="oj-flex">  
-                        <div class="oj-flex-item">
-                            <label for="code">Type Code</label>
-                        </div>
-                        <div class="oj-flex-item">
-                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: counterPrtyTypCd}" >
-                        </div>
-                    </div> 
-                    <div class="oj-flex">  
-                        <div class="oj-flex-item">
-                            <label for="name">Type Name</label>
-                        </div>
-                        <div class="oj-flex-item">
-                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: counterPrtyTypName}" >
-                        </div>
-                    </div> 
-                    <div class="oj-flex">  
-                        <div class="oj-flex-item">
-                            <label for="desc">Type Description</label>
-                        </div>
-                        <div class="oj-flex-item">
-                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: counterPrtyTypDesc}">
-                        </div>
-                    </div> 
-                    <div class="oj-flex">  
-                        <div class="oj-flex-item">
-                            <label for="statusGroup">Status</label>
-                        </div>
-                        <div class="oj-flex-item">
-                            <div class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: active}" 
-                                 aria-labelledby="statusGroup">
-                                <span class="oj-choice-item">
-                                    <input id="rbtn_active" type="radio" 
-                                           value="Y" name="status">
-                                    <label for="rbtn_active">Active</label>
-                                </span>
-                                <span class="oj-choice-item">
-                                    <input id="rbtn_inactive" type="radio" 
-                                           value="N" name="status">
-                                    <label for="rbtn_inactive">Inactive</label>
-                                </span>
-                            </div>
+        <div class="oj-dialog-body" data-bind="with: model">
+            <div class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="code">Type Code</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.cptTypeCd}" >
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="name">Type Name</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.cptTypeName}" >
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="desc">Type Description</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.cptTypeDesc}">
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label id="statusGroup">Status</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: attributes.active}" 
+                             aria-labelledby="statusGroup">
+                            <span class="oj-choice-item">
+                                <input id="rbtn_active" type="radio" 
+                                       value="Y" name="status">
+                                <label for="rbtn_active">Active</label>
+                            </span>
+                            <span class="oj-choice-item">
+                                <input id="rbtn_inactive" type="radio" 
+                                       value="N" name="status">
+                                <label for="rbtn_inactive">Inactive</label>
+                            </span>
                         </div>
                     </div>
-                    <div class="oj-flex">  
-                        <div class="oj-flex-item">
-                            <label for="effectiveDt">Effective Date</label>
-                        </div>
-                        <div class="oj-flex-item">
-                        <input id="effectiveDt" style="width: 100%;"
-                               data-bind="ojComponent: {component: 'ojInputDate',value: effectiveDate}"/>
-                        </div>
-                    </div>
-                    <div class="oj-flex">  
-                        <div class="oj-flex-item">
-                            <label for="desc">Type Remarks</label>
-                        </div>
-                        <div class="oj-flex-item">
-                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: remarks}">
-                        </div>
-                    </div> 
                 </div>
-            </form>
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="effectiveDt">Effective Date</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input id="effectiveDt" style="width: 100%;"
+                           data-bind="ojComponent: {component: 'ojInputDate',value: attributes.effectiveDate, converter: dateConverter}"/>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="oj-dialog-footer">
-            <button id="btnSave" type="submit" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
-            <button id="btnCancel" data-bind="click:cancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+            <button id="btnSave" data-bind="click:onSave,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
+            <button id="btnCancel" data-bind="click:onCancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
         </div>
     </div>
 </div>

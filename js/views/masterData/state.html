@@ -105,7 +105,7 @@
     <div id="CreateEditDialog" title=""
             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modeless', 
                     cancelBehavior: 'escape',resizeBehavior: 'none', 
-                rootAttributes: { style: 'min-width:420px; min-height: 250px;'}}">
+                rootAttributes: { style: 'min-width:420px; min-height: 100px;'}}">
         <div class="oj-dialog-header oj-helper-clearfix">
             <span id="dialogTitleId" class="oj-dialog-title" data-bind="text:dialogTitle"> </span> 
         </div>
@@ -142,7 +142,7 @@
                 </div>
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
-                        <label for="statusGroup">Status</label>
+                        <label id="statusGroup">Status</label>
                     </div>
                     <div class="oj-flex-item">
                         <div class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: attributes.active}" 
