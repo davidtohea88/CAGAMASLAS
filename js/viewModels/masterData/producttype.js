@@ -110,9 +110,11 @@ define(['ojs/ojcore', 'knockout', 'jquery','services/rendererService', 'services
                     self.nameSearch('');
                     self.descSearch('');
                     
-                    self.selectedRow(undefined);
-                    $('#btnEdit').hide();
-                    $('#btnActivate').hide();
+                    if (self.collection().models.length>1){
+                        self.selectedRow(undefined);
+                        $('#btnEdit').hide();
+                        $('#btnActivate').hide();
+                    }
                 };
                 
                 self.onSearch = function(){

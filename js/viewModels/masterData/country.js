@@ -1,15 +1,15 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/BaseRestService','services/exportService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/RestService','services/exportService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
         'ojs/ojdatetimepicker','ojs/ojradioset'],
-        function (oj, ko, data, $, rendererService, BaseRestService, exportService)
+        function (oj, ko, data, $, rendererService, RestService, exportService)
         {
             function countryMainViewModel() {
                 var self = this;
-                var restService = new BaseRestService("country","countryId","MdCountry");
+                var restService = RestService.countryService();
                 self.header = "Country";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.countryModel = ko.observable();
@@ -105,13 +105,17 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     self.codeSearch('');
                     self.nameSearch('');
                     
-                    self.selectedRow(undefined);
-                    $('#btnEdit').hide();
-                    $('#btnActivate').hide();
+                    if (self.collection().models.length>1){
+                        self.selectedRow(undefined);
+                        $('#btnEdit').hide();
+                        $('#btnActivate').hide();
+                    }
                 };
                 
                 self.onSearch = function(){
-                    self.search(self.codeSearch(),self.nameSearch());
+                    self.collection().refresh().then(function(){
+                        self.search(self.codeSearch(),self.nameSearch());
+                    });
                 };
                 
                 self.onCreate = function(){

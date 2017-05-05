@@ -78,7 +78,7 @@
                                                 <div class="oj-flex">                        
                                                     <div style="width:100%;">
                                                         <div id="pagingControlDemo" class="page-content">
-                                                            <table id="table" summary="Origination List" aria-label="Origination Table"
+                                                            <table id="table" summary="Exchange Rate Type" aria-label="Exchange Rate Type Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
                                                                     [{headerText: 'Code',  field: 'orgTypCd', style: 'width: 10%'},
                                                                     {headerText: 'Name', field: 'orgTypName', style: 'width: 30%'},
@@ -126,7 +126,7 @@
                             <label for="code">Exchange Rate Type Code</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: orgTypCd}" >
+                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.orgTypCd}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -134,7 +134,7 @@
                             <label for="name">Exchange Rate Type Name</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: orgTypName}" >
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.orgTypName}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -142,7 +142,7 @@
                             <label for="desc">Exchange Rate Type Description</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: orgTypDesc}">
+                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.orgTypDesc}">
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -150,20 +150,20 @@
                             <label for="statusGroup">Status</label>
                         </div>
                         <div class="oj-flex-item">
-                            <div id="statusGroup" class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: active}" 
-                                 aria-labelledby="statusGroup">
-                                <span class="oj-choice-item">
-                                    <input id="rbtn_active" type="radio" 
-                                           value="Y" name="status">
-                                    <label for="rbtn_active">Active</label>
-                                </span>
-                                <span class="oj-choice-item">
-                                    <input id="rbtn_inactive" type="radio" 
-                                           value="N" name="status">
-                                    <label for="rbtn_inactive">Inactive</label>
-                                </span>
-                            </div>
+                        <div class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: attributes.active}" 
+                             aria-labelledby="statusGroup">
+                            <span class="oj-choice-item">
+                                <input id="rbtn_active" type="radio" 
+                                       value="Y" name="status">
+                                <label for="rbtn_active">Active</label>
+                            </span>
+                            <span class="oj-choice-item">
+                                <input id="rbtn_inactive" type="radio" 
+                                       value="N" name="status">
+                                <label for="rbtn_inactive">Inactive</label>
+                            </span>
                         </div>
+                    </div>
                     </div>
                     <div class="oj-flex">  
                         <div class="oj-flex-item">
@@ -171,14 +171,14 @@
                         </div>
                         <div class="oj-flex-item">
                         <input id="effectiveDt" style="width: 100%;"
-                               data-bind="ojComponent: {component: 'ojInputDate',value: effectiveDate}"/>
+                               data-bind="ojComponent: {component: 'ojInputDate',value: attributes.effectiveDate}"/>
                         </div>
                     </div>    
                 </div>
             </form>
         </div>
         <div class="oj-dialog-footer">
-            <button id="saveButton" type="submit" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
+            <button id="saveButton" type="submit" data-bind="click:onSave,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
             <button id="cancelButton" data-bind="click:cancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
         </div>
     </div>

@@ -24,6 +24,18 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.productGroupService = function(){
                 return new BaseRestService("productGroup","prodGrpId","MdProdGrp");
             };
+            self.counterpartySectorService = function(){
+                return new BaseRestService("cptySector","cptSctrId","MdCptSctr");
+            };
+            self.counterpartyTypeService = function(){
+                return new BaseRestService("cptyType","cptTypeId","MdCptType");
+            };
+            self.counterpartyGroupService = function(){
+                return new BaseRestService("cptyGroup","cptGrpId","MdCptGroup");
+            };
+            self.counterpartyGroupTypeService = function(){
+                return new BaseRestService("cptyGroupType","cptGrpTypeId","MdCptGroupType");
+            };
             self.agreementTypeService = function(){
                 return new BaseRestService("agreementType","agreementTypId","MdAgreementTyp");
             };
@@ -39,8 +51,20 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.purchaseModeService = function(){
                 return new BaseRestService("purchaseMode","prchsModeId","MdPrchsMode");
             };
+            self.purchaseConsSubTypeService = function(){
+                return new BaseRestService("purchaseConsSubType","consSubtypeId","MdConsSubType");
+            };
             self.purchaseConsTypeService = function(){
                 return new BaseRestService("purchaseConsType","consTypeId","MdConsType");
+            };
+            self.priceFactorService = function(){
+                return new BaseRestService("priceFactor","priceFctrId","MdPriceFctr");
+            };
+            self.organizationTypeService = function(){
+                return new BaseRestService("organizationType","orgTypeId","MDOrganizationType");
+            };
+            self.organizationService = function(){
+                return new BaseRestService("organization","orgId","MDOrganization");
             };
             self.gstChargeTypeService = function(){
                 return new BaseRestService("gstChargeType","gstCrgtypeId","MdGstcrgType");
@@ -48,8 +72,29 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.gstFeeTypeService = function(){
                 return new BaseRestService("gstFeeType","gstFeetypeId","MdGstfeeType");
             };
+            self.gstCodeService = function(){
+                return new BaseRestService("gstCode","gstCodeId","MdGstCode");
+            };
+            self.gstTypeService = function(){
+                return new BaseRestService("gstType","gstTypeId","MdGstType");
+            };
             self.paymentFrequencyService = function(){
                 return new BaseRestService("paymentFrequency","pymtFreqId","MdPymtFreq");
+            };
+            self.exchangeRateTypeService = function(){
+                return new BaseRestService("exchangeRateType","exRateTypeId","MdExchangeRateType");
+            };
+            self.exchangeRateService = function(){
+                return new BaseRestService("exchangeRate","exRateId","MdExchangeRate");
+            };
+            self.currencyService = function(){
+                return new BaseRestService("MD_CurrencyService/CurrencyRestPS","crncyId","MdCrncy");
+            };
+            self.exchangeRateDataEntryService = function(){
+                return new BaseRestService("exchangeratedataentry","ExRateCd","MDExchangeRateDataEntry");
+            };
+            self.fundingSourceService = function(){
+                return new BaseRestService("fundingsource","FundSrcId","MdFundingSource");
             };
         };
         return new RestService();

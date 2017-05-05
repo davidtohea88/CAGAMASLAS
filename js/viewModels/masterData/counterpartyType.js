@@ -9,14 +9,17 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
         {
             function counterpartyTypeMainViewModel() {
                 var self = this;
+                var restService = RestService.counterpartyTypeService();
                 self.header = "Counterparty Type";
                 self.dialogTitle = "Create/edit "+self.header;
+                self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
-                self.counterpartyTypeModel = ko.observable();
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'counterPrtyTypCd'}));
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
+                self.model = ko.observable();
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
                 self.codeSearch = ko.observable('');
+                self.dateConverter = rendererService.dateConverter;
 
                 self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
@@ -44,24 +47,34 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 }; 
                 
                 self.createOrEdit = function (model) {
-                    self.counterpartyTypeModel(model);
+                    self.model(model);
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
-                self.cancel = function () {
-                    $("#CreateEditDialog").ojDialog("close");
-                };
-                
                 self.save = function (model) {
-                   console.log("Saving ");
-                   console.log(model);
+                    var user = "LAS";
+                    var currentDate = new Date().toISOString();
+                    var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
+                            createdDate: model.isNew()?currentDate:model.attributes.createdDate,
+                            updatedBy: user,
+                            updatedDate: currentDate
+                        };
+                    model.save(defaultAttributes,{
+                        success: function(model,resp){
+                            self.refreshData();
+                        },
+                        error: function(){
+                            console.log("failed saving");
+                        }
+                    });
+                    
                 };
 
                 self.activateDeactivate = function (model) {
-                    if (model.active === 'Y'){
-                        model.active = 'N';
-                    }else if (model.active === 'N'){
-                        model.active = 'Y';
+                    if (model.attributes.active === 'Y'){
+                        model.attributes.active = 'N';
+                    }else if (model.attributes.active === 'N'){
+                        model.attributes.active = 'Y';
                     }
                     self.save(model);
                 };
@@ -85,20 +98,22 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 // ===============  EVENT HANDLER  ==============
                 
                 self.onReset = function(){
+                    self.refreshData();
+                    
                     self.codeSearch('');
                     self.nameSearch('');
                     self.descSearch('');
-                    self.refreshData(function(data){
+                    
+                    if (self.collection.model.length>1){
                         self.selectedRow(undefined);
-                        self.allData(data.MdCounterPrtyType);
                         $('#btnEdit').hide();
                         $('#btnActivate').hide();
-                    });
+                    }
+                    
                 };
                 
                 self.onSearch = function(){
-                    self.refreshData(function(data){
-                        self.allData(data.MdCounterPrtyType);
+                    self.collection().refresh().then(function(){
                         self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
                         self.selectedRow(undefined);
                         $('#btnEdit').hide();
@@ -107,44 +122,44 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
                 
                 self.onCreate = function(){
-                    var newRec = { counterPrtyTypId: undefined,
-                        counterPrtyTypCd: "",
-                        counterPrtyTypName: "",
-                        counterPrtyTypDesc: "",
-                        active: "Y",
-                        effectiveDate: "",
-                        remarks: ""};
-                    self.createOrEdit(newRec);
+                    var model = restService.createModel();
+                    self.createOrEdit(model);
                 };
                 
                 self.onEdit = function(){
-                    self.createOrEdit(self.selectedRow());
+                    var model = self.collection().get(self.selectedRow());
+                    self.createOrEdit(model);
                 };
                 
-                self.onSave = function(model){
-                    self.save(model);
+                self.onSave = function(){
+                    self.save(self.model());
+                    $("#CreateEditDialog").ojDialog("close");
                 };
                 
                 self.onActivateDeactivate = function(){
-                    self.activateDeactivate(self.selectedRow());
+                    var model = self.collection().get(self.selectedRow());
+                    self.activateDeactivate(model);
                 };
                 
                 self.onSelectRow = function(event, ui){
                     var idx = ui.currentRow.rowIndex;
                     self.dataSource.at(idx).
                         then(function (obj) {
-                            self.selectedRow(obj.data);
+                            self.selectedRow(obj.data[self.collection().model.idAttribute]);
                             $('#btnEdit').show();
                             $('#btnActivate').show();
                         });
                 };
                 
                 self.onExport = function(){
-                   self.exportxls(); 
+                    self.exportxls(); 
                 };
-
-                self.onReset();
                 
+                self.onCancel = function () {
+                    $("#CreateEditDialog").ojDialog("close");
+                };
+                
+                self.refreshData();
             }
             return counterpartyTypeMainViewModel();
         }

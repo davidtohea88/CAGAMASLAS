@@ -43,7 +43,7 @@
                                                     <div class="oj-flex-item">
                                                         <input id="datestart" 
                                                             data-bind="ojComponent: {
-                                                            component: 'ojInputDate', value: startDateSearch}">
+                                                            component: 'ojInputDate', value: startDateSearch, renderer: dateRenderer}">
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">  
@@ -53,7 +53,7 @@
                                                     <div class="oj-flex-item">
                                                         <input id="dateend" 
                                                             data-bind="ojComponent: {
-                                                            component: 'ojInputDate', value: endDateSearch}">
+                                                            component: 'ojInputDate', value: endDateSearch, renderer: dateRenderer}">
                                                     </div>
                                                 </div>
                                         </div>
@@ -150,7 +150,7 @@
                             <label for="code">Exchange Rate Name</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: ExRateName}" >
+                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.ExRateName}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -158,7 +158,7 @@
                             <label for="name">Origin Currency</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: OrgCurr}" >
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.OrgCurr}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -166,7 +166,7 @@
                             <label for="desc">Target Currency</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: TargetCurr}">
+                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.TargetCurr}">
                         </div>
                     </div>
                     <div class="oj-flex">  
@@ -174,7 +174,7 @@
                             <label for="desc">Rate</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: Rate}">
+                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.Rate}">
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -182,7 +182,7 @@
                             <label for="desc">Reverse Rate</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: ReverseRate}">
+                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.ReverseRate}">
                         </div>
                     </div>                    
                     <div class="oj-flex">  
@@ -191,7 +191,7 @@
                         </div>
                         <div class="oj-flex-item">
                         <input id="effectiveDt" style="width: 100%;"
-                               data-bind="ojComponent: {component: 'ojInputDate',value: StartDate}"/>
+                               data-bind="ojComponent: {component: 'ojInputDate',value: attributes.StartDate}"/>
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -200,15 +200,15 @@
                         </div>
                         <div class="oj-flex-item">
                         <input id="effectiveDt" style="width: 100%;"
-                               data-bind="ojComponent: {component: 'ojInputDate',value: EndDate}"/>
+                               data-bind="ojComponent: {component: 'ojInputDate',value: attributes.EndDate}"/>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
         <div class="oj-dialog-footer">
-            <button id="saveButton" type="submit" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
-            <button id="cancelButton" data-bind="click:cancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+            <button id="btnSave" data-bind="click:onSave,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
+            <button id="btnCancel" data-bind="click:onCancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
         </div>
     </div>
 </div>

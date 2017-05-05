@@ -27,7 +27,12 @@
                                                         <label for="searchRateType">Exchange Rate Type</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="searchRateType" data-bind="ojComponent: {component: 'ojCombobox', value:rateTypeSearch, options: rateType}">
+                                                        <select id="searchRateType" style="width: 100%;" data-bind="ojComponent: {
+                                                            component: 'ojSelect',
+                                                            options: exchangeRateTypeLOV, 
+                                                            value: selectedExRateTypeId, 
+                                                            rootAttributes: {style:'max-width: 20em'}}">
+                                                        </select>
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">                       
@@ -75,7 +80,7 @@
                                                                     [
                                                                     {headerText: 'Exchange Rate Name', field: 'ExRateName', style: 'width: 30%'},
                                                                     {headerText: 'Precision', field: 'Precision',style: 'width: 20%'},
-                                                                    {headerText: 'Exchange Rate Type', field: 'ExRateType',style: 'width: 20%'},
+                                                                    {headerText: 'Exchange Rate Type', field: 'exRateTypeId',style: 'width: 20%', renderer: LOVNameRenderer},
                                                                     {headerText: 'Source', field: 'ExRateSource',style: 'width: 20%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
@@ -113,14 +118,14 @@
             <span id="dialogTitleId" class="oj-dialog-title" data-bind="text:dialogTitle"> </span> 
         </div>
         <div class="oj-dialog-body">
-            <form data-bind="submit: onSave, with: ExRateModel">
+            <form data-bind="submit: onSave, with: exchangeRateModel">
                 <div class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
                     <div class="oj-flex">  
                         <div class="oj-flex-item">
                             <label for="name">Exchange Rate Name</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: ExRateName}" >
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.ExRateName}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -128,7 +133,7 @@
                             <label for="precision">Precision</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="precision" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: Precision}" >
+                            <input id="precision" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.Precision}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -136,7 +141,12 @@
                             <label for="type">Exchange Rate Type</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="type" data-bind="ojComponent: {component: 'ojCombobox', value:ExRateType, options: rateType}">
+                            <select id="countryInput" style="width: 100%;" data-bind="ojComponent: {
+                            component: 'ojSelect',
+                            options: exchangeRateTypeLOV, 
+                            value: selectedExRateTypeId, 
+                            rootAttributes: {style:'max-width: 20em'}}">
+                        </select>
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -144,44 +154,44 @@
                             <label for="source">Source</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="source" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: ExRateSource}">
+                            <input id="source" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.ExRateSource}">
                         </div>
                     </div> 
                     <div class="oj-flex">  
-                        <div class="oj-flex-item">
-                            <label for="statusGroup">Status</label>
-                        </div>
-                        <div class="oj-flex-item">
-                            <div id="statusGroup" class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: active}" 
-                                 aria-labelledby="statusGroup">
-                                <span class="oj-choice-item">
-                                    <input id="rbtn_active" type="radio" 
-                                           value="Y" name="status">
-                                    <label for="rbtn_active">Active</label>
-                                </span>
-                                <span class="oj-choice-item">
-                                    <input id="rbtn_inactive" type="radio" 
-                                           value="N" name="status">
-                                    <label for="rbtn_inactive">Inactive</label>
-                                </span>
-                            </div>
+                    <div class="oj-flex-item">
+                        <label for="statusGroup">Status</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: attributes.active}" 
+                             aria-labelledby="statusGroup">
+                            <span class="oj-choice-item">
+                                <input id="rbtn_active" type="radio" 
+                                       value="Y" name="status">
+                                <label for="rbtn_active">Active</label>
+                            </span>
+                            <span class="oj-choice-item">
+                                <input id="rbtn_inactive" type="radio" 
+                                       value="N" name="status">
+                                <label for="rbtn_inactive">Inactive</label>
+                            </span>
                         </div>
                     </div>
+                </div> 
                     <div class="oj-flex">  
                         <div class="oj-flex-item">
                             <label for="effectiveDt">Effective Date</label>
                         </div>
                         <div class="oj-flex-item">
                         <input id="effectiveDt" style="width: 100%;"
-                               data-bind="ojComponent: {component: 'ojInputDate',value: effectiveDate}"/>
+                               data-bind="ojComponent: {component: 'ojInputDate',value: attributes.effectiveDate}"/>
                         </div>
                     </div>    
                 </div>
             </form>
         </div>
         <div class="oj-dialog-footer">
-            <button id="saveButton" type="submit" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
-            <button id="cancelButton" data-bind="click:cancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+            <button id="btnSave" data-bind="click:onSave,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
+            <button id="btnCancel" data-bind="click:onCancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
         </div>
     </div>
 </div>

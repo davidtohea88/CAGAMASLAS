@@ -13,9 +13,11 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                 var self = this;
                 self.tracker = ko.observable();
                 
-                var restUrl = configService.serviceUrl + "MdProdGrp/";
+                var restUrl = configService.serviceUrl + "Product/";
+                //var restUrl = configService.serviceUrl + "MD_Product_Group/ProductGroupRestPS/";
                 self.productGroupModel = ko.observable();
                 self.header = "Product Group";
+                self.value = ko.observable('');
                 self.allData = ko.observableArray();
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'prodGrpCd'}));
                 
@@ -35,8 +37,8 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                 self.descItem = ko.observable('');
                 self.statusItem = ko.observable('');
                 self.effectiveDateItem = ko.observable('');
-                self.createByItem = ko.observable('');
-                self.createDateItem = ko.observable('');
+                self.createdByItem = ko.observable('');
+                self.createdDateItem = ko.observable('');
                 self.updatedByItem = ko.observable('');
                 self.updatedDateItem = ko.observable('');               
                 
@@ -64,8 +66,8 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                                 method: "GET",
                                 dataType: "json",
                                 success: function (data) {
-                                    console.log(data);
-                                    self.allData(data);
+                                    console.log(data.MdProdGrp);
+                                    self.allData(data.MdProdGrp);
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     console.log(textStatus, errorThrown);
@@ -83,8 +85,8 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                     self.descItem(data.prodGrpDesc);
                     self.statusItem(data.active);
                     self.effectiveDateItem(data.effectiveDate);
-                    self.createByItem(data.createBy);
-                    self.createDateItem(data.createDate);
+                    self.createdByItem(data.createBy);
+                    self.createdDateItem(data.createDate);
                     self.updatedByItem(data.updatedBy);
                     self.updatedDateItem(data.updatedDate);
                     self.selectedRow(data);
@@ -109,21 +111,39 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                         return;
                     }
                     
+                    var model = oj.Model.extend({
+                        urlRoot: restUrl,
+                        idAttribute: "prodGrpId",
+                        customURL: function (operation, model) {
+                            var url;
+                            var customURLObj;
+                            url = restUrl;
+                            customURLObj = new customURL({url: url, type: "PUT"});
+                            return customURLObj;
+                        }
+                    });
+                    
                     var productGroupModelNew = new model();
-                    productGroupModelNew.attributes.prodGrpCd = self.inputProdGrpCd();
-                    productGroupModelNew.attributes.prodGrpName = self.inputProdGrpName();
-                    productGroupModelNew.attributes.prodGrpDesc = self.inputProdGrpDesc();
-                    productGroupModelNew.attributes.active = self.inputActive();
-                    productGroupModelNew.attributes.effectiveDate = self.inputEffectiveDate();
-                    productGroupModelNew.attributes.createDate = new Date();
-                    productGroupModelNew.attributes.createBy = "LAS";
-                    productGroupModelNew.attributes.updatedDate = "";
-                    productGroupModelNew.attributes.updatedBy = "";
+                    productGroupModelNew.attributes.MdProdGrp = [];
+                    
+                    var prodObject = {};
+                    prodObject.prodGrpCd = self.inputProdGrpCd();
+                    prodObject.prodGrpName = self.inputProdGrpName();
+                    prodObject.prodGrpDesc = self.inputProdGrpDesc();
+                    prodObject.active = self.inputActive();
+                    prodObject.effectiveDate = self.inputEffectiveDate();
+                    prodObject.createdDate = new Date();
+                    prodObject.createdBy = "LAS";
+                    //prodObject.updatedDate = "";
+                    //prodObject.updatedBy = "";
+                    productGroupModelNew.attributes.MdProdGrp.push(prodObject);
+                    
+                    console.log(JSON.stringify(productGroupModelNew));
                     
                     productGroupModelNew.save(undefined, {
                         success: function (model) {
-                            alert("Data : " + productGroupModelNew.attributes.prodGrpCd + "  Created Successfully");
-                            self.initRefresh();
+                            $("#AlertDialog").ojDialog("open");
+                            self.value("Data : " + self.inputProdGrpName() + "  Created Successfully");
                         }, error: function (jqXHR, textStatus, errorThrown) {
                             console.log("Error");
                         }}
@@ -138,33 +158,40 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                     }
                     
                     var model = oj.Model.extend({
-                        urlRoot: restUrl + self.idItem(),
+                        urlRoot: restUrl,
                         idAttribute: "prodGrpId",
                         customURL: function (operation, model) {
                             var url;
                             var customURLObj;
-                            url = restUrl + self.idItem();
+                            url = restUrl;
                             customURLObj = new customURL({url: url, type: "PUT"});
                             return customURLObj;
                         }
                     });
                     
                     var productGroupModelNew = new model();
-                    productGroupModelNew.attributes.prodGrpId = self.idItem();
-                    productGroupModelNew.attributes.prodGrpCd = self.inputProdGrpCd();
-                    productGroupModelNew.attributes.prodGrpName = self.inputProdGrpName();
-                    productGroupModelNew.attributes.prodGrpDesc = self.inputProdGrpDesc();
-                    productGroupModelNew.attributes.active = self.inputActive();
-                    productGroupModelNew.attributes.effectiveDate = self.inputEffectiveDate();
-                    productGroupModelNew.attributes.createDate = self.createDateItem;
-                    productGroupModelNew.attributes.createBy = self.createByItem;
-                    productGroupModelNew.attributes.updatedDate = new Date();
-                    productGroupModelNew.attributes.updatedBy = "LAS";
-
-                    productGroupModelNew.save(undefined, {"success": function () {
-                            alert("Data : " + productGroupModelNew.attributes.prodGrpCd + "  Edited Successfully");
-                            self.initRefresh();
-                        }, "error": function (jqXHR, textStatus, errorThrown) {
+                    productGroupModelNew.attributes.MdProdGrp = [];
+                    
+                    var prodObject = {};
+                    prodObject.prodGrpId = self.idItem();
+                    prodObject.prodGrpCd = self.inputProdGrpCd();
+                    prodObject.prodGrpName = self.inputProdGrpName();
+                    prodObject.prodGrpDesc = self.inputProdGrpDesc();
+                    prodObject.active = self.inputActive();
+                    prodObject.effectiveDate = self.inputEffectiveDate();
+                    prodObject.createdDate = self.createdDateItem;
+                    prodObject.createdBy = self.createdByItem;
+                    prodObject.updatedDate = new Date();
+                    prodObject.updatedBy = "LAS";
+                    productGroupModelNew.attributes.MdProdGrp.push(prodObject);
+                    
+                    console.log(JSON.stringify(productGroupModelNew));
+                    
+                    productGroupModelNew.save(undefined, {
+                        success: function () {
+                            $("#AlertDialog").ojDialog("open");
+                            self.value("Data : " + self.inputProdGrpName() + "  Edited Successfully");
+                        }, error: function (jqXHR, textStatus, errorThrown) {
                             console.log("Error");
                         }});
                     $("#DataDialog").ojDialog("close");
@@ -178,8 +205,8 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                     self.descItem('');
                     self.statusItem('');
                     self.effectiveDateItem('');
-                    self.createByItem('');
-                    self.createDateItem('');
+                    self.createdByItem('');
+                    self.createdDateItem('');
                     self.updatedByItem('');
                     self.updatedDateItem('');
                     
@@ -245,45 +272,7 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                 };
 
                 self.onStatusBtn = function () {
-                    var model = oj.Model.extend({
-                        urlRoot: restUrl + self.idItem(),
-                        idAttribute: "prodGrpId",
-                        customURL: function (operation, model) {
-                            var url;
-                            var customURLObj;
-                            url = restUrl + self.idItem();
-                            customURLObj = new customURL({url: url, type: "PUT"});
-                            return customURLObj;
-                        }
-                    });
-                    
-                    var status = "";
-                    if (self.statusItem() === "N") {
-                        status = "Y";
-                    } else {
-                        status = "N";
-                    }
-                    
-                    var productGroupModelNew = new model();
-                    productGroupModelNew.attributes.prodGrpId = self.idItem();
-                    productGroupModelNew.attributes.prodGrpCd = self.codeItem();
-                    productGroupModelNew.attributes.prodGrpName = self.nameItem();
-                    productGroupModelNew.attributes.prodGrpDesc = self.descItem();
-                    productGroupModelNew.attributes.active = status;
-                    productGroupModelNew.attributes.effectiveDate = self.effectiveDateItem();
-                    productGroupModelNew.attributes.createDate = self.createDateItem();
-                    productGroupModelNew.attributes.createBy = self.createByItem();
-                    productGroupModelNew.attributes.updatedDate = new Date();
-                    productGroupModelNew.attributes.updatedBy = "LAS";
-
-                    productGroupModelNew.save(undefined, {
-                        success: function () {
-                            alert("Data : " + productGroupModelNew.attributes.prodGrpCd + "  Edited Status Successfully");
-                            self.initRefresh();
-                        }, error: function (jqXHR, textStatus, errorThrown) {
-                            console.log("Error");
-                        }});
-
+                    $("#ConfirmDialog").ojDialog("open");
                 };
 
                 self.onEditBtn = function () {
@@ -300,8 +289,67 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                     return true;
                 };
 
-                self.onExportBtn = function(){
+                self.onExportBtn = function() {
                    self.exportxls(); 
+                };
+                
+                self.onConfirmOK = function () {
+                    //alert("ok");
+                    var model = oj.Model.extend({
+                        urlRoot: restUrl,
+                        idAttribute: "prodGrpId",
+                        customURL: function (operation, model) {
+                            var url;
+                            var customURLObj;
+                            url = restUrl;
+                            customURLObj = new customURL({url: url, type: "PUT"});
+                            return customURLObj;
+                        }
+                    });
+                    
+                    var status = "";
+                    if (self.statusItem() === "N") {
+                        status = "Y";
+                    } else {
+                        status = "N";
+                    }
+                    
+                    var productGroupModelNew = new model();
+                    productGroupModelNew.attributes.MdProdGrp = [];
+                    
+                    var prodObject = {};
+                    
+                    prodObject.prodGrpId = self.idItem();
+                    prodObject.prodGrpCd = self.codeItem();
+                    prodObject.prodGrpName = self.nameItem();
+                    prodObject.prodGrpDesc = self.descItem();
+                    prodObject.active = status;
+                    prodObject.effectiveDate = self.effectiveDateItem();
+                    prodObject.createdDate = self.createdDateItem;
+                    prodObject.createdBy = self.createdByItem;
+                    prodObject.updatedDate = new Date();
+                    prodObject.updatedBy = "LAS";
+                    productGroupModelNew.attributes.MdProdGrp.push(prodObject);
+                    
+                    console.log(JSON.stringify(productGroupModelNew));
+
+                    productGroupModelNew.save(undefined, {
+                        success: function () {
+                            $("#ConfirmDialog").ojDialog("close");
+                            self.initRefresh();
+                        }, error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Error");
+                        }});
+                    
+                };
+
+                self.onConfirmCancel = function () {
+                    $("#ConfirmDialog").ojDialog("close");
+                };
+
+                self.onAlertOK = function () {
+                    $("#AlertDialog").ojDialog("close");
+                    self.initRefresh();
                 };
 
                 self.initRefresh();
