@@ -30,7 +30,7 @@ requirejs.config({
         'file-saverjs': 'libs/sheetjs/FileSaver.min',
         'jzip': 'libs/sheetjs/jszip',
         'xlsx-js': 'libs/sheetjs/xlsx',
-        'cagutils': 'services/utils'
+        'cagutils': 'services/cagutils'
     }
     //endinjector
     ,

@@ -1,11 +1,11 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService','cagutils', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
         'ojs/ojdatetimepicker','ojs/ojradioset'],
-        function (oj, ko, data, $, rendererService, configService, exportService)
+        function (oj, ko, data, $, rendererService, configService, exportService,cagutils)
         {
             function counterpartyTypeMainViewModel() {
                 var self = this;
@@ -32,36 +32,16 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     
                 self.refreshData = function (fnSuccess) {
                     console.log("fetching data");
-                    var jsonUrl = "js/data/counterpartyType.json";
-
-                    $.ajax(jsonUrl,
-                            {
-                                method: "GET",
-                                dataType: "json",
-//                                headers: {"Authorization": "Basic " + btoa("username:password")},
-                                // Alternative Headers if using JWT Token
-                                // headers : {"Authorization" : "Bearer "+ jwttoken; 
-                                success: function (data)
-                                {
-                                    fnSuccess(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown)
-                                {
-                                    console.log(textStatus, errorThrown);
-                                }
-                            }
-                    );
+                    var jsonUrl = "js/data/counterpartyType.json";                    
+                    self.refreshJsonData(jsonUrl,fnSuccess);                 
                 };
 
-                self.search = function (code, name, desc) {
-                    var temp = ko.utils.arrayFilter(self.allData(),
-                        function (rec) {
-                            return ((code.length ===0 || (code.length > 0 && rec.counterPrtyTypCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                    (name.length ===0 || (name.length > 0 && rec.counterPrtyTypName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                    (desc.length ===0 || (desc.length > 0 && rec.counterPrtyTypDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
-                        });
+                self.search = function (code, name, desc) {                    
+                    var Keys = ["counterPrtyTypCd","counterPrtyTypName","counterPrtyTypDesc"];
+                    var Vals= [code,name,desc];                    
+                    var temp = self.doFilterSearch(Keys,Vals,self.allData());                 
                     self.allData(temp);
-                };
+                }; 
                 
                 self.createOrEdit = function (model) {
                     self.counterpartyTypeModel(model);
@@ -120,6 +100,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     self.refreshData(function(data){
                         self.allData(data.MdCounterPrtyType);
                         self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                        self.selectedRow(undefined);
+                        $('#btnEdit').hide();
+                        $('#btnActivate').hide();
                     });
                 };
                 
