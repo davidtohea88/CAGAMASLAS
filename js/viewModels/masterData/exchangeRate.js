@@ -129,7 +129,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSearch = function(){
-                    self.search(self.nameSearch(),self.selectedExRateTypeId());
+                    self.collection().refresh().then(function(){
+                        self.search(self.nameSearch(),self.selectedExRateTypeId());
+                    });
                 };
                 
                 self.onCreate = function(){

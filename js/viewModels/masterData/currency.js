@@ -13,8 +13,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 var restService = RestService.currencyService();
                 self.header = "Currency";
                 self.dialogTitle = "Create/edit "+self.header;
-                self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
+                self.collection = ko.observable(restService.createCollection());
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
                 self.currencyModel = ko.observable();
                 self.nameSearch = ko.observable('');
@@ -22,14 +22,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.descSearch = ko.observable('');
                 self.selectedCountryId = ko.observableArray();
                 
-                self.countryNameRenderer = function(context){
-                    if (context.data){
-                        var id = context.data;
-                        return rendererService.LOVConverter(self.countryLOV(),id);
-                    }
-                    return '';
-                };
-
                 self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
                 };
@@ -51,10 +43,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.search = function (code, name, desc) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((code.length ===0 || (code.length > 0 && rec.attributes.orgTypCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                (name.length ===0 || (name.length > 0 && rec.attributes.orgTypName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                (desc.length ===0 || (desc.length > 0 && rec.attributes.orgTypDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
-});
+                        return ((code.length ===0 || (code.length > 0 && rec.attributes.crncyCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.crncySymbol.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.crncyName.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                    });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
                 };
@@ -111,18 +103,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 // ===============  EVENT HANDLER  ==============
                 
                 self.onReset = function(){
-                    self.refreshData();
-                    
+                    self.refreshData();  
                     self.codeSearch('');
                     self.nameSearch('');
-                    
                     self.selectedRow(undefined);
                     $('#btnEdit').hide();
                     $('#btnActivate').hide();
                 };
                 
                 self.onSearch = function(){
-                    self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                    self.collection().refresh().then(function(){
+                        self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                    });
                 };
                 
                 self.onCreate = function(){

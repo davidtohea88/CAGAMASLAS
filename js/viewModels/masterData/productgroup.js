@@ -13,9 +13,11 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                 var self = this;
                 self.tracker = ko.observable();
                 
-                var restUrl = configService.serviceUrl + "MD_Product_Group/ProductGroupRestPS/";
+                var restUrl = configService.serviceUrl + "Product/";
+                //var restUrl = configService.serviceUrl + "MD_Product_Group/ProductGroupRestPS/";
                 self.productGroupModel = ko.observable();
                 self.header = "Product Group";
+                self.value = ko.observable('');
                 self.allData = ko.observableArray();
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'prodGrpCd'}));
                 
@@ -140,8 +142,8 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                     
                     productGroupModelNew.save(undefined, {
                         success: function (model) {
-                            alert("Data Code : " + self.inputProdGrpCd() + "  Created Successfully");
-                            self.initRefresh();
+                            $("#AlertDialog").ojDialog("open");
+                            self.value("Data : " + self.inputProdGrpName() + "  Created Successfully");
                         }, error: function (jqXHR, textStatus, errorThrown) {
                             console.log("Error");
                         }}
@@ -185,10 +187,11 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                     
                     console.log(JSON.stringify(productGroupModelNew));
                     
-                    productGroupModelNew.save(undefined, {"success": function () {
-                            alert("Data Code : " + self.inputProdGrpCd() + "  Edited Successfully");
-                            self.initRefresh();
-                        }, "error": function (jqXHR, textStatus, errorThrown) {
+                    productGroupModelNew.save(undefined, {
+                        success: function () {
+                            $("#AlertDialog").ojDialog("open");
+                            self.value("Data : " + self.inputProdGrpName() + "  Edited Successfully");
+                        }, error: function (jqXHR, textStatus, errorThrown) {
                             console.log("Error");
                         }});
                     $("#DataDialog").ojDialog("close");
@@ -269,6 +272,29 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                 };
 
                 self.onStatusBtn = function () {
+                    $("#ConfirmDialog").ojDialog("open");
+                };
+
+                self.onEditBtn = function () {
+                    self.productGroupModel(new model());
+                    self.inputProdGrpCd(self.codeItem());
+                    self.inputProdGrpName(self.nameItem());
+                    self.inputProdGrpDesc(self.descItem());
+                    self.inputActive(self.statusItem());
+                    self.inputEffectiveDate(self.effectiveDateItem());
+
+                    $('#btn_create').hide();
+                    $('#btn_edit').show();
+                    $("#DataDialog").ojDialog("open");
+                    return true;
+                };
+
+                self.onExportBtn = function() {
+                   self.exportxls(); 
+                };
+                
+                self.onConfirmOK = function () {
+                    //alert("ok");
                     var model = oj.Model.extend({
                         urlRoot: restUrl,
                         idAttribute: "prodGrpId",
@@ -298,7 +324,7 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                     prodObject.prodGrpName = self.nameItem();
                     prodObject.prodGrpDesc = self.descItem();
                     prodObject.active = status;
-                    prodObject.effectiveDate = self.inputEffectiveDate();
+                    prodObject.effectiveDate = self.effectiveDateItem();
                     prodObject.createdDate = self.createdDateItem;
                     prodObject.createdBy = self.createdByItem;
                     prodObject.updatedDate = new Date();
@@ -309,30 +335,21 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
 
                     productGroupModelNew.save(undefined, {
                         success: function () {
-                            alert("Data Code : " + self.codeItem() + " Updated Status Successfully");
+                            $("#ConfirmDialog").ojDialog("close");
                             self.initRefresh();
                         }, error: function (jqXHR, textStatus, errorThrown) {
                             console.log("Error");
                         }});
-
+                    
                 };
 
-                self.onEditBtn = function () {
-                    self.productGroupModel(new model());
-                    self.inputProdGrpCd(self.codeItem());
-                    self.inputProdGrpName(self.nameItem());
-                    self.inputProdGrpDesc(self.descItem());
-                    self.inputActive(self.statusItem());
-                    self.inputEffectiveDate(self.effectiveDateItem());
-
-                    $('#btn_create').hide();
-                    $('#btn_edit').show();
-                    $("#DataDialog").ojDialog("open");
-                    return true;
+                self.onConfirmCancel = function () {
+                    $("#ConfirmDialog").ojDialog("close");
                 };
 
-                self.onExportBtn = function(){
-                   self.exportxls(); 
+                self.onAlertOK = function () {
+                    $("#AlertDialog").ojDialog("close");
+                    self.initRefresh();
                 };
 
                 self.initRefresh();

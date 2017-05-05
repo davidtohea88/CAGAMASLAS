@@ -116,7 +116,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSearch = function(){
-                    self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                    self.collection().refresh().then(function(){
+                        self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                    });
                 };
                 
                 self.onCreate = function(){
