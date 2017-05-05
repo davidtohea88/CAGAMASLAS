@@ -93,6 +93,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.exchangeRateDataEntryService = function(){
                 return new BaseRestService("exchangeratedataentry","ExRateCd","MDExchangeRateDataEntry");
             };
+            self.fundingSourceService = function(){
+                return new BaseRestService("fundingsource","FundSrcId","MdFundingSource");
+            };
         };
         return new RestService();
 });
