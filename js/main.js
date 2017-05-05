@@ -396,7 +396,8 @@ require(['ojs/ojcore',
                 'nbdayconvention': {value:getMasterDataPath('NBDayConvention'), label: 'Non Business Day Convention'},
                 'exchangeratetype': {value:getMasterDataPath('exchangeRateType'), label: 'Exchange Rate Type'},
                 'exchangerate': {value:getMasterDataPath('exchangeRate'), label: 'Exchange Rate'},
-                'currency': {value:getMasterDataPath('currency'), label: 'Currency'}
+                'currency': {value:getMasterDataPath('currency'), label: 'Currency'},
+                'exchangeratedataentry': {value:getMasterDataPath('exchangeRateDataEntry'), label: 'Exchange Rate Data Entry'},
             });
             
                        

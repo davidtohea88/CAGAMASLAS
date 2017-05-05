@@ -80,9 +80,9 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                    [{headerText: 'Currency Code',  field: 'orgTypCd', style: 'width: 10%'},
-                                                                    {headerText: 'Currency Symbol', field: 'orgTypName', style: 'width: 30%'},
-                                                                    {headerText: 'Description', field: 'orgTypDesc',style: 'width: 20%'},
+                                                                    [{headerText: 'Currency Code',  field: 'crncyCd', style: 'width: 10%'},
+                                                                    {headerText: 'Currency Symbol', field: 'crncySymbol', style: 'width: 30%'},
+                                                                    {headerText: 'Description', field: 'crncyName',style: 'width: 20%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
@@ -126,7 +126,7 @@
                             <label for="code">Currency Code</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.orgTypCd}" >
+                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.crncyCd}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -134,7 +134,7 @@
                             <label for="name">Currency Symbol</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.orgTypName}" >
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.crncySymbol}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -142,7 +142,7 @@
                             <label for="desc">Currency Description</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.orgTypDesc}">
+                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.crncyName}">
                         </div>
                     </div> 
                     <div class="oj-flex">  

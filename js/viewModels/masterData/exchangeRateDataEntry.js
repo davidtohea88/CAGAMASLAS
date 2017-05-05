@@ -1,19 +1,22 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset'],
-        function (oj, ko, data, $, rendererService, configService, exportService)
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox'],
+        function (oj, ko, $, rendererService, RestService, exportService)
+
         {
-            function organizationTypeMainViewModel() {
+            function exchangeRateTypeMainViewModel() {
+                var restService = RestService.exchangeRateDataEntryService();
                 var self = this;
                 self.header = "Exchange Rate Data Entry";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.allData = ko.observableArray();
                 self.ExRateModel = ko.observable();
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'ExRateCd'}));
+                self.collection = ko.observable(restService.createCollection());
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
                 self.nameSearch = ko.observable('');
                 self.currSearch = ko.observable('');
                 self.startDateSearch = ko.observable('');
@@ -37,40 +40,24 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     return rendererService.activeConverter(context.data);
                 };
                  
-                self.refreshData = function (fnSuccess) {
-                    console.log("fetching data");
-                    var jsonUrl = "js/data/exchangeRateDataEntry.json";
-
-                    $.ajax(jsonUrl,
-                            {
-                                method: "GET",
-                                dataType: "json",
-//                                headers: {"Authorization": "Basic " + btoa("username:password")},
-                                // Alternative Headers if using JWT Token
-                                // headers : {"Authorization" : "Bearer "+ jwttoken; 
-                                success: function (data)
-                                {
-                                    fnSuccess(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown)
-                                {
-                                    console.log(textStatus, errorThrown);
-                                }
-                            }
-                    );
+                self.refreshData = function(){
+                    // fetch from rest service
+                    self.collection().refresh().then(function(){
+                        self.allData(self.collection().toJSON());
+                    });  
                 };
 
+
                 self.search = function (name, curr,start, end) {
-                    console.log(start);
-                    var temp = ko.utils.arrayFilter(self.allData(),
+                    var tmp = ko.utils.arrayFilter(self.allData(),
                         function (rec) {
-                            console.log(rec);
                             return ((name.length ===0 || (name.length > 0 && rec.ExRateName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
                                     (start.length ===0 || (start.length > 0 && rec.StartDate.toLowerCase().indexOf(start.toString().toLowerCase()) > -1)) &&
                                     (end.length ===0 || (end.length > 0 && rec.EndDate.toLowerCase().indexOf(end.toString().toLowerCase()) > -1)) &&
                                     (curr.length ===0 || curr.length > 0 && rec.OrgCurr.toLowerCase().indexOf(curr.toString().toLowerCase()) > -1));
                         });
-                    self.allData(temp);
+                    self.collection().reset(tmp);
+                    self.allData(self.collection().toJSON());
                 };
                 
                 self.createOrEdit = function (model) {
@@ -83,15 +70,29 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
                 
                 self.save = function (model) {
-                   console.log("Saving ");
-                   console.log(model);
+                    var user = "LAS";
+                    var currentDate = new Date();
+                    var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
+                            createdDate: model.isNew()?currentDate:model.attributes.createdDate,
+                            updatedBy: user,
+                            updatedDate: currentDate
+                        };
+                    model.save(defaultAttributes,{
+                        success: function(model,resp){
+                            self.refreshData();
+                        },
+                        error: function(){
+                            console.log("failed saving");
+                        }
+                    });
+                    
                 };
 
                 self.activateDeactivate = function (model) {
-                    if (model.active === 'Y'){
-                        model.active = 'N';
-                    }else if (model.active === 'N'){
-                        model.active = 'Y';
+                    if (model.attributes.active === 'Y'){
+                        model.attributes.active = 'N';
+                    }else if (model.attributes.active === 'N'){
+                        model.attributes.active = 'Y';
                     }
                     self.save(model);
                 };
@@ -100,10 +101,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     exportService.export($("#table").ojTable("option","columns"),self.allData(),'xlsx','data.xlsx', function(field,value){
                         if (field === 'active'){
                             return rendererService.activeConverter(value);
-                        }else if (field === 'effectiveDate'){
-                            return rendererService.dateConverter.format(value);
                         }else if (field === 'updatedDate'){
-                            return rendererService.dateTimeConverter.format(value)
+                            return rendererService.dateTimeConverter.format(value);
+                        }else if (field === 'countryId'){
+                            return rendererService.LOVConverter(self.countryLOV(),value);
                         }else{
                             return value;
                         }
@@ -115,68 +116,60 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 // ===============  EVENT HANDLER  ==============
                 
                 self.onReset = function(){
+                    self.refreshData();  
                     self.currSearch('');
                     self.nameSearch('');
                     self.startDateSearch('');
                     self.endDateSearch('');
-                    self.refreshData(function(data){
-                        $('#btnEdit').hide();
-                        $('#btnActivate').hide();
-                        self.selectedRow(undefined);
-                        self.allData(data.MDExchangeRateDataEntry);
-                    });
                 };
                 
                 self.onSearch = function(){
-                    self.refreshData(function(data){
-                        self.allData(data.MDExchangeRateDataEntry);
+                    self.collection().refresh().then(function(){
                         self.search(self.nameSearch(),self.currSearch(),self.startDateSearch(),self.endDateSearch());
                     });
                 };
                 
                 self.onCreate = function(){
-                    var newRec = { ExRateId: undefined,
-                        ExRateCd: "",
-                        ExRateName: "",
-                        OrgCurr: "",
-                        TargetCurr:"",
-                        Rate:"",
-                        ReverseRate:"",
-                        StartDate:"",
-                        EndDate:"",
-                        active: "Y",
-                        effectiveDate: ""};
-                    self.createOrEdit(newRec);
+                    var model = restService.createModel();
+                    self.createOrEdit(model);
+
                 };
                 
                 self.onEdit = function(){
-                    self.createOrEdit(self.selectedRow());
+                    var model = self.collection().get(self.selectedRow());
+                    self.createOrEdit(model);
                 };
                 
-                self.onSave = function(model){
-                    self.save(model);
+                self.onSave = function(){
+                    self.save(self.ExRateModel());
+                    $("#CreateEditDialog").ojDialog("close");
                 };
                 
                 self.onActivateDeactivate = function(){
-                    self.activateDeactivate(self.selectedRow());
+                    var model = self.collection().get(self.selectedRow());
+                    self.activateDeactivate(model);
                 };
                 
                 self.onSelectRow = function(event, ui){
-                    $('#btnEdit').show();
-                    $('#btnActivate').show();
                     var idx = ui.currentRow.rowIndex;
                     self.dataSource.at(idx).
                         then(function (obj) {
-                            self.selectedRow(obj.data);
+                            self.selectedRow(obj.data[self.collection().model.idAttribute]);
+                            $('#btnEdit').show();
+                            $('#btnActivate').show();
                         });
                 };
                 
                 self.onExport = function(){
-                   self.exportxls(); 
+                    self.exportxls(); 
+                };
+                
+                self.onCancel = function () {
+                    $("#CreateEditDialog").ojDialog("close");
                 };
 
-                self.onReset();
+                self.refreshData();
             }
-            return organizationTypeMainViewModel();
+            return exchangeRateTypeMainViewModel();
         }
 ); 

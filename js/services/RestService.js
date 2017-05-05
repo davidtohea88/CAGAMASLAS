@@ -58,7 +58,10 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("exchangeRate","exRateId","MdExchangeRate");
             };
             self.currencyService = function(){
-                return new BaseRestService("currency","currencyId","MdCurrency");
+                return new BaseRestService("currency","crncyId","MdCrncy");
+            };
+            self.exchangeRateDataEntryService = function(){
+                return new BaseRestService("exchangeratedataentry","ExRateCd","MDExchangeRateDataEntry");
             };
         };
         return new RestService();
