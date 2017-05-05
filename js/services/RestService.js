@@ -31,7 +31,10 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("cptyType","cptTypeId","MdCptType");
             };
             self.counterpartyGroupService = function(){
-                return new BaseRestService("cptyGroup","cptGrpId","MdCptGrouo");
+                return new BaseRestService("cptyGroup","cptGrpId","MdCptGroup");
+            };
+            self.counterpartyGroupTypeService = function(){
+                return new BaseRestService("cptyGroupType","cptGrpTypeId","MdCptGroupType");
             };
             self.agreementTypeService = function(){
                 return new BaseRestService("agreementType","agreementTypId","MdAgreementTyp");
