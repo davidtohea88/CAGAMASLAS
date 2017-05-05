@@ -392,7 +392,11 @@ require(['ojs/ojcore',
                 'quarterly-reviews-upload': {label: 'Quarterly Reviews Upload'},
                 'reset': {label: 'Reset'},
                 'rollover': {label: 'Rollover'},
-                'review-date-bu': {label: 'Review Date BU'}
+                'review-date-bu': {label: 'Review Date BU'},
+                'nbdayconvention': {value:getMasterDataPath('NBDayConvention'), label: 'Non Business Day Convention'},
+                'exchangeratetype': {value:getMasterDataPath('exchangeRateType'), label: 'Exchange Rate Type'},
+                'exchangerate': {value:getMasterDataPath('exchangeRate'), label: 'Exchange Rate'},
+                'currency': {value:getMasterDataPath('currency'), label: 'Currency'}
             });
             
                        

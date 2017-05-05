@@ -55,10 +55,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     });  
                 };
                 
-                self.search = function (code, name, desc) {
+                self.search = function (name, type) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((code.length ===0 || (code.length > 0 && rec.attributes.rateTypeCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                (name.length ===0 || (name.length > 0 && rec.attributes.rateTypeName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
+                        return ((name.length ===0 || (name.length > 0 && rec.attributes.ExRateName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) && 
+                                (type.length ===0 || (type.length > 0 && rec.attributes.exRateTypeId==type.toString()) )
+                                
+                                );
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
@@ -127,7 +129,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSearch = function(){
-                    self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                    self.search(self.nameSearch(),self.selectedExRateTypeId());
                 };
                 
                 self.onCreate = function(){

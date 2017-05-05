@@ -50,6 +50,7 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             };
             self.paymentFrequencyService = function(){
                 return new BaseRestService("paymentFrequency","pymtFreqId","MdPymtFreq");
+            };
             self.exchangeRateTypeService = function(){
                 return new BaseRestService("exchangeRateType","exRateTypeId","MdExchangeRateType");
             };

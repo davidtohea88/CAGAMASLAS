@@ -27,7 +27,7 @@
                                                         <label for="searchRateType">Exchange Rate Type</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <select id="countryInput" style="width: 100%;" data-bind="ojComponent: {
+                                                        <select id="searchRateType" style="width: 100%;" data-bind="ojComponent: {
                                                             component: 'ojSelect',
                                                             options: exchangeRateTypeLOV, 
                                                             value: selectedExRateTypeId, 
@@ -143,7 +143,6 @@
                         <div class="oj-flex-item">
                             <select id="countryInput" style="width: 100%;" data-bind="ojComponent: {
                             component: 'ojSelect',
-                            placeholder:'Select Exchange Rate Type',
                             options: exchangeRateTypeLOV, 
                             value: selectedExRateTypeId, 
                             rootAttributes: {style:'max-width: 20em'}}">

@@ -51,9 +51,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.search = function (code, name, desc) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((code.length ===0 || (code.length > 0 && rec.attributes.rateTypeCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                (name.length ===0 || (name.length > 0 && rec.attributes.rateTypeName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
-                    });
+                        return ((code.length ===0 || (code.length > 0 && rec.attributes.orgTypCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.orgTypName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.orgTypDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+});
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
                 };
