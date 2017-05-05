@@ -397,6 +397,7 @@ require(['ojs/ojcore',
                 'exchangeratetype': {value:getMasterDataPath('exchangeRateType'), label: 'Exchange Rate Type'},
                 'exchangerate': {value:getMasterDataPath('exchangeRate'), label: 'Exchange Rate'},
                 'currency': {value:getMasterDataPath('currency'), label: 'Currency'},
+                'fundingsource': {value:getMasterDataPath('fundingSource'), label: 'Funding Source'},
                 'exchangeratedataentry': {value:getMasterDataPath('exchangeRateDataEntry'), label: 'Exchange Rate Data Entry'},
             });
             
