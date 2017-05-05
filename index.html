@@ -32,6 +32,14 @@
 
     <!-- This is where you would add any app specific styling -->
     <link rel="stylesheet" href="css/override.css" type="text/css"/>
+    
+    <!--  The style sheet for print operation -->
+    <style type="text/css">
+@media print{
+ .printVis {  visibility:  visible !important; }
+.printHide {display: none !important;}}
+    </style>
+
 
     <!-- RequireJS bootstrap file -->
     <script data-main="js/main" src="js/libs/require/require.js"></script>

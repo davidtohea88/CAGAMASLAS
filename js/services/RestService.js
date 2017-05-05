@@ -21,6 +21,35 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.productTypeService = function(){
                 return new BaseRestService("productType","prodTypeId","MdProdType");
             };
+            self.productGroupService = function(){
+                return new BaseRestService("productGroup","prodGrpId","MdProdGrp");
+            };
+            self.agreementTypeService = function(){
+                return new BaseRestService("agreementType","agreementTypId","MdAgreementTyp");
+            };
+            self.assetTypeService = function(){
+                return new BaseRestService("assetType","assetTypeId","MdAssetType");
+            };
+            self.assetGroupService = function(){
+                return new BaseRestService("assetGroup","assetGrpId","MdAssetGrp");
+            };
+            self.consumerTypeService = function(){
+                return new BaseRestService("consumerType","consmrTypeId","MdConsumerType");
+            };
+            self.purchaseModeService = function(){
+                return new BaseRestService("purchaseMode","prchsModeId","MdPrchsMode");
+            };
+            self.purchaseConsTypeService = function(){
+                return new BaseRestService("purchaseConsType","consTypeId","MdConsType");
+            };
+            self.gstChargeTypeService = function(){
+                return new BaseRestService("gstChargeType","gstCrgtypeId","MdGstcrgType");
+            };
+            self.gstFeeTypeService = function(){
+                return new BaseRestService("gstFeeType","gstFeetypeId","MdGstfeeType");
+            };
+            self.paymentFrequencyService = function(){
+                return new BaseRestService("paymentFrequency","pymtFreqId","MdPymtFreq");
             self.exchangeRateTypeService = function(){
                 return new BaseRestService("exchangeRateType","exRateTypeId","MdExchangeRateType");
             };

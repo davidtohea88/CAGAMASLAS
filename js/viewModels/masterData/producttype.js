@@ -9,7 +9,6 @@ define(['ojs/ojcore', 'knockout', 'jquery','services/rendererService', 'services
         {
             function prodTypeViewModel() {
                 var self = this;
-                self.productTypeModel = ko.observable();
                 var restService = RestService.productTypeService();
                 self.header = "Product Type";
                 self.dialogTitle = "Create/edit "+self.header;
@@ -20,6 +19,7 @@ define(['ojs/ojcore', 'knockout', 'jquery','services/rendererService', 'services
                 self.nameSearch = ko.observable('');
                 self.codeSearch = ko.observable('');
                 self.descSearch =  ko.observable('');
+                self.dateConverter = rendererService.dateConverter;
 
                 self.dateTimeRenderer = function(context){
                     var data = context.data;
@@ -48,7 +48,7 @@ define(['ojs/ojcore', 'knockout', 'jquery','services/rendererService', 'services
                     var tmp = self.collection().filter(function(rec){
                         return ((code.length ===0 || (code.length > 0 && rec.attributes.prodTypeCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
                                 (name.length ===0 || (name.length > 0 && rec.attributes.prodTypeName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                (desc.length ===0 || (name.length > 0 && rec.attributes.prodTypeDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.prodTypeDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
@@ -126,7 +126,6 @@ define(['ojs/ojcore', 'knockout', 'jquery','services/rendererService', 'services
                 
                 self.onEdit = function(){
                     var model = self.collection().get(self.selectedRow());
-                    console.log(self.collection());
                     self.createOrEdit(model);
                 };
                 

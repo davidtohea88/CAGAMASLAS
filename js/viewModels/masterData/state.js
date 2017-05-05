@@ -9,12 +9,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
         {
             function stateMainViewModel() {
                 var self = this;
-                
+                //LOV
                 var countryService = RestService.countryService();
                 self.countryLOV = ko.observableArray();
                 countryService.fetchAsLOV('countryName','countryId').then(function(data){
                     self.countryLOV(data);
                 });
+                self.selectedCountryId = ko.observableArray();
                 
                 var restService = RestService.stateService();
                 self.header = "State";
@@ -25,7 +26,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.stateModel = ko.observable();
                 self.nameSearch = ko.observable('');
                 self.codeSearch = ko.observable('');
-                self.selectedCountryId = ko.observableArray();
+                self.dateConverter = rendererService.dateConverter;
                 
                 self.countryNameRenderer = function(context){
                     if (context.data){
@@ -70,7 +71,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.save = function (model) {
                     var user = "LAS";
-                    var currentDate = new Date();
+                    var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
                             createdDate: model.isNew()?currentDate:model.attributes.createdDate,
                             updatedBy: user,
@@ -141,8 +142,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSave = function(){
-                    var arr = self.selectedCountryId();
-                    self.stateModel().attributes.countryId = arr[0];
+                    self.stateModel().attributes.countryId = self.selectedCountryId()[0];
                     self.save(self.stateModel());
                     $("#CreateEditDialog").ojDialog("close");
                 };

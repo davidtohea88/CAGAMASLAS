@@ -1,14 +1,15 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
         'ojs/ojdatetimepicker','ojs/ojradioset'],
-        function (oj, ko, data, $, rendererService, configService, exportService)
+        function (oj, ko, $, rendererService, RestService, exportService)
         {
             function gstTypeMainViewModel() {
                 var self = this;
+                var restService = RestService.rateTypeService();
                 self.header = "GST Type";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.allData = ko.observableArray();
