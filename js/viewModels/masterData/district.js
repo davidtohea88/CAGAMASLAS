@@ -1,11 +1,11 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService','ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService', 'services/exportService','services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox'],
-        function (oj, ko, $, rendererService, RestService, exportService)
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation','ojs/ojselectcombobox'],
+        function (oj, ko, $, rendererService, RestService, exportService,MessageService)
         {
             function districtMainViewModel() {
                 var self = this;
@@ -32,7 +32,36 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
                 self.model = ko.observable();
                 self.nameSearch = ko.observable('');
+                self.stateSearch = ko.observable('');
+                self.countrySearch = ko.observable('');
                 self.dateConverter = rendererService.dateConverter;
+                self.message = ko.observable();
+                self.colorType = ko.observable();
+                self.tracker = ko.observable();
+                self.dialogOffcanvas = {selector: '#dialogDrawer', content: '#dialogContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                self.pageOffcanvas = {selector: '#pageDrawer', content: '#pageContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                    
+                self.showMessage = function(type,message,afterShow){
+                    var canvas = ($("#CreateEditDialog").ojDialog("isOpen"))?self.dialogOffcanvas:self.pageOffcanvas;
+                    self.message(message);
+                    if (type==="SUCCESS"){
+                        self.colorType(MessageService.bgColorSuccess);
+                    }else if (type==="ERROR"){
+                        self.colorType(MessageService.bgColorError);
+                    }else{
+                        self.colorType(MessageService.bgColorDefault);
+                    }
+                    oj.OffcanvasUtils.open(canvas);
+                    setTimeout(function(){
+                        oj.OffcanvasUtils.close(canvas);
+                        if (afterShow){
+                            afterShow();
+                        }
+                    },MessageService.displayTimeout);
+                };
+                
 
                 self.countryNameRenderer = function(context){
                     if (context.data){
@@ -64,14 +93,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     
                 self.refreshData = function(){
                     // fetch from rest service
-                    self.collection().refresh().then(function(){
-                        self.allData(self.collection().toJSON());
+                    self.collection().fetch({
+                        success: function(){
+                            self.allData(self.collection().toJSON());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
                     });  
                 };
                 
-                self.search = function (name) {
+                self.search = function (name,stateId,countryId) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((name.length ===0 || (name.length > 0 && rec.attributes.districtName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
+                        return ((!stateId || (stateId && rec.attributes.stateId === stateId)) &&
+                                (!countryId || (countryId && rec.attributes.countryId === stateId)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.districtName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
@@ -82,7 +117,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
-                self.save = function (model) {
+                self.save = function (model,successMsg) {
                     var user = "LAS";
                     var currentDate = new Date();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
@@ -93,9 +128,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     model.save(defaultAttributes,{
                         success: function(model,resp){
                             self.refreshData();
+                            var message = successMsg? successMsg: (model.isNew()?'A new District is successfully created':'District is successfully updated');
+                            self.showMessage("SUCCESS",message,function(){
+                                $("#CreateEditDialog").ojDialog("close");
+                            });
                         },
-                        error: function(){
-                            console.log("failed saving");
+                        error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
                         }
                     });
                     
@@ -107,7 +146,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model);
+                    self.save(model,"District \""+model.attributes.districtName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
@@ -129,9 +168,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onReset = function(){
                     self.refreshData();
                     
-                    self.codeSearch('');
                     self.nameSearch('');
-                    self.descSearch('');
+                    self.countrySearch([]);
+                    self.stateSearch([]);
                     
                     if (self.collection().models.length>1){
                         self.selectedRow(undefined);
@@ -141,8 +180,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSearch = function(){
-                    self.collection().refresh().then(function(){
-                        self.search(self.nameSearch());
+                    self.collection().fetch({
+                        success: function(){
+                            var stateId = (self.stateSearch() && self.stateSearch().length>0)?self.stateSearch()[0]:undefined;
+                            var countryId = (self.countrySearch() && self.countrySearch().length>0)?self.countrySearch()[0]:undefined;
+                            self.search(self.nameSearch(),stateId,countryId);
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
                     });
                 };
                 
@@ -160,16 +205,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     self.createOrEdit(model);
                 };
                 
-                self.onSave = function(){
-                    self.stateModel().attributes.countryId = self.selectedCountryId()[0];
-                    self.stateModel().attributes.stateId = self.selectedStateId()[0];
-                    self.save(self.model());
-                    $("#CreateEditDialog").ojDialog("close");
+                self.onSave = function(){var trackerObj = ko.utils.unwrapObservable(self.tracker);
+                    if (trackerObj !== undefined){
+                        if (trackerObj instanceof oj.InvalidComponentTracker){
+                            trackerObj.showMessages();
+                            trackerObj.focusOnFirstInvalid();
+                        }
+                    }
+                    if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
+                        self.model().attributes.countryId = self.selectedCountryId()[0];
+                        self.model().attributes.stateId = self.selectedStateId()[0];
+                        self.save(self.model());
+                    }
                 };
                 
                 self.onActivateDeactivate = function(){
-                    var model = self.collection().get(self.selectedRow());
-                    self.activateDeactivate(model);
+                    $("#ConfirmDialog").ojDialog("open");
                 };
                 
                 self.onSelectRow = function(event, ui){
@@ -188,6 +239,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.onCancel = function () {
                     $("#CreateEditDialog").ojDialog("close");
+                };
+                
+                self.onConfirmNo = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                };
+                
+                self.onConfirmYes = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                    var model = self.collection().get(self.selectedRow());
+                    self.activateDeactivate(model);
                 };
                 
                 self.refreshData();

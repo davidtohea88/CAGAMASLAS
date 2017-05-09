@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 
-<div id="container" >
+<!-- MAIN -->
+<div id="container" class="oj-offcanvas-outer-wrapper" >
     <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
-    <div class="page-content" style="margin:0 auto">
+    <div id="pageDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center', color: 'white'}">
+        <span data-bind="text: message"></span>
+    </div>
+    <div id="pageContent" class="page-content" style="margin:0 auto">
         <div class="oj-flex">  
             <div class="oj-flex-item">
                 <div class="oj-margin oj-panel-alt demo-mypanel" >          
@@ -16,26 +20,38 @@
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchCode">District Name</label>
+                                                        <label >District Name</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText', value: nameSearch, valueUpdate: 'afterkeydown'}">
-                                                    </div>
-                                                </div> 
-                                                <div class="oj-flex">  
-                                                    <div class="oj-flex-item">
-                                                        <label for="searchName">State Name</label>
-                                                    </div>
-                                                    <div class="oj-flex-item">
-                                                        <input id="seachName" data-bind="ojComponent: {component: 'ojInputText', value: nameSearch, valueUpdate: 'afterkeydown'}">
+                                                        <input id="searchCode" data-bind="ojComponent: {component: 'ojInputText', value: nameSearch, valueUpdate: 'afterkeydown',rootAttributes: {style:'max-width: 20em'}}">
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchName">Country Name</label>
+                                                        <label>State</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachName" data-bind="ojComponent: {component: 'ojInputText', value: nameSearch, valueUpdate: 'afterkeydown'}">
+                                                        <select id="stateSrch" style="width: 100%;" data-bind="ojComponent: {
+                                                            component: 'ojSelect',
+                                                            options: stateLOV, 
+                                                            value: stateSearch,
+                                                            placeholder: 'Please Select',  valueUpdate: 'afterkeydown',
+                                                            rootAttributes: {style:'max-width: 20em'}}">
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label>Country</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="countrySrch" style="width: 100%;" data-bind="ojComponent: {
+                                                            component: 'ojSelect',
+                                                            options: countryLOV, 
+                                                            value: countrySearch, 
+                                                            placeholder: 'Please Select',  valueUpdate: 'afterkeydown',
+                                                            rootAttributes: {style:'max-width: 20em'}}">
+                                                        </select>
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">                       
@@ -116,14 +132,17 @@
         <div class="oj-dialog-header oj-helper-clearfix">
             <span id="dialogTitleId" class="oj-dialog-title" data-bind="text:dialogTitle"> </span> 
         </div>
-        <div class="oj-dialog-body" data-bind="with: model">
-            <div class="oj-form oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
+        <div class="oj-dialog-body oj-offcanvas-outer-wrapper" data-bind="with: model">
+            <div id="dialogDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center'}">
+                 <p style="color: white"><span data-bind="text: message"></span></p>
+            </div>
+            <div id="dialogContent" class="oj-form oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
                         <label for="name">District Name</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.districtName}" >
+                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.districtName, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div>
                 <div class="oj-flex">  
@@ -135,7 +154,7 @@
                             component: 'ojSelect',
                             options: stateLOV, 
                             value: selectedStateId,
-                            placeholder: 'Please Select',
+                            placeholder: 'Please Select', required: true, invalidComponentTracker: tracker,
                             rootAttributes: {style:'max-width: 20em'}}">
                         </select>
                     </div>
@@ -149,7 +168,7 @@
                             component: 'ojSelect',
                             options: countryLOV, 
                             value: selectedCountryId, 
-                            placeholder: 'Please Select',
+                            placeholder: 'Please Select', required: true, invalidComponentTracker: tracker,
                             rootAttributes: {style:'max-width: 20em'}}">
                         </select>
                     </div>
@@ -159,7 +178,7 @@
                         <label id="statusGroup">Status</label>
                     </div>
                     <div class="oj-flex-item">
-                        <div class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: attributes.active}" 
+                        <div class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: attributes.active, required: true, invalidComponentTracker: tracker}" 
                              aria-labelledby="statusGroup">
                             <span class="oj-choice-item">
                                 <input id="rbtn_active" type="radio" 
@@ -179,6 +198,25 @@
         <div class="oj-dialog-footer">
             <button id="btnSave" data-bind="click:onSave,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
             <button id="btnCancel" data-bind="click:onCancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+        </div>
+    </div>
+    <div id="ConfirmDialog" class="ojDialog" title="" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:400px;'}
+		  }">
+        <div class="oj-dialog-header oj-helper-clearfix">
+            <div>
+                <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+                <span id="dialog-title-id" class="oj-dialog-title">Confirmation</span>
+            </div>
+        </div>
+        <div class="oj-dialog-body">
+            <p>Are you sure you want to do this action?</p>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="btnConfirmOk" data-bind="click: onConfirmYes, ojComponent:
+                 { component: 'ojButton', label: 'Yes'}"> </button>
+            <button id="btnConfirmCancel" data-bind="click: onConfirmNo, ojComponent:
+                 { component: 'ojButton', label: 'No'}"> </button>
         </div>
     </div>
 </div>
