@@ -402,9 +402,9 @@
             },
             {
                 "attr" : {
-                    "id" : "mgp-fully-disp",
+                    "id" : "mgp-verify-sheet",
                     "name" : "MGP Fully Disbursed Report",
-                    "view" : "mgp-fully-disp"
+                    "view" : "mgp-verify-sheet"
                 }
             },
             {

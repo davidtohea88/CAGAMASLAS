@@ -23,6 +23,7 @@ function (oj) {
 
         // Create a movie collection.
         createCollection : function (restURL,restId) {
+            alert(restURL);
             var Objects = oj.Collection.extend( {
                 url : restURL, model : this.createModel(restURL,restId)
             });

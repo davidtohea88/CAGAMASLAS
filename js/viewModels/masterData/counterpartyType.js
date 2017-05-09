@@ -1,11 +1,11 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService','cagutils', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
         'ojs/ojdatetimepicker','ojs/ojradioset'],
-        function (oj, ko, $, rendererService, RestService, exportService)
+        function (oj, ko, data, $, rendererService, configService, exportService,cagutils)
         {
             function counterpartyTypeMainViewModel() {
                 var self = this;
@@ -33,22 +33,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     return rendererService.activeConverter(context.data);
                 };
                     
-                self.refreshData = function(){
-                    // fetch from rest service
-                    self.collection().refresh().then(function(){
-                        self.allData(self.collection().toJSON());
-                    });  
+                self.refreshData = function (fnSuccess) {
+                    console.log("fetching data");
+                    var jsonUrl = "js/data/counterpartyType.json";                    
+                    self.refreshJsonData(jsonUrl,fnSuccess);                 
                 };
-                
-                self.search = function (code, name, desc) {
-                    var tmp = self.collection().filter(function(rec){
-                        return ((code.length ===0 || (code.length > 0 && rec.attributes.cptTypeCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                (name.length ===0 || (name.length > 0 && rec.attributes.cptTypeName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                (desc.length ===0 || (desc.length > 0 && rec.attributes.cptTypeDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
-                    });
-                    self.collection().reset(tmp);
-                    self.allData(self.collection().toJSON());
-                };
+
+                self.search = function (code, name, desc) {                    
+                    var Keys = ["counterPrtyTypCd","counterPrtyTypName","counterPrtyTypDesc"];
+                    var Vals= [code,name,desc];                    
+                    var temp = self.doFilterSearch(Keys,Vals,self.allData());                 
+                    self.allData(temp);
+                }; 
                 
                 self.createOrEdit = function (model) {
                     self.model(model);
@@ -119,6 +115,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onSearch = function(){
                     self.collection().refresh().then(function(){
                         self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                        self.selectedRow(undefined);
+                        $('#btnEdit').hide();
+                        $('#btnActivate').hide();
                     });
                 };
                 
