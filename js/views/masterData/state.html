@@ -116,15 +116,7 @@
                         <label for="code">State Code</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.stateCd}" >
-                    </div>
-                </div> 
-                <div class="oj-flex">  
-                    <div class="oj-flex-item">
-                        <label for="name">State Name</label>
-                    </div>
-                    <div class="oj-flex-item">
-                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.stateName}" >
+                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.stateName}" >
                     </div>
                 </div>
                 <div class="oj-flex">  
@@ -135,7 +127,8 @@
                         <select id="countryInput" style="width: 100%;" data-bind="ojComponent: {
                             component: 'ojSelect',
                             options: countryLOV, 
-                            value: selectedCountryId, 
+                            value: selectedCountryId,
+                            placeholder: 'Please Select',
                             rootAttributes: {style:'max-width: 20em'}}">
                         </select>
                     </div>

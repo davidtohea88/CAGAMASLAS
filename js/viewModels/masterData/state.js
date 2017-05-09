@@ -130,12 +130,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.onSearch = function(){
                     self.collection().refresh().then(function(){
-                        self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                        self.search(self.codeSearch(),self.nameSearch());
                     });
                 };
                 
                 self.onCreate = function(){
-                    var model = restService.createModel();
+                    self.selectedCountryId([]);
+                    var model = restService.createModel({active: 'Y'});
                     self.createOrEdit(model);
                 };
                 

@@ -108,7 +108,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     self.nameSearch('');
                     self.descSearch('');
                     
-                    if (self.collection.model.length>1){
+                    if (self.collection().models.length>1){
                         self.selectedRow(undefined);
                         $('#btnEdit').hide();
                         $('#btnActivate').hide();
@@ -123,7 +123,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onCreate = function(){
-                    var model = restService.createModel();
+                    var model = restService.createModel({active: 'Y'});
                     self.createOrEdit(model);
                 };
                 

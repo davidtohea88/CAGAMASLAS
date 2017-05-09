@@ -146,7 +146,21 @@
                     <div class="oj-flex-item">
                         <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.consSubtypeDesc}">
                     </div>
-                </div> 
+                </div>
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="consType">Type</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <select id="consType" style="width: 100%;" data-bind="ojComponent: {
+                            component: 'ojSelect',
+                            options: prchsConsTypeLOV, 
+                            value: selectedPrchsConsTypeId, 
+                            placeholder: 'Please Select',
+                            rootAttributes: {style:'max-width: 20em'}}">
+                        </select>
+                    </div>
+                </div>
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
                         <label id="statusGroup">Status</label>

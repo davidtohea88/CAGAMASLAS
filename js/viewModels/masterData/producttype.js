@@ -122,7 +122,7 @@ define(['ojs/ojcore', 'knockout', 'jquery','services/rendererService', 'services
                 };
                 
                 self.onCreate = function(){
-                    var model = restService.createModel();
+                    var model = restService.createModel({active: 'Y'});
                     self.createOrEdit(model);
                 };
                 

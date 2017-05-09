@@ -12,8 +12,14 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.countryService = function(){
                 return new BaseRestService("country","countryId","MdCountry");
             };
+            self.districtService = function(){
+                return new BaseRestService("district","districtId","MdDistrict");
+            };
             self.stateService = function(){
                 return new BaseRestService("state","stateId","MdState");
+            };
+            self.branchService = function(){
+                return new BaseRestService("branch","branchId","MdBranch");
             };
             self.rateTypeService = function(){
                 return new BaseRestService("rateType","rateTypeId","MdRateType");
@@ -46,7 +52,7 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("assetGroup","assetGrpId","MdAssetGrp");
             };
             self.consumerTypeService = function(){
-                return new BaseRestService("consumerType","consmrTypeId","MdConsumerType");
+                return new BaseRestService("consumerType","consmrTypeId","MdConsmrType");
             };
             self.purchaseModeService = function(){
                 return new BaseRestService("purchaseMode","prchsModeId","MdPrchsMode");
@@ -65,6 +71,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             };
             self.organizationService = function(){
                 return new BaseRestService("organization","orgId","MDOrganization");
+            };
+            self.gstOrganizationService = function(){
+                return new BaseRestService("gstOrgCode","gstOrgId","MdGstOrgCode");
             };
             self.gstChargeTypeService = function(){
                 return new BaseRestService("gstChargeType","gstCrgtypeId","MdGstcrgType");

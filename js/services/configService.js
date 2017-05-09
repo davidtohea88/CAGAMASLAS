@@ -16,8 +16,8 @@ define(['jquery','ojs/ojcore' ,'knockout'],
             var self = this;
             //self.status = "temp-new";
             //self.loanStatus = "not validated"; 
-            //self.serviceUrl = 'http://localhost:3000/';
-            self.serviceUrl = 'http://192.228.216.147:7002/';
+            self.serviceUrl = 'http://localhost:3000/';
+            //self.serviceUrl = 'http://192.228.216.147:7002/';
 
             //self.notificationDailogModel = new NotificationDailogModel(); 
         };

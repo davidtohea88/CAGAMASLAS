@@ -4,11 +4,20 @@
 define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset'],
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox'],
         function (oj, ko, $, rendererService, RestService, exportService)
         {
             function prchsConsTypMainViewModel() {
                 var self = this;
+                
+                //LOV
+                var prchsConsTypeService = RestService.purchaseConsTypeService();
+                self.prchsConsTypeLOV = ko.observableArray();
+                prchsConsTypeService.fetchAsLOV('consTypeName','consTypeId').then(function(data){
+                    self.prchsConsTypeLOV(data);
+                });
+                self.selectedPrchsConsTypeId = ko.observableArray();
+                
                 var restService = RestService.purchaseConsSubTypeService();
                 self.header = "Purchase Consideration Sub Type";
                 self.dialogTitle = "Create/edit "+self.header;
@@ -122,16 +131,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onCreate = function(){
-                    var model = restService.createModel();
+                    self.selectedPrchsConsTypeId([]);
+                    var model = restService.createModel({active: 'Y'});
                     self.createOrEdit(model);
                 };
                 
                 self.onEdit = function(){
                     var model = self.collection().get(self.selectedRow());
+                    self.selectedPrchsConsTypeId([model.attributes.consTypeId]);
                     self.createOrEdit(model);
                 };
                 
                 self.onSave = function(){
+                    self.model.attributes.consTypeId = self.selectedPrchsConsTypeId()[0];
                     self.save(self.model());
                     $("#CreateEditDialog").ojDialog("close");
                 };

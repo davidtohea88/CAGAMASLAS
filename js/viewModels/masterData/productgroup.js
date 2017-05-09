@@ -94,7 +94,7 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
 
                 self.shouldDisableCreate = function () {
                     var trackerObj = ko.utils.unwrapObservable(self.tracker),
-                            hasInvalidComponents = ko.utils.unwrapObservable(trackerObj["invalidShown"]);
+                            hasInvalidComponents = ko.utils.s(trackerObj["invalidShown"]);
                     return  hasInvalidComponents;
                 };
         

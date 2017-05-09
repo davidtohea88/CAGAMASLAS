@@ -14,7 +14,7 @@ define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
             self.propertyId = propertyId;
             self.objectEnclosure = objEnclosure;
             
-            self.createModel = function(){
+            self.createModel = function(defaultObj){
                 var baseModel  = oj.Model.extend({
                     urlRoot: config.serviceUrl+self.baseUrl,
                     customURL: function(operation,model,options){
@@ -46,7 +46,15 @@ define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
                         return item;
                     }
                 });
-                return new baseModel();
+                var model = new baseModel();
+                if (defaultObj){
+                    for (var prop in defaultObj) {
+                        if (defaultObj.hasOwnProperty(prop)) {
+                            model.attributes[prop] = defaultObj[prop];
+                        }
+                    }
+                }
+                return model;
             };
             
             self.createCollection = function(){
@@ -70,7 +78,7 @@ define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
                     collection.fetch({
                         success: function(coll,resp){
                             var allData = collection.toJSON();
-                            var result = [{label: '--Please Select--', value: undefined}];
+                            var result = [];
                             
                             ko.utils.arrayForEach(allData,function(item){
                                 if (item.active ==='Y'){

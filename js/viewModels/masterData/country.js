@@ -12,7 +12,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 var restService = RestService.countryService();
                 self.header = "Country";
                 self.dialogTitle = "Create/edit "+self.header;
-                self.countryModel = ko.observable();
+                self.model = ko.observable();
                 self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
@@ -49,7 +49,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
                 
                 self.createOrEdit = function (model) {
-                    self.countryModel(model);
+                    self.model(model);
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
@@ -119,7 +119,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
                 
                 self.onCreate = function(){
-                    var model = restService.createModel();
+                    var model = restService.createModel({active: 'Y'});
                     self.createOrEdit(model);
                 };
                 
@@ -129,7 +129,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
                 
                 self.onSave = function(){
-                    self.save(self.countryModel());
+                    self.save(self.model());
                     $("#CreateEditDialog").ojDialog("close");
                 };
                 
