@@ -1,12 +1,11 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService',
-        'services/exportService','ojs/ojrouter',
+define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services/RestService','services/exportService', 'services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset'],
-        function (oj, ko, $, rendererService, RestService, exportService)
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        function (oj, ko, $, rendererService, RestService, exportService, MessageService)
         {
             function rateTypeViewModel() {
                 var self = this;
@@ -17,11 +16,37 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.allData = ko.observableArray();
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
                 
-                self.rateTypeModel = ko.observable();
+                self.model = ko.observable();
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
                 self.codeSearch = ko.observable('');
                 self.dateConverter = rendererService.dateConverter;
+                self.message = ko.observable();
+                self.colorType = ko.observable();
+                self.tracker = ko.observable();
+                self.dialogOffcanvas = {selector: '#dialogDrawer', content: '#dialogContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                self.pageOffcanvas = {selector: '#pageDrawer', content: '#pageContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                    
+                self.showMessage = function(type,message,afterShow){
+                    var canvas = ($("#CreateEditDialog").ojDialog("isOpen"))?self.dialogOffcanvas:self.pageOffcanvas;
+                    self.message(message);
+                    if (type==="SUCCESS"){
+                        self.colorType(MessageService.bgColorSuccess);
+                    }else if (type==="ERROR"){
+                        self.colorType(MessageService.bgColorError);
+                    }else{
+                        self.colorType(MessageService.bgColorDefault);
+                    }
+                    oj.OffcanvasUtils.open(canvas);
+                    setTimeout(function(){
+                        oj.OffcanvasUtils.close(canvas);
+                        if (afterShow){
+                            afterShow();
+                        }
+                    },MessageService.displayTimeout);
+                };
 
                 self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
@@ -37,8 +62,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.refreshData = function(){
                     // fetch from rest service
-                    self.collection().refresh().then(function(){
-                        self.allData(self.collection().toJSON());
+                    self.collection().fetch({
+                        success: function(){
+                            self.allData(self.collection().toJSON());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
                     });  
                 };
                 
@@ -53,11 +82,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.createOrEdit = function (model) {
-                    self.rateTypeModel(model);
+                    self.model(model);
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
-                self.save = function (model) {
+                self.save = function (model,successMsg) {
                     var user = "LAS";
                     var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
@@ -66,11 +95,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             updatedDate: currentDate
                         };
                     model.save(defaultAttributes,{
-                        success: function(model,resp){
+                        success: function(model){
                             self.refreshData();
+                            var message = successMsg? successMsg: (model.isNew()?'A new Rate type is successfully created':'Rate type is successfully updated');
+                            self.showMessage("SUCCESS",message,function(){
+                                $("#CreateEditDialog").ojDialog("close");
+                            });
                         },
-                        error: function(){
-                            console.log("failed saving");
+                        error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
                         }
                     });
                     
@@ -82,7 +115,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model);
+                    self.save(model,"Rate type \""+model.attributes.prchsModeName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
@@ -118,8 +151,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSearch = function(){
-                    self.collection().refresh().then(function(){
-                        self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                    self.collection().fetch({
+                        success: function(){
+                            self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
                     });
                 };
                 
@@ -134,13 +171,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSave = function(){
-                    self.save(self.rateTypeModel());
-                    $("#CreateEditDialog").ojDialog("close");
+                    var trackerObj = ko.utils.unwrapObservable(self.tracker);
+                    if (trackerObj !== undefined){
+                        if (trackerObj instanceof oj.InvalidComponentTracker){
+                            trackerObj.showMessages();
+                            trackerObj.focusOnFirstInvalid();
+                        }
+                    }
+                    if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
+                        self.save(self.model());
+                    }
                 };
                 
                 self.onActivateDeactivate = function(){
-                    var model = self.collection().get(self.selectedRow());
-                    self.activateDeactivate(model);
+                    $("#ConfirmDialog").ojDialog("open");
                 };
                 
                 self.onSelectRow = function(event, ui){
@@ -159,6 +203,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.onCancel = function () {
                     $("#CreateEditDialog").ojDialog("close");
+                };
+                
+                self.onConfirmNo = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                };
+                
+                self.onConfirmYes = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                    var model = self.collection().get(self.selectedRow());
+                    self.activateDeactivate(model);
                 };
                 
                 self.refreshData();
