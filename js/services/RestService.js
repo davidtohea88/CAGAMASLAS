@@ -111,6 +111,18 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.NBDConventionService  = function(){
                 return new BaseRestService("nbdayconvention","NDBConvId","MdNonBusinessDayConvention");
             };
+            self.productService = function(){
+                return new BaseRestService("MD_Product/ProductRestPS","prodCd","MdProd");
+            };
+            self.companyService = function(){
+                return new BaseRestService("company","CompanyId","MdCompany");
+            };
+            self.accountService = function(){
+                return new BaseRestService("account","AccountId","MdGLAccount");
+            };
+            self.dbCodeService = function(){
+                return new BaseRestService("databasecode","CompanyId","MdDatabaseCode");
+            };
         };
         return new RestService();
 });
