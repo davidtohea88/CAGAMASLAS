@@ -124,8 +124,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             return rendererService.activeConverter(value);
                         }else if (field === 'updatedDate'){
                             return rendererService.dateTimeConverter.format(value);
-                        }else if (field === 'countryId'){
-                            return rendererService.LOVConverter(self.countryLOV(),value);
                         }else{
                             return value;
                         }

@@ -1,11 +1,11 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService','services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox'],
-        function (oj, ko, $, rendererService, RestService, exportService)
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        function (oj, ko, $, rendererService, RestService, exportService,MessageService)
         {
             function exchangeRateMainViewModel() {
                 var self = this;
@@ -19,6 +19,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 var restService = RestService.exchangeRateService();
                 self.header = "Exchange Rate";
                 self.dialogTitle = "Create/edit "+self.header;
+                self.emptyPlaceholder = ko.observable(false);
                 self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
@@ -27,7 +28,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.codeSearch = ko.observable('');
                 self.rateTypeSearch = ko.observable('');
                 self.selectedExRateTypeId = ko.observableArray();
-                
+                self.message = ko.observable();
+                self.colorType = ko.observable();
+                self.tracker = ko.observable();
+                self.dialogOffcanvas = {selector: '#dialogDrawer', content: '#dialogContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                self.pageOffcanvas = {selector: '#pageDrawer', content: '#pageContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                    
+                self.showMessage = function(type,message,afterShow){
+                    var canvas = ($("#CreateEditDialog").ojDialog("isOpen"))?self.dialogOffcanvas:self.pageOffcanvas;
+                    self.message(message);
+                    if (type==="SUCCESS"){
+                        self.colorType(MessageService.bgColorSuccess);
+                    }else if (type==="ERROR"){
+                        self.colorType(MessageService.bgColorError);
+                    }else{
+                        self.colorType(MessageService.bgColorDefault);
+                    }
+                    oj.OffcanvasUtils.open(canvas);
+                    setTimeout(function(){
+                        oj.OffcanvasUtils.close(canvas);
+                        if (afterShow){
+                            afterShow();
+                        }
+                    },MessageService.displayTimeout);
+                };                
                 self.LOVNameRenderer = function(context){
                     if (context.data){
                         var id = context.data;
@@ -50,11 +76,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.refreshData = function(){
                     // fetch from rest service
-                    self.collection().refresh().then(function(){
-                        self.allData(self.collection().toJSON());
-                    });  
-                };
-                
+                    self.collection().fetch({
+                        success: function(){
+                            self.allData(self.collection().toJSON());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
+                    }); 
+                };                
                 self.search = function (name, type) {
                     var tmp = self.collection().filter(function(rec){
                         return ((name.length ===0 || (name.length > 0 && rec.attributes.ExRateName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) && 
@@ -71,7 +100,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
-                self.save = function (model) {
+                self.save = function (model,successMsg) {
                     var user = "LAS";
                     var currentDate = new Date();
                     var defaultAttributes = model.isNew()?{createdBy: user,
@@ -84,9 +113,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     model.save(defaultAttributes,{
                         success: function(model,resp){
                             self.refreshData();
+                            var message = successMsg? successMsg: (model.isNew()?'A new '+self.header+' is successfully created':self.header+' is successfully updated');
+                            self.showMessage("SUCCESS",message,function(){
+                                $("#CreateEditDialog").ojDialog("close");
+                            });
                         },
                         error: function(){
-                            console.log("failed saving");
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
                         }
                     });
                     
@@ -98,7 +131,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model);
+                    self.save(model,self.header+" \""+model.attributes.crncyCd+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
@@ -122,7 +155,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onReset = function(){
                     self.refreshData();
                     
-                    self.codeSearch('');
+                    self.selectedExRateTypeId('');
                     self.nameSearch('');
                     
                     self.selectedRow(undefined);
@@ -137,7 +170,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onCreate = function(){
-                    var model = restService.createModel();
+                    var model = restService.createModel({active: 'Y'});
                     self.createOrEdit(model);
                 };
                 
@@ -148,15 +181,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSave = function(){
-                    var arr = self.selectedExRateTypeId();
-                    self.exchangeRateModel().attributes.exRateTypeId = arr[0];
-                    self.save(self.exchangeRateModel());
-                    $("#CreateEditDialog").ojDialog("close");
+                    var trackerObj = ko.utils.unwrapObservable(self.tracker);
+                    if (trackerObj !== undefined){
+                        if (trackerObj instanceof oj.InvalidComponentTracker){
+                            trackerObj.showMessages();
+                            trackerObj.focusOnFirstInvalid();
+                        }
+                    }
+                    if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
+                        var arr = self.selectedExRateTypeId();
+                        self.exchangeRateModel().attributes.exRateTypeId = arr[0];
+                         self.save(self.exchangeRateModel());
+                    }
                 };
-                
+
                 self.onActivateDeactivate = function(){
-                    var model = self.collection().get(self.selectedRow());
-                    self.activateDeactivate(model);
+                    $("#ConfirmDialog").ojDialog("open");
                 };
                 
                 self.onSelectRow = function(event, ui){
@@ -176,9 +216,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onCancel = function () {
                     $("#CreateEditDialog").ojDialog("close");
                 };
+                self.onConfirmNo = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                };
                 
-                self.refreshData();
-                    
+                self.onConfirmYes = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                    var model = self.collection().get(self.selectedRow());
+                    self.activateDeactivate(model);
+                };
+                
+                self.refreshData();                    
             }
             return exchangeRateMainViewModel();
         }
