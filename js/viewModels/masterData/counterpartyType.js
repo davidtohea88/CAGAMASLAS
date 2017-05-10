@@ -72,9 +72,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
 
                 self.search = function (code, name, desc) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((code.length ===0 || (code.length > 0 && rec.attributes.counterPrtyTypCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                (name.length ===0 || (name.length > 0 && rec.attributes.counterPrtyTypName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                (desc.length ===0 || (desc.length > 0 && rec.attributes.counterPrtyTypDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                        return ((code.length ===0 || (code.length > 0 && rec.attributes.cptTypeCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.cptTypeName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.cptTypeDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
@@ -86,8 +86,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.save = function (model,successMsg) {
-                    $('#btnSave').ojButton("disable");
-                    $('#btnCancel').ojButton("disable");
+                    $('#btnSave').ojButton("option", "disabled", true );
+                    $('#btnCancel').ojButton("option", "disabled", true );
                     var user = "LAS";
                     var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
@@ -101,14 +101,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             var message = successMsg? successMsg: (model.isNew()?'A new counterparty type is successfully created':'Counterparty type is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
-                                $('#btnSave').ojButton("enable");
-                                $('#btnCancel').ojButton("enable");
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
                             });
                         },
                         error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status),function(){
-                                $('#btnSave').ojButton("enable");
-                                $('#btnCancel').ojButton("enable");
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
                             });
                         }
                     });
@@ -121,7 +123,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model,"Counterparty type \""+model.attributes.cptSctrName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                    self.save(model,"Counterparty type \""+model.attributes.cptTypeName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
@@ -218,6 +220,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.onConfirmYes = function(){
                     $("#ConfirmDialog").ojDialog("close");
+                    $('#btnActivate').ojButton("option", "disabled", true );
                     var model = self.collection().get(self.selectedRow());
                     self.activateDeactivate(model);
                 };

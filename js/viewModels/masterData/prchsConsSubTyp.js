@@ -95,8 +95,8 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 };
                 
                 self.save = function (model,successMsg) {
-                    $('#btnSave').ojButton("disable");
-                    $('#btnCancel').ojButton("disable");
+                    $('#btnSave').ojButton("option", "disabled", true );
+                    $('#btnCancel').ojButton("option", "disabled", true );
                     var user = "LAS";
                     var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
@@ -110,14 +110,16 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                             var message = successMsg? successMsg: (model.isNew()?'A new Purchase Consideration Subtype is successfully created':'Purchase Consideration Subtype is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
-                                $('#btnSave').ojButton("enable");
-                                $('#btnCancel').ojButton("enable");
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
                             });
                         },
                         error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status),function(){
-                                $('#btnSave').ojButton("enable");
-                                $('#btnCancel').ojButton("enable");
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
                             });
                         }
                     });
@@ -229,6 +231,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 
                 self.onConfirmYes = function(){
                     $("#ConfirmDialog").ojDialog("close");
+                    $('#btnActivate').ojButton("option", "disabled", true );
                     var model = self.collection().get(self.selectedRow());
                     self.activateDeactivate(model);
                 };

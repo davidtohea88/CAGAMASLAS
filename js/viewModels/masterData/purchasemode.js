@@ -101,14 +101,16 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                             var message = successMsg? successMsg: (model.isNew()?'A new Purchase mode is successfully created':'Purchase mode is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
-                                $('#btnSave').ojButton("enable");
-                                $('#btnCancel').ojButton("enable");
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
                             });
                         },
                         error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status),function(){
-                                $('#btnSave').ojButton("enable");
-                                $('#btnCancel').ojButton("enable");
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
                             });
                         }
                     });

@@ -32,7 +32,7 @@ define(['jquery','ojs/ojcore' ,'knockout'],
             self.bgColorError = "#F45229";
             self.bgColorSuccess = "#B4D884";
             self.bgColorDefault = "#DBD6D0";
-            self.displayTimeout = 3000;
+            self.displayTimeout = 2000;
             
         };
         return new MessageService();

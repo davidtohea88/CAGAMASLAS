@@ -86,8 +86,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.save = function (model,successMsg) {
-                    $('#btnSave').ojButton("disable");
-                    $('#btnCancel').ojButton("disable");
+                    $('#btnSave').ojButton("option", "disabled", true );
+                    $('#btnCancel').ojButton("option", "disabled", true );
                     var user = "LAS";
                     var currentDate = new Date();
                     var defaultAttributes = {
@@ -102,14 +102,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             var message = successMsg? successMsg: (model.isNew()?'A new agreement type is successfully created':'Agreement type is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
-                                $('#btnSave').ojButton("enable");
-                                $('#btnCancel').ojButton("enable");
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
                             });
                         },
                         error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status),function(){
-                                $('#btnSave').ojButton("enable");
-                                $('#btnCancel').ojButton("enable");
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
                             });
                         }
                     });
@@ -215,6 +217,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onConfirmYes = function(){
+                    $('#btnActivate').ojButton("option", "disabled", true );
                     $("#ConfirmDialog").ojDialog("close");
                     var model = self.collection().get(self.selectedRow());
                     self.activateDeactivate(model);
