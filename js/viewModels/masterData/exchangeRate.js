@@ -74,8 +74,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.save = function (model) {
                     var user = "LAS";
                     var currentDate = new Date();
-                    var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
-                            createdDate: model.isNew()?currentDate:model.attributes.createdDate,
+                    var defaultAttributes = model.isNew()?{createdBy: user,
+                            createdDate: currentDate
+                        }:{createdBy: model.attributes.createdBy,
+                            createdDate: model.attributes.createdDate,
                             updatedBy: user,
                             updatedDate: currentDate
                         };

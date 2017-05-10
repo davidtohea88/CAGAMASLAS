@@ -91,8 +91,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     $('#btnCancel').ojButton("option", "disabled", true );
                     var user = "LAS";
                     var currentDate = new Date().toISOString();
-                    var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
-                            createdDate: model.isNew()?currentDate:model.attributes.createdDate,
+                    var defaultAttributes = model.isNew()?{createdBy: user,
+                            createdDate: currentDate
+                        }:{createdBy: model.attributes.createdBy,
+                            createdDate: model.attributes.createdDate,
                             updatedBy: user,
                             updatedDate: currentDate
                         };
