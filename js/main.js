@@ -399,6 +399,8 @@ require(['ojs/ojcore',
                 'currency': {value:getMasterDataPath('currency'), label: 'Currency'},
                 'fundingsource': {value:getMasterDataPath('fundingSource'), label: 'Funding Source'},
                 'exchangeratedataentry': {value:getMasterDataPath('exchangeRateDataEntry'), label: 'Exchange Rate Data Entry'},
+                'revaluation': {value:getMasterDataPath('revaluation'), label: 'Revaluation'},
+                'daycountconvention': {value:getMasterDataPath('DayCountConvention'), label: 'Day Count Convention'},
             });
             
                        

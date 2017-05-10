@@ -105,6 +105,12 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.fundingSourceService = function(){
                 return new BaseRestService("fundingsource","FundSrcId","MdFundingSource");
             };
+            self.dayCountConventionService  = function(){
+                return new BaseRestService("daycountconvention","DCConvId","MdDayCountConvention");
+            };
+            self.NBDConventionService  = function(){
+                return new BaseRestService("nbdayconvention","NDBConvId","MdNonBusinessDayConvention");
+            };
         };
         return new RestService();
 });
