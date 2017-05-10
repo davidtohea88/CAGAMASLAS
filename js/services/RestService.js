@@ -21,6 +21,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.branchService = function(){
                 return new BaseRestService("branch","branchId","MdBranch");
             };
+            self.contactService = function(){
+                return new BaseRestService("contact","contactId","MdContact");
+            };
             self.rateTypeService = function(){
                 return new BaseRestService("rateType","rateTypeId","MdRateType");
             };

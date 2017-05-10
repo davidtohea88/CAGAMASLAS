@@ -39,6 +39,9 @@ define(['jquery','ojs/ojcore' ,'knockout'], function($,oj,ko) {
                 }
                 return arr;
         };
+        self.switchConverter = function(str){
+            return (str===1)? 'Y':'N';
+        };
     };
     return new RendererServiceUtilities();
 });
