@@ -86,10 +86,14 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 };
                 
                 self.save = function (model,successMsg) {
+                    $('#btnSave').ojButton("option", "disabled", true );
+                    $('#btnCancel').ojButton("option", "disabled", true );
                     var user = "LAS";
                     var currentDate = new Date().toISOString();
-                    var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
-                            createdDate: model.isNew()?currentDate:model.attributes.createdDate,
+                    var defaultAttributes = model.isNew()?{createdBy: user,
+                            createdDate: currentDate
+                        }:{createdBy: model.attributes.createdBy,
+                            createdDate: model.attributes.createdDate,
                             updatedBy: user,
                             updatedDate: currentDate
                         };
@@ -99,10 +103,17 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                             var message = successMsg? successMsg: (model.isNew()?'A new payment frequency is successfully created':'Payment frequency is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
                             });
                         },
                         error: function(resp){
-                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status),function(){
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
+                            });
                         }
                     });
                     
@@ -210,6 +221,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 
                 self.onConfirmYes = function(){
                     $("#ConfirmDialog").ojDialog("close");
+                    $('#btnActivate').ojButton("option", "disabled", true );
                     var model = self.collection().get(self.selectedRow());
                     self.activateDeactivate(model);
                 };

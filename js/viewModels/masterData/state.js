@@ -4,7 +4,7 @@
 define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services/RestService','services/exportService', 'services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation','ojs/ojselectcombobox'],
         function (oj, ko, $, rendererService, RestService, exportService, MessageService)
         {
             function stateMainViewModel() {
@@ -100,10 +100,14 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 };
                 
                 self.save = function (model,successMsg) {
+                    $('#btnSave').ojButton("option", "disabled", true );
+                    $('#btnCancel').ojButton("option", "disabled", true );
                     var user = "LAS";
                     var currentDate = new Date().toISOString();
-                    var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
-                            createdDate: model.isNew()?currentDate:model.attributes.createdDate,
+                    var defaultAttributes = model.isNew()?{createdBy: user,
+                            createdDate: currentDate
+                        }:{createdBy: model.attributes.createdBy,
+                            createdDate: model.attributes.createdDate,
                             updatedBy: user,
                             updatedDate: currentDate
                         };
@@ -113,10 +117,17 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                             var message = successMsg? successMsg: (model.isNew()?'A new State is successfully created':'State is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
                             });
                         },
                         error: function(resp){
-                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status),function(){
+                                $('#btnSave').ojButton("option", "disabled", false );
+                                $('#btnCancel').ojButton("option", "disabled", false );
+                                $('#btnActivate').ojButton("option", "disabled", false );
+                            });
                         }
                     });
                     
@@ -199,8 +210,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 };
                 
                 self.onActivateDeactivate = function(){
-                    var model = self.collection().get(self.selectedRow());
-                    self.activateDeactivate(model);
+                    $("#ConfirmDialog").ojDialog("open");
                 };
                 
                 self.onSelectRow = function(event, ui){
@@ -227,6 +237,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 
                 self.onConfirmYes = function(){
                     $("#ConfirmDialog").ojDialog("close");
+                    $('#btnActivate').ojButton("option", "disabled", true );
                     var model = self.collection().get(self.selectedRow());
                     self.activateDeactivate(model);
                 };
