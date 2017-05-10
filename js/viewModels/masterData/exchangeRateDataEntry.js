@@ -1,12 +1,11 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService','services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox'],
-        function (oj, ko, $, rendererService, RestService, exportService)
-
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        function (oj, ko, $, rendererService, RestService, exportService,MessageService)
         {
             function exchangeRateTypeMainViewModel() {
                 var restService = RestService.exchangeRateDataEntryService();
@@ -21,13 +20,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.currSearch = ko.observable('');
                 self.startDateSearch = ko.observable('');
                 self.endDateSearch = ko.observable('');
-//                self.originCurrency = ko.observable('');
-//                self.targetCurrency = ko.observable('');
-//                self.rate = ko.observable('');
-//                self.reverseRate = ko.observable('');
-//                self.startDate = ko.observable('');
-//                self.endDate = ko.observable('');
-
+                self.message = ko.observable();
+                self.colorType = ko.observable();
+                self.tracker = ko.observable();
+                self.dialogOffcanvas = {selector: '#dialogDrawer', content: '#dialogContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                self.pageOffcanvas = {selector: '#pageDrawer', content: '#pageContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                    
+                self.showMessage = function(type,message,afterShow){
+                    var canvas = ($("#CreateEditDialog").ojDialog("isOpen"))?self.dialogOffcanvas:self.pageOffcanvas;
+                    self.message(message);
+                    if (type==="SUCCESS"){
+                        self.colorType(MessageService.bgColorSuccess);
+                    }else if (type==="ERROR"){
+                        self.colorType(MessageService.bgColorError);
+                    }else{
+                        self.colorType(MessageService.bgColorDefault);
+                    }
+                    oj.OffcanvasUtils.open(canvas);
+                    setTimeout(function(){
+                        oj.OffcanvasUtils.close(canvas);
+                        if (afterShow){
+                            afterShow();
+                        }
+                    },MessageService.displayTimeout);
+                };
                 self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
                 };
@@ -42,14 +60,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                  
                 self.refreshData = function(){
                     // fetch from rest service
-                    self.collection().refresh().then(function(){
-                        self.allData(self.collection().toJSON());
-                    });  
+                    self.collection().fetch({
+                        success: function(){
+                            self.allData(self.collection().toJSON());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
+                    }); 
                 };
 
 
                 self.search = function (name, curr,start, end) {
-                    console.log(start);
                     var tmp = self.collection().filter(function(rec){
                             return ((name.length ===0 || (name.length > 0 && rec.attributes.ExRateName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
                                     (start.length ===0 || (start.length > 0 && rec.attributes.StartDate.indexOf(start) > -1)) &&
@@ -69,7 +90,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     $("#CreateEditDialog").ojDialog("close");
                 };
                 
-                self.save = function (model) {
+                self.save = function (model,successMsg) {
                     var user = "LAS";
                     var currentDate = new Date();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
@@ -80,9 +101,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     model.save(defaultAttributes,{
                         success: function(model,resp){
                             self.refreshData();
+                            var message = successMsg? successMsg: (model.isNew()?'A new '+self.header+' is successfully created':self.header+' is successfully updated');
+                            self.showMessage("SUCCESS",message,function(){
+                                $("#CreateEditDialog").ojDialog("close");
+                            });
                         },
                         error: function(){
-                            console.log("failed saving");
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
                         }
                     });
                     
@@ -94,7 +119,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model);
+                    self.save(model,self.header+" \""+model.attributes.ExRateName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
@@ -103,8 +128,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             return rendererService.activeConverter(value);
                         }else if (field === 'updatedDate'){
                             return rendererService.dateTimeConverter.format(value);
-                        }else if (field === 'countryId'){
-                            return rendererService.LOVConverter(self.countryLOV(),value);
                         }else{
                             return value;
                         }
@@ -124,13 +147,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSearch = function(){
-                    self.collection().refresh().then(function(){
+                    self.collection().fetch({
+                        success: function(){
                         self.search(self.nameSearch(),self.currSearch(),self.startDateSearch(),self.endDateSearch());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
                     });
                 };
                 
                 self.onCreate = function(){
-                    var model = restService.createModel();
+                    var model = restService.createModel({active: 'Y'});
                     self.createOrEdit(model);
 
                 };
@@ -141,13 +168,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSave = function(){
-                    self.save(self.ExRateModel());
-                    $("#CreateEditDialog").ojDialog("close");
+                    var trackerObj = ko.utils.unwrapObservable(self.tracker);
+                    if (trackerObj !== undefined){
+                        if (trackerObj instanceof oj.InvalidComponentTracker){
+                            trackerObj.showMessages();
+                            trackerObj.focusOnFirstInvalid();
+                        }
+                    }
+                    if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
+                         self.save(self.ExRateModel());
+                    }
                 };
                 
                 self.onActivateDeactivate = function(){
-                    var model = self.collection().get(self.selectedRow());
-                    self.activateDeactivate(model);
+                    $("#ConfirmDialog").ojDialog("open");
                 };
                 
                 self.onSelectRow = function(event, ui){
@@ -167,7 +201,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onCancel = function () {
                     $("#CreateEditDialog").ojDialog("close");
                 };
-
+                self.onConfirmNo = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                };
+                
+                self.onConfirmYes = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                    var model = self.collection().get(self.selectedRow());
+                    self.activateDeactivate(model);
+                };
+                
+                self.refreshData();
                 self.refreshData();
             }
             return exchangeRateTypeMainViewModel();

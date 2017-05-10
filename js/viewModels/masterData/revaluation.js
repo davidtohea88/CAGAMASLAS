@@ -1,13 +1,70 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService','services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojselectcombobox'],
-        function (oj, ko, data, $, rendererService, configService, exportService)
+        function (oj, ko, $, rendererService, RestService, exportService,MessageService)
         {
             function organizationTypeMainViewModel() {
                 var self = this;
+
+                self.message = ko.observable();
+                self.colorType = ko.observable();
+                self.pageOffcanvas = {selector: '#pageDrawer', content: '#pageContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                    
+                self.showMessage = function(type,message,afterShow){
+                    var canvas = self.pageOffcanvas;
+                    self.message(message);
+                    if (type==="SUCCESS"){
+                        self.colorType(MessageService.bgColorSuccess);
+                    }else if (type==="ERROR"){
+                        self.colorType(MessageService.bgColorError);
+                    }else{
+                        self.colorType(MessageService.bgColorDefault);
+                    }
+                    oj.OffcanvasUtils.open(canvas);
+                    setTimeout(function(){
+                        oj.OffcanvasUtils.close(canvas);
+                        if (afterShow){
+                            afterShow();
+                        }
+                    },MessageService.displayTimeout);
+                };
+                
+                //LOV
+
+                var productService = RestService.productService();
+                self.productLOV = ko.observableArray();
+                productService.fetchAsLOV('prodName','prodCd').then(function(data){
+                    self.productLOV(data);
+                });
+
+                var companyService = RestService.companyService();
+                self.companyLOV = ko.observableArray();
+                companyService.fetchAsLOV('CompanyName','CompanyId').then(function(data){
+                    self.companyLOV(data);
+                });
+
+                var accountService = RestService.accountService();
+                self.accountLOV = ko.observableArray();
+                accountService.fetchAsLOV('AccountName','AccountNo').then(function(data){
+                    for(item in data)
+                    {
+                        var res = {
+                            Account: data[item].value + ' | '+ data[item].label,
+                            AccountNo: data[item].value,
+                            AccountName: data[item].label
+                        };
+                        if(data[item].value!==undefined){
+                            self.accountLOV.push(res);                            
+                        }                      
+                    }
+                    console.log(self.accountLOV());
+                });
+
+
                 self.header = "Revaluation";
                 self.emptyPlaceholder = ko.observable(false);
                 self.selectedProductList = ko.observableArray();
@@ -15,18 +72,13 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 self.company = ko.observable('');
                 self.dbCode = ko.observable('');
                 self.selectedProduct = ko.observable('');
-                self.dbCodeData = ko.observableArray([ 
-                    {value: "AK", label: "AK - Alaska"},  
-                    {value: "HI", label: "HI - Hawaii"} 
-                ]);
-                self.companyData = ko.observableArray([ 
-                    {value: "AK", label: "AK - Alaska"},  
-                    {value: "HI", label: "HI - Hawaii"} 
-                ]);
-                self.productData = ko.observableArray([ 
-                    {value: "AK", label: "AK - Alaska"},  
-                    {value: "HI", label: "HI - Hawaii"} 
-                ]);
+
+                var restService = RestService.dbCodeService();
+                self.collection = ko.observable(restService.createCollection());
+                self.dbCodeData = ko.observableArray();
+                self.dbCodeDataForRender = ko.observableArray();
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.dbCodeData, {idAttribute: self.collection().model.idAttribute}));
+
                 self.selectedGainAccount = ko.observable('');
                 self.selectedGainAccountList = ko.observableArray();
                 self.selectedGainAccountDataSource = new oj.ArrayTableDataSource(self.selectedGainAccountList, {idAttribute: 'Account'});
@@ -35,130 +87,120 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 self.selectedLossAccountDataSource = new oj.ArrayTableDataSource(self.selectedLossAccountList, {idAttribute: 'Account'});
                 self.accountData = ko.observableArray();
 
-                self.GetGLAccount = function(){
-                    console.log("fetching data - GL Account");
-                    var jsonUrl = "js/data/GLAccount.json";
-
-                    $.ajax(jsonUrl,
-                            {
-                                method: "GET",
-                                dataType: "json",
-//                                headers: {"Authorization": "Basic " + btoa("username:password")},
-                                // Alternative Headers if using JWT Token
-                                // headers : {"Authorization" : "Bearer "+ jwttoken; 
-                                success: function (data)
-                                {
-                                    for(item in data.MdGLAccount)
-                                    {                               
-                                        var res = {
-                                            Account: data.MdGLAccount[item].AccountNo + ' | '+ data.MdGLAccount[item].AccountName,
-                                            AccountNo: data.MdGLAccount[item].AccountNo,
-                                            AccountName: data.MdGLAccount[item].AccountName
-                                        };
-                                        self.accountData.push(res);
-                                    }
-                                },
-                                error: function (jqXHR, textStatus, errorThrown)
-                                {
-                                    console.log(textStatus, errorThrown);
-                                }
-                            });
-                };
                 
-                self.refreshData = function (fnSuccess) {
-                    console.log("fetching data");
-                    var jsonUrl = "js/data/exchangeRateDateEntry.json";
-
-                    $.ajax(jsonUrl,
-                            {
-                                method: "GET",
-                                dataType: "json",
-//                                headers: {"Authorization": "Basic " + btoa("username:password")},
-                                // Alternative Headers if using JWT Token
-                                // headers : {"Authorization" : "Bearer "+ jwttoken; 
-                                success: function (data)
-                                {
-                                    fnSuccess(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown)
-                                {
-                                    console.log(textStatus, errorThrown);
-                                }
-                            }
-                    );
-                };
-
+                
                 
                 
                 // ===============  EVENT HANDLER  ==============
                 
-                self.onLoad = function(){
-                    self.refreshData(function(data){
-                        self.selectedRow(undefined);
-                        self.allData(data.MDExchangeRateDateEntry);
-                    });
+                self.refreshData = function(){
+                    // fetch from rest service
+                    self.collection().refresh().then(function(){
+                        
+                        self.dbCodeData(self.collection().toJSON());
+                    });  
                 };
                 
                 self.onRun = function(){
-                    console.log(self.company()+', '+self.dbCode()+', '+self.selectedProduct());
-                    var gainAccount = [];
-                    var lossAccount = [];
-                    for(item in self.selectedGainAccountList())
+                    if(self.company()==='')
                     {
-                        gainAccount.push(self.selectedGainAccountList()[item].AccountNo);
+                        self.showMessage("ERROR",MessageService.httpStatusToMessage('Please select the Company'));
                     }
-                    for(item in self.selectedLossAccountList())
+                    else if(self.dbCode()==='')
                     {
-                        lossAccount.push(self.selectedLossAccountList()[item].AccountNo);
+                        self.showMessage("ERROR",MessageService.httpStatusToMessage('Please select the Database Code'));
                     }
-                    
-                    console.log(gainAccount);
-                    console.log(lossAccount);
+                    else if(self.selectedProduct()==='')
+                    {
+                        self.showMessage("ERROR",MessageService.httpStatusToMessage('Please select the Product'));
+                    }
+                    else if(self.selectedGainAccountList().length<=0)
+                    {
+                        self.showMessage("ERROR",MessageService.httpStatusToMessage('Please select the Realized Gain Account'));
+                    }
+                    else if(self.selectedLossAccountList().length<=0)
+                    {
+                        self.showMessage("ERROR",MessageService.httpStatusToMessage('Please select the Realized Loss Account'));
+                    }
+                    else {
+                        var gainAccount = [];
+                        var lossAccount = [];
+                        for(item in self.selectedGainAccountList())
+                        {
+                            gainAccount.push(self.selectedGainAccountList()[item].AccountNo);
+                        }
+                        for(item in self.selectedLossAccountList())
+                        {
+                            lossAccount.push(self.selectedLossAccountList()[item].AccountNo);
+                        }
+                        self.showMessage("SUCCESS",MessageService.httpStatusToMessage('Revaluation is run.'));
+                    }
                     
                 };
                 
-                self.gainAccountChangeHandler = function (context, valueParam) {
-                     if (valueParam.option == "value" && valueParam.value!="") {                        
-                            var valNo = valueParam.value.toString().split('|')[0];
-                            var valName = valueParam.value.toString().split('|')[1];
+                self.onAddGain = function () {
+                        if(self.selectedGainAccount()[0]!==undefined){
+                            var valNo = self.selectedGainAccount()[0].split(' | ')[0];
+                            var valName = self.selectedGainAccount()[0].split(' | ')[1];
                             
                             var res = {
-                                Account: valueParam.value,
+                                Account: self.selectedGainAccount()[0],
                                 AccountNo: valNo,
                                 AccountName: valName
                             };
-                            console.log(self.selectedGainAccountList.indexOf('Account'));
                             self.selectedGainAccountList.push(res);
-                        };
+                        }
                     };
-                self.lossAccountChangeHandler = function (context, valueParam) {
-                     if (valueParam.option == "value" && valueParam.value!="") {                        
-                            var valNo = valueParam.value.toString().split('|')[0];
-                            var valName = valueParam.value.toString().split('|')[1];
+                self.onAddLoss = function () {
+                        if(self.selectedLossAccount()[0]!==undefined){
+                            var valNo = self.selectedLossAccount()[0].split(' | ')[0];
+                            var valName = self.selectedLossAccount()[0].split(' | ')[1];
                             
                             var res = {
-                                Account: valueParam.value,
+                                Account: self.selectedLossAccount()[0],
                                 AccountNo: valNo,
                                 AccountName: valName
                             };
                             self.selectedLossAccountList.push(res);
+                        }
+                    };        
+                
+                self.companyChangeHandler = function (context, valueParam) {
+                    self.dbCodeDataForRender([]);
+                        if (valueParam.option == "value" && valueParam.value!="") {                        
+                            var val = valueParam.value;                            
+//                            var tmp = self.collection().filter(function(rec){
+//                                return (rec.attributes.CompanyId===val[0]);
+//                            });
+//                            self.collection().reset(tmp);
+//                            self.dbCodeData(self.collection().toJSON());
+//
+                        ko.utils.arrayForEach(self.dbCodeData(),function(item){
+                                if (item.CompanyId === valueParam.value[0]){
+                                    var lbl = item['dbCodeName'];
+                                    var val = item['dbCodeId'];
+                                    self.dbCodeDataForRender.push({label: lbl, value: val});
+                                    console.log('push '+ val);
+                                }
+                            });
+
                         };
                     };        
+                    
                 self.onRemoveGain = function(data)
                 {
                     self.selectedGainAccountList.remove(function(item) {
-                        return item.AccountNo == data.AccountNo;
+                        return item.AccountNo === data.AccountNo;
                     });
                 };
                 self.onRemoveLoss = function(data)
                 {
                     self.selectedLossAccountList.remove(function(item) {
-                        return item.AccountNo == data.AccountNo;
+                        return item.AccountNo === data.AccountNo;
                     });
                 };
 
-                //self.onLoad();
-                self.GetGLAccount();
+                self.refreshData();
             }
             return organizationTypeMainViewModel();
         }
