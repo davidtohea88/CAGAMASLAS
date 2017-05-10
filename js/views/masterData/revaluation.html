@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 
-<div id="container" >
+<div id="container" class="oj-offcanvas-outer-wrapper">
     <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+    <div id="pageDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center', color: 'white'}">
+        <span data-bind="text: message"></span>
+    </div>
     <div class="page-content" style="margin:0 auto">
         <div class="oj-flex">  
             <div class="oj-flex-item">
@@ -21,7 +24,8 @@
                                                         <select id="company" data-bind="ojComponent: {component: 'ojSelect',
                                                                                 placeholder: emptyPlaceholder() ? '' : 'Select a company',
                                                                                 value: company,
-                                                                                options: companyData}">
+                                                                                optionChange: companyChangeHandler, 
+                                                                                options: companyLOV}">
                                                         </select>
                                                     </div>
                                                 </div> 
@@ -33,7 +37,7 @@
                                                         <select id="dbcode" data-bind="ojComponent: {component: 'ojSelect',
                                                                                 placeholder: emptyPlaceholder() ? '' : 'Select a database code',
                                                                                 value: dbCode,
-                                                                                options: dbCodeData}">
+                                                                                options: dbCodeDataForRender}">
                                                         </select>
                                                     </div>
                                                 </div> 
@@ -49,7 +53,7 @@
                                                         <select id="product" data-bind="ojComponent: {component: 'ojSelect',
                                                                                 placeholder: emptyPlaceholder() ? '' : 'Select a product',
                                                                                 value: selectedProduct,
-                                                                                options: productData}">
+                                                                                options: productLOV}">
                                                         </select>
                                                     </div>
                                                 </div>
@@ -61,7 +65,7 @@
                                 <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >  
                                     <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
                                         <div class="oj-flex-item">
-                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                            <div class="oj-form  oj-md-odd-cols-4 oj-md-even-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
                                                         <label for="gainAccount">Add Realized Gain Account</label>
@@ -71,15 +75,17 @@
                                                             data-bind="ojComponent: {
                                                                 component: 'ojSelect',
                                                                 placeholder: emptyPlaceholder() ? '' : 'Select an account',
-                                                                options: accountData,
-                                                                optionChange: gainAccountChangeHandler, 
+                                                                options: accountLOV,
                                                                 optionsKeys: {
                                                                     value: 'Account',
                                                                     label: 'Account'
                                                                 },
-                                                                value:selectedGainAccount,
-                                                                optionTemplate: 'optionTemplate'}">
+                                                                value:selectedGainAccount}">
                                                     </div>
+                                                    <div class="oj-flex-item">
+                                                        <button id= "addGain"  style="margin-left:5px;" data-bind="click: onAddGain,ojComponent: {component: 'ojButton', label: 'Add' } "></button>
+                                                    </div>
+
                                                 </div>
                                                 <div class="oj-flex">
                                                     <div class="oj-flex-item">
@@ -98,24 +104,24 @@
                                             </div>
                                         </div>
                                          <div class="oj-flex-item">
-                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                            <div class="oj-form  oj-md-odd-cols-4 oj-md-even-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="lossAccount">Add Realized Loss Account</label>
+                                                        <label for="lossAccountList">Add Realized Loss Account</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="lossAccountList"
-                                                            data-bind="ojComponent: {
-                                                                component: 'ojSelect',
+                                                        <select id="lossAccountList" data-bind="ojComponent: {component: 'ojSelect',
                                                                 placeholder: emptyPlaceholder() ? '' : 'Select an account',
-                                                                options: accountData,
-                                                                optionChange: lossAccountChangeHandler, 
+                                                                options: accountLOV,
                                                                 optionsKeys: {
                                                                     value: 'Account',
                                                                     label: 'Account'
                                                                 },
-                                                                value:selectedLossAccount,
-                                                                optionTemplate: 'optionTemplate'}">
+                                                                value:selectedLossAccount}">
+                                                            </select>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <button id= "addLoss"  style="margin-left:5px;" data-bind="click: onAddLoss,ojComponent: {component: 'ojButton', label: 'Add' } "></button>
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">
@@ -155,13 +161,7 @@
 </div>
 
 
-<script type="text/html" id="optionTemplate">
-        <div>
-          <span class="oj-listbox-highlighter-section">
-            <span data-bind="text: Account"></span>
-          </span>
-        </div>
-  </script>
+
 <script type="text/html" id="delete_gain_hdr">
     <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
         Action

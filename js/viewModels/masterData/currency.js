@@ -115,7 +115,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model,self.header+" \""+model.attributes.assetTypeName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                    self.save(model,self.header+" \""+model.attributes.crncyCd+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
@@ -124,8 +124,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             return rendererService.activeConverter(value);
                         }else if (field === 'updatedDate'){
                             return rendererService.dateTimeConverter.format(value);
-                        }else if (field === 'countryId'){
-                            return rendererService.LOVConverter(self.countryLOV(),value);
                         }else{
                             return value;
                         }
