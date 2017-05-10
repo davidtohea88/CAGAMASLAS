@@ -402,6 +402,7 @@ require(['ojs/ojcore',
                 'exchangeratedataentry': {value:getMasterDataPath('exchangeRateDataEntry'), label: 'Exchange Rate Data Entry'},
                 'revaluation': {value:getMasterDataPath('revaluation'), label: 'Revaluation'},
                 'daycountconvention': {value:getMasterDataPath('DayCountConvention'), label: 'Day Count Convention'},
+                'glpostingrule': {value:getMasterDataPath('GLPostingRule'), label: 'GL Posting Rule'}
             });
             
                        
