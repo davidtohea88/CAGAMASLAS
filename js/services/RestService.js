@@ -108,6 +108,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.dayCountConventionService  = function(){
                 return new BaseRestService("daycountconvention","DCConvId","MdDayCountConvention");
             };
+            self.NBDConventionService  = function(){
+                return new BaseRestService("nbdayconvention","NDBConvId","MdNonBusinessDayConvention");
+            };
         };
         return new RestService();
 });
