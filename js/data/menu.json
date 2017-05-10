@@ -218,6 +218,13 @@
             },
             {
                 "attr" : {
+                    "id" : "Contact",
+                    "name" : "Contact",
+                    "view" : "contact"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "blank",
                     "name" : "blank",
                     "view" : "blank"

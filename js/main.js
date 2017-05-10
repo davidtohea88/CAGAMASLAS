@@ -348,6 +348,7 @@ require(['ojs/ojcore',
                 'net-income': {label: 'net-income'},
                 
                 'branch': {value:getMasterDataPath('branch'), label: 'Branch'},
+                'contact': {value:getMasterDataPath('contact'), label: 'Contact'},
                 'paymentfreq': {value:getMasterDataPath('paymentFreq'),label: 'Payment Frequency'},
                 'assettype': {value:getMasterDataPath('assetType'),label: 'Asset Type'},
                 'assetgroup': {value:getMasterDataPath('assetGroup'),label: 'Asset Group'},
