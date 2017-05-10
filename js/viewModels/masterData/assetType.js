@@ -101,6 +101,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.save = function (model,successMsg) {
+                    $('#btnSave').ojButton("disable");
+                    $('#btnCancel').ojButton("disable");
                     var user = "LAS";
                     var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
@@ -114,10 +116,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             var message = successMsg? successMsg: (model.isNew()?'A new asset type is successfully created':'Asset type is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
+                                $('#btnSave').ojButton("enable");
+                                $('#btnCancel').ojButton("enable");
                             });
                         },
                         error: function(resp){
-                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status),function(){
+                                $('#btnSave').ojButton("enable");
+                                $('#btnCancel').ojButton("enable");
+                            });
                         }
                     });
                     

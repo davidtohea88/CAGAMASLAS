@@ -15,7 +15,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
-                self.purchaseModeModel = ko.observable();
+                self.model = ko.observable();
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
                 self.codeSearch = ko.observable('');
@@ -81,11 +81,13 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 };
                 
                 self.createOrEdit = function (model) {
-                    self.purchaseModeModel(model);
+                    self.model(model);
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
                 self.save = function (model,successMsg) {
+                    $('#btnSave').ojButton("disable");
+                    $('#btnCancel').ojButton("disable");
                     var user = "LAS";
                     var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
@@ -99,10 +101,15 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                             var message = successMsg? successMsg: (model.isNew()?'A new Purchase mode is successfully created':'Purchase mode is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
+                                $('#btnSave').ojButton("enable");
+                                $('#btnCancel').ojButton("enable");
                             });
                         },
                         error: function(resp){
-                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status),function(){
+                                $('#btnSave').ojButton("enable");
+                                $('#btnCancel').ojButton("enable");
+                            });
                         }
                     });
                     

@@ -4,7 +4,7 @@
 define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services/RestService','services/exportService', 'services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation','ojs/ojselectcombobox'],
         function (oj, ko, $, rendererService, RestService, exportService, MessageService)
         {
             function stateMainViewModel() {
@@ -100,6 +100,8 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 };
                 
                 self.save = function (model,successMsg) {
+                    $('#btnSave').ojButton("disable");
+                    $('#btnCancel').ojButton("disable");
                     var user = "LAS";
                     var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
@@ -113,10 +115,15 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                             var message = successMsg? successMsg: (model.isNew()?'A new State is successfully created':'State is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
+                                $('#btnSave').ojButton("enable");
+                                $('#btnCancel').ojButton("enable");
                             });
                         },
                         error: function(resp){
-                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status),function(){
+                                $('#btnSave').ojButton("enable");
+                                $('#btnCancel').ojButton("enable");
+                            });
                         }
                     });
                     

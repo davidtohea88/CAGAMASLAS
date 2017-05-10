@@ -1,11 +1,11 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService','cagutils', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService', 'services/exportService','services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset'],
-        function (oj, ko, data, $, rendererService, configService, exportService,cagutils)
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        function (oj, ko, $, rendererService, RestService, exportService,MessageService)
         {
             function counterpartyTypeMainViewModel() {
                 var self = this;
@@ -20,6 +20,32 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 self.descSearch = ko.observable('');
                 self.codeSearch = ko.observable('');
                 self.dateConverter = rendererService.dateConverter;
+                self.message = ko.observable();
+                self.colorType = ko.observable();
+                self.tracker = ko.observable();
+                self.dialogOffcanvas = {selector: '#dialogDrawer', content: '#dialogContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                self.pageOffcanvas = {selector: '#pageDrawer', content: '#pageContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                    
+                self.showMessage = function(type,message,afterShow){
+                    var canvas = ($("#CreateEditDialog").ojDialog("isOpen"))?self.dialogOffcanvas:self.pageOffcanvas;
+                    self.message(message);
+                    if (type==="SUCCESS"){
+                        self.colorType(MessageService.bgColorSuccess);
+                    }else if (type==="ERROR"){
+                        self.colorType(MessageService.bgColorError);
+                    }else{
+                        self.colorType(MessageService.bgColorDefault);
+                    }
+                    oj.OffcanvasUtils.open(canvas);
+                    setTimeout(function(){
+                        oj.OffcanvasUtils.close(canvas);
+                        if (afterShow){
+                            afterShow();
+                        }
+                    },MessageService.displayTimeout);
+                };
 
                 self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
@@ -33,25 +59,35 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     return rendererService.activeConverter(context.data);
                 };
                     
-                self.refreshData = function (fnSuccess) {
-                    console.log("fetching data");
-                    var jsonUrl = "js/data/counterpartyType.json";                    
-                    self.refreshJsonData(jsonUrl,fnSuccess);                 
+                self.refreshData = function(){
+                    // fetch from rest service
+                    self.collection().fetch({
+                        success: function(){
+                            self.allData(self.collection().toJSON());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
+                    });  
                 };
 
-                self.search = function (code, name, desc) {                    
-                    var Keys = ["counterPrtyTypCd","counterPrtyTypName","counterPrtyTypDesc"];
-                    var Vals= [code,name,desc];                    
-                    var temp = self.doFilterSearch(Keys,Vals,self.allData());                 
-                    self.allData(temp);
-                }; 
+                self.search = function (code, name, desc) {
+                    var tmp = self.collection().filter(function(rec){
+                        return ((code.length ===0 || (code.length > 0 && rec.attributes.counterPrtyTypCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.counterPrtyTypName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.counterPrtyTypDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                    });
+                    self.collection().reset(tmp);
+                    self.allData(self.collection().toJSON());
+                };
                 
                 self.createOrEdit = function (model) {
                     self.model(model);
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
-                self.save = function (model) {
+                self.save = function (model,successMsg) {
+                    $('#btnSave').ojButton("disable");
+                    $('#btnCancel').ojButton("disable");
                     var user = "LAS";
                     var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
@@ -62,9 +98,18 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     model.save(defaultAttributes,{
                         success: function(model,resp){
                             self.refreshData();
+                            var message = successMsg? successMsg: (model.isNew()?'A new counterparty type is successfully created':'Counterparty type is successfully updated');
+                            self.showMessage("SUCCESS",message,function(){
+                                $("#CreateEditDialog").ojDialog("close");
+                                $('#btnSave').ojButton("enable");
+                                $('#btnCancel').ojButton("enable");
+                            });
                         },
-                        error: function(){
-                            console.log("failed saving");
+                        error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status),function(){
+                                $('#btnSave').ojButton("enable");
+                                $('#btnCancel').ojButton("enable");
+                            });
                         }
                     });
                     
@@ -76,7 +121,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model);
+                    self.save(model,"Counterparty type \""+model.attributes.cptSctrName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
@@ -113,11 +158,12 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
                 
                 self.onSearch = function(){
-                    self.collection().refresh().then(function(){
-                        self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
-                        self.selectedRow(undefined);
-                        $('#btnEdit').hide();
-                        $('#btnActivate').hide();
+                    self.collection().fetch({
+                        success: function(){
+                            self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
                     });
                 };
                 
@@ -132,13 +178,20 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 };
                 
                 self.onSave = function(){
-                    self.save(self.model());
-                    $("#CreateEditDialog").ojDialog("close");
+                    var trackerObj = ko.utils.unwrapObservable(self.tracker);
+                    if (trackerObj !== undefined){
+                        if (trackerObj instanceof oj.InvalidComponentTracker){
+                            trackerObj.showMessages();
+                            trackerObj.focusOnFirstInvalid();
+                        }
+                    }
+                    if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
+                        self.save(self.model());
+                    }
                 };
                 
                 self.onActivateDeactivate = function(){
-                    var model = self.collection().get(self.selectedRow());
-                    self.activateDeactivate(model);
+                    $("#ConfirmDialog").ojDialog("open");
                 };
                 
                 self.onSelectRow = function(event, ui){
@@ -157,6 +210,16 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 
                 self.onCancel = function () {
                     $("#CreateEditDialog").ojDialog("close");
+                };
+                
+                self.onConfirmNo = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                };
+                
+                self.onConfirmYes = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                    var model = self.collection().get(self.selectedRow());
+                    self.activateDeactivate(model);
                 };
                 
                 self.refreshData();
