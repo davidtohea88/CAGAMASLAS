@@ -123,6 +123,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.dbCodeService = function(){
                 return new BaseRestService("databasecode","CompanyId","MdDatabaseCode");
             };
+            self.fundingSourceTaggingService = function(){
+                return new BaseRestService("MD_FundSourceDeal_Tagging/FundDealRestPS","fundLineId","MdFundSrcLine");
+            };
         };
         return new RestService();
 });
