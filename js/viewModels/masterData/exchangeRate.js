@@ -107,8 +107,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             createdDate: currentDate
                         }:{createdBy: model.attributes.createdBy,
                             createdDate: model.attributes.createdDate,
-                            updatedBy: user,
-                            updatedDate: currentDate
+                            updatedBy: model.isNew()?'':user,
+                            updatedDate: model.isNew()?'':currentDate
                         };
                     model.save(defaultAttributes,{
                         success: function(model,resp){

@@ -106,7 +106,7 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("exchangeratedataentry","ExRateCd","MDExchangeRateDataEntry");
             };
             self.fundingSourceService = function(){
-                return new BaseRestService("fundingsource","FundSrcId","MdFundingSource");
+                return new BaseRestService("MD_FundSrcService/FundingSrcRestPS","fundHdrId","MdFundSrcHdr");
             };
             self.dayCountConventionService  = function(){
                 return new BaseRestService("daycountconvention","DCConvId","MdDayCountConvention");
@@ -122,6 +122,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             };
             self.accountService = function(){
                 return new BaseRestService("account","AccountId","MdGLAccount");
+            };
+            self.eventService = function(){
+                return new BaseRestService("event","EventId","MdEvent");
             };
             self.dbCodeService = function(){
                 return new BaseRestService("databasecode","CompanyId","MdDatabaseCode");

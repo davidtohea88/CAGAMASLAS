@@ -110,8 +110,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
                             createdDate: model.isNew()?currentDate:model.attributes.createdDate,
-                            updatedBy: user,
-                            updatedDate: currentDate
+                            updatedBy: model.isNew()?'':user,
+                            updatedDate: model.isNew()?'':currentDate
                         };
                     model.save(defaultAttributes,{
                         success: function(model,resp){
@@ -134,7 +134,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model,self.header+" \""+model.attributes.FundSrcCd+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                    self.save(model,self.header+" \""+model.attributes.fundSrcName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
                 
                 self.deactivate = function (model) {
@@ -217,14 +217,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         then(function (obj) {
                             self.selectedHdr(self.collection().model.idAttribute);
                             self.selectedRow(obj.data[self.collection().model.idAttribute]);
-                            self.selectedRowValue(obj.data[self.collection().model.idAttribute.replace("Id","Name")]);
-                            console.log(self.selectedRowValue());
+                            self.selectedRowValue(obj.data['fundSrcName']);
                             $('#btnEdit').show();
                             $('#btnActivate').show();
                         }).
                         then(self.collectionTagging().refresh().then(function(obj){
                             var tmptag = self.collectionTagging().filter(function(rec){
-                                return ((rec.attributes.fundHdrId.toString()===self.selectedRow()) &&
+                                return ((rec.attributes.fundHdrId===self.selectedRow()) &&
                                         (rec.attributes.active==='Y'));
                             });
                             self.collectionTagging().reset(tmptag);

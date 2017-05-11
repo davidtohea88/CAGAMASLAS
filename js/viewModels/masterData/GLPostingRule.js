@@ -64,14 +64,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     console.log(self.accountLOV());
                 });
 
+                var eventService = RestService.eventService();
+                self.eventLOV = ko.observableArray();
+                eventService.fetchAsLOV('EventName','EventId').then(function(data){
+                    self.eventLOV(data);
+                });
 
-                self.header = "Revaluation";
+                self.header = "GL Posting Rule";
                 self.emptyPlaceholder = ko.observable(false);
                 self.selectedProductList = ko.observableArray();
                 self.selectedProductDataSource = new oj.ArrayTableDataSource(self.selectedProductList, {idAttribute: 'productID'});
                 self.company = ko.observable('');
                 self.dbCode = ko.observable('');
                 self.selectedProduct = ko.observable('');
+                self.selectedEvent = ko.observable('');
 
                 var restService = RestService.dbCodeService();
                 self.collection = ko.observable(restService.createCollection());
