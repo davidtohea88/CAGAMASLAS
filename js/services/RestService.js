@@ -21,23 +21,26 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.branchService = function(){
                 return new BaseRestService("branch","branchId","MdBranch");
             };
-            self.contactService = function(){
-                return new BaseRestService("contact","contactId","MdContact");
-            };
             self.rateTypeService = function(){
                 return new BaseRestService("rateType","rateTypeId","MdRateType");
             };
             self.productTypeService = function(){
-                return new BaseRestService("productType","prodTypeId","MdProdType");
+                return new BaseRestService("/MD_ProductType/ProductTypeRestPS","prodTypeId","MdProdType");
             };
             self.productGroupService = function(){
-                return new BaseRestService("productGroup","prodGrpId","MdProdGrp");
+                return new BaseRestService("/MD_Product_Group/ProductGroupRestPS","prodGrpId","MdProdGrp");
+            };
+            self.counterpartyContactService = function(){
+                return new BaseRestService("/MD_CounterpartyContacts/CPTContactRestPS","cptContId","MdCptContacts");
+            };
+            self.counterpartyService = function(){
+                return new BaseRestService("MD_Counterparty/CPTRestPS","cptId","MdCpt");
             };
             self.counterpartySectorService = function(){
-                return new BaseRestService("cptySector","cptSctrId","MdCptSctr");
+                return new BaseRestService("/MD_CounterpartySector/CPTSCTRRestPS","cptSctrId","MdCptSctr");
             };
             self.counterpartyTypeService = function(){
-                return new BaseRestService("cptyType","cptTypeId","MdCptType");
+                return new BaseRestService("/MD_CounterPartyType/CPTTypeRestPS","cptTypeId","MdCptType");
             };
             self.counterpartyGroupService = function(){
                 return new BaseRestService("cptyGroup","cptGrpId","MdCptGroup");
@@ -49,40 +52,43 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("agreementType","agreementTypId","MdAgreementTyp");
             };
             self.assetTypeService = function(){
-                return new BaseRestService("assetType","assetTypeId","MdAssetType");
+                return new BaseRestService("/MD_AssetType/AssetTypeRestPS","assetTypeId","MdAssetType");
             };
             self.assetGroupService = function(){
-                return new BaseRestService("assetGroup","assetGrpId","MdAssetGrp");
+                return new BaseRestService("/MD_Asset_Group/AssetGrpRestPS","assetGrpId","MdAssetGrp");
             };
             self.consumerTypeService = function(){
-                return new BaseRestService("consumerType","consmrTypeId","MdConsmrType");
+                return new BaseRestService("/MD_ConsumerTypeService/ConsmrTypeRestPS","consmrTypeId","MdConsmrType");
             };
             self.purchaseModeService = function(){
-                return new BaseRestService("purchaseMode","prchsModeId","MdPrchsMode");
+                return new BaseRestService("/MD_PurchaseMode/PurchaseModeRestPS","prchsModeId","MdPrchsMode");
             };
             self.purchaseConsSubTypeService = function(){
-                return new BaseRestService("purchaseConsSubType","consSubtypeId","MdConsSubType");
+                return new BaseRestService("/MD_PurchaseConsSubType/PurConsSubTypeRestPS","consSubtypeId","MdConsSubType");
             };
             self.purchaseConsTypeService = function(){
-                return new BaseRestService("purchaseConsType","consTypeId","MdConsType");
+                return new BaseRestService("/MD_PurchaseConType/PurConsTypeRestPS","consTypeId","MdConsType");
             };
             self.priceFactorService = function(){
-                return new BaseRestService("priceFactor","priceFctrId","MdPriceFctr");
+                return new BaseRestService("/MD_PriceFactor/PriceFactorRestPS","priceFctrId","MdPriceFctr");
             };
             self.organizationTypeService = function(){
-                return new BaseRestService("organizationType","orgTypeId","MDOrganizationType");
+                return new BaseRestService("/organizationType","orgTypeId","MDOrganizationType");
             };
             self.organizationService = function(){
-                return new BaseRestService("organization","orgId","MDOrganization");
+                return new BaseRestService("/organization","orgId","MDOrganization");
+            };
+            self.organizationHierarchyService = function(){
+                return new BaseRestService("/MD_OrgHierarchy/OrgHierRestPS","orgHierId","MdOrgHier");
             };
             self.gstOrganizationService = function(){
-                return new BaseRestService("gstOrgCode","gstOrgId","MdGstOrgCode");
+                return new BaseRestService("/MD_GSTOrgCode/GSTOrgCodeRestPS","gstOrgId","MdGstOrgCode");
             };
             self.gstChargeTypeService = function(){
-                return new BaseRestService("gstChargeType","gstCrgtypeId","MdGstcrgType");
+                return new BaseRestService("/MD_GST_ChargeType/GSTCrgTypeRestPS","gstCrgtypeId","MdGstcrgType");
             };
             self.gstFeeTypeService = function(){
-                return new BaseRestService("gstFeeType","gstFeetypeId","MdGstfeeType");
+                return new BaseRestService("/MD_GSTFeeType/GSTFeeTypeRestPS","gstFeetypeId","MdGstfeeType");
             };
             self.gstCodeService = function(){
                 return new BaseRestService("gstCode","gstCodeId","MdGstCode");
@@ -90,11 +96,17 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.gstTypeService = function(){
                 return new BaseRestService("gstType","gstTypeId","MdGstType");
             };
+            self.gstGLCodeService = function(){
+                return new BaseRestService("gstGl","gstglId","MdGstglCode");
+            };
             self.paymentFrequencyService = function(){
-                return new BaseRestService("paymentFrequency","pymtFreqId","MdPymtFreq");
+                return new BaseRestService("/MD_PaymentFrequency/PaymentFreqRestPS","pymtFreqId","MdPymtFreq");
+            };
+            self.paymentTypeService = function(){
+                return new BaseRestService("/MD_PaymentType/PaymentTypeRestPS","pymtTypeId","MdPymtType");
             };
             self.exchangeRateTypeService = function(){
-                return new BaseRestService("exchangeRateType","exRateTypeId","MdExchangeRateType");
+                return new BaseRestService("/MD_RateType/RateTypeRestPS","exRateTypeId","MdExchangeRateType");
             };
             self.exchangeRateService = function(){
                 return new BaseRestService("exchangeRate","exRateId","MdExchangeRate");
@@ -115,7 +127,7 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("nbdayconvention","NDBConvId","MdNonBusinessDayConvention");
             };
             self.productService = function(){
-                return new BaseRestService("MD_Product/ProductRestPS","prodCd","MdProd");
+                return new BaseRestService("/MD_Product/ProductRestPS","prodCd","MdProd");
             };
             self.companyService = function(){
                 return new BaseRestService("company","CompanyId","MdCompany");
