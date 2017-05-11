@@ -34,11 +34,8 @@
                                                         <label for="dbcode">Database Code</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <select id="dbcode" data-bind="ojComponent: {component: 'ojSelect',
-                                                                                placeholder: emptyPlaceholder() ? '' : 'Select a database code',
-                                                                                value: dbCode,
-                                                                                options: dbCodeDataForRender}">
-                                                        </select>
+                                                        <input id="dbcode" data-bind="ojComponent: {component: 'ojInputText', disabled:true,
+                                                                                value: dbCodeDataForRender}" />
                                                     </div>
                                                 </div> 
                                                 <div class="oj-flex">  
@@ -71,14 +68,15 @@
                                                 </div>
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="product">Posting Frequency</label>
+                                                        <label for="product">Payment Frequency</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <select id="product" data-bind="ojComponent: {component: 'ojSelect',
                                                                                 placeholder: emptyPlaceholder() ? '' : 'Select a product',
-                                                                                value: selectedProduct,
-                                                                                options: productLOV}">
+                                                                                value: selectedPaymentFreq,
+                                                                                options: paymentFrequencyLOV}">
                                                         </select>
+                                                        
                                                     </div>
                                                 </div>
                                                 
