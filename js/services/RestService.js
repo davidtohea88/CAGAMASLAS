@@ -144,6 +144,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.fundingSourceTaggingService = function(){
                 return new BaseRestService("MD_FundSourceDeal_Tagging/FundDealRestPS","fundLineId","MdFundSrcLine");
             };
+            self.SunGLAccountService = function(){
+                return new BaseRestService("SUNaccount","AccountId","MdGLAccount");
+            };
         };
         return new RestService();
 });
