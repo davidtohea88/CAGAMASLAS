@@ -1,27 +1,59 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService','services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox'],
-        function (oj, ko, $, rendererService, RestService, exportService)
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        function (oj, ko, $, rendererService, RestService, exportService,MessageService)
         {
             function fundingSourceMainViewModel() {
                 var self = this;
                             
                 var restService = RestService.fundingSourceService();
-                self.header = "Currency";
+                var restServiceTagging = RestService.fundingSourceTaggingService();
+                self.header = "Funding Source";
                 self.dialogTitle = "Create/edit "+self.header;
+                self.dialogTitleTagging = "Add " + self.header+" Tagging";
                 self.allData = ko.observableArray();
+                self.allDataTagging = ko.observableArray();
                 self.collection = ko.observable(restService.createCollection());
+                self.collectionTagging = ko.observable(restServiceTagging.createCollection());
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
+                self.dataSourceTagging = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allDataTagging, {idAttribute: self.collectionTagging().model.idAttribute}));
                 self.fundingSourceModel = ko.observable();
+                self.fundingSourceTaggingModel = ko.observable();
                 self.nameSearch = ko.observable('');
                 self.codeSearch = ko.observable('');
                 self.descSearch = ko.observable('');
-                self.selectedCountryId = ko.observableArray();
-                
+                self.selectedProductGroupId = ko.observableArray();
+                self.message = ko.observable();
+                self.colorType = ko.observable();
+                self.tracker = ko.observable();
+                self.tracker2 = ko.observable();
+                self.dialogOffcanvas = {selector: '#dialogDrawer', content: '#dialogContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                self.pageOffcanvas = {selector: '#pageDrawer', content: '#pageContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                    
+                self.showMessage = function(type,message,afterShow){
+                    var canvas = ($("#CreateEditDialog").ojDialog("isOpen"))?self.dialogOffcanvas:self.pageOffcanvas;
+                    self.message(message);
+                    if (type==="SUCCESS"){
+                        self.colorType(MessageService.bgColorSuccess);
+                    }else if (type==="ERROR"){
+                        self.colorType(MessageService.bgColorError);
+                    }else{
+                        self.colorType(MessageService.bgColorDefault);
+                    }
+                    oj.OffcanvasUtils.open(canvas);
+                    setTimeout(function(){
+                        oj.OffcanvasUtils.close(canvas);
+                        if (afterShow){
+                            afterShow();
+                        }
+                    },MessageService.displayTimeout);
+                };                
                 self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
                 };
@@ -36,15 +68,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.refreshData = function(){
                     // fetch from rest service
-                    self.collection().refresh().then(function(){
-                        self.allData(self.collection().toJSON());
-                    });  
+                    self.collection().fetch({
+                        success: function(){
+                            self.allData(self.collection().toJSON()); 
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
+                    }); 
+                    
+                    self.collectionTagging().fetch({
+                                success: function(){
+                                    self.allDataTagging(self.collectionTagging().toJSON());
+                                },error: function(resp){
+                                    self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                                }
+                            });
+                    
                 };
                 
-                self.search = function (code, name, desc) {
+                self.search = function (name, desc) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((code.length ===0 || (code.length > 0 && rec.attributes.FundSrcCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                (name.length ===0 || (name.length > 0 && rec.attributes.FundSrcName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                        return ((name.length ===0 || (name.length > 0 && rec.attributes.FundSrcName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
                                 (desc.length ===0 || (desc.length > 0 && rec.attributes.FundSrcDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
@@ -56,32 +100,47 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
-                self.save = function (model) {
+                self.createOrEdiTagging = function (model) {
+                    self.fundingSourceTaggingModel(model);
+                    $("#CreateEditDialogTagging").ojDialog("open");
+                };
+
+                self.save = function (model,successMsg) {
                     var user = "LAS";
-                    var currentDate = new Date();
+                    var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
                             createdDate: model.isNew()?currentDate:model.attributes.createdDate,
-                            updatedBy: user,
-                            updatedDate: currentDate
+                            updatedBy: model.isNew()?'':user,
+                            updatedDate: model.isNew()?'':currentDate
                         };
                     model.save(defaultAttributes,{
                         success: function(model,resp){
                             self.refreshData();
+                            var message = successMsg? successMsg: (model.isNew()?'A new '+self.header+' is successfully created':self.header+' is successfully updated');
+                            self.showMessage("SUCCESS",message,function(){
+                                $("#CreateEditDialog").ojDialog("close");
+                            });
                         },
-                        error: function(){
-                            console.log("failed saving");
+                        error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
                         }
                     });
                     
                 };
-
+              
                 self.activateDeactivate = function (model) {
                     if (model.attributes.active === 'Y'){
                         model.attributes.active = 'N';
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model);
+                    self.save(model,self.header+" \""+model.attributes.fundSrcName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                };
+                
+                self.deactivate = function (model) {
+                    model.attributes.active = 'N';
+                    self.save(model,self.header+" Tagging \""+model.attributes.fundLineId+"\" is successfully deleted");
+
                 };
 
                 self.exportxls = function () {
@@ -90,8 +149,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             return rendererService.activeConverter(value);
                         }else if (field === 'updatedDate'){
                             return rendererService.dateTimeConverter.format(value);
-                        }else if (field === 'countryId'){
-                            return rendererService.LOVConverter(self.countryLOV(),value);
                         }else{
                             return value;
                         }
@@ -99,6 +156,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.selectedRow = ko.observable(undefined);
+                self.selectedRowValue = ko.observable(undefined);
+                self.selectedHdr = ko.observable(undefined);
+                self.selectedRowTagging = ko.observable(undefined);
                 
                 // ===============  EVENT HANDLER  ==============
                 
@@ -107,18 +167,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     self.codeSearch('');
                     self.nameSearch('');
                     self.selectedRow(undefined);
+                    self.selectedRowValue(undefined);
+                    self.selectedRowTagging(undefined);
                     $('#btnEdit').hide();
                     $('#btnActivate').hide();
                 };
                 
                 self.onSearch = function(){
-                    self.collection().refresh().then(function(){
-                        self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                    self.collection().fetch({
+                        success: function(){
+                            self.search(self.nameSearch(),self.descSearch());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
                     });
                 };
                 
                 self.onCreate = function(){
-                    var model = restService.createModel();
+                    var model = restService.createModel({active: 'Y'});
                     self.createOrEdit(model);
                 };
                 
@@ -128,25 +194,55 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSave = function(){
-                    self.save(self.fundingSourceModel());
-                    $("#CreateEditDialog").ojDialog("close");
+                    var trackerObj = ko.utils.unwrapObservable(self.tracker);
+                    if (trackerObj !== undefined){
+                        if (trackerObj instanceof oj.InvalidComponentTracker){
+                            trackerObj.showMessages();
+                            trackerObj.focusOnFirstInvalid();
+                        }
+                    }
+                    console.log(trackerObj);
+                    if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
+                         self.save(self.fundingSourceModel());
+                    }
                 };
                 
                 self.onActivateDeactivate = function(){
-                    var model = self.collection().get(self.selectedRow());
-                    self.activateDeactivate(model);
+                    $("#ConfirmDialog").ojDialog("open");
                 };
                 
                 self.onSelectRow = function(event, ui){
                     var idx = ui.currentRow.rowIndex;
                     self.dataSource.at(idx).
                         then(function (obj) {
+                            self.selectedHdr(self.collection().model.idAttribute);
                             self.selectedRow(obj.data[self.collection().model.idAttribute]);
+                            self.selectedRowValue(obj.data['fundSrcName']);
                             $('#btnEdit').show();
                             $('#btnActivate').show();
-                        });
+                        }).
+                        then(self.collectionTagging().refresh().then(function(obj){
+                            var tmptag = self.collectionTagging().filter(function(rec){
+                                return ((rec.attributes.fundHdrId===self.selectedRow()) &&
+                                        (rec.attributes.active==='Y'));
+                            });
+                            self.collectionTagging().reset(tmptag);
+                            self.allDataTagging(self.collectionTagging().toJSON());                            
+                        }));
+                    $('#DealTagging').show();
+                    
+
                 };
                 
+                self.onSelectRowTagging = function(event, ui){
+                    var idx = ui.currentRow.rowIndex;
+                    self.dataSourceTagging.at(idx).
+                        then(function (obj) {
+                            self.selectedRowTagging(obj.data[self.collectionTagging().model.idAttribute]);
+                            $('#btnDeleteTagging').show();
+                        });
+                };
+
                 self.onExport = function(){
                     self.exportxls(); 
                 };
@@ -155,6 +251,37 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     $("#CreateEditDialog").ojDialog("close");
                 };
                 
+                self.onAddTagging = function (){
+                    var model = restServiceTagging.createModel();
+                    self.createOrEdiTagging(model);
+                };
+                
+                self.onDeleteTagging = function (){
+                    var model = self.collectionTagging().get(self.selectedRowTagging());
+                        self.deactivate(model);                    
+                };
+                
+                self.onSaveTagging = function(){
+                    self.fundingSourceTaggingModel().attributes.fundHdrId = self.selectedRow();
+                    self.save(self.fundingSourceTaggingModel());
+                    $("#CreateEditDialogTagging").ojDialog("close");                    
+                };
+                
+                self.onCancelTagging = function()
+                {
+                    $("#CreateEditDialogTagging").ojDialog("close");
+                };
+                
+                self.onConfirmNo = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                };
+                
+                self.onConfirmYes = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                    var model = self.collection().get(self.selectedRow());
+                    self.activateDeactivate(model);
+                };
+
                 self.refreshData();
                     
             }

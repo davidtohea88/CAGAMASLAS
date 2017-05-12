@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 
-<div id="container" >
+<div id="container" class="oj-offcanvas-outer-wrapper" >
     <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
-    <div class="page-content" style="margin:0 auto">
+    <div id="pageDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center', color: 'white'}">
+        <span data-bind="text: message"></span>
+    </div>
+    <div id="pageContent" class="page-content" style="margin:0 auto">
         <div class="oj-flex">  
             <div class="oj-flex-item">
                 <div class="oj-margin oj-panel-alt demo-mypanel" >          
@@ -112,20 +115,23 @@
 <!-- DIALOG -->
 <div id="dialogWrapper">
     <div id="CreateEditDialog" title=""
-            data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modeless', 
+            data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modal', 
                     cancelBehavior: 'escape',resizeBehavior: 'none', 
                 rootAttributes: { style: 'min-width:420px; min-height: 100px;'}}">
         <div class="oj-dialog-header oj-helper-clearfix">
             <span id="dialogTitleId" class="oj-dialog-title" data-bind="text:dialogTitle"> </span> 
         </div>
-        <div class="oj-dialog-body" data-bind="with: purchaseModeModel">
-            <div class="oj-form oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
+        <div class="oj-dialog-body oj-offcanvas-outer-wrapper" data-bind="with: model">
+            <div id="dialogDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center'}">
+                 <p style="color: white"><span data-bind="text: message"></span></p>
+            </div>
+            <div id="dialogContent" class="oj-form oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
                         <label for="code">Purchase Mode Code</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="code" style="width: 100%;" data-bind="value: attributes.prchsModeCd" >
+                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.prchsModeCd, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
                 <div class="oj-flex">  
@@ -133,7 +139,7 @@
                         <label for="name">Purchase Mode Name</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="name" style="width: 100%;" data-bind="value: attributes.prchsModeName" >
+                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.prchsModeName, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div>
                 <div class="oj-flex">  
@@ -141,7 +147,7 @@
                         <label for="desc">Purchase Mode Description</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="desc" style="width: 100%;" data-bind="value: attributes.prchsModeDesc" >
+                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.prchsModeDesc, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
                 <div class="oj-flex">  
@@ -149,7 +155,7 @@
                         <label id="statusGroup">Status</label>
                     </div>
                     <div class="oj-flex-item">
-                        <div class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: attributes.active}" 
+                        <div class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: attributes.active, required: true, invalidComponentTracker: tracker}" 
                              aria-labelledby="statusGroup">
                             <span class="oj-choice-item">
                                 <input id="rbtn_active" type="radio" 
@@ -169,7 +175,7 @@
                         <label for="effectiveDt">Effective Date</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="effectiveDt" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputDate',value: attributes.effectiveDate}" >
+                        <input id="effectiveDt" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputDate',value: attributes.effectiveDate,converter: dateConverter, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
             </div>
@@ -177,6 +183,25 @@
         <div class="oj-dialog-footer">
             <button id="btnSave" data-bind="click:onSave, ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
             <button id="btnCancel" data-bind="click:onCancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+        </div>
+    </div>
+    <div id="ConfirmDialog" class="ojDialog" title="" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:400px;'}
+		  }">
+        <div class="oj-dialog-header oj-helper-clearfix">
+            <div>
+                <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+                <span id="dialog-title-id" class="oj-dialog-title">Confirmation</span>
+            </div>
+        </div>
+        <div class="oj-dialog-body">
+            <p>Are you sure you want to do this action?</p>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="btnConfirmOk" data-bind="click: onConfirmYes, ojComponent:
+                 { component: 'ojButton', label: 'Yes'}"> </button>
+            <button id="btnConfirmCancel" data-bind="click: onConfirmNo, ojComponent:
+                 { component: 'ojButton', label: 'No'}"> </button>
         </div>
     </div>
 </div>

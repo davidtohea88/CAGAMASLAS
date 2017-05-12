@@ -26,6 +26,22 @@ define(['jquery','ojs/ojcore' ,'knockout'], function($,oj,ko) {
                 return id;
             }
         };
+        self.renderYear = function(start,year)
+        {
+            var arr = [];
+            for (var i = start; i <= year; i++)
+                {
+                    var res = {
+                        value: i,
+                        label: i
+                    };
+                    arr.push(res);
+                }
+                return arr;
+        };
+        self.switchConverter = function(str){
+            return (str===1)? 'Y':'N';
+        };
     };
     return new RendererServiceUtilities();
 });

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 
-<!-- MAIN -->
 <div id="container" class="oj-offcanvas-outer-wrapper" >
     <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
     <div id="pageDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center', color: 'white'}">
         <span data-bind="text: message"></span>
     </div>
-    <div id="pageContent" class="page-content" style="margin:0 auto">
+    <div id="pageContent"  class="page-content" style="margin:0 auto">
         <div class="oj-flex">  
             <div class="oj-flex-item">
                 <div class="oj-margin oj-panel-alt demo-mypanel" >          
@@ -20,28 +19,29 @@
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchCode">Charge Type Code</label>
+                                                        <label for="searchName">Contact Name</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText', value: codeSearch, valueUpdate: 'afterkeydown'}">
+                                                        <input id="searchName" data-bind="ojComponent: {component: 'ojInputText', value: nameSearch, valueUpdate: 'afterkeydown'}">
                                                     </div>
-                                                </div> 
+                                                </div>
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchName">Charge Type Name</label>
+                                                        <label for="searchPhone">Contact Phone</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachName" data-bind="ojComponent: {component: 'ojInputText', value: nameSearch, valueUpdate: 'afterkeydown'}">
+                                                        <input id="searchPhone" data-bind="ojComponent: {component: 'ojInputText', value: phoneSearch, valueUpdate: 'afterkeydown'}">
                                                     </div>
-                                                </div> 
+                                                </div>
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchDesc">Charge Type Description</label>
+                                                        <label for="searchEmail">Contact Email</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <input id="seachDesc" data-bind="ojComponent: {component: 'ojInputText', value: descSearch, valueUpdate: 'afterkeydown'}">
+                                                        <input id="searchEmail" data-bind="ojComponent: {component: 'ojInputText', value: emailSearch, valueUpdate: 'afterkeydown'}">
                                                     </div>
-                                                </div> 
+                                                </div>
+                                                
                                                 <div class="oj-flex">                       
                                                     <div class="oj-flex-item">
                                                         <button id= "btnSearch" data-bind="click: onSearch,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
@@ -84,11 +84,14 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                    [{headerText: 'Code',  field: 'gstCrgtypeCd', style: 'width: 10%'},
-                                                                    {headerText: 'Name', field: 'gstCrgtypeName', style: 'width: 30%'},
-                                                                    {headerText: 'Description', field: 'gstCrgtypeDesc',style: 'width: 20%'},
-                                                                    {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
-                                                                    {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
+                                                                    [{headerText: 'Name',  field: 'name', style: 'width: 10%'},
+                                                                    {headerText: 'Phone', field: 'phone', style: 'width: 30%'},
+                                                                    {headerText: 'Email', field: 'email',style: 'width: 20%'},
+                                                                    {headerText: 'Address 1', field: 'address1',style: 'width: 10%'},
+                                                                    {headerText: 'Address 2',  field: 'address2',style: 'width: 10%'},
+                                                                    {headerText: 'Department',  field: 'department',style: 'width: 10%'},
+                                                                    {headerText: 'Primary',  field: 'primary',style: 'width: 10%',renderer: primaryRenderer},
+                                                                    {headerText: 'Active',  field: 'active',style: 'width: 10%',renderer: activeRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
                                                                     {headerText: 'Last Updated Date',  field: 'updatedDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
                                                                     rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'},
@@ -102,7 +105,7 @@
                                             </div>
                                         </div>    
                                     </div>
-                                </div>      
+                                </div>     
                             </div>    
                         </div>
                     </div> 
@@ -128,28 +131,76 @@
             <div id="dialogContent" class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
-                        <label for="code">Charge Type Code</label>
+                        <label for="name">Contact Name</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.gstCrgtypeCd, required: true, invalidComponentTracker: tracker}" >
+                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.name, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
-                        <label for="name">Charge Type Name</label>
+                        <label for="phone">Contact Phone</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.gstCrgtypeName, required: true, invalidComponentTracker: tracker}" >
+                        <input id="phone" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.phone, required: true,
+                            invalidComponentTracker: tracker,validators: [phoneValidator]}" >
                     </div>
                 </div> 
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
-                        <label for="desc">Charge Type Description</label>
+                        <label for="email">Email</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.gstCrgtypeDesc, required: true, invalidComponentTracker: tracker}">
+                        <input id="email" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.email, required: true, 
+                            invalidComponentTracker: tracker, validators: [emailValidator]}">
                     </div>
-                </div> 
+                </div>
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="address1">Address 1</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="address1" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.address1, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div>
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="address2">Address 2</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="address2" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.address2, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div>
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="stateInput">State</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <select id="stateInput" style="width: 100%;" data-bind="ojComponent: {
+                            component: 'ojSelect',
+                            options: stateLOV, 
+                            value: selectedStateId,
+                            placeholder: 'Please Select', required: true, invalidComponentTracker: tracker,
+                            rootAttributes: {style:'max-width: 20em'}}">
+                        </select>
+                    </div>
+                </div>
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="department">Department</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="department" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.department, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div>
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="primary">Primary</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="primary" style="width: 100%;"  data-bind="ojComponent: {component: 'ojSwitch', value: isPrimaryContact, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div>
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
                         <label id="statusGroup">Status</label>
@@ -170,15 +221,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="oj-flex">  
-                    <div class="oj-flex-item">
-                        <label for="effectiveDt">Effective Date</label>
-                    </div>
-                    <div class="oj-flex-item">
-                    <input id="effectiveDt" style="width: 100%;"
-                           data-bind="ojComponent: {component: 'ojInputDate',value: attributes.effectiveDate,converter: dateConverter, required: true, invalidComponentTracker: tracker}"/>
-                    </div>
-                </div>    
             </div>
         </div>
         <div class="oj-dialog-footer">

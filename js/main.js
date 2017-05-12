@@ -348,6 +348,7 @@ require(['ojs/ojcore',
                 'net-income': {label: 'net-income'},
                 
                 'branch': {value:getMasterDataPath('branch'), label: 'Branch'},
+                'contact': {value:getMasterDataPath('contact'), label: 'Contact'},
                 'paymentfreq': {value:getMasterDataPath('paymentFreq'),label: 'Payment Frequency'},
                 'assettype': {value:getMasterDataPath('assetType'),label: 'Asset Type'},
                 'assetgroup': {value:getMasterDataPath('assetGroup'),label: 'Asset Group'},
@@ -374,6 +375,7 @@ require(['ojs/ojcore',
                 'gstchrgtype': {value:getMasterDataPath('gstChargeType'), label: 'GST Charge Type'},
                 'gstcode': {value:getMasterDataPath('gstCode'), label: 'GST Code'},
                 'gstorganization': {value:getMasterDataPath('gstOrganization'), label: 'GST Organization'},
+                'gstglcode': {value:getMasterDataPath('gstGlCode'), label: 'GST GL Code'},
                 'agreementtype': {value:getMasterDataPath('agreementType'), label: 'Agreement Type'},
                 'mgp-guarantee-review': {label: 'mgp-guarantee-review'},
                 'reconciliation-user-interface': {label: 'Reconciliation User Interface'},
@@ -405,8 +407,13 @@ require(['ojs/ojcore',
                 'mgp-foreclosure-recovery': {value:'mgp-foreclosure-recovery', label: 'mgp-file-type'},
                 'mgp-template-upd': {value:'mgp-template-upd', label: 'mgp-file-type'},
                 'mgp-terminate-code': {value:'mgp-terminate-code', label: 'mgp-file-type'},
-                'mgp-verify-sheet': {value:'mgp-verify-sheet', label: 'mgp-file-type'}
+                'mgp-verify-sheet': {value:'mgp-verify-sheet', label: 'mgp-file-type'},
                 
+                'revaluation': {value:getMasterDataPath('revaluation'), label: 'Revaluation'},
+                'daycountconvention': {value:getMasterDataPath('DayCountConvention'), label: 'Day Count Convention'},
+                'glpostingrule': {value:getMasterDataPath('GLPostingRule'), label: 'GL Posting Rule'},
+                'glaccountmaster': {value:getMasterDataPath('GLAccountMaster'), label: 'GL Account Master'}
+
             });
             
                        

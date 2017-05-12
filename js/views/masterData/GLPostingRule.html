@@ -34,17 +34,10 @@
                                                         <label for="dbcode">Database Code</label>
                                                     </div>
                                                     <div class="oj-flex-item">
-                                                        <select id="dbcode" data-bind="ojComponent: {component: 'ojSelect',
-                                                                                placeholder: emptyPlaceholder() ? '' : 'Select a database code',
-                                                                                value: dbCode,
-                                                                                options: dbCodeDataForRender}">
-                                                        </select>
+                                                        <input id="dbcode" data-bind="ojComponent: {component: 'ojInputText', disabled:true,
+                                                                                value: dbCodeDataForRender}" />
                                                     </div>
                                                 </div> 
-                                            </div>
-                                        </div>    
-                                        <div class="oj-flex-item">
-                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
                                                         <label for="product">Product</label>
@@ -55,6 +48,35 @@
                                                                                 value: selectedProduct,
                                                                                 options: productLOV}">
                                                         </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                        <div class="oj-flex-item">
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="product">Event</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="product" data-bind="ojComponent: {component: 'ojSelect',
+                                                                                placeholder: emptyPlaceholder() ? '' : 'Select a product',
+                                                                                value: selectedEvent,
+                                                                                options: eventLOV}">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="product">Payment Frequency</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="product" data-bind="ojComponent: {component: 'ojSelect',
+                                                                                placeholder: emptyPlaceholder() ? '' : 'Select a product',
+                                                                                value: selectedPaymentFreq,
+                                                                                options: paymentFrequencyLOV}">
+                                                        </select>
+                                                        
                                                     </div>
                                                 </div>
                                                 
@@ -68,7 +90,7 @@
                                             <div class="oj-form  oj-md-odd-cols-4 oj-md-even-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="gainAccount">Add Realized Gain Account</label>
+                                                        <label for="gainAccount">Debit Account</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="gainAccountList"
@@ -107,7 +129,7 @@
                                             <div class="oj-form  oj-md-odd-cols-4 oj-md-even-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="lossAccountList">Add Realized Loss Account</label>
+                                                        <label for="lossAccountList">Credit Account</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <select id="lossAccountList" data-bind="ojComponent: {component: 'ojSelect',
@@ -143,7 +165,7 @@
                                     </div>
                                 <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-flex-end" style="margin-top:50px;">
                                  <div class="oj-flex-item">
-                                     <button id= "button" data-bind="click: onRun,ojComponent: {component: 'ojButton', label: 'Run Revaluation' } "></button>
+                                     <button id= "button" data-bind="click: onRun,ojComponent: {component: 'ojButton', label: 'Run Rules' } "></button>
                                  </div>
                                </div>
                                 </div>

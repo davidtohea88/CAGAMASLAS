@@ -9,6 +9,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
             function organizationTypeMainViewModel() {
                 var self = this;
 
+                self.isNative = ko.observable(true);
                 self.message = ko.observable();
                 self.colorType = ko.observable();
                 self.pageOffcanvas = {selector: '#pageDrawer', content: '#pageContent',
@@ -61,17 +62,30 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             self.accountLOV.push(res);                            
                         }                      
                     }
-                    console.log(self.accountLOV());
+
                 });
 
-
-                self.header = "Revaluation";
+                var eventService = RestService.eventService();
+                self.eventLOV = ko.observableArray();
+                eventService.fetchAsLOV('EventName','EventId').then(function(data){
+                    self.eventLOV(data);
+                });
+                var paymentFrequencyService = RestService.paymentFrequencyService();
+                self.paymentFrequencyLOV = ko.observableArray();
+                paymentFrequencyService.fetchAsLOV('pymtFreqName','pymtFreqId').then(function(data){
+                    self.paymentFrequencyLOV(data);
+                });
+ 
+                self.header = "GL Posting Rule";
                 self.emptyPlaceholder = ko.observable(false);
                 self.selectedProductList = ko.observableArray();
                 self.selectedProductDataSource = new oj.ArrayTableDataSource(self.selectedProductList, {idAttribute: 'productID'});
                 self.company = ko.observable('');
                 self.dbCode = ko.observable('');
                 self.selectedProduct = ko.observable('');
+                self.selectedEvent = ko.observable('');
+                self.selectedPaymentFreq = ko.observable('');
+
 
                 var restService = RestService.dbCodeService();
                 self.collection = ko.observable(restService.createCollection());
@@ -99,6 +113,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         
                         self.dbCodeData(self.collection().toJSON());
                     });  
+                    console.log(self.dbCodeData());
                 };
                 
                 self.onRun = function(){
@@ -106,9 +121,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     {
                         self.showMessage("ERROR",MessageService.httpStatusToMessage('Please select the Company'));
                     }
-                    else if(self.dbCode()==='')
+                    else if(self.dbCodeDataForRender().length===0)
                     {
-                        self.showMessage("ERROR",MessageService.httpStatusToMessage('Please select the Database Code'));
+                        self.showMessage("ERROR",MessageService.httpStatusToMessage('No Database Code for this Company'));
                     }
                     else if(self.selectedProduct()==='')
                     {
@@ -175,12 +190,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
 //                            self.collection().reset(tmp);
 //                            self.dbCodeData(self.collection().toJSON());
 //
+
                         ko.utils.arrayForEach(self.dbCodeData(),function(item){
                                 if (item.CompanyId === valueParam.value[0]){
-                                    var lbl = item['dbCodeName'];
                                     var val = item['dbCodeId'];
-                                    self.dbCodeDataForRender.push({label: lbl, value: val});
-                                    console.log('push '+ val);
+                                    self.dbCodeDataForRender.push(val);
                                 }
                             });
 

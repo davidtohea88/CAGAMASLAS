@@ -204,6 +204,13 @@
             },
             {
                 "attr" : {
+                    "id" : "gstglcode",
+                    "name" : "GST GL Code",
+                    "view" : "gstglcode"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "branch",
                     "name" : "Branch",
                     "view" : "branch"
@@ -214,6 +221,13 @@
                     "id" : "agreementtype",
                     "name" : "Agreement Type",
                     "view" : "agreementtype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "Contact",
+                    "name" : "Contact",
+                    "view" : "contact"
                 }
             },
             {

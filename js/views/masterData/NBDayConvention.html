@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 
-<div id="container" >
+<div id="container" class="oj-offcanvas-outer-wrapper">
     <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
-    <div class="page-content" style="margin:0 auto">
+    <div id="pageDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center', color: 'white'}">
+        <span data-bind="text: message"></span>
+    </div>
+    <div id="pageContent" class="page-content" style="margin:0 auto">
         <div class="oj-flex">  
             <div class="oj-flex-item">
                 <div class="oj-margin oj-panel-alt demo-mypanel" >          
@@ -131,15 +134,17 @@
         <div class="oj-dialog-header oj-helper-clearfix">
             <span id="dialogTitleId" class="oj-dialog-title" data-bind="text:dialogTitle"> </span> 
         </div>
-        <div class="oj-dialog-body">
-            <form data-bind="submit: onSave, with: NBDConvModel">
-                <div class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
+        <div class="oj-dialog-body oj-offcanvas-outer-wrapper" data-bind="with: NBDConvModel">
+            <div id="dialogDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center'}">
+                 <p style="color: white"><span data-bind="text: message"></span></p>
+            </div>
+            <div id="dialogContent" class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
                     <div class="oj-flex">  
                         <div class="oj-flex-item">
                             <label for="code">Convention Name</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: ConvName}" >
+                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.ConvName, required: true, invalidComponentTracker: tracker}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -147,7 +152,7 @@
                             <label for="name">Holiday Name</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: HolidayName}" >
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.HolidayName, required: true, invalidComponentTracker: tracker}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -157,7 +162,7 @@
                         <div class="oj-flex-item">
                             <input id="fdate" 
                                     data-bind="ojComponent: {
-                                    component: 'ojInputDate', value: FixedDate}">
+                                    component: 'ojInputDate', value: attributes.FixedDate, required: true, invalidComponentTracker: tracker}">
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -165,7 +170,7 @@
                             <label for="Year">Year</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="Year" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: Year}" >
+                            <input id="Year" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.Year, required: true, invalidComponentTracker: tracker}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -173,7 +178,7 @@
                             <label for="BusinessRule">Business Rule</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="BusinessRule" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: BusinessRule}" >
+                            <input id="BusinessRule" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.BusinessRule, required: true, invalidComponentTracker: tracker}" >
                         </div>
                     </div>                     
                     <div class="oj-flex">  
@@ -181,7 +186,7 @@
                             <label for="status">Status</label>
                         </div>
                         <div class="oj-flex-item">
-                            <div id="status" class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: active}" 
+                            <div id="status" class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: attributes.active, required: true, invalidComponentTracker: tracker}" 
                                  aria-labelledby="statusGroup">
                                 <span class="oj-choice-item">
                                     <input id="rbtn_active" type="radio" 
@@ -202,15 +207,33 @@
                         </div>
                         <div class="oj-flex-item">
                         <input id="effectiveDt" style="width: 100%;"
-                               data-bind="ojComponent: {component: 'ojInputDate',value: effectiveDate}"/>
+                               data-bind="ojComponent: {component: 'ojInputDate',value: attributes.effectiveDate, required: true, invalidComponentTracker: tracker}"/>
                         </div>
                     </div>    
                 </div>
-            </form>
         </div>
         <div class="oj-dialog-footer">
-            <button id="btnSave" type="submit" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
-            <button id="btnCancel" data-bind="click:cancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+            <button id="btnSave" data-bind="click:onSave,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
+            <button id="btnCancel" data-bind="click:onCancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+        </div>
+    </div>
+    <div id="ConfirmDialog" class="ojDialog" title="" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:400px;'}
+		  }">
+        <div class="oj-dialog-header oj-helper-clearfix">
+            <div>
+                <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+                <span id="dialog-title-id" class="oj-dialog-title">Confirmation</span>
+            </div>
+        </div>
+        <div class="oj-dialog-body">
+            <p>Are you sure you want to do this action?</p>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="btnConfirmOk" data-bind="click: onConfirmYes, ojComponent:
+                 { component: 'ojButton', label: 'Yes'}"> </button>
+            <button id="btnConfirmCancel" data-bind="click: onConfirmNo, ojComponent:
+                 { component: 'ojButton', label: 'No'}"> </button>
         </div>
     </div>
 </div>

@@ -1,24 +1,26 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService', 'services/exportService','services/MessageService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService',
+        'services/MessageService','services/ValidatorService','ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation'],
-        function (oj, ko, $, rendererService, RestService, exportService,MessageService)
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation','ojs/ojswitch'],
+        function (oj, ko, $, rendererService, RestService, exportService,MessageService,ValidatorService)
         {
-            function counterpartyTypeMainViewModel() {
+            function assetTypeMainViewModel() {
                 var self = this;
-                var restService = RestService.counterpartyTypeService();
-                self.header = "Counterparty Type";
+                var restService = RestService.contactService();
+                self.header = "Contact";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
                 self.model = ko.observable();
                 self.nameSearch = ko.observable('');
-                self.descSearch = ko.observable('');
-                self.codeSearch = ko.observable('');
+                self.phoneSearch = ko.observable('');
+                self.emailSearch = ko.observable('');
+                self.isPrimaryContact = ko.observable();
                 self.dateConverter = rendererService.dateConverter;
                 self.message = ko.observable();
                 self.colorType = ko.observable();
@@ -46,6 +48,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         }
                     },MessageService.displayTimeout);
                 };
+                
+                self.primaryRenderer = function(context){
+                    return rendererService.switchConverter(context.data);
+                };
 
                 self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
@@ -67,14 +73,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         },error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
                         }
-                    });  
+                    }); 
                 };
-
-                self.search = function (code, name, desc) {
+                
+                self.search = function (phone,name,email) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((code.length ===0 || (code.length > 0 && rec.attributes.cptTypeCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                (name.length ===0 || (name.length > 0 && rec.attributes.cptTypeName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                (desc.length ===0 || (desc.length > 0 && rec.attributes.cptTypeDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                        return ((phone.length ===0 || (phone.length > 0 && rec.attributes.ctcPhone.toLowerCase().indexOf(phone.toString().toLowerCase()) > -1))&&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.ctcName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1))&&
+                                (email.length ===0 || (email.length > 0 && rec.attributes.ctcName.toLowerCase().indexOf(email.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
@@ -100,7 +106,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     model.save(defaultAttributes,{
                         success: function(model,resp){
                             self.refreshData();
-                            var message = successMsg? successMsg: (model.isNew()?'A new counterparty type is successfully created':'Counterparty type is successfully updated');
+                            var message = successMsg? successMsg: (model.isNew()?'A new contact is successfully created':'Contact is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
                                 $('#btnSave').ojButton("option", "disabled", false );
@@ -125,7 +131,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model,"Counterparty type \""+model.attributes.cptTypeName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                    self.save(model,"Contact \""+model.attributes.contactName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
@@ -144,14 +150,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.selectedRow = ko.observable(undefined);
                 
+                // =============== VALIDATOR ====================
+                
+                self.emailValidator = ValidatorService.emailValidator;
+                self.phoneValidator = ValidatorService.phoneValidator;
+                
                 // ===============  EVENT HANDLER  ==============
                 
                 self.onReset = function(){
                     self.refreshData();
                     
-                    self.codeSearch('');
                     self.nameSearch('');
-                    self.descSearch('');
+                    self.phoneSearch('');
+                    self.emailSearch('');
                     
                     if (self.collection().models.length>1){
                         self.selectedRow(undefined);
@@ -164,7 +175,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onSearch = function(){
                     self.collection().fetch({
                         success: function(){
-                            self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                            self.search(self.phoneSearch(),self.nameSearch(),self.emailSearch());
                         },error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
                         }
@@ -172,12 +183,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onCreate = function(){
-                    var model = restService.createModel({active: 'Y'});
+                    var model = restService.createModel({'active': 'Y','ctcPrimary': 0,'contactId': 1});
+                    self.isPrimaryContact(model.attributes.ctcPrimary===1);
                     self.createOrEdit(model);
                 };
                 
                 self.onEdit = function(){
                     var model = self.collection().get(self.selectedRow());
+                    self.isPrimaryContact(model.attributes.ctcPrimary===1);
                     self.createOrEdit(model);
                 };
                 
@@ -190,6 +203,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         }
                     }
                     if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
+                        self.model().attributes.ctcPrimary = self.isPrimaryContact()?1:0;
                         self.save(self.model());
                     }
                 };
@@ -228,7 +242,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.refreshData();
+                
             }
-            return counterpartyTypeMainViewModel();
+            return assetTypeMainViewModel();
         }
 ); 

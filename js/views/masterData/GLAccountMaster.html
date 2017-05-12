@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<div id="container" class="oj-offcanvas-outer-wrapper">
+    <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+    <div id="pageDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center', color: 'white'}">
+        <span data-bind="text: message"></span>
+    </div>
+    <div class="page-content" style="margin:0 auto">
+        <div class="oj-flex">  
+            <div class="oj-flex-item">
+                <div class="oj-margin oj-panel-alt demo-mypanel" >          
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">  
+                            <div class="oj-margin oj-panel-alt demo-mypanel" >   
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >  
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">
+                                            <div class="oj-form  oj-md-labels-inline">
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item">
+                                                        <h3><b>Sun GL Account Master</b></h3>
+                                                    <table id="sun" summary="Department List" aria-label="Departments Table" style="width:100%;"
+                                                            data-bind="ojComponent: {component: 'ojTable', 
+                                                            data: SunGLAccountDataSource, 
+                                                            columnsDefault: {sortable: 'none'}, 
+                                                            columns: [{headerText: 'Account No', 
+                                                                       field: 'AccountNo',style: 'width: 5%'},
+                                                                      {headerText: 'Account Name', 
+                                                                       field: 'AccountName',style: 'width: 50%'},
+                                                               {headerTemplate: 'move_hdr', template: 'move_item', style: 'width: 45%;text-align:center;'}]}">
+                                                         </table>
+                                                        
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="oj-flex-item">
+                                            <div class="oj-form oj-md-labels-inline">
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item">
+                                                        <h3><b>LAS Specific GL Account</b></h3>
+                                                    <table id="las" summary="Department List" aria-label="Departments Table"
+                                                            data-bind="ojComponent: {component: 'ojTable', 
+                                                            data: LasSpecificAccountDataSource, 
+                                                            columnsDefault: {sortable: 'none'}, 
+                                                            columns: [{headerText: 'Account No', 
+                                                                       field: 'AccountNo',style: 'width: 5%'},
+                                                                      {headerText: 'Account Name', 
+                                                                       field: 'AccountName',style: 'width: 50%'},
+                                                               {headerTemplate: 'delete_hdr', template: 'delete_item', style: 'width: 45%;text-align:center;'}]}">
+                                                         </table>                                                    </div>
+                                                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                                
+                                
+                            </div>    
+                        </div>
+                    </div> 
+                </div>    
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+
+<script type="text/html" id="delete_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="delete_item">
+    <td>
+        <button id= "btn_Vendor" 
+            data-bind=" click: onDelete, ojComponent: { component: 'ojButton', label: 'Remove' }">
+        </button>
+    </td>
+</script>
+<script type="text/html" id="move_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="move_item">
+    <td>
+        <button id= "btn_Vendor" data-bind="click: onAdd, ojComponent: { component: 'ojButton', label: '>>' }">
+        </button>
+    </td>
+</script>
