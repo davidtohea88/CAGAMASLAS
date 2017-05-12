@@ -24,11 +24,14 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.rateTypeService = function(){
                 return new BaseRestService("rateType","rateTypeId","MdRateType");
             };
+            self.productService = function(){
+                return new BaseRestService("Product","prodId","MdProd");
+            };
             self.productTypeService = function(){
                 return new BaseRestService("productType","prodTypeId","MdProdType");
             };
             self.productGroupService = function(){
-                return new BaseRestService("productGroup","prodGrpId","MdProdGrp");
+                return new BaseRestService("ProductGroup","prodGrpId","MdProdGrp");
             };
             self.counterpartySectorService = function(){
                 return new BaseRestService("cptySector","cptSctrId","MdCptSctr");
@@ -46,7 +49,7 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("agreementType","agreementTypId","MdAgreementTyp");
             };
             self.assetTypeService = function(){
-                return new BaseRestService("assetType","assetTypeId","MdAssetType");
+                return new BaseRestService("AssetType","assetTypeId","MdAssetType");
             };
             self.assetGroupService = function(){
                 return new BaseRestService("assetGroup","assetGrpId","MdAssetGrp");
@@ -88,7 +91,7 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("gstType","gstTypeId","MdGstType");
             };
             self.paymentFrequencyService = function(){
-                return new BaseRestService("paymentFrequency","pymtFreqId","MdPymtFreq");
+                return new BaseRestService("PaymentFreq","pymtFreqId","MdPymtFreq");
             };
             self.exchangeRateTypeService = function(){
                 return new BaseRestService("exchangeRateType","exRateTypeId","MdExchangeRateType");
@@ -107,6 +110,24 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             };
             self.dayCountConventionService  = function(){
                 return new BaseRestService("daycountconvention","DCConvId","MdDayCountConvention");
+            };
+            self.counterpartyService  = function(){
+                return new BaseRestService("Counterparty","cptId","MdCpt");
+            };
+            self.counterpartyAssetService  = function(){
+                return new BaseRestService("CounterpartyAsset","cptAssetId","MdCptAsset");
+            };
+            self.counterpartyProductService  = function(){
+                return new BaseRestService("CounterpartyProduct","cptProdId","MdCptProd");
+            };
+            self.counterpartyRatioFiService  = function(){
+                return new BaseRestService("RatioFI","fiCptRtId","MdCptRtFi");
+            };
+            self.ratingAgencyService  = function(){
+                return new BaseRestService("RatingAgency","acyId","MdRatingAcy");
+            };
+            self.productEventCodeService  = function(){
+                return new BaseRestService("ProductEventCode","prodEventId","MdProdeventCode");
             };
         };
         return new RestService();

@@ -1,258 +1,251 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'viewModels/GetRest', 'jquery',
-    'ojs/ojrouter', 'ojs/ojradioset', 'ojs/ojdialog', 'ojs/ojknockout', 'promise', 'ojs/ojlistview',
-    'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 'ojs/ojarraytabledatasource',
-    'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdatetimepicker',
-    'ojs/ojselectcombobox', 'ojs/ojknockout-validation', 'moment','blobjs','xlsx-js','file-saverjs','tableexport','exports'],
-        function (oj, ko, GetRest, $)
+define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services/RestService','services/exportService', 'services/MessageService', 'ojs/ojrouter',
+        'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
+        'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        function (oj, ko, $, rendererService, RestService, exportService, MessageService)
         {
-            function productViewModel() {
+            function productMainViewModel() {
                 var self = this;
-                self.serviceURL = 'js/data/product.json';
-                //self.serviceURL = 'http://localhost:3000/MdProd';
-                self.tracker = ko.observable();
-                self.productModel = ko.observable();
-                self.header = "Product Type";
-                self.productData = ko.observableArray([{prodCd: "Fetching data"}]);
-                //self.tempPeople = ko.observableArray([{prodCd: "Fetching data"}]);
-                self.productDataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.productData, {idAttribute: 'prodCd'}));
-                self.productCol = ko.observable();
-
-                self.codeSearch = ko.observable('');
+                // LOV
+                var productGroupService = RestService.productGroupService();
+                self.productGroupLOV = ko.observableArray();
+                productGroupService.fetchAsLOV('prodGrpName','prodGrpId').then(function(data){
+                    self.productGroupLOV(data);
+                });
+                self.selectedProductGroupId = ko.observableArray();
+                var productTypeService = RestService.productTypeService();
+                self.productTypeLOV = ko.observableArray();
+                productTypeService.fetchAsLOV('prodTypeName','prodTypeId').then(function(data){
+                    self.productTypeLOV(data);
+                });
+                self.selectedProductTypeId = ko.observableArray();
+                var paymentFrequencyService = RestService.paymentFrequencyService();
+                self.paymentFrequencyLOV = ko.observableArray();
+                paymentFrequencyService.fetchAsLOV('pymtFreqName','pymtFreqId').then(function(data){
+                    self.paymentFrequencyLOV(data);
+                });
+                self.selectedpaymentFrequencyId = ko.observableArray();
+                
+                // Service
+                var restService = RestService.productService();
+                self.header = "Product";
+                self.dialogTitle = "Create/edit "+self.header;
+                self.collection = ko.observable(restService.createCollection());
+                self.allData = ko.observableArray();
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
+                self.model = ko.observable();
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
+                self.codeSearch = ko.observable('');
+                self.dateConverter = rendererService.dateConverter;
+                self.message = ko.observable();
+                self.colorType = ko.observable();
+                self.tracker = ko.observable();
+                self.dialogOffcanvas = {selector: '#dialogDrawer', content: '#dialogContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                self.pageOffcanvas = {selector: '#pageDrawer', content: '#pageContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                    
+                self.showMessage = function(type,message,afterShow){
+                    var canvas = ($("#CreateEditDialog").ojDialog("isOpen"))?self.dialogOffcanvas:self.pageOffcanvas;
+                    self.message(message);
+                    if (type==="SUCCESS"){
+                        self.colorType(MessageService.bgColorSuccess);
+                    }else if (type==="ERROR"){
+                        self.colorType(MessageService.bgColorError);
+                    }else{
+                        self.colorType(MessageService.bgColorDefault);
+                    }
+                    oj.OffcanvasUtils.open(canvas);
+                    setTimeout(function(){
+                        oj.OffcanvasUtils.close(canvas);
+                        if (afterShow){
+                            afterShow();
+                        }
+                    },MessageService.displayTimeout);
+                };
 
-                self.productGroups = [];
-                self.productGroups = ko.observableArray([]);
-                self.inputProductCode = ko.observable('');
-                self.inputProductName = ko.observable('');
-                self.inputProductDesc = ko.observable('');
-                self.selectedProductGroup = ko.observableArray([]);
-                self.inputStatus = ko.observable('');
-                self.inputEffectiveDate = ko.observable('');
+                self.dateTimeRenderer = function(context){
+                    return rendererService.dateTimeConverter.format(context.data);
+                };
+                
+                self.dateRenderer = function(context){
+                    return rendererService.dateConverter.format(context.data);
+                };
+                
+                self.activeRenderer = function(context){
+                    return rendererService.activeConverter(context.data);
+                };
+                    
+                self.refreshData = function(){
+                    // fetch from rest service
+                    self.collection().fetch({
+                        success: function(){
+                            self.allData(self.collection().toJSON());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
+                    }); 
+                };
+                
+                self.search = function (code, name, desc) {
+                    var tmp = self.collection().filter(function(rec){
+                        return ((code.length ===0 || (code.length > 0 && rec.attributes.prodCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.prodName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.prodDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                    });
+                    self.collection().reset(tmp);
+                    self.allData(self.collection().toJSON());
+                };
+                
+                self.createOrEdit = function (model) {
+                    self.model(model);
+                    $("#CreateEditDialog").ojDialog("open");
+                };
+                
+                self.save = function (model,successMsg) {
+                    var user = "LAS";
+                    var currentDate = new Date().toISOString();
+                    var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
+                            createdDate: model.isNew()?currentDate:model.attributes.createdDate,
+                            updatedBy: user,
+                            updatedDate: currentDate
+                        };
+                    model.save(defaultAttributes,{
+                        success: function(model){
+                            self.refreshData();
+                            var message = successMsg? successMsg: (model.isNew()?'A new '+self.header+' is successfully created':self.header+' is successfully updated');
+                            self.showMessage("SUCCESS",message,function(){
+                                $("#CreateEditDialog").ojDialog("close");
+                            });
+                        },
+                        error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
+                        }
+                    });
+                    
+                };
 
-                self.codeItem = ko.observable('');
-                self.nameItem = ko.observable('');
-                self.descItem = ko.observable('');
-                self.productGroupItem = ko.observable('');
-                self.statusItem = ko.observable('');
-                self.effectiveDateItem = ko.observable('');
+                self.activateDeactivate = function (model) {
+                    if (model.attributes.active === 'Y'){
+                        model.attributes.active = 'N';
+                    }else if (model.attributes.active === 'N'){
+                        model.attributes.active = 'Y';
+                    }
+                    self.save(model,self.header+" \""+model.attributes.prodCd+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                };
 
-                self.clickResetBtn = function () {
+                self.exportxls = function () {
+                    exportService.export($("#table").ojTable("option","columns"),self.allData(),'xlsx','data.xlsx', function(field,value){
+                        if (field === 'active'){
+                            return rendererService.activeConverter(value);
+                        }else if (field === 'effectiveDate'){
+                            return rendererService.dateConverter.format(value);
+                        }else if (field === 'updatedDate'){
+                            return rendererService.dateTimeConverter.format(value);
+                        }else{
+                            return value;
+                        }
+                    });
+                };
+                
+                self.selectedRow = ko.observable(undefined);
+                
+                // ===============  EVENT HANDLER  ==============
+                
+                self.onReset = function(){
+                    self.refreshData();
+                    
                     self.codeSearch('');
                     self.nameSearch('');
                     self.descSearch('');
-                    self.initRefresh();
+                    
+                    if (self.collection().models.length>1){
+                        self.selectedRow(undefined);
+                        $('#btnEdit').hide();
+                        $('#btnActivate').hide();
+                    }
                 };
-
-                self.resetFormDialog = function () {
-                    self.inputProductCode('');
-                    self.inputProductName('');
-                    self.inputProductDesc('');
-                    self.inputStatus('');
-                    self.inputEffectiveDate('');
-                    $(".selector").ojSelect({"placeholder": "Select a value."});
-                };
-
-                self.loadProductGroups = function () {
-                    self.productGroups([]);
-                    var jsonUrl = "js/data/productgroup.json";
-                    $.ajax(jsonUrl,
-                            {
-                                method: "GET",
-                                dataType: "json",
-                                success: function (data)
-                                {
-                                    console.log(data);
-                                    for (var model in data) {
-                                        self.newProductGroups = Object.create(Object.prototype, {
-                                            "label": {writable: true, configurable: true, value: data[model].prodGrpName},
-                                            "value": {writable: true, configurable: true, value: data[model].prodGrpCd}
-                                        });
-                                        console.log(newProductGroups);
-                                        self.productGroups.push(newProductGroups);
-                                    }
-                                    //self.productGroups(data);
-                                    //console.log(self.productGroups());
-                                },
-                                error: function (jqXHR, textStatus, errorThrown)
-                                {
-                                    console.log(textStatus, errorThrown);
-                                }
-                            }
-                    );
-                };
-
-                self.initRefresh = function () {
-                    console.log("fetching data");
-                    //var jsonUrl = "js/data/product.json";
-                    //var serviceURL = "http://localhost:3000/MdProd";
-//                    var queryString = "/salesApi/resources/latest/opportunities?onlyData=true&fields=OptyNumber,Name,Revenue,TargetPartyName,StatusCode&q=StatusCode=OPEN&limit=10&offset=" + offset;
-//                    console.log(queryString);
-//                    $.ajax(hostname + queryString,
-                    $.ajax(serviceURL,
-                            {
-                                method: "GET",
-                                //dataType: "json",
-//                                headers: {"Authorization": "Basic " + btoa("username:password")},
-                                // Alternative Headers if using JWT Token
-                                // headers : {"Authorization" : "Bearer "+ jwttoken; 
-                                success: function (data)
-                                {
-                                    self.productData(data.MdProd);
-                                    console.log(self.productData());
-                                    //self.tempPeople(data);
-//                                    console.log('Data returned ' + JSON.stringify(data.MdAssetTyp));
-//                                    console.log("Rows Returned" + self.allPeople().length);
-//                                    // Enable / Disable the next/prev button based on results of query
-//                                    if (self.optyList().length < limit)
-//                                    {
-//                                        $('#nextButton').attr("disabled", true);
-//                                    } else
-//                                    {
-//                                        $('#nextButton').attr("disabled", false);
-//                                    }
-//                                    if (self.offset === 0)
-//                                        $('#prevButton').attr("disabled", true);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown)
-                                {
-                                    console.log(textStatus, errorThrown);
-                                }
-                            }
-                    );
-                };
-
-                self.clickSearchBtn = function () {
-                    var productFilter = new Array();
-                    ko.utils.arrayFilter(self.productData(),
-                            function (r) {
-                                var codeSearch = self.codeSearch().toString().toLowerCase();
-                                var nameSearch = self.nameSearch().toString().toLowerCase();
-                                var descSearch = self.descSearch().toString().toLowerCase();
-                                if ((r.prodCd.toString().toLowerCase().indexOf(codeSearch) > -1) &&
-                                        (r.prodName.toString().toLowerCase().indexOf(nameSearch) > -1) &&
-                                        (r.prodDesc.toString().toLowerCase().indexOf(descSearch) > -1)) {
-                                    productFilter.push(r);
-
-                                }
-                            });
-                    self.productData(productFilter);
-                };
-
-                self.onCreateBtn = function () {
-                    self.resetFormDialog();
-                    self.loadProductGroups();
-                    self.productModel(GetRest.createModel("http://movieapp-sitepointdemos.rhcloud.com/api/movies", "_id"));
-                    $('#btn_create').show();
-                    $('#btn_edit').hide();
-                    $("#DataDialog").ojDialog("open");
-                };
-
-                self.onStatusBtn = function () {
-                    alert(self.codeItem());
-                };
-
-                self.onEditBtn = function () {
-                    $('#btn_edit').show();
-                    self.loadProductGroups();
-                    self.productModel(GetRest.createModel(serviceURL, "prodCd"));
-                    console.log(self.codeItem());
-                    self.inputProductCode(self.codeItem());
-                    self.inputProductName(self.nameItem());
-                    self.inputProductDesc(self.descItem());
-                    self.selectedProductGroup(self.productGroupItem());
-                    self.inputStatus(self.statusItem());
-                    self.inputEffectiveDate(self.effectiveDateItem());
-
-                    self.productModel().id = self.codeItem();
-                    self.productModel().fetch({
-                        success: function (model) {
-                            self.productModel(model);
-                        },
-                        error: function (model) {
-                            console.log("Fetch error: ", model);
+                
+                self.onSearch = function(){
+                    self.collection().fetch({
+                        success: function(){
+                            self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
                         }
                     });
-
-                    $("#DataDialog").ojDialog("open");
-                    $('#btn_create').hide();
-                    return true;
                 };
-
-                self.onEdit = function (data, event) {
-                    self.codeItem(data.prodCd);
-                    self.nameItem(data.prodName);
-                    self.descItem(data.prodDesc);
-                    self.productGroupItem(data.mdProdGrp.prodGrpCd);
-                    self.statusItem(data.active);
-                    self.effectiveDateItem(data.effectiveDate);
+                
+                self.onCreate = function(){
+                    self.selectedProductGroupId([]);
+                    self.selectedProductTypeId([]);
+                    self.selectedpaymentFrequencyId([]);
+                    var model = restService.createModel({active: 'Y'});
+                    self.createOrEdit(model);
                 };
-
-                self._showComponentValidationErrors = function (trackerObj)
-                {
-                    trackerObj.showMessages();
-                    if (trackerObj.focusOnFirstInvalid())
-                        return false;
-
-                    return true;
+                
+                self.onEdit = function(){
+                    var model = self.collection().get(self.selectedRow());
+                    self.selectedProductGroupId([model.attributes.prodGrpId]);
+                    self.selectedProductTypeId([model.attributes.prodTypeId]);
+                    self.selectedpaymentFrequencyId([model.attributes.pymtFreqId]);
+                    self.createOrEdit(model);
                 };
-
-                self.onCreate = function () {
+                
+                self.onSave = function(){
                     var trackerObj = ko.utils.unwrapObservable(self.tracker);
-                    /*if (!this._showComponentValidationErrors(trackerObj))
-                    {
-                        return;
-                    }*/
-                    console.log("insert...");
-                    var Product = oj.Model.extend({urlRoot: serviceURL,
-                        idAttribute: "id"});
-                    
-                    var product = new Product();
-                    product.attributes.prodCd = self.inputProductCode().toString();
-                    product.attributes.prodName = self.inputProductName().toString();
-                    product.attributes.prodDesc = self.inputProductDesc().toString();
-                    product.attributes.active = self.inputStatus().toString();
-                    product.attributes.effectiveDate = self.inputEffectiveDate().toString();
-                    //product.attributes.mdProdGrp.prodGrpCd = self.selectedProductGroup().toString();
-                    
-                    /*product.save().then(function() {
-                        console.log("Saved with product Code: " + product.prodCd);
-                    });*/
-                    
-                    product.save(undefined, {"success": function () {
-                        console.log("Saved with product Code: " + product.prodCd);
-                    }, "error": function (jqXHR, textStatus, errorThrown) {
-                        console.log("Error");
-                    }});
-                    
-                    $("#DataDialog").ojDialog("close");
+                    if (trackerObj !== undefined){
+                        if (trackerObj instanceof oj.InvalidComponentTracker){
+                            trackerObj.showMessages();
+                            trackerObj.focusOnFirstInvalid();
+                        }
+                    }
+                    if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
+                        self.model().attributes.prodGrpId = self.selectedProductGroupId()[0];
+                        self.model().attributes.prodTypeId = self.selectedProductTypeId()[0];
+                        self.model().attributes.pymtFreqId = self.selectedpaymentFrequencyId()[0];
+                        self.save(self.model());
+                    }
                 };
-
+                
+                self.onActivateDeactivate = function(){
+                    $("#ConfirmDialog").ojDialog("open");
+                };
+                
+                self.onSelectRow = function(event, ui){
+                    var idx = ui.currentRow.rowIndex;
+                    self.dataSource.at(idx).
+                        then(function (obj) {
+                            self.selectedRow(obj.data[self.collection().model.idAttribute]);
+                            $('#btnEdit').show();
+                            $('#btnActivate').show();
+                        });
+                };
+                
+                self.onExport = function(){
+                    self.exportxls(); 
+                };
+                
                 self.onCancel = function () {
-                    $("#DataDialog").ojDialog("close");
+                    $("#CreateEditDialog").ojDialog("close");
                 };
-
-
-                self.onExportBtn = function () {
-                    alert("test");
-                    $("#table").tableExport();
+                
+                self.onConfirmNo = function(){
+                    $("#ConfirmDialog").ojDialog("close");
                 };
-
-                self.onRowClick = function (data, event)
-                {
-                    self.codeItem(data.prodCd);
-                    self.nameItem(data.prodName);
-                    self.descItem(data.prodDesc);
-                    self.productGroupItem(data.mdProdGrp.prodGrpCd);
-                    self.statusItem(data.active);
-                    self.effectiveDateItem(data.effectiveDate);
-
+                
+                self.onConfirmYes = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                    var model = self.collection().get(self.selectedRow());
+                    self.activateDeactivate(model);
                 };
-                self.initRefresh();
+                
+                self.refreshData();
             }
-            return productViewModel();
+            return productMainViewModel();
         }
 ); 

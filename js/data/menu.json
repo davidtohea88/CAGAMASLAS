@@ -218,6 +218,69 @@
             },
             {
                 "attr" : {
+                    "id" : "counterpartyasset",
+                    "name" : "Counterparty Asset",
+                    "view" : "counterpartyasset"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "counterpartyproduct",
+                    "name" : "Counterparty Product",
+                    "view" : "counterpartyproduct"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "historicalfi",
+                    "name" : "Historical FI",
+                    "view" : "historicalfi"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "ratiofi",
+                    "name" : "Ratio FI",
+                    "view" : "ratiofi"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "producteventcode",
+                    "name" : "Product Event Code",
+                    "view" : "producteventcode"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "ratingagency",
+                    "name" : "Rating Agency",
+                    "view" : "ratingagency"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "counterpartyguarantor",
+                    "name" : "Counterparty Guarantor",
+                    "view" : "counterpartyguarantor"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "counterpartyagreement",
+                    "name" : "Counterparty Agreement",
+                    "view" : "counterpartyagreement"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "counterpartyvendor",
+                    "name" : "Counterparty Vendor",
+                    "view" : "counterpartyvendor"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "blank",
                     "name" : "blank",
                     "view" : "blank"

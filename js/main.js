@@ -401,6 +401,15 @@ require(['ojs/ojcore',
                 'exchangeratedataentry': {value:getMasterDataPath('exchangeRateDataEntry'), label: 'Exchange Rate Data Entry'},
                 'revaluation': {value:getMasterDataPath('revaluation'), label: 'Revaluation'},
                 'daycountconvention': {value:getMasterDataPath('DayCountConvention'), label: 'Day Count Convention'},
+                'counterpartyasset': {value:getMasterDataPath('counterpartyAsset'), label: 'Counterparty Asset'},
+                'counterpartyproduct': {value:getMasterDataPath('counterpartyProduct'), label: 'Counterparty Product'},
+                'historicalfi': {value:getMasterDataPath('historicalFi'), label: 'Historical FI'},
+                'ratiofi': {value:getMasterDataPath('ratioFi'), label: 'Ratio FI'},
+                'producteventcode': {value:getMasterDataPath('productEventCode'), label: 'Product Event Code'},
+                'ratingagency': {value:getMasterDataPath('ratingAgency'), label: 'Rating Agency'},
+                'counterpartyguarantor': {value:getMasterDataPath('counterpartyGuarantor'), label: 'Counterparty Guarantor'},
+                'counterpartyagreement': {value:getMasterDataPath('counterpartyAgreement'), label: 'Counterparty Agreement'},
+                'counterpartyvendor': {value:getMasterDataPath('counterpartyVendor'), label: 'Counterparty Vendor'},
             });
             
                        

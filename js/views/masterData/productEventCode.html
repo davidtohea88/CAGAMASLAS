@@ -19,7 +19,7 @@
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchCode"><label data-bind="text:header"></label> Code</label>
+                                                        <label for="searchCode"><label data-bind="text:header"></label> Event Code</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearch, valueUpdate: 'afterkeydown'}">
@@ -27,20 +27,20 @@
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchName"><label data-bind="text:header"></label> Name</label>
+                                                        <label for="searchName"><label data-bind="text:header"></label> Acc Code</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachName" data-bind="ojComponent: {component: 'ojInputText',value: nameSearch, valueUpdate: 'afterkeydown'}">
                                                     </div>
                                                 </div> 
-                                                <div class="oj-flex">  
+                                                <!--div class="oj-flex">  
                                                     <div class="oj-flex-item">
                                                         <label for="searchDesc"><label data-bind="text:header"></label> Description</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachDesc" data-bind="ojComponent: {component: 'ojInputText',value: descSearch, valueUpdate: 'afterkeydown'}">
                                                     </div>
-                                                </div> 
+                                                </div--> 
                                                 <div class="oj-flex">                       
                                                     <div class="oj-flex-item">
                                                         <button id= "btnSearch" data-bind="click: onSearch,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
@@ -83,9 +83,10 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                    [{headerText: 'Code',  field: 'prodGrpCd', style: 'width: 10%'},
-                                                                    {headerText: 'Name', field: 'prodGrpName', style: 'width: 20%'},
-                                                                    {headerText: 'Description', field: 'prodGrpDesc', style: 'width: 30%'},
+                                                                    [{headerText: 'Event Code',  field: 'eventCd', style: 'width: 10%'},
+                                                                    {headerText: 'Org Hierarcy', field: 'orgId', style: 'width: 20%'},
+                                                                    {headerText: 'Product Name', field: 'prodId',style: 'width: 30%'},
+                                                                    {headerText: 'Acc Code', field: 'accCd',style: 'width: 30%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
@@ -131,7 +132,7 @@
                         <label for="code"><label data-bind="text:header"></label> Code</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.prodGrpCd, required: true, invalidComponentTracker: tracker}" >
+                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.acyCd, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
                 <div class="oj-flex">  
@@ -139,7 +140,7 @@
                         <label for="name"><label data-bind="text:header"></label> Name</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.prodGrpName, required: true, invalidComponentTracker: tracker}" >
+                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.agencyName, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
                 <div class="oj-flex">  
@@ -147,7 +148,7 @@
                         <label for="desc"><label data-bind="text:header"></label> Description</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.prodGrpDesc, required: true, invalidComponentTracker: tracker}" >
+                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.agencyDesc, required: true, invalidComponentTracker: tracker}">
                     </div>
                 </div> 
                 <div class="oj-flex">  

@@ -4,34 +4,13 @@
 define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services/RestService','services/exportService', 'services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation'],
         function (oj, ko, $, rendererService, RestService, exportService, MessageService)
         {
-            function productGroupMainViewModel() {
+            function ratingAgencyMainViewModel() {
                 var self = this;
-                // LOV
-                var productGroupService = RestService.productGroupService();
-                self.productGroupLOV = ko.observableArray();
-                productGroupService.fetchAsLOV('prodGrpName','prodGrpId').then(function(data){
-                    self.productGroupLOV(data);
-                });
-                self.selectedProductGroupId = ko.observableArray();
-                var productTypeService = RestService.productTypeService();
-                self.productTypeLOV = ko.observableArray();
-                productTypeService.fetchAsLOV('prodTypeName','prodTypeId').then(function(data){
-                    self.productTypeLOV(data);
-                });
-                self.selectedProductTypeId = ko.observableArray();
-                var paymentFrequencyService = RestService.paymentFrequencyService();
-                self.paymentFrequencyLOV = ko.observableArray();
-                paymentFrequencyService.fetchAsLOV('pymtFreqName','pymtFreqId').then(function(data){
-                    self.paymentFrequencyLOV(data);
-                });
-                self.selectedpaymentFrequencyId = ko.observableArray();
-                
-                // Service
-                var restService = RestService.productGroupService();
-                self.header = "Product Group";
+                var restService = RestService.ratingAgencyService();
+                self.header = "Rating Agency";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
@@ -93,9 +72,9 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 
                 self.search = function (code, name, desc) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((code.length ===0 || (code.length > 0 && rec.attributes.prodGrpCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                (name.length ===0 || (name.length > 0 && rec.attributes.prodGrpName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                (desc.length ===0 || (desc.length > 0 && rec.attributes.prodGrpDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                        return ((code.length ===0 || (code.length > 0 && rec.attributes.acyCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.agencyName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.agencyDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
@@ -117,7 +96,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                     model.save(defaultAttributes,{
                         success: function(model){
                             self.refreshData();
-                            var message = successMsg? successMsg: (model.isNew()?'A new '+self.header+' is successfully created':self.header+' is successfully updated');
+                            var message = successMsg? successMsg: (model.isNew()?'A new payment frequency is successfully created':'Rating agency is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
                             });
@@ -135,7 +114,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model,self.header+" \""+model.attributes.prodGrpCd+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                    self.save(model,"Rating agency \""+model.attributes.agencyName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
@@ -181,18 +160,12 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 };
                 
                 self.onCreate = function(){
-                    self.selectedProductGroupId([]);
-                    self.selectedProductTypeId([]);
-                    self.selectedpaymentFrequencyId([]);
                     var model = restService.createModel({active: 'Y'});
                     self.createOrEdit(model);
                 };
                 
                 self.onEdit = function(){
                     var model = self.collection().get(self.selectedRow());
-                    self.selectedProductGroupId([model.attributes.prodGrpId]);
-                    self.selectedProductTypeId([model.attributes.prodTypeId]);
-                    self.selectedpaymentFrequencyId([model.attributes.pymtFreqId]);
                     self.createOrEdit(model);
                 };
                 
@@ -205,9 +178,6 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                         }
                     }
                     if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
-                        self.model().attributes.prodGrpId = self.selectedProductGroupId()[0];
-                        self.model().attributes.prodTypeId = self.selectedProductTypeId()[0];
-                        self.model().attributes.pymtFreqId = self.selectedpaymentFrequencyId()[0];
                         self.save(self.model());
                     }
                 };
@@ -246,6 +216,6 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 
                 self.refreshData();
             }
-            return productGroupMainViewModel();
+            return ratingAgencyMainViewModel();
         }
 ); 
