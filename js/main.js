@@ -399,6 +399,14 @@ require(['ojs/ojcore',
                 'currency': {value:getMasterDataPath('currency'), label: 'Currency'},
                 'fundingsource': {value:getMasterDataPath('fundingSource'), label: 'Funding Source'},
                 'exchangeratedataentry': {value:getMasterDataPath('exchangeRateDataEntry'), label: 'Exchange Rate Data Entry'},
+                'mgp-aar-code': {value:'mgp-aar-code', label: 'mgp-aar-code'},
+                'mgp-file-type': {value:'mgp-file-type', label: 'mgp-file-type'},
+                'mgp-caid-code': {value:'mgp-caid-code' },
+                'mgp-foreclosure-recovery': {value:'mgp-foreclosure-recovery', label: 'mgp-file-type'},
+                'mgp-template-upd': {value:'mgp-template-upd', label: 'mgp-file-type'},
+                'mgp-terminate-code': {value:'mgp-terminate-code', label: 'mgp-file-type'},
+                'mgp-verify-sheet': {value:'mgp-verify-sheet', label: 'mgp-file-type'}
+                
             });
             
                        

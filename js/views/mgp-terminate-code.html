@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<div id="container" >
+    <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+    <div class="page-content" style="margin:0 auto">
+        <div class="oj-flex">  
+            <div class="oj-flex-item">
+                <div class="oj-margin oj-panel-alt demo-mypanel" >          
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">  
+                            <div class="oj-margin oj-panel-alt demo-mypanel" >   
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >  
+                                    <h3><b>Filter</b></h3>
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchCode">Product</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText', value: prdSerach}">
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchName">Code</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="seachName" data-bind="ojComponent: {component: 'ojInputText' }">
+                                                    </div>
+                                                </div> 
+                                                
+                                                <div class="oj-flex">                       
+                                                    <div class="oj-flex-item">
+                                                        <button id= "button" data-bind="click:onSearchBtn,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
+                                                        <button id= "button" data-bind="click:onResetBtn,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>    
+                                        <div class="oj-flex-item"></div>
+                                    </div>
+                                </div>
+
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" > 
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <button id= "button" data-bind="click:onCreateBtn,ojComponent: { component: 'ojButton', label: 'Add' }">
+                                                        </button>
+                                                        <button id= "button" data-bind="click:onStatusBtn,ojComponent: { component: 'ojButton', label: 'Delete', disabled: !selectedRow() }">
+                                                        </button>
+                                                        <button id= "button" data-bind="click:onEditBtn,ojComponent: { component: 'ojButton', label: 'Modify', disabled: !selectedRow() }">
+                                                        </button>
+                                                        <button id= "button" data-bind="click:onExportBtn,ojComponent: { component: 'ojButton', label: 'Export' }">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >                    
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">                        
+                                                    <div style="width:100%;">
+                                                        <div id="pagingControlDemo" class="page-content">
+                                                            <table id="table" summary="Origination List" aria-label="Origination Table"
+                                                                   data-bind="ojComponent: {component: 'ojTable', data: dataSource, 
+                                                        columns:[{headerText: 'Product',  field: 'prodGrpCd'  },
+                                                         
+                                                    {headerText: 'Code',     field: 'prodGrpName'} ,{headerText: 'Status',     field: 'prodGrpName'} ], 
+                                                         rootAttributes: {'style':'width: 100%;'},
+                                                            rowTemplate: 'row_template'}">
+                                                            </table>
+                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 10}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>                 
+
+                            </div>    
+                        </div>
+                    </div> 
+                </div>    
+            </div>
+        </div> 
+    </div>
+</div>
+
+<div style="display:none" id="DataDialog" title="Create" 
+     data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:350px;'}
+		  }">
+    <div class="oj-dialog-body" data-bind="with: productGroupModel">
+        <div id="validator" class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-6 oj-md-labels-inline">
+ 
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label for="inputProdGrpCd">Product</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="inputProdGrpCd" required data-bind="ojComponent:{component: 'ojCombobox',value:selectProd, options: lovProduct, invalidComponentTracker: tracker, required:true}">
+                </div>
+            </div> 
+            
+            
+            
+     <div class="oj-flex">                  
+                 <div class="oj-flex-item">
+                    <label for="inputCodeName">Code</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="inputCodeName" required data-bind="ojComponent:{component: 'ojInputText',style: 'width:250px;',invalidComponentTracker: tracker}">
+                </div>              
+               
+            </div> 
+            
+            
+            
+             <div class="oj-flex">  
+                
+                 <div class="oj-flex-item">
+                    <label for="inputStatusName">Status</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="inputStatusName" required data-bind="ojComponent:{component: 'ojInputText', style: 'width:250px;',invalidComponentTracker: tracker}">
+                </div>
+                
+               
+            </div> 
+   
+                                   
+            <div class="oj-dialog-footer">                       
+                <div class="oj-flex-item">
+                    <button id= "btn_create" data-bind="click: onCreate,ojComponent: {component: 'ojButton', label: 'Create', disabled: shouldDisableCreate() } "></button>
+                    <button id= "btn_edit" data-bind="click: onEdit,ojComponent: {component: 'ojButton', label: 'Edit', disabled: shouldDisableCreate() } "></button>
+                    <button id= "btn_cancel" data-bind="click: onCancel,ojComponent: {component: 'ojButton', label: 'Cancel' } "></button>
+                </div>
+            </div> 
+        </div>
+    </div>    
+    <div class="oj-flex-item"></div>
+</div>
+
+<div id="ConfirmDialog" class="ojDialog" title="Confirmation" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:400px;'}
+		  }">
+    <div class="oj-dialog-body">
+        <p>Are you sure ?</p>
+    </div>
+    <div class="oj-dialog-footer">
+        <button id="buttonCancel" data-bind="click: onConfirmOK, ojComponent:
+             { component: 'ojButton', label: 'OK'}"> </button>
+        <button data-bind="click: onConfirmCancel, ojComponent:
+             { component: 'ojButton', label: 'Cancel'}"> </button>
+    </div>
+</div>
+
+<div id="AlertDialog" class="ojDialog" title="Information" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:400px;'}
+		  }">
+    <div class="oj-dialog-body">
+        <div>  
+            <span data-bind="text: value"/>  
+        </div>     
+    </div>
+    <div class="oj-dialog-footer">
+        <button id="buttonCancel" data-bind="click: onAlertOK, ojComponent:
+             { component: 'ojButton', label: 'OK'}"> </button>
+    </div>
+</div>
+
+<script type="text/html" id="row_template">
+    <tr>
+        <!-- The $data check is for when the field doesn't exists. If no value has been specified for a field then the web service might exclude that field from the reponse. -->
+        <td data-bind="text: $data.prodGrpCd       ? prodGrpCd : '', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.prodGrpName    ? prodGrpName    : '', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.prodGrpDesc ? prodGrpDesc : '', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.active == 'Y'       ? 'Active'       : 'Inactive', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.effectiveDate ? moment($data.effectiveDate).format('DD-MM-YYYY'):'', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.updatedDate ? moment($data.updatedDate).format('DD-MM-YYYY') : '', click: function(data, event){onRowClick(data,event)}"></td>
+        <td data-bind="text: $data.updatedBy ? updatedBy       : '', click: function(data, event){onRowClick(data,event)}"></td>
+    </tr>
+</script>

@@ -351,6 +351,71 @@
             "view" : ""
         },
         "children" : [
+            
+                 {
+                "attr" : {
+                    "id" : "mgpsetup",
+                    "name" : "MGP Setup",
+                    "view" : ""
+                },
+            
+            "children" : [
+                    
+                                      
+                       
+                     {
+                "attr" : {
+                    "id" : "mgp-verify-sheet",
+                    "name" : "Verification Sheet",
+                    "view" : "mgp-verify-sheet"
+                }
+            }  ,
+                        {
+                "attr" : {
+                    "id" : "mgp-template-upd",
+                    "name" : "Document Template",
+                    "view" : "mgp-template-upd"
+                }
+            },
+             {
+                "attr" : {
+                    "id" : "mgp-file-type",
+                    "name" : "File Type",
+                    "view" : "mgp-file-type"
+                }
+            },
+                        {
+                "attr" : {
+                    "id" : "mgp-foreclosure-recovery",
+                    "name" : "Foreclosure and Recovery",
+                    "view" : "mgp-foreclosure-recovery"
+                }
+            },
+                        {
+                "attr" : {
+                    "id" : "mgp-terminate-code",
+                    "name" : "Termination Code",
+                    "view" : "mgp-terminate-code"
+                }
+            },
+            
+                        {
+                "attr" : {
+                    "id" : "mgp-caid-code",
+                    "name" : "CAID Code",
+                    "view" : "mgp-caid-code"
+                }
+            },
+        {
+                "attr" : {
+                    "id" : "mgp-aar-code",
+                    "name" : "AAR Code",
+                    "view" : "mgp-aar-code"
+                }
+            }
+            
+            ] },
+            
             {
                 "attr" : {
                     "id" : "origination",
@@ -402,9 +467,9 @@
             },
             {
                 "attr" : {
-                    "id" : "mgp-verify-sheet",
+                    "id" : "mgp-fully-disp",
                     "name" : "MGP Fully Disbursed Report",
-                    "view" : "mgp-verify-sheet"
+                    "view" : "mgp-fully-disp"
                 }
             },
             {
