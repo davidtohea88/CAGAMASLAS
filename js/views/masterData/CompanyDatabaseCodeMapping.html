@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<div id="container" class="oj-offcanvas-outer-wrapper">
+    <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+    <div id="pageDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center', color: 'white'}">
+        <span data-bind="text: message"></span>
+    </div>
+    <div class="page-content" style="margin:0 auto">
+        <div class="oj-flex">  
+            <div class="oj-flex-item">
+                <div class="oj-margin oj-panel-alt demo-mypanel" >          
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">  
+                            <div class="oj-margin oj-panel-alt demo-mypanel" >   
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >  
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">
+                                            <div class="oj-form  oj-md-labels-inline">
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item">
+                                                        <h3><b>Company Master</b></h3>
+                                                    </div>
+                                                    </div>
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item">
+                                                        <button id= "btn_Vendor"  data-bind="click:onAddCompany, ojComponent: { component: 'ojButton', label: 'Add Company' }"></button>
+                                                        <button id= "btn_EditCompany"  data-bind="click:onEdit, ojComponent: { component: 'ojButton', label: 'Edit Company', disabled: !selectedRow() }"></button>
+                                                        <button id= "btn_AddDB"  data-bind="click:onAddDB, ojComponent: { component: 'ojButton', label: 'Add Database', disabled: !selectedRow() }"></button>
+                                                    </div>
+                                                    </div>
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item">
+                                                    <table id="sun" summary="Department List" aria-label="Departments Table" style="width:100%;"
+                                                            data-bind="ojComponent: {component: 'ojTable', 
+                                                            data: companyDataSource, 
+                                                            columnsDefault: {sortable: 'none'}, 
+                                                            columns: [{headerText: 'Company Name', 
+                                                                       field: 'CompanyName'}], selectionMode: {row: 'single'},beforeCurrentRow: onSelectRow}">
+                                                         </table>
+                                                        
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="oj-flex-item">
+                                            <div class="oj-form oj-md-labels-inline">
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item" id="databasecode" style="display:none;">
+                                                        <h3><b>Database Code</b></h3>
+                                                    <table id="dbcode" summary="Department List" aria-label="Departments Table"
+                                                            data-bind="ojComponent: {component: 'ojTable', emptyText: 'Please select any company.',
+                                                            data: DBCodeDataSource, 
+                                                            columnsDefault: {sortable: 'none'}, 
+                                                            columns: [{headerText: 'Database Code', field: 'dbCodeName'},
+                                                               {headerTemplate: 'delete_hdr', template: 'delete_item', style: 'width: 45%;text-align:center;'}]}">
+                                                         </table>                                                    </div>
+                                                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                                
+                                
+                            </div>    
+                        </div>
+                    </div> 
+                </div>    
+            </div>
+        </div> 
+    </div>
+</div>
+<div id="dialogWrapper">
+    <div id="CreateEditDialog" title=""
+            data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modeless', 
+                    cancelBehavior: 'escape',resizeBehavior: 'none', 
+                rootAttributes: { style: 'min-width:420px; min-height: 230px;'}}">
+        <div class="oj-dialog-header oj-helper-clearfix">
+            <span id="dialogTitleId" class="oj-dialog-title"> Add Company </span> 
+        </div>
+        <div class="oj-dialog-body oj-offcanvas-outer-wrapper" data-bind="with: companyModel">
+            <div id="dialogDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center'}">
+                 <p style="color: white"><span data-bind="text: message"></span></p>
+            </div>
+            <div id="dialogContent" class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="name">Company Name</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.CompanyName, required: true, invalidComponentTracker: tracker}" >
+                        </div>
+                    </div>   
+                </div>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="btnSave" data-bind="click:onSave,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
+            <button id="btnCancel" data-bind="click:onCancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+        </div>
+    </div>
+    <div id="CreateEditDialogDB" title=""
+            data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modeless', 
+                    cancelBehavior: 'escape',resizeBehavior: 'none', 
+                rootAttributes: { style: 'min-width:420px; min-height: 230px;'}}">
+        <div class="oj-dialog-header oj-helper-clearfix">
+            <span id="dialogTitleId" class="oj-dialog-title"> Map Database Code </span> 
+        </div>
+        <div class="oj-dialog-body oj-offcanvas-outer-wrapper" data-bind="with: DBCodeModel">
+            <div id="dialogDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center'}">
+                 <p style="color: white"><span data-bind="text: message"></span></p>
+            </div>
+            <div id="dialogContent" class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
+                
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="name">Company Name</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: selectedRowValue, disabled:true}" >
+                        </div>
+                    </div> 
+                <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="name">Database Code</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.dbCodeId, required: true, invalidComponentTracker: tracker2}" >
+                        </div>
+                    </div>   
+                </div>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="btnSaveDB" data-bind="click:onSaveDB,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
+            <button id="btnCancelDB" data-bind="click:onCancelDB,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/html" id="delete_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="delete_item">
+    <td>
+        <button id= "btn_Vendor" 
+            data-bind=" click: onDeleteDB, ojComponent: { component: 'ojButton', label: 'Remove' }">
+        </button>
+    </td>
+</script>
