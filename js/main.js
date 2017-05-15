@@ -412,7 +412,9 @@ require(['ojs/ojcore',
                 'revaluation': {value:getMasterDataPath('revaluation'), label: 'Revaluation'},
                 'daycountconvention': {value:getMasterDataPath('DayCountConvention'), label: 'Day Count Convention'},
                 'glpostingrule': {value:getMasterDataPath('GLPostingRule'), label: 'GL Posting Rule'},
-                'glaccountmaster': {value:getMasterDataPath('GLAccountMaster'), label: 'GL Account Master'}
+                'glaccountmaster': {value:getMasterDataPath('GLAccountMaster'), label: 'GL Account Master'},
+                'companydbcodemapping': {value:getMasterDataPath('CompanyDatabaseCodeMapping'), label: 'Company Database Code Mapping'}
+
 
             });
             
