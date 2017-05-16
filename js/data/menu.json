@@ -426,6 +426,13 @@
                     "name" : "AAR Code",
                     "view" : "mgp-aar-code"
                 }
+            },
+             {
+                "attr" : {
+                    "id" : "mgp-elig-summary",
+                    "name" : "MGP Eligibility Summary",
+                    "view" : "mgp-elig-summary"
+                }
             }
             
             ] },
