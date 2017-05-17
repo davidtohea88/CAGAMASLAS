@@ -289,8 +289,9 @@ require(['ojs/ojcore',
                 'daycountconvention': {value:getMasterDataPath('DayCountConvention'), label: 'Day Count Convention'},
                 'glpostingrule': {value:getMasterDataPath('GLPostingRule'), label: 'GL Posting Rule'},
                 'glaccountmaster': {value:getMasterDataPath('GLAccountMaster'), label: 'GL Account Master'},
-                'companydbcodemapping': {value:getMasterDataPath('CompanyDatabaseCodeMapping'), label: 'Company Database Code Mapping'}
-
+                'companydbcodemapping': {value:getMasterDataPath('CompanyDatabaseCodeMapping'), label: 'Company Database Code Mapping'},
+                'glaccountassignment': {value:getMasterDataPath('GLAccountAssignment'), label: 'GL Account Assignment'},
+                'glaccounttemplate': {value:getMasterDataPath('GLAccountTemplate'), label: 'GL Account Template'}
 
             });
             
