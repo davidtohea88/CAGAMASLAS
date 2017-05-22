@@ -13,7 +13,7 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("country","countryId","MdCountry");
             };
             self.districtService = function(){
-                return new BaseRestService("district","districtId","MdDistrict");
+                return new BaseRestService("District","distId","MdDistrict");
             };
             self.stateService = function(){
                 return new BaseRestService("state","stateId","MdState");
@@ -37,7 +37,7 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("cptySector","cptSctrId","MdCptSctr");
             };
             self.counterpartyTypeService = function(){
-                return new BaseRestService("cptyType","cptTypeId","MdCptType");
+                return new BaseRestService("CounterpartyType","cptTypeId","MdCptType");
             };
             self.counterpartyGroupService = function(){
                 return new BaseRestService("cptyGroup","cptGrpId","MdCptGroup");
@@ -114,6 +114,15 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.counterpartyService  = function(){
                 return new BaseRestService("Counterparty","cptId","MdCpt");
             };
+            self.cagamasRatingService  = function(){
+                return new BaseRestService("CagamasRating","cagaRatingId","MdCagaRating");
+            };
+            self.bnmRatingService  = function(){
+                return new BaseRestService("BnmRating","bnmRatingId","MdBnmRating");
+            };
+            self.counterpartyRatingService  = function(){
+                return new BaseRestService("CounterpartyRating","cptRtgId","MdCptRating");
+            };
             self.counterpartyAssetService  = function(){
                 return new BaseRestService("CounterpartyAsset","cptAssetId","MdCptAsset");
             };
@@ -128,6 +137,15 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             };
             self.productEventCodeService  = function(){
                 return new BaseRestService("ProductEventCode","prodEventId","MdProdeventCode");
+            };
+            self.fiReviewGroupService  = function(){
+                return new BaseRestService("FiReviewGroup","rvwGrpId","MdRvwGrp");
+            };
+            self.postCodeService  = function(){
+                return new BaseRestService("PostCode","postId","MdPostCode");
+            };
+            self.vendorService  = function(){
+                return new BaseRestService("Vendor","vndrId","MdCptVndrHdr");
             };
         };
         return new RestService();

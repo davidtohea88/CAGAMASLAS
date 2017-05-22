@@ -120,6 +120,13 @@
             },
             {
                 "attr" : {
+                    "id" : "counterpartyrating",
+                    "name" : "Counterparty Rating",
+                    "view" : "counterpartyrating"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "consumertype",
                     "name" : "Consumer Type",
                     "view" : "consumertype"
@@ -144,6 +151,13 @@
                     "id" : "district",
                     "name" : "District",
                     "view" : "district"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "postcode",
+                    "name" : "Post Code",
+                    "view" : "postcode"
                 }
             },
             {
@@ -204,6 +218,13 @@
             },
             {
                 "attr" : {
+                    "id" : "gstaccount",
+                    "name" : "GST Account",
+                    "view" : "gstaccount"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "branch",
                     "name" : "Branch",
                     "view" : "branch"
@@ -211,9 +232,72 @@
             },
             {
                 "attr" : {
+                    "id" : "masteragreement",
+                    "name" : "Master Agreement",
+                    "view" : "masteragreement"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "agreementtype",
                     "name" : "Agreement Type",
                     "view" : "agreementtype"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "cagamasrating",
+                    "name" : "Cagamas Rating",
+                    "view" : "cagamasrating"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "bnmrating",
+                    "name" : "BNM Rating",
+                    "view" : "bnmrating"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "guarantor",
+                    "name" : "Guarantor",
+                    "view" : "guarantor"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "mgpmaintenance",
+                    "name" : "MGP Maintenance - Verification Sheet",
+                    "view" : "mgpmaintenance"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "foreclosurerecoverycode",
+                    "name" : "Foreclosure Recovery Code",
+                    "view" : "foreclosurerecoverycode"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "terminationcode",
+                    "name" : "Termination Code",
+                    "view" : "terminationcode"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "caidcode",
+                    "name" : "CAID Code",
+                    "view" : "caidcode"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "mgpeligibilitycheck",
+                    "name" : "MGP Eligibility Check",
+                    "view" : "mgpeligibilitycheck"
                 }
             },
             {
@@ -277,6 +361,41 @@
                     "id" : "counterpartyvendor",
                     "name" : "Counterparty Vendor",
                     "view" : "counterpartyvendor"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "fireviewgroup",
+                    "name" : "FI Review Group",
+                    "view" : "fireviewgroup"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "documents",
+                    "name" : "Documents",
+                    "view" : "documents"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "creditlimit",
+                    "name" : "Credit Limit",
+                    "view" : "creditlimit"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "gir",
+                    "name" : "GIR",
+                    "view" : "gir"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "vendor",
+                    "name" : "Vendor",
+                    "view" : "vendor"
                 }
             },
             {

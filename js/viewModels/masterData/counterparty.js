@@ -72,7 +72,9 @@ define(['ojs/ojcore', 'knockout', 'jquery','data/data', 'ojs/ojknockout', 'ojs/o
                 };
                 
                 self.buttonClick = function(item) {
+                    alert("test");
                     console.log(item.cpCd);
+                    //alert("Code = " + item.cpCd);
                     oj.Router.rootInstance.store(item);
                     oj.Router.rootInstance.go("counterparty-detail");
                   };

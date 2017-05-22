@@ -83,9 +83,9 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                    [{headerText: 'Code',  field: 'fiCptRtId', style: 'width: 10%'},
-                                                                    {headerText: 'Name',  field: 'fiCptHstId', style: 'width: 20%'},
-                                                                    {headerText: 'Description', field: 'ctiRatio', style: 'width: 30%'},
+                                                                    [{headerText: 'Code',  field: 'postCd', style: 'width: 10%'},
+                                                                    {headerText: 'Name', field: 'addrName', style: 'width: 20%'},
+                                                                    {headerText: 'Description', field: 'addrDesc',style: 'width: 30%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
@@ -117,7 +117,7 @@
     <div id="CreateEditDialog" title=""
             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modeless', 
                     cancelBehavior: 'escape',resizeBehavior: 'none', 
-                rootAttributes: { style: 'min-width:800px;'}}">
+                rootAttributes: { style: 'min-width:500px;'}}">
         <div class="oj-dialog-header oj-helper-clearfix">
             <span id="dialogTitleId" class="oj-dialog-title" data-bind="text:dialogTitle"> </span> 
         </div>
@@ -125,16 +125,24 @@
             <div id="dialogDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center'}">
                  <p style="color: white"><span data-bind="text: message"></span></p>
             </div>
-            <div id="dialogContent" class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-form-cols-labels-inline oj-form-cols-max2">
+            <div id="dialogContent" class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
                 <div class="oj-flex">  
-                    <div class="oj-flex-item" style="width: 200px;">
-                        <label for="counterparty">Historical FI</label>
+                    <div class="oj-flex-item">
+                        <label for="code"><label data-bind="text:header"></label> Code</label>
                     </div>
                     <div class="oj-flex-item">
-                        <select id="counterparty" data-bind="ojComponent: {
+                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.postCd, required: true, invalidComponentTracker: tracker}" >
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="district">District</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <select id="district" style="width: 100%;" data-bind="ojComponent: {
                             component: 'ojSelect',
-                            options: counterpartyLOV, 
-                            value: selectedCounterpartyId, 
+                            options: districtLOV, 
+                            value: selectedDistrictId, 
                             placeholder: 'Please Select',
                             required: true, invalidComponentTracker: tracker,
                             rootAttributes: {style:'max-width: 20em'}}">
@@ -142,14 +150,21 @@
                     </div>
                 </div> 
                 <div class="oj-flex">  
-                    <div class="oj-flex-item" style="width: 50%;">
-                        <label for="name">cetICapital</label>
+                    <div class="oj-flex-item">
+                        <label for="name"><label data-bind="text:header"></label> Name</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="name" data-bind="ojComponent: {component: 'ojInputText',value: attributes.cetICapital, required: true, invalidComponentTracker: tracker}" >
+                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.addrName, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
-
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="desc"><label data-bind="text:header"></label> Description</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.addrDesc, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div> 
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
                         <label id="statusGroup">Status</label>
@@ -170,6 +185,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="effectiveDt">Effective Date</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input id="effectiveDt" style="width: 100%;"
+                           data-bind="ojComponent: {component: 'ojInputDate',value: attributes.effectiveDate, converter: dateConverter, required: true, invalidComponentTracker: tracker}"/>
+                    </div>
+                </div>    
             </div>
         </div>
         <div class="oj-dialog-footer">

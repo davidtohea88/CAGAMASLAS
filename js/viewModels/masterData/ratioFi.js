@@ -26,7 +26,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 self.selectedProductId = ko.observableArray();
                 
                 // Service
-                var restService = RestService.counterpartyProductService();
+                var restService = RestService.counterpartyRatioFiService();
                 self.header = "Ratio FI";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.collection = ko.observable(restService.createCollection());
@@ -100,8 +100,9 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 
                 self.search = function (code, name, desc) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((code.length ===0 || (code.length > 0 && rec.attributes.cptId.toString().toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                (name.length ===0 || (name.length > 0 && rec.attributes.prodId.toString().toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
+                        return ((code.length ===0 || (code.length > 0 && rec.attributes.fiCptRtId.toString().toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.fiCptHstId.toString().toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.ctiRatio.toString().toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());

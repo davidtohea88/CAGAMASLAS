@@ -19,7 +19,7 @@
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchCode"><label data-bind="text:header"></label> Code</label>
+                                                        <label for="searchCode">Rating Category</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearch, valueUpdate: 'afterkeydown'}">
@@ -27,7 +27,7 @@
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchName"><label data-bind="text:header"></label> Name</label>
+                                                        <label for="searchName">Rate Weight %</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachName" data-bind="ojComponent: {component: 'ojInputText',value: nameSearch, valueUpdate: 'afterkeydown'}">
@@ -35,7 +35,7 @@
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchDesc"><label data-bind="text:header"></label> Description</label>
+                                                        <label for="searchDesc">Agency</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachDesc" data-bind="ojComponent: {component: 'ojInputText',value: descSearch, valueUpdate: 'afterkeydown'}">
@@ -83,13 +83,13 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                    [{headerText: 'Code',  field: 'fiCptRtId', style: 'width: 10%'},
-                                                                    {headerText: 'Name',  field: 'fiCptHstId', style: 'width: 20%'},
-                                                                    {headerText: 'Description', field: 'ctiRatio', style: 'width: 30%'},
+                                                                    [{headerText: 'Counter Party Type',  field: 'cptTypeId', style: 'width: 10%'},
+                                                                    {headerText: 'Rating Category', field: 'bnmRateCatgy', style: 'width: 20%'},
+                                                                    {headerText: 'Rate Weight %', field: 'bnmRateWeight',style: 'width: 20%'},
+                                                                    {headerText: 'Agency', field: 'agencyBnmRating',style: 'width: 20%'},
+                                                                    {headerText: 'Rating', field: 'bnmRatingCd',style: 'width: 10%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
-                                                                    {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
-                                                                    {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
-                                                                    {headerText: 'Last Updated Date',  field: 'updatedDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
+                                                                    {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer}],
                                                                     rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} ,
                                                                         beforeCurrentRow: onSelectRow}">
                                                             </table>
@@ -117,7 +117,7 @@
     <div id="CreateEditDialog" title=""
             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modeless', 
                     cancelBehavior: 'escape',resizeBehavior: 'none', 
-                rootAttributes: { style: 'min-width:800px;'}}">
+                rootAttributes: { style: 'min-width:500px;'}}">
         <div class="oj-dialog-header oj-helper-clearfix">
             <span id="dialogTitleId" class="oj-dialog-title" data-bind="text:dialogTitle"> </span> 
         </div>
@@ -125,31 +125,53 @@
             <div id="dialogDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center'}">
                  <p style="color: white"><span data-bind="text: message"></span></p>
             </div>
-            <div id="dialogContent" class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-form-cols-labels-inline oj-form-cols-max2">
+            <div id="dialogContent" class="oj-form  oj-sm-odd-cols-7 oj-md-odd-cols-5 oj-md-labels-inline">
                 <div class="oj-flex">  
-                    <div class="oj-flex-item" style="width: 200px;">
-                        <label for="counterparty">Historical FI</label>
+                    <div class="oj-flex-item">
+                        <label for="counterpartyType">Counter Party Type</label>
                     </div>
                     <div class="oj-flex-item">
-                        <select id="counterparty" data-bind="ojComponent: {
+                        <select id="counterpartyType" data-bind="ojComponent: {
                             component: 'ojSelect',
-                            options: counterpartyLOV, 
-                            value: selectedCounterpartyId, 
+                            options: counterpartyTypeLOV, 
+                            value: selectedCounterpartyTypeId, 
                             placeholder: 'Please Select',
-                            required: true, invalidComponentTracker: tracker,
-                            rootAttributes: {style:'max-width: 20em'}}">
+                            required: true, invalidComponentTracker: tracker}">
                         </select>
                     </div>
                 </div> 
                 <div class="oj-flex">  
-                    <div class="oj-flex-item" style="width: 50%;">
-                        <label for="name">cetICapital</label>
+                    <div class="oj-flex-item">
+                        <label for="ratingCategory">Rating Category</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="name" data-bind="ojComponent: {component: 'ojInputText',value: attributes.cetICapital, required: true, invalidComponentTracker: tracker}" >
+                        <input id="ratingCategory" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.bnmRateCatgy, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
-
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="rateWeight">Rate Weight %</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="rateWeight" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.bnmRateWeight, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="agency">Agency</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="agency" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.agencyBnmRating, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="rating">Rating</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="rating" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.bnmRatingCd, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div> 
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
                         <label id="statusGroup">Status</label>
@@ -170,6 +192,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="effectiveDt">Effective Date</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input id="effectiveDt" style="width: 100%;"
+                           data-bind="ojComponent: {component: 'ojInputDate',value: attributes.effectiveDate, converter: dateConverter, required: true, invalidComponentTracker: tracker}"/>
+                    </div>
+                </div>    
             </div>
         </div>
         <div class="oj-dialog-footer">
