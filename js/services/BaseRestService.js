@@ -7,23 +7,37 @@
 
 define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
     function(oj,ko,config) {
-        var BaseRestService = function(baseUrl, propertyId, objEnclosure) {
+        var BaseRestService = function(url, propertyId, objEnclosure) {
             var self = this;
             
-            self.baseUrl = baseUrl;
+            self.getRestServiceUrl = function(restUrl){
+                var url = config.serviceUrl+((config.serviceUrl[config.serviceUrl.length-1]==='/')?"":"/")+restUrl;
+                var idx = url.indexOf('://');
+                if (idx >= 0){
+                    url = url.substr(0,idx)+'://'+url.substr(idx+3).replace('//','/');
+                }else{
+                    url.replace('//','/');
+                }
+                if (url[url.length-1]==='/'){
+                    url = url.substr(0,url.length-1);
+                }
+                return url;
+            };
+            
+            self.baseUrl = self.getRestServiceUrl(url);
             self.propertyId = propertyId;
             self.objectEnclosure = objEnclosure;
             
             self.createModel = function(defaultObj){
                 var baseModel  = oj.Model.extend({
-                    urlRoot: config.serviceUrl+self.baseUrl,
+                    urlRoot: self.baseUrl,
                     customURL: function(operation,model,options){
                         if (operation === 'create'){
-                            return {url: config.serviceUrl+self.baseUrl, type: 'PUT'};
+                            return {url: self.baseUrl, type: 'PUT'};
                         }else if (operation === 'update'){
-                            return {url: config.serviceUrl+self.baseUrl+"?"+propertyId+"="+options.recordID, type: 'PUT'};
+                            return {url: self.baseUrl+"?"+propertyId+"="+options.recordID, type: 'PUT'};
                         }else if (operation === 'get'){
-                            return {url: config.serviceUrl+self.baseUrl+"?"+propertyId+"="+options.recordID, type: 'GET'};
+                            return {url: self.baseUrl+"?"+propertyId+"="+options.recordID, type: 'GET'};
                         }
                     },
                     idAttribute: self.propertyId,
@@ -59,7 +73,7 @@ define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
             
             self.createCollection = function(){
                 var baseCollection = oj.Collection.extend({
-                    url:   config.serviceUrl+self.baseUrl,
+                    url:   self.baseUrl,
                     model: new self.createModel(),
                     parse: function(resp){
                         if (resp.hasOwnProperty(self.objectEnclosure)){

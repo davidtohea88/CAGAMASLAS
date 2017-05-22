@@ -4,7 +4,7 @@
 define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services/RestService','services/exportService', 'services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojselectcombobox','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        'ojs/ojdatetimepicker', 'ojs/ojradioset', 'ojs/ojselectcombobox', 'ojs/ojoffcanvas','ojs/ojknockout-validation'],
         function (oj, ko, $, rendererService, RestService, exportService, MessageService)
         {
             function vendorMainViewModel() {

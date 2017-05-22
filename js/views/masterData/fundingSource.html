@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 
-<!-- MAIN -->
-<div id="container" class="oj-offcanvas-outer-wrapper" >
+<div id="container" class="oj-offcanvas-outer-wrapper">
     <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
     <div id="pageDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center', color: 'white'}">
         <span data-bind="text: message"></span>
     </div>
-    <div id="pageContent" class="page-content" style="margin:0 auto">
+    <div class="page-content" style="margin:0 auto">
         <div class="oj-flex">  
             <div class="oj-flex-item">
                 <div class="oj-margin oj-panel-alt demo-mypanel" >          
@@ -18,14 +17,6 @@
                                     <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
                                         <div class="oj-flex-item">
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-md-labels-inline">
-                                                <div class="oj-flex">  
-                                                    <div class="oj-flex-item">
-                                                        <label for="searchCode">Funding Source Code</label>
-                                                    </div>
-                                                    <div class="oj-flex-item">
-                                                        <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearch,valueUpdate: 'afterkeydown'}">
-                                                    </div>
-                                                </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
                                                         <label for="searchName">Funding Source Name</label>
@@ -84,9 +75,8 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                    [{headerText: 'Code',  field: 'FundSrcCd', style: 'width: 10%'},
-                                                                    {headerText: 'Name', field: 'FundSrcName', style: 'width: 30%'},
-                                                                    {headerText: 'Description', field: 'FundSrcDesc',style: 'width: 20%'},
+                                                                    [{headerText: 'Name', field: 'fundSrcName', style: 'width: 30%'},
+                                                                    {headerText: 'Description', field: 'fundSrcDesc',style: 'width: 20%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
@@ -101,7 +91,52 @@
                                             </div>
                                         </div>    
                                     </div>
-                                </div>                 
+                                </div>  
+
+                                <div id="DealTagging" style="display:none;">                                
+                                    <h3><b>Funding Source Deal Tagging of <span data-bind="text:selectedRowValue"></span></b></h3>                                
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" > 
+
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <button id= "btnAddTagging" data-bind="click:onAddTagging,ojComponent: { component: 'ojButton', label: 'Add' }">
+                                                        </button>
+                                                        <button id= "btnDeleteTagging" data-bind="click:onDeleteTagging,ojComponent: { component: 'ojButton', label: 'Delete', disabled: !selectedRowTagging() }">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+                                
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >                    
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">                        
+                                                    <div style="width:100%;">
+                                                        <div id="pagingControlDemo" class="page-content">
+                                                            <table id="table" summary="Tagging" aria-label="Tagging Table"
+                                                                   data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSourceTagging, columns:
+                                                                    [{headerText: 'Tagging Code',  field: 'fundLineId', style: 'width: 30%'},
+                                                                    {headerText: 'Deal Number', field: 'dealCd', style: 'width: 30%'},
+                                                                    {headerText: 'Bond Number', field: 'bondNumber',style: 'width: 40%'}], 
+                                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'},beforeCurrentRow: onSelectRowTagging}">
+                                                            </table>
+                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSourceTagging, pageSize: 10}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+                                    </div>
 
                             </div>    
                         </div>
@@ -122,71 +157,109 @@
         <div class="oj-dialog-header oj-helper-clearfix">
             <span id="dialogTitleId" class="oj-dialog-title" data-bind="text:dialogTitle"> </span> 
         </div>
-        <div class="oj-dialog-body oj-offcanvas-outer-wrapper" data-bind="with: model">
+        <div class="oj-dialog-body oj-offcanvas-outer-wrapper" data-bind="with: fundingSourceModel">
             <div id="dialogDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center'}">
                  <p style="color: white"><span data-bind="text: message"></span></p>
             </div>
             <div id="dialogContent" class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
-                <div class="oj-flex">  
-                    <div class="oj-flex-item">
-                        <label for="code">Funding Source Code</label>
-                    </div>
-                    <div class="oj-flex-item">
-                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.FundSrcCd, required: true, invalidComponentTracker: tracker}" >
-                    </div>
-                </div> 
-                <div class="oj-flex">  
-                    <div class="oj-flex-item">
-                        <label for="name">Funding Source Name</label>
-                    </div>
-                    <div class="oj-flex-item">
-                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.FundSrcName, required: true, invalidComponentTracker: tracker}" >
-                    </div>
-                </div> 
-                <div class="oj-flex">  
-                    <div class="oj-flex-item">
-                        <label for="desc">Funding Source Description</label>
-                    </div>
-                    <div class="oj-flex-item">
-                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.FundSrcDesc, required: true, invalidComponentTracker: tracker}">
-                    </div>
-                </div> 
-                <div class="oj-flex">  
-                    <div class="oj-flex-item">
-                        <label for="statusGroup">Status</label>
-                    </div>
-                    <div class="oj-flex-item">
-                        <div id="statusGroup" class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: attributes.active, required: true, invalidComponentTracker: tracker}" 
-                             aria-labelledby="statusGroup">
-                            <span class="oj-choice-item">
-                                <input id="rbtn_active" type="radio" 
-                                       value="Y" name="status">
-                                <label for="rbtn_active">Active</label>
-                            </span>
-                            <span class="oj-choice-item">
-                                <input id="rbtn_inactive" type="radio" 
-                                       value="N" name="status">
-                                <label for="rbtn_inactive">Inactive</label>
-                            </span>
+                    
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="name">Funding Source Name</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.fundSrcName, required: true, invalidComponentTracker: tracker}" >
+                        </div>
+                    </div> 
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="desc">Funding Source Description</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.fundSrcDesc, required: true, invalidComponentTracker: tracker}">
+                        </div>
+                    </div> 
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="statusGroup">Status</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <div id="statusGroup" class="oj-choice-direction-row" data-bind="ojComponent: {component: 'ojRadioset', value: attributes.active, required: true, invalidComponentTracker: tracker}" 
+                                 aria-labelledby="statusGroup">
+                                <span class="oj-choice-item">
+                                    <input id="rbtn_active" type="radio" 
+                                           value="Y" name="status">
+                                    <label for="rbtn_active">Active</label>
+                                </span>
+                                <span class="oj-choice-item">
+                                    <input id="rbtn_inactive" type="radio" 
+                                           value="N" name="status">
+                                    <label for="rbtn_inactive">Inactive</label>
+                                </span>
+                            </div>
                         </div>
                     </div>
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="effectiveDt">Effective Date</label>
+                        </div>
+                        <div class="oj-flex-item">
+                        <input id="effectiveDt" style="width: 100%;"
+                               data-bind="ojComponent: {component: 'ojInputDate',value: attributes.effectiveDate, required: true, invalidComponentTracker: tracker}"/>
+                        </div>
+                    </div>    
                 </div>
-                <div class="oj-flex">  
-                    <div class="oj-flex-item">
-                        <label for="effectiveDt">Effective Date</label>
-                    </div>
-                    <div class="oj-flex-item">
-                    <input id="effectiveDt" style="width: 100%;"
-                           data-bind="ojComponent: {component: 'ojInputDate',value: attributes.effectiveDate, converter: dateConverter, required: true, invalidComponentTracker: tracker}"/>
-                    </div>
-                </div>    
-            </div>
+
         </div>
         <div class="oj-dialog-footer">
             <button id="btnSave" data-bind="click:onSave,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
             <button id="btnCancel" data-bind="click:onCancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
         </div>
     </div>
+    <div id="CreateEditDialogTagging" title=""
+            data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modeless', 
+                    cancelBehavior: 'escape',resizeBehavior: 'none', 
+                rootAttributes: { style: 'min-width:450px; min-height: 330px;'}}">
+        <div class="oj-dialog-header oj-helper-clearfix">
+            <span id="dialogTitleId" class="oj-dialog-title" data-bind="text:dialogTitle"> </span> 
+        </div>
+        <div class="oj-dialog-body oj-offcanvas-outer-wrapper" data-bind="with: fundingSourceTaggingModel">
+            <div id="dialogDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center'}">
+                 <p style="color: white"><span data-bind="text: message"></span></p>
+            </div>
+            <div id="dialogContent" class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="code">Funding Source</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: selectedRowValue, disabled:true}" >
+                        </div>
+                    </div> 
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="name">Deal Number</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.dealCd, required: true, invalidComponentTracker: tracker2}" >
+                        </div>
+                    </div> 
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="desc">Bond Number</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.bondNumber, required: true, invalidComponentTracker: tracker2}">
+                        </div>
+                    </div>    
+                </div>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="btnSave" data-bind="click:onSaveTagging,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
+            <button id="btnCancel" data-bind="click:onCancelTagging,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+        </div>
+    </div>
+    
     <div id="ConfirmDialog" class="ojDialog" title="" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
 		  rootAttributes: { style: 'width:400px;'}
 		  }">

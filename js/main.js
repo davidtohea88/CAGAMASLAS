@@ -80,13 +80,14 @@ require(['ojs/ojcore',
             var router = oj.Router.rootInstance;
             
             function getMasterDataPath(path) {
+
                 return 'masterData/' + path.substr(path.lastIndexOf('/') + 1);
               }
             function getPWRPath(path) {
                 return 'pwr/' + path.substr(path.lastIndexOf('/') + 1);
               }
             function getMGPPath(path) {
-                return 'mgp/' + path.substr(path.lastIndexOf('/') + 1);
+                       return 'mgp/' + path.substr(path.lastIndexOf('/') + 1);
               }
             router.configure({
                 'productgroup': {value:getMasterDataPath('productgroup'), label: 'Product Group'},
@@ -178,176 +179,58 @@ require(['ojs/ojcore',
                 
                 'people': {label: 'people'},
                 'person': {label: 'person'},
-                'mgpsummary': {label: 'Origination'},
-                'mgpcreate': {label: 'MGP Contract Create & Edit'},
-                'masdpart2upload': {label: 'MASD PART 2 Upload'},
-                'masdpart2upload-sum': {label: 'MASD PART 2 Summary'},
-                'mgp-def-notice-sum' : {label: 'mgp-def-notice-sum'},
-                'masdpart3upload': {label: 'MASD PART 3 Upload'},
-                'loanrecoverystatus': {label: 'Loan Recovery Status'},
-                'generatetransdoc' : {label: 'generatetransdoc'},
-                'mgpsummaryreport' : {label: 'mgpsummaryReport'},
-                'amortization-schedule' : {label: 'amortization-schedule'},
-                'amortization-summary' : {label: 'amortization-summary'},
-                'creategen' : {label: 'creategen'},
-                'guarantee-fund' : {label: 'guarantee-fund'},
-                'guarantee-fund-confirmation' : {label: 'guarantee-fund-confirmation'},
-                'hodgenrecommendation' : {label: 'hodgenrecommendation'},
-                'mgp-arr-err': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-arr-upload': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-arr-validated': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-asset-delinquency': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-disp-approved': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-fully-disp': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-guarantee-app': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-guarantee-recom': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-msad1-err': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-msad1-upd-sum': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-msad1-upd': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-msad1-validated': {label: 'MGP MASD Part1',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-msad-upd-status' : {label: 'mgp-msad-upd-status'},
-                'mgp-msad-upload': {label: 'mgp-msad-upload',
-                    exit: function () {
-                        var childRouter = router.currentState().value;
-                        childRouter.dispose();
-                    },
-                    enter: function () {
-                        var childRouter = router.createChildRouter('id');
-                        childRouter.defaultStateId = '100';
-                        router.currentState().value = childRouter;
-                    }
-                },
-                'mgp-payment-processing' : {label: 'mgp-payment-processing'},
-                'net-income-confirmation' : {label: 'net-income-confirmation'},
-                'segenverification' : {label: 'segenverification'},
-                'status-monitoring-masd-aar-status' : {label: 'status-monitoring-masd-aar-status'},
-                'svpceoapproval' : {label: 'svpceoapproval'},
+                'mgpsummary':  {value:getMGPPath('mgpsummary')},
+                'mgpcreate': {value:getMGPPath('mgpcreate')},
+                'masdpart2upload': {value:getMGPPath('masdpart2upload')},
+                'masdpart2upload-sum':  {value:getMGPPath('masdpart2upload-sum')},
+                'mgp-def-notice-sum' : {value:getMGPPath('mgp-def-notice-sum')},
+                'masdpart3upload': {value:getMGPPath('masdpart3upload')},
+                'loanrecoverystatus': {value:getMGPPath('loanrecoverystatus')},
+                'generatetransdoc'  :{value:getMGPPath('generatetransdoc')},
+                'mgpsummaryreport' :{value:getMGPPath('mgpsummaryreport')},
+                'amortization-schedule' :  {value:getMGPPath('amortization-schedule')},
+                'amortization-summary' :  {value:getMGPPath('amortization-summary')},
+                'creategen' :{value:getMGPPath('creategen')},
+                'guarantee-fund' : {value:getMGPPath('guarantee-fund')},
+                'guarantee-fund-confirmation' :  {value:getMGPPath('guarantee-fund-confirmation')},
+                'hodgenrecommendation' :{value:getMGPPath('hodgenrecommendation')},
+                'mgp-arr-err': {value:getMGPPath('mgp-arr-err')},
+                'mgp-arr-upload': {value:getMGPPath('mgp-arr-upload')},
+                'mgp-arr-validated': {value:getMGPPath('mgp-arr-validated')},
+                'mgp-asset-delinquency': {value:getMGPPath('mgp-asset-delinquency')},
+                'mgp-disp-approved': {value:getMGPPath('mgp-disp-approved')},
+                'mgp-fully-disp': {value:getMGPPath('mgp-fully-disp')},
+                'mgp-guarantee-app': {value:getMGPPath('mgp-guarantee-app')},
+                'mgp-guarantee-recom': {value:getMGPPath('mgp-guarantee-recom')},
+                'mgp-msad1-err':  {value:getMGPPath('mgp-msad1-err')},
+                'mgp-msad1-upd-sum':  {value:getMGPPath('mgp-msad1-upd-sum')},
+                'mgp-msad1-upd':  {value:getMGPPath('mgp-msad1-upd')},
+                'mgp-msad1-validated':   {value:getMGPPath('mgp-msad1-validated')},
+                'mgp-msad-upd-status': {value:getMGPPath('mgp-msad-upd-status')},
+//                'mgp-msad-upload':{value:getMGPPath('mgp-msad-upload')},
+                'mgp-payment-processing' : {value:getMGPPath('mgp-payment-processing')},
+                'cost': {value:getMGPPath('cost')},
+                'cost-confirmation': {value:getMGPPath('cost-confirmation')},
+                'net-income':  {value:getMGPPath('net-income')},
+                'net-income-confirmation' : {value:getMGPPath('net-income-confirmation')},
+                'mgp-aar-code': {value:getMGPPath('mgp-aar-code'), label: 'mgp-aar-code'},
+                'mgp-file-type': {value:getMGPPath('mgp-file-type'), label: 'mgp-file-type'},
+                'mgp-caid-code': {value:getMGPPath('mgp-caid-code')},
+                'mgp-foreclosure-recovery': {value:getMGPPath('mgp-foreclosure-recovery'), label: 'mgp-file-type'},
+                'mgp-template-upd': {value:getMGPPath('mgp-template-upd'), label: 'mgp-file-type'},
+                'mgp-terminate-code': {value:getMGPPath('mgp-terminate-code'), label: 'mgp-file-type'},
+                'mgp-verify-sheet': {value:getMGPPath('mgp-verify-sheet'), label: 'mgp-file-type'},
+                'mgp-elig-summary': {value:  getMGPPath('mgp-elig-summary') , label: 'mgp-elig-summary'},
+                
+                'segenverification' :  {value:getMGPPath('segenverification')},
+                'status-monitoring-masd-aar-status' : {value:getMGPPath('status-monitoring-masd-aar-status')},
+                'svpceoapproval' :  {value:getMGPPath('svpceoapproval')},
+                
                 'login': {label: 'login'},
-                'cost': {label: 'cost'},
-                'cost-confirmation': {label: 'cost-confirmation'},
-                'net-income': {label: 'net-income'},
+
                 
                 'branch': {value:getMasterDataPath('branch'), label: 'Branch'},
+                'contact': {value:getMasterDataPath('contact'), label: 'Contact'},
                 'paymentfreq': {value:getMasterDataPath('paymentFreq'),label: 'Payment Frequency'},
                 'assettype': {value:getMasterDataPath('assetType'),label: 'Asset Type'},
                 'assetgroup': {value:getMasterDataPath('assetGroup'),label: 'Asset Group'},
@@ -374,6 +257,7 @@ require(['ojs/ojcore',
                 'gstchrgtype': {value:getMasterDataPath('gstChargeType'), label: 'GST Charge Type'},
                 'gstcode': {value:getMasterDataPath('gstCode'), label: 'GST Code'},
                 'gstorganization': {value:getMasterDataPath('gstOrganization'), label: 'GST Organization'},
+                'gstglcode': {value:getMasterDataPath('gstGlCode'), label: 'GST GL Code'},
                 'agreementtype': {value:getMasterDataPath('agreementType'), label: 'Agreement Type'},
                 'mgp-guarantee-review': {label: 'mgp-guarantee-review'},
                 'reconciliation-user-interface': {label: 'Reconciliation User Interface'},
@@ -399,6 +283,8 @@ require(['ojs/ojcore',
                 'currency': {value:getMasterDataPath('currency'), label: 'Currency'},
                 'fundingsource': {value:getMasterDataPath('fundingSource'), label: 'Funding Source'},
                 'exchangeratedataentry': {value:getMasterDataPath('exchangeRateDataEntry'), label: 'Exchange Rate Data Entry'},
+
+                
                 'revaluation': {value:getMasterDataPath('revaluation'), label: 'Revaluation'},
                 'daycountconvention': {value:getMasterDataPath('DayCountConvention'), label: 'Day Count Convention'},
                 
@@ -428,6 +314,11 @@ require(['ojs/ojcore',
                 'counterpartyguarantor': {value:getMasterDataPath('counterpartyGuarantor'), label: 'Counterparty Guarantor'},
                 'counterpartyagreement': {value:getMasterDataPath('counterpartyAgreement'), label: 'Counterparty Agreement'},
                 'counterpartyvendor': {value:getMasterDataPath('counterpartyVendor'), label: 'Counterparty Vendor'},
+                'glpostingrule': {value:getMasterDataPath('GLPostingRule'), label: 'GL Posting Rule'},
+                'glaccountmaster': {value:getMasterDataPath('GLAccountMaster'), label: 'GL Account Master'},
+                'companydbcodemapping': {value:getMasterDataPath('CompanyDatabaseCodeMapping'), label: 'Company Database Code Mapping'},
+                'glaccountassignment': {value:getMasterDataPath('GLAccountAssignment'), label: 'GL Account Assignment'},
+                'glaccounttemplate': {value:getMasterDataPath('GLAccountTemplate'), label: 'GL Account Template'}
             });
             
                        

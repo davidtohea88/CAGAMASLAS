@@ -1,31 +1,55 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererService', 'services/configService','services/exportService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService','services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset', 'ojs/ojselectcombobox'],
-        function (oj, ko, data, $, rendererService, configService, exportService)
+        'ojs/ojdatetimepicker','ojs/ojradioset', 'ojs/ojselectcombobox','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        function (oj, ko, $, rendererService, RestService, exportService,MessageService)
         {
             function organizationMainViewModel() {
                 var self = this;
+
+                var restService = RestService.NBDConventionService();
                 self.header = "Non Business Day Convention";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.emptyPlaceholder = ko.observable(false);
                 self.allData = ko.observableArray();
+                self.collection = ko.observable(restService.createCollection());
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
                 self.NBDConvModel = ko.observable();
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: 'NDBConvId'}));
                 self.nameSearch = ko.observable('');
                 self.yearSearch = ko.observable('');
                 self.fixedDateValue = ko.observable('');
                 self.toDateValue = ko.observable('');
-                self.yearList = ko.observableArray([ 
-                    {value: "2017", label: "2017"},  
-                    {value: "2016", label: "2016"},
-                    {value: "2015", label: "2015"},
-                    {value: "2014", label: "2014"}
-                ]);
+                self.yearList = ko.observableArray(rendererService.renderYear(2015,2030));
 
+                self.message = ko.observable();
+                self.colorType = ko.observable();
+                self.tracker = ko.observable();
+                self.dialogOffcanvas = {selector: '#dialogDrawer', content: '#dialogContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                self.pageOffcanvas = {selector: '#pageDrawer', content: '#pageContent',
+                        modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
+                    
+                self.showMessage = function(type,message,afterShow){
+                    var canvas = ($("#CreateEditDialog").ojDialog("isOpen"))?self.dialogOffcanvas:self.pageOffcanvas;
+                    self.message(message);
+                    if (type==="SUCCESS"){
+                        self.colorType(MessageService.bgColorSuccess);
+                    }else if (type==="ERROR"){
+                        self.colorType(MessageService.bgColorError);
+                    }else{
+                        self.colorType(MessageService.bgColorDefault);
+                    }
+                    oj.OffcanvasUtils.open(canvas);
+                    setTimeout(function(){
+                        oj.OffcanvasUtils.close(canvas);
+                        if (afterShow){
+                            afterShow();
+                        }
+                    },MessageService.displayTimeout);
+                };
                 self.orgRenderer = function(context) 
                 {
                     if (context.data){
@@ -49,40 +73,27 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     return rendererService.activeConverter(context.data);
                 };
                     
-                self.refreshData = function (fnSuccess) {
-                    console.log("fetching data");
-                    var jsonUrl = "js/data/nonBusinessConvention.json";
-
-                    $.ajax(jsonUrl,
-                            {
-                                method: "GET",
-                                dataType: "json",
-//                                headers: {"Authorization": "Basic " + btoa("username:password")},
-                                // Alternative Headers if using JWT Token
-                                // headers : {"Authorization" : "Bearer "+ jwttoken; 
-                                success: function (data)
-                                {
-                                    fnSuccess(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown)
-                                {
-                                    console.log(textStatus, errorThrown);
-                                }
-                            }
-                    );
+                self.refreshData = function(){
+                    // fetch from rest service
+                    self.collection().fetch({
+                        success: function(){
+                            self.allData(self.collection().toJSON());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
+                    }); 
                 };
 
                 self.search = function (name, year, from, to) {
-                    var temp = ko.utils.arrayFilter(self.allData(),
-                        function (rec) {
-                            return ((name.length ===0 || (name.length > 0 && rec.HolidayName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                    (year.length ===0 || (year.length > 0 && rec.Year.toLowerCase().indexOf(year.toString().toLowerCase()) > -1)) &&
-                                    (from.length ===0 || (from.length > 0 && rec.FixedDate>from.toString())) &&
-                                    (to.length ===0 || (to.length > 0 && rec.FixedDate<to.toString())));
-                        
-                        });
-                    self.allData(temp);
-                };
+                    var tmp = self.collection().filter(function(rec){
+                            return ((name.length ===0 || (name.length > 0 && rec.attributes.HolidayName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                    (year.length ===0 || (year.length > 0 && rec.attributes.Year.toLowerCase().indexOf(year.toString().toLowerCase()) > -1)) &&
+                                    (from.length ===0 || (from.length > 0 && rec.attributes.FixedDate>from.toString())) &&
+                                    (to.length ===0 || (to.length > 0 && rec.attributes.FixedDate<to.toString())));
+                    });
+                    self.collection().reset(tmp);
+                    self.allData(self.collection().toJSON());
+                };                
                 
                 self.createOrEdit = function (model) {
                     self.NBDConvModel(model);
@@ -93,18 +104,36 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                     $("#CreateEditDialog").ojDialog("close");
                 };
                 
-                self.save = function (model) {
-                   console.log("Saving ");
-                   console.log(model);
+                self.save = function (model,successMsg) {
+                    var user = "LAS";
+                    var currentDate = new Date().toISOString();
+                    var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
+                            createdDate: model.isNew()?currentDate:model.attributes.createdDate,
+                            updatedBy: model.isNew()?'':user,
+                            updatedDate: model.isNew()?'':currentDate
+                        };
+                    model.save(defaultAttributes,{
+                        success: function(model,resp){
+                            self.refreshData();
+                            var message = successMsg? successMsg: (model.isNew()?'A new '+self.header+' is successfully created':self.header+' is successfully updated');
+                            self.showMessage("SUCCESS",message,function(){
+                                $("#CreateEditDialog").ojDialog("close");
+                            });
+                        },
+                        error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
+                        }
+                    });
+                    
                 };
 
                 self.activateDeactivate = function (model) {
-                    if (model.active === 'Y'){
-                        model.active = 'N';
-                    }else if (model.active === 'N'){
-                        model.active = 'Y';
+                    if (model.attributes.active === 'Y'){
+                        model.attributes.active = 'N';
+                    }else if (model.attributes.active === 'N'){
+                        model.attributes.active = 'Y';
                     }
-                    self.save(model);
+                    self.save(model,self.header+" \""+model.attributes.ConvName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
@@ -126,52 +155,64 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 
                 // ===============  EVENT HANDLER  ==============
                 
+ 
+                
+                
                 self.onReset = function(){
+                    self.refreshData();
+                    
                     self.nameSearch('');
-                    self.refreshData(function(data){
+                    self.yearSearch('');
+                    self.fixedDateValue('');
+                    self.toDateValue('');
+                    if (self.collection().models.length>1){
                         self.selectedRow(undefined);
-                        self.allData(data.MdNonBusinessDayConvention);
                         $('#btnEdit').hide();
                         $('#btnActivate').hide();
-                    });
-                };
-                
+                    }
+                };                
                 self.onSearch = function(){
-                    self.refreshData(function(data){
-                        self.allData(data.MdNonBusinessDayConvention);
+                    self.collection().fetch({
+                        success: function(){
                         self.search(self.nameSearch(),self.yearSearch(),self.fixedDateValue(),self.toDateValue());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
                     });
                 };
                 
                 self.onCreate = function(){
-                    var newRec = { NDBConvId: undefined,
-                        ConvName: undefined,
-                        HolidayName: undefined,
-                        FixedDate: undefined,
-                        Year: undefined,
-                        BusinessRule: undefined,
-                        active: "Y",
-                        effectiveDate: ""};
-                    self.createOrEdit(newRec);
+                    var model = restService.createModel({active: 'Y'});
+                    self.createOrEdit(model);
                 };
                 
                 self.onEdit = function(){
-                    self.createOrEdit(self.selectedRow());
+                    var model = self.collection().get(self.selectedRow());
+                    self.createOrEdit(model);
                 };
                 
-                self.onSave = function(model){
-                    self.save(model);
+                self.onSave = function(){
+                    var trackerObj = ko.utils.unwrapObservable(self.tracker);
+                    if (trackerObj !== undefined){
+                        if (trackerObj instanceof oj.InvalidComponentTracker){
+                            trackerObj.showMessages();
+                            trackerObj.focusOnFirstInvalid();
+                        }
+                    }
+                    if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
+                         self.save(self.NBDConvModel());
+                    }
                 };
                 
                 self.onActivateDeactivate = function(){
-                    self.activateDeactivate(self.selectedRow());
+                    $("#ConfirmDialog").ojDialog("open");
                 };
                 
                 self.onSelectRow = function(event, ui){
                     var idx = ui.currentRow.rowIndex;
                     self.dataSource.at(idx).
                         then(function (obj) {
-                            self.selectedRow(obj.data);
+                            self.selectedRow(obj.data[self.collection().model.idAttribute]);
                             $('#btnEdit').show();
                             $('#btnActivate').show();
                         });
@@ -180,8 +221,21 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'jquery', 'services/rendererServi
                 self.onExport = function(){
                    self.exportxls(); 
                 };
-
-                self.onReset();
+                
+                self.onCancel = function () {
+                    $("#CreateEditDialog").ojDialog("close");
+                };
+                self.onConfirmNo = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                };
+                
+                self.onConfirmYes = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                    var model = self.collection().get(self.selectedRow());
+                    self.activateDeactivate(model);
+                };
+                
+                self.refreshData();
             }
             return organizationMainViewModel();
         }

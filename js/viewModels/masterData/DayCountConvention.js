@@ -122,8 +122,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     var currentDate = new Date().toISOString();
                     var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
                             createdDate: model.isNew()?currentDate:model.attributes.createdDate,
-                            updatedBy: user,
-                            updatedDate: currentDate
+                            updatedBy: model.isNew()?'':user,
+                            updatedDate: model.isNew()?'':currentDate
                         };
                     model.save(defaultAttributes,{
                         success: function(model,resp){
@@ -146,7 +146,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model,"Asset group \""+model.attributes.assetTypeName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                    self.save(model,"Asset group \""+model.attributes.DCConvName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
@@ -193,7 +193,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
 
                 
                 self.onCreate = function(){
-                    var model = restService.createModel();
+                    var model = restService.createModel({active: 'Y'});
                     self.createOrEdit(model);
                 };
                 
