@@ -9,6 +9,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
         {
             function vendorMainViewModel() {
                 var self = this;
+                
                 // LOV
                 var districtService = RestService.districtService();
                 self.districtLOV = ko.observableArray();
@@ -90,8 +91,14 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 };
                 
                 self.createOrEdit = function (model) {
-                    self.model(model);
-                    $("#CreateEditDialog").ojDialog("open");
+                    //self.model(model);
+                    //$("#CreateEditDialog").ojDialog("open");
+                    if (typeof model.attributes.vndrId == 'undefined') {
+                        oj.Router.rootInstance.store(null);
+                    } else {
+                        oj.Router.rootInstance.store(model.attributes.vndrId);
+                    }
+                    oj.Router.rootInstance.go("vendordetail");
                 };
                 
                 self.save = function (model,successMsg) {
@@ -229,5 +236,6 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 self.refreshData();
             }
             return vendorMainViewModel();
+            
         }
 ); 

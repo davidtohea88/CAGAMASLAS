@@ -9,7 +9,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
         {
             function gstAccountMainViewModel() {
                 var self = this;
-                var restService = RestService.ratingAgencyService();
+                var restService = RestService.gstAccountTypeService();
                 self.header = "GST Account";
                 self.dialogTitle = "Create/edit "+self.header;
                 self.collection = ko.observable(restService.createCollection());
@@ -72,9 +72,9 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 
                 self.search = function (code, name, desc) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((code.length ===0 || (code.length > 0 && rec.attributes.acyCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-                                (name.length ===0 || (name.length > 0 && rec.attributes.agencyName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                (desc.length ===0 || (desc.length > 0 && rec.attributes.agencyDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                        return ((code.length ===0 || (code.length > 0 && rec.attributes.gstacctTypeCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.gstacctTypeName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.gstacctTypeDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
@@ -114,7 +114,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model,self.header+" \""+model.attributes.agencyName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                    self.save(model,self.header+" \""+model.attributes.gstacctTypeName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {

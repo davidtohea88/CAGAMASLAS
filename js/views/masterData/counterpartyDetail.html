@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<div class="oj-form-layout" id="form-container">
+    <div class="page-content oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+         oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">  
+        <div class="oj-flex" id="pc-row-1">
+            <div style="width:100%;">
+                <h3 class="oj-header-border"></h3>
+                <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">
+                    <div class="oj-flex-item">
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="cpCd">Counterparty Code</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="cpCd"
+                                           data-bind="ojComponent: {component: 'ojInputText', value: '', required: true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="cpName">Counterparty Name</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="cpName"
+                                           data-bind="ojComponent: {component: 'ojInputText', value: '', required: true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="cpGroup">Counterparty Group</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="cpGroupId" type="hidden"/>
+                                    <input id="cpGroup" data-bind="ojComponent: {component: 'ojInputText', value: '', required: true, rootAttributes: {style:'max-width:83.5%'}}"/>
+                                    <button id="btnCpGroupLOV" data-bind="click: btnCpGroupLOV, ojComponent:
+                                                        { component: 'ojButton', display: 'icons', icons: {start:'demo-icon-sprite demo-icon-search'}, label: 'Yes'}"> </button>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="cpSector">Counterparty Sector</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="cpSectorId" type="hidden"/>
+                                    <input id="cpSector" data-bind="ojComponent: {component: 'ojInputText', value: '', required: true, rootAttributes: {style:'max-width:83.5%'}}"/>
+                                    <button id="btnCpSectorLOV" data-bind="click: btnCpSectorLOV, ojComponent:
+                                                        { component: 'ojButton', display: 'icons', icons: {start:'demo-icon-sprite demo-icon-search'}, label: 'Yes'}"> </button>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="cpType">Counterparty Type</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <select id="cpType" style="width: 100%;" data-bind="ojComponent: {
+                                        component: 'ojSelect',
+                                        options: counterpartyTypeLOV, 
+                                        value: selectedCounterpartyTypeId, 
+                                        placeholder: 'Please Select'}">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">Quarterly Review End Month</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Qtr Ending Month 2,5,8,11', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">T7 Counterparty Code</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">T7 Counterparty Name</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div id="PCI-col-2" class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-5 oj-lg-even-cols-6 oj-lg-labels-inline">
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">Counterparty Status</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value: '', required: true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-inputdate-label">
+                                        <div class="oj-label-group">
+                                            <label for="purchaseDate">Bank Account Number</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value: '', required: true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="purchaseAmount">Quarterly Review Last Date</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value: '', required: true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-inputdate-label">
+                                        <div class="oj-label-group">
+                                            <label for="reviewDate">Quarterly Review Next Date</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value: '', required: true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Reporting Group</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Watchlist</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'No', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-5 oj-lg-even-cols-6 oj-lg-labels-inline">
+                            <!--<div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Shareholding Structure</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Holding Company', required: false, disabled:true}"/>
+                                </div>
+                            </div>-->
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Resident</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Resident Company', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">Country</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Malaysia', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <div class="oj-label oj-component oj-combobox-label">
+                                        <div class="oj-label-group">
+                                            <label for="select">State</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'K. LUMPUR', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">District</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Wilayah Persekutuan', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">City</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'Wilayah Persekutuan', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol" >Postcode</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'02600', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="inputcontrol">GST Registration No</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="inputcontrol"
+                                           data-bind="ojComponent: {component: 'ojInputText', value:'001003', required: false, disabled:true}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="CounterpartyGroupDialog" title=""
+     data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', modality: 'modeless', 
+                    cancelBehavior: 'escape',resizeBehavior: 'none', 
+                rootAttributes: { style: 'min-width:650px;'}}">
+    <div class="oj-dialog-header oj-helper-clearfix">
+        <div>
+            <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+            <span id="dialog-title-id" class="oj-dialog-title">Counterparty Group</span>
+        </div>
+    </div>
+    <div class="oj-dialog-body">
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-3 oj-md-labels-inline" style="margin-left:10px">
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Code</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearchCpGroup, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Name</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchName" data-bind="ojComponent: {component: 'ojInputText',value: nameSearchCpGroup, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">                       
+                <div class="oj-flex-item">
+                    <button id= "btnSearchCpGroup" data-bind="click: onSearchCpGroup,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
+                    <button id= "btnResetCpGroup" data-bind="click: onResetCpGroup,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
+                </div>
+            </div> 
+        </div>
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-flex">                        
+                <div style="margin-left:-10px; margin-right:-10px;">
+                    <div id="pagingControlDemo" class="page-content">
+                        <table id="table" summary="Origination List" aria-label="Origination Table"
+                               data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSourceCpGroup, columns:
+                                                                    [{headerText: 'Code', style: 'width: 10%',  field: 'cptGrpCd'},
+                                                                    {headerText: 'Name', style: 'width: 20%', field: 'cptGrpName'},
+                                                                    {headerText: 'Description', style: 'width: 55%', field: 'cptGrpDesc'},
+                                                                    {headerText: 'Active', field: 'active', style: 'width: 5%', renderer: activeRenderer},
+                                                                    {headerText: 'Effective Date', field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer}],
+                                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} ,
+                                                                        beforeCurrentRow: onSelectRowCpGroup}">
+                        </table>
+                        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSourceCpGroup, pageSize: 10}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="oj-dialog-footer">
+        <button id="btnCpGroupOk" data-bind="click: chooseCpGroupOk, ojComponent:
+                 { component: 'ojButton', label: 'OK'}"> </button>
+        <button id="btnCpGroupCancel" data-bind="click: chooseCpGroupCancel, ojComponent:
+                 { component: 'ojButton', label: 'Cancel'}"> </button>
+    </div>
+</div>
+
+<div id="CounterpartySectorDialog" title=""
+     data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', modality: 'modeless', 
+                    cancelBehavior: 'escape',resizeBehavior: 'none', 
+                rootAttributes: { style: 'min-width:650px;'}}">
+    <div class="oj-dialog-header oj-helper-clearfix">
+        <div>
+            <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+            <span id="dialog-title-id" class="oj-dialog-title">Counterparty Sector</span>
+        </div>
+    </div>
+    <div class="oj-dialog-body">
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-3 oj-md-labels-inline" style="margin-left:10px">
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Code</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearchCpSector, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Name</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchName" data-bind="ojComponent: {component: 'ojInputText',value: nameSearchCpSector, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">                       
+                <div class="oj-flex-item">
+                    <button id= "btnSearchCpSector" data-bind="click: onSearchCpSector,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
+                    <button id= "btnResetCpSector" data-bind="click: onResetCpSector,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
+                </div>
+            </div> 
+        </div>
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-flex">                        
+                <div style="margin-left:-10px; margin-right:-10px;">
+                    <div id="pagingControlDemo" class="page-content">
+                        <table id="table" summary="Origination List" aria-label="Origination Table"
+                               data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSourceCpSector, columns:
+                                                                    [{headerText: 'Code', style: 'width: 10%',  field: 'cptSctrCd'},
+                                                                    {headerText: 'Name', style: 'width: 20%', field: 'cptSctrName'},
+                                                                    {headerText: 'Description', style: 'width: 55%', field: 'cptSctrDesc'},
+                                                                    {headerText: 'Active', field: 'active', style: 'width: 5%', renderer: activeRenderer},
+                                                                    {headerText: 'Effective Date', field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer}],
+                                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} ,
+                                                                        beforeCurrentRow: onSelectRowCpSector}">
+                        </table>
+                        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSourceCpSector, pageSize: 10}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="oj-dialog-footer">
+        <button id="btnCpSectorOk" data-bind="click: chooseCpSectorOk, ojComponent:
+                 { component: 'ojButton', label: 'OK'}"> </button>
+        <button id="btnCpSectorCancel" data-bind="click: chooseCpSectorCancel, ojComponent:
+                 { component: 'ojButton', label: 'Cancel'}"> </button>
+    </div>
+</div>
+
