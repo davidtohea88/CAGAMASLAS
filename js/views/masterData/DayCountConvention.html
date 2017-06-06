@@ -50,7 +50,7 @@
                                                     <div class="oj-flex-item">
                                                         <select id="numeratorSearch" data-bind="ojComponent: {component: 'ojSelect',
                                                                                 placeholder: emptyPlaceholder() ? '' : 'Select numerator',
-                                                                                value: numeratorVal,
+                                                                                value: numeratorSearch,
                                                                                 options: numeratorList}">
                                                         </select>
                                                     </div>
@@ -62,7 +62,7 @@
                                                     <div class="oj-flex-item">
                                                         <select id="denominatorSearch" data-bind="ojComponent: {component: 'ojSelect',
                                                                 placeholder: emptyPlaceholder() ? '' : 'Select numerator',
-                                                                value: denominatorVal,
+                                                                value: denominatorSearch,
                                                                 options: denominatorList}">
                                                         </select>
                                                     </div>
@@ -101,10 +101,11 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                    [{headerText: 'Name', field: 'DCConvName', style: 'width: 25%'},
-                                                                    {headerText: 'Description', field: 'DCConvDesc',style: 'width: 10%; text-align: right;'},
-                                                                    {headerText: 'Numerator', field: 'Numerator',style: 'width:10%'},
-                                                                    {headerText: 'Denominator', field: 'Denominator',style: 'width: 10%'},
+                                                                    [{headerText: 'Code', field: 'dayConvCd', style: 'width: 25%'},
+                                                                    {headerText: 'Name', field: 'dayConvName', style: 'width: 25%'},
+                                                                    {headerText: 'Description', field: 'dayConvDesc',style: 'width: 10%;'},
+                                                                    {headerText: 'Numerator', field: 'numerator',style: 'width:10%'},
+                                                                    {headerText: 'Denominator', field: 'denominator',style: 'width: 10%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
@@ -147,18 +148,26 @@
                 <div id="dialogContent" class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
                     <div class="oj-flex">  
                         <div class="oj-flex-item">
-                            <label for="code">Day Count Convention Name</label>
+                            <label for="code">Day Count Convention Code</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.DCConvName, required: true, invalidComponentTracker: tracker}" >
+                            <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.dayConvCd, required: true, invalidComponentTracker: tracker}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
                         <div class="oj-flex-item">
-                            <label for="name">Day Count Convention Description</label>
+                            <label for="name">Day Count Convention Name</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.DCConvDesc, required: true, invalidComponentTracker: tracker}" >
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.dayConvName, required: true, invalidComponentTracker: tracker}" >
+                        </div>
+                    </div> 
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="desc">Day Count Convention Description</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.dayConvDesc, required: true, invalidComponentTracker: tracker}" >
                         </div>
                     </div> 
                     <div class="oj-flex">  
@@ -168,7 +177,7 @@
                         <div class="oj-flex-item">
                             <select id="numerator" data-bind="ojComponent: {component: 'ojSelect',
                                     placeholder: emptyPlaceholder() ? '' : 'Select numerator',
-                                    value: attributes.Numerator,
+                                    value: numeratorVal,
                                     options: numeratorList,
                                     required: true, invalidComponentTracker: tracker}">
                             </select>
@@ -181,7 +190,7 @@
                         <div class="oj-flex-item">
                             <select id="denominator" data-bind="ojComponent: {component: 'ojSelect',
                                     placeholder: emptyPlaceholder() ? '' : 'Select denominator',
-                                    value: attributes.Denominator,
+                                    value: denominatorVal,
                                     options: denominatorList,
                                     required: true, invalidComponentTracker: tracker}">
                             </select>

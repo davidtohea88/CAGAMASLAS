@@ -39,12 +39,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 var restService = RestService.SunGLAccountService();
                 self.collectionSunGL = ko.observable(restService.createCollection());
                 self.SunGLAccount = ko.observableArray();
-                self.SunGLAccountDataSource = new oj.ArrayTableDataSource(self.SunGLAccount, {idAttribute: self.collectionSunGL().model.idAttribute});
+                self.SunGLAccountDataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.SunGLAccount, {idAttribute: self.collectionSunGL().model.idAttribute}));
 
                 var restServiceLAS = RestService.accountService();
                 self.collectionLAS = ko.observable(restServiceLAS.createCollection());
                 self.LasSpecificAccount = ko.observableArray();
-                self.LasSpecificAccountDataSource =  new oj.ArrayTableDataSource(self.LasSpecificAccount, {idAttribute: self.collectionLAS().model.idAttribute});
+                self.LasSpecificAccountDataSource =  new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.LasSpecificAccount, {idAttribute: self.collectionLAS().model.idAttribute}));
 
                 
                 // ===============  EVENT HANDLER  ==============
