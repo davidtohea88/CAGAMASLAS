@@ -11,6 +11,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
 
                 self.isNative = ko.observable(true);
                 self.message = ko.observable();
+                self.id = ko.observable(undefined);
                 self.colorType = ko.observable();
                 self.pageOffcanvas = {selector: '#pageDrawer', content: '#pageContent',
                         modality: 'modeless', autoDismiss: 'none', displayMode: 'overlay'};
@@ -67,7 +68,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
 
                 var eventService = RestService.eventService();
                 self.eventLOV = ko.observableArray();
-                eventService.fetchAsLOV('EventName','EventId').then(function(data){
+                eventService.fetchAsLOV('EventName','eventCd').then(function(data){
                     self.eventLOV(data);
                 });
                 var paymentFrequencyService = RestService.paymentFrequencyService();
@@ -86,8 +87,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.selectedEvent = ko.observable('');
                 self.selectedPaymentFreq = ko.observable('');
 
-
-                var restService = RestService.dbCodeService();
+                self.model = ko.observable();
+                var restService = RestService.ActPostingRuleService();
                 self.collection = ko.observable(restService.createCollection());
                 self.dbCodeData = ko.observableArray();
                 self.dbCodeDataForRender = ko.observableArray();
@@ -101,19 +102,60 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.selectedLossAccountDataSource = new oj.ArrayTableDataSource(self.selectedLossAccountList, {idAttribute: 'Account'});
                 self.accountData = ko.observableArray();
 
+                self.selectedProduct.subscribe(function(newValue){
+                    console.log(newValue);
+//                    var tmp = self.collection().filter(function(rec){
+//                        return ((code.length ===0 || (code.length > 0 && rec.attributes.stateCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+//                                (name.length ===0 || (name.length > 0 && rec.attributes.stateName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
+//                    });
+//                    self.collection().reset(tmp);
+//                    self.allData(self.collection().toJSON());
+                });
                 
                 
-                
-                
+                self.getParameterByName = function(name, url) {
+                    if (!url) url = window.location.href;
+                    name = name.replace(/[\[\]]/g, "\\$&");
+                    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                        results = regex.exec(url);
+                    if (!results) return null;
+                    if (!results[2]) return '';
+                    return decodeURIComponent(results[2].replace(/\+/g, " "));
+                };
                 // ===============  EVENT HANDLER  ==============
                 
                 self.refreshData = function(){
                     // fetch from rest service
-                    self.collection().refresh().then(function(){
+                    
+
+                    
+                self.collection().fetch({
+                        success: function(){
+                            self.dbCodeData(self.collection().toJSON());
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
+                    }).then(function(obj){
+                        console.log(self.id());
+                        if(self.id()!==undefined && self.id()!==null ){
+                            self.model(self.collection().get(self.id()));
+                            self.company(self.model().attributes.orgId);
+                            self.selectedProduct(self.model().attributes.prodCd);
+                            self.selectedPaymentFreq(self.model().attributes.pymtFreqId);
+                            self.selectedEvent(self.model().attributes.eventCd);
+                            console.log(self.model().attributes);
+                        }
+                        else
+                        {
+                            self.model(restService.createModel({active: 'Y',dbCd:'',}));
+                            self.company('');
+                            self.selectedProduct('');
+                            self.selectedPaymentFreq('');
+                            self.selectedEvent('');
+                           
+                        }
                         
-                        self.dbCodeData(self.collection().toJSON());
-                    });  
-                    console.log(self.dbCodeData());
+                    }); 
                 };
                 
                 self.onRun = function(){
@@ -213,7 +255,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         return item.AccountNo === data.AccountNo;
                     });
                 };
-
+                self.id(getParameterByName('id'));
                 self.refreshData();
             }
             return organizationTypeMainViewModel();

@@ -11,9 +11,90 @@
                 <div class="oj-margin oj-panel-alt demo-mypanel" >          
                     <div class="oj-flex">  
                         <div class="oj-flex-item">  
-                            <div class="oj-margin oj-panel-alt demo-mypanel" >   
+                            <div class="oj-margin oj-panel-alt demo-mypanel" >  
                                 <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >  
+                                    <h3><b>Filter</b></h3>
                                     <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchCode">Company</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="countryInput" data-bind="ojComponent: {
+                                                            component: 'ojSelect',
+                                                            options: companyLOV, 
+                                                            value: selectedcompanyId,
+                                                            placeholder: 'Please Select',
+                                                            rootAttributes: {style:'max-width: 20em'}}">
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="searchName">Database Code</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="seachName" data-bind="ojComponent: {component: 'ojInputText', value:searchDBCode,  valueUpdate: 'afterkeydown'}">
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">                       
+                                                    <div class="oj-flex-item">
+                                                        <button id= "btnSearch" data-bind="click: onSearch,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
+                                                        <button id= "btnReset" data-bind="click: onReset,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>    
+                                        <div class="oj-flex-item"></div>
+                                    </div>
+                                </div>
+
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" > 
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">                        
+                                                    <div class="oj-flex-item">
+                                                        <button id= "btn_Vendor"  data-bind="click:onAddCompany, ojComponent: { component: 'ojButton', label: 'Add Mapping' }"></button>
+                                                        <button id= "btn_delete" data-bind=" click: onDelete, ojComponent: { component: 'ojButton', label: 'Remove' }"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+                                
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >                    
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">   
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">                        
+                                                    <div style="width:100%;">
+                                                        <div id="pagingControlDemo" class="page-content">
+                                                            <table id="dbcode" summary="Department List" aria-label="Departments Table"
+                                                            data-bind="ojComponent: {component: 'ojTable',
+                                                            data: DBCodeDataSource, 
+                                                            display: 'grid',
+                                                            columnsDefault: {sortable: 'none'}, 
+                                                            columns: [
+                                                                {headerText: 'Company', field: 'OrgName',style: 'width: 70%'},
+                                                                {headerText: 'Database Code', field: 'DBCode',style: 'width: 30%'},
+                                                                {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer}],
+                                                                rootAttributes: {'style':'width: 100%;'}}">
+                                                         </table>
+                                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: DBCodeDataSource, pageSize: 10}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+                                
+<!--                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
                                         <div class="oj-flex-item">
                                             <div class="oj-form  oj-md-labels-inline">
                                                 <div class="oj-flex">
@@ -24,18 +105,18 @@
                                                 <div class="oj-flex">
                                                     <div class="oj-flex-item">
                                                         <button id= "btn_Vendor"  data-bind="click:onAddCompany, ojComponent: { component: 'ojButton', label: 'Add Company' }"></button>
-                                                        <button id= "btn_EditCompany"  data-bind="click:onEdit, ojComponent: { component: 'ojButton', label: 'Edit Company', disabled: !selectedRow() }"></button>
-                                                        <button id= "btn_AddDB"  data-bind="click:onAddDB, ojComponent: { component: 'ojButton', label: 'Add Database', disabled: !selectedRow() }"></button>
                                                     </div>
                                                     </div>
                                                 <div class="oj-flex">
                                                     <div class="oj-flex-item">
-                                                    <table id="sun" summary="Department List" aria-label="Departments Table" style="width:100%;"
+                                                    <table id="company" summary="Department List" aria-label="Departments Table"
                                                             data-bind="ojComponent: {component: 'ojTable', 
                                                             data: companyDataSource, 
+                                                            display: 'grid',
                                                             columnsDefault: {sortable: 'none'}, 
                                                             columns: [{headerText: 'Company Name', 
-                                                                       field: 'CompanyName'}], selectionMode: {row: 'single'},beforeCurrentRow: onSelectRow}">
+                                                                       field: 'CompanyName',style: 'width: 90%'},
+                                                               {headerTemplate: 'select_hdr', template: 'select_item', style: 'width: 10%;text-align:center;'}]}">
                                                          </table>
                                                         
                                                     </div>
@@ -46,25 +127,24 @@
                                          <div class="oj-flex-item">
                                             <div class="oj-form oj-md-labels-inline">
                                                 <div class="oj-flex">
-                                                    <div class="oj-flex-item" id="databasecode" style="display:none;">
+                                                    <div class="oj-flex-item" id="databasecode">
                                                         <h3><b>Database Code</b></h3>
                                                     <table id="dbcode" summary="Department List" aria-label="Departments Table"
-                                                            data-bind="ojComponent: {component: 'ojTable', emptyText: 'Please select any company.',
+                                                            data-bind="ojComponent: {component: 'ojTable',
                                                             data: DBCodeDataSource, 
+                                                            display: 'grid',
                                                             columnsDefault: {sortable: 'none'}, 
-                                                            columns: [{headerText: 'Database Code', field: 'dbCodeName'},
-                                                               {headerTemplate: 'delete_hdr', template: 'delete_item', style: 'width: 45%;text-align:center;'}]}">
-                                                         </table>                                                    </div>
+                                                            columns: [
+                                                        {headerText: 'Company', field: 'OrgName',style: 'width: 80%'},
+                                                        {headerText: 'Database Code', field: 'DBCode',style: 'width: 35%'},
+                                                               {headerTemplate: 'delete_hdr', template: 'delete_item', style: 'width: 15%;text-align:center;'}]}">
+                                                         </table>
+                                                    </div>
                                                         
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                
-                                
-                                                
-                                
+                                    </div>-->
                             </div>    
                         </div>
                     </div> 
@@ -74,7 +154,7 @@
     </div>
 </div>
 <div id="dialogWrapper">
-    <div id="CreateEditDialog" title=""
+<!--    <div id="CreateEditDialog" title=""
             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modeless', 
                     cancelBehavior: 'escape',resizeBehavior: 'none', 
                 rootAttributes: { style: 'min-width:420px; min-height: 230px;'}}">
@@ -100,8 +180,8 @@
             <button id="btnSave" data-bind="click:onSave,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
             <button id="btnCancel" data-bind="click:onCancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
         </div>
-    </div>
-    <div id="CreateEditDialogDB" title=""
+    </div>-->
+    <div id="CreateEditDialog" title=""
             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',modality: 'modeless', 
                     cancelBehavior: 'escape',resizeBehavior: 'none', 
                 rootAttributes: { style: 'min-width:420px; min-height: 230px;'}}">
@@ -119,7 +199,13 @@
                             <label for="name">Company Name</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: selectedRowValue, disabled:true}" >
+                            <select id="countryInput" data-bind="ojComponent: {
+                                component: 'ojSelect',
+                                options: companyLOV, 
+                                value: selectedcompanyId,
+                                placeholder: 'Please Select', required: true, invalidComponentTracker: tracker,
+                                rootAttributes: {style:'max-width: 20em'}}">
+                            </select>
                         </div>
                     </div> 
                 <div class="oj-flex">  
@@ -127,14 +213,33 @@
                             <label for="name">Database Code</label>
                         </div>
                         <div class="oj-flex-item">
-                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.dbCodeId, required: true, invalidComponentTracker: tracker2}" >
+                            <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.DBCode, required: true, invalidComponentTracker: tracker}" >
                         </div>
                     </div>   
                 </div>
         </div>
         <div class="oj-dialog-footer">
-            <button id="btnSaveDB" data-bind="click:onSaveDB,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
-            <button id="btnCancelDB" data-bind="click:onCancelDB,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+            <button id="btnSaveDB" data-bind="click:onSave,ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
+            <button id="btnCancelDB" data-bind="click:onCancel,ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+        </div>
+    </div>
+<div id="ConfirmDialog" class="ojDialog" title="" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:400px;'}
+		  }">
+        <div class="oj-dialog-header oj-helper-clearfix">
+            <div>
+                <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+                <span id="dialog-title-id" class="oj-dialog-title">Confirmation</span>
+            </div>
+        </div>
+        <div class="oj-dialog-body">
+            <p>Are you sure you want to do this action?</p>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="btnConfirmOk" data-bind="click: onConfirmYes, ojComponent:
+                 { component: 'ojButton', label: 'Yes'}"> </button>
+            <button id="btnConfirmCancel" data-bind="click: onConfirmNo, ojComponent:
+                 { component: 'ojButton', label: 'No'}"> </button>
         </div>
     </div>
 </div>
@@ -152,3 +257,17 @@
         </button>
     </td>
 </script>
+
+<!--<script type="text/html" id="select_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="select_item">
+    <td>
+        <button id= "btn_select" 
+            data-bind=" click: onSelectRow, ojComponent: { component: 'ojButton', label: 'Select' }">
+        </button>
+        <button id= "btn_Add"  data-bind="click:onAddDB, ojComponent: { component: 'ojButton', label: 'Associate Database Code' }"></button>
+    </td>
+</script>-->
