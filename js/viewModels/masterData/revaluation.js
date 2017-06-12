@@ -41,9 +41,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     self.productLOV(data);
                 });
 
-                var companyService = RestService.companyService();
+                var companyService = RestService.organizationService();
                 self.companyLOV = ko.observableArray();
-                companyService.fetchAsLOV('CompanyName','CompanyId').then(function(data){
+                companyService.fetchAsLOV('orgName','orgId').then(function(data){
                     self.companyLOV(data);
                 });
 
@@ -73,11 +73,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.dbCode = ko.observable('');
                 self.selectedProduct = ko.observable('');
 
-                var restService = RestService.dbCodeService();
+                var restService = RestService.OrganizationDBCodeService();
                 self.collection = ko.observable(restService.createCollection());
-                self.dbCodeData = ko.observableArray();
+                self.OrgDBCodeData = ko.observableArray();
                 self.dbCodeDataForRender = ko.observableArray();
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.dbCodeData, {idAttribute: self.collection().model.idAttribute}));
+                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.OrgDBCodeData, {idAttribute: self.collection().model.idAttribute}));
 
                 self.selectedGainAccount = ko.observable('');
                 self.selectedGainAccountList = ko.observableArray();
@@ -97,7 +97,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     // fetch from rest service
                     self.collection().refresh().then(function(){
                         
-                        self.dbCodeData(self.collection().toJSON());
+                        self.OrgDBCodeData(self.collection().toJSON());
                     });  
                 };
                 
@@ -168,19 +168,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.companyChangeHandler = function (context, valueParam) {
                     self.dbCodeDataForRender([]);
                         if (valueParam.option == "value" && valueParam.value!="") {                        
-                            var val = valueParam.value;                            
+//                            var val = valueParam.value;                            
 //                            var tmp = self.collection().filter(function(rec){
 //                                return (rec.attributes.CompanyId===val[0]);
 //                            });
 //                            self.collection().reset(tmp);
 //                            self.dbCodeData(self.collection().toJSON());
 //
-                        ko.utils.arrayForEach(self.dbCodeData(),function(item){
-                                if (item.CompanyId === valueParam.value[0]){
-                                    var lbl = item['dbCodeName'];
-                                    var val = item['dbCodeId'];
+                        ko.utils.arrayForEach(self.OrgDBCodeData(),function(item){
+                                if (item.orgId === valueParam.value[0]){
+                                    var lbl = item['dbCd'];
+                                    var val = item['dbCd'];
                                     self.dbCodeDataForRender.push({label: lbl, value: val});
-                                    console.log('push '+ val);
                                 }
                             });
 

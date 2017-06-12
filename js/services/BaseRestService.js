@@ -38,6 +38,8 @@ define(['ojs/ojcore' ,'knockout', 'services/configService','ojs/ojmodel'],
                             return {url: self.baseUrl+"?"+propertyId+"="+options.recordID, type: 'PUT'};
                         }else if (operation === 'get'){
                             return {url: self.baseUrl+"?"+propertyId+"="+options.recordID, type: 'GET'};
+                        }else if (operation === 'delete'){
+                            return {url: self.baseUrl+"?"+propertyId+"="+options.recordID, type: 'DELETE'};
                         }
                     },
                     idAttribute: self.propertyId,

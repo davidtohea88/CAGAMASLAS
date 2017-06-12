@@ -3,7 +3,8 @@
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService','services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
-        'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojselectcombobox','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource',
+        'ojs/ojselectcombobox','ojs/ojoffcanvas','ojs/ojknockout-validation','ojs/ojdialog'],
         function (oj, ko, $, rendererService, RestService, exportService,MessageService)
         {
             function organizationTypeMainViewModel() {
@@ -15,18 +16,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 var restService = RestService.companyService();
                 self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
-                self.companyDataSource = new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute});
+                self.companyDataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
                 self.companyModel = ko.observable();
 
                 var restServiceDBCode = RestService.dbCodeService();
                 self.collectionDBCode = ko.observable(restServiceDBCode.createCollection());
                 self.DBCodeData = ko.observableArray();
-                self.DBCodeDataSource =  new oj.ArrayTableDataSource(self.DBCodeData, {idAttribute: self.collectionDBCode().model.idAttribute});
+                self.DBCodeDataSource =  new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.DBCodeData, {idAttribute: self.collectionDBCode().model.idAttribute}));
                 self.DBCodeModel = ko.observable();
+                
+                var companyService = RestService.companyService();
+                self.companyLOV = ko.observableArray();
+                companyService.fetchAsLOV('CompanyName','CompanyId').then(function(data){
+                    self.companyLOV(data);
+                });
+                self.selectedcompanyId = ko.observableArray();
+                
 
                 self.selectedRow = ko.observable(undefined);
                 self.selectedRowValue = ko.observable(undefined);
                 self.selectedRowDB = ko.observable(undefined);
+                self.searchDBCode = ko.observable('');
                 
                 self.message = ko.observable();
                 self.colorType = ko.observable();
@@ -55,34 +65,69 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     },MessageService.displayTimeout);
                 };                                
 
-                self.tracker2 = ko.observable();
-                
                 // ===============  EVENT HANDLER  ==============
                 
+                
+                self.getCompanyName = function(id){
+                    return new Promise(function(resolve,reject){
+                       ko.utils.arrayForEach(self.allData(), function(x) {
+                            if(x.CompanyId===id){
+                                console.log(x.CompanyName);
+                                resolve(x.CompanyName);
+
+                            }
+                        }); 
+                    });
+                    
+                };
                 self.refreshData = function(){
                     // fetch from rest service
+
                     self.collection().fetch({
                         success: function(){
                             self.allData(self.collection().toJSON());
-                            $('#databasecode').hide();
-                            self.collectionDBCode().fetch({
-                                success: function(){
-                                    self.DBCodeData(self.collectionDBCode().toJSON());
-                                },error: function(resp){
-                                    self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
-                                }
-                            }); 
+                            self.DBCodeData.removeAll();
+                                self.collectionDBCode().fetch({
+                                    success: function(){
+
+                                        var temp = self.collectionDBCode().toJSON();
+
+                                        var idx=0;
+                                            ko.utils.arrayForEach(temp, function(item) {
+                                                    ko.utils.arrayForEach(self.allData(), function(x) {
+                                                        if(x.CompanyId===item.OrgId)
+                                                        {
+                                                            temp[idx].OrgName=x.CompanyName;
+                                                            self.DBCodeData.push(temp[idx]);
+                                                            return ;
+                                                        }
+                                                    });
+                                                idx++;
+
+                                            });
+            //                                self.DBCodeData(temp);
+
+                                    },error: function(resp){
+                                        self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                                    }
+                                }); 
+
                         },error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
                         }
                     });  
 
+
+                    
+
+
                 };
 
                 self.save = function (model,successMsg) {
-                    console.log(model);
-                    var user = "LAS";
+                     var user = "LAS";
                     var currentDate = new Date();
+//                    console.log(self.selectedcompanyId()[0]);
+                    model.attributes.OrgId=self.selectedcompanyId()[0];
                     var defaultAttributes = model.isNew()?{createdBy: user,
                             createdDate: currentDate
                         }:{createdBy: model.attributes.createdBy,
@@ -102,11 +147,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
                         }
                     });
-                    
+                };
+                
+                self.onAddDB = function(){
+                    var currentRowLas = $('#company').ojTable('option', 'currentRow');
+                    var  idx = currentRowLas['rowIndex'];
+                    self.companyDataSource.at(idx).
+                        then(function (obj) {
+                            self.selectedRow(obj.data[self.collection().model.idAttribute]);
+                        });
+                    var model = restServiceDBCode.createModel({active: 'Y',CompanyId:self.selectedRow()});
+                    self.createOrEditDBCode(model);                    
                 };
                 
                 self.createOrEdit = function (model) {
-                    self.companyModel(model);
+                    self.DBCodeModel(model);
                     $("#CreateEditDialog").ojDialog("open");
                 };
 
@@ -123,7 +178,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                                 
 
-                
+                self.activeRenderer = function(context){
+                    return rendererService.activeConverter(context.data);
+                };
                 self.createOrEditCompany = function (model) {
                     self.companyModel(model);
                     $("#CreateEditDialog").ojDialog("open");
@@ -134,8 +191,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
 
                 self.onAddCompany = function(){
-                    var model = restService.createModel({active: 'Y'});
-                    self.createOrEditCompany(model);
+                    var model = restServiceDBCode.createModel({active: 'Y'});
+                    self.createOrEdit(model);
                 };
                 
                 self.onEdit = function(){
@@ -147,40 +204,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     var trackerObj = ko.utils.unwrapObservable(self.tracker);
                     if (trackerObj !== undefined){
                         if (trackerObj instanceof oj.InvalidComponentTracker){
-                        console.log('invalid');
                             trackerObj.showMessages();
                             trackerObj.focusOnFirstInvalid();
                         }
                     }
                     if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
-                         self.save(self.companyModel());
-                    }
-                };
-                
-                self.onSaveDB = function(){
-                    var trackerObj2 = ko.utils.unwrapObservable(self.tracker2);
-                    if (trackerObj2 !== undefined){
-                        if (trackerObj2 instanceof oj.InvalidComponentTracker){
-                            trackerObj2.showMessages();
-                            trackerObj2.focusOnFirstInvalid();
-                        }
-                    }
-                    if (!(trackerObj2.invalidHidden || trackerObj2.invalidShown)){
                          self.save(self.DBCodeModel());
                     }
                 };
-
-
+                
                 self.onCancel = function(){
                     $("#CreateEditDialog").ojDialog("close");
                 };
 
-                self.onCancelDB = function(){
-                    $("#CreateEditDialogDB").ojDialog("close");
-                };
-
-                self.onSelectRow = function(event, ui){
-                    var idx = ui.currentRow.rowIndex;
+                self.onSelectRow = function(){
+                    var currentRowLas = $('#company').ojTable('option', 'currentRow');
+                    var  idx = currentRowLas['rowIndex'];
                     self.companyDataSource.at(idx).
                         then(function (obj) {
                             self.selectedRow(obj.data[self.collection().model.idAttribute]);
@@ -200,24 +239,106 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
 
 
-                self.onAddDB = function(){
-                    var model = restServiceDBCode.createModel({active: 'Y',CompanyId:self.selectedRow()});
-                    self.createOrEditDBCode(model);                    
-                };
+                
  
                 self.deactivate = function (model) {
                     model.attributes.active = 'N';
                     self.save(model,self.header +" is successfully deleted");
                 };
+                
 
                 self.onDeleteDB = function (){
                     var currentRowLas = $('#dbcode').ojTable('option', 'currentRow');
+                    
                     self.DBCodeData()[currentRowLas['rowIndex']].active='N';
                     var model = restServiceDBCode.createModel(self.DBCodeData()[currentRowLas['rowIndex']]);
                     self.deactivate(model);                    
-                    self.refreshDataDB();
+                    self.refreshData();
                 };
- 
+                
+                
+                self.onDelete = function(){
+                    $("#ConfirmDialog").ojDialog("open");
+                };
+                
+                self.activateDeactivate = function (model) {
+                    if (model.attributes.active === 'Y'){
+                        model.attributes.active = 'N';
+                    }else if (model.attributes.active === 'N'){
+                        model.attributes.active = 'Y';
+                    }
+                    self.save(model,"Mapping is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                };
+                
+                self.onConfirmYes = function(){
+//                    $('#btnActivate').ojButton("option", "disabled", true );
+//                    $("#ConfirmDialog").ojDialog("close");
+//                    var model = self.collection().get(self.selectedRow());
+//                    self.activateDeactivate(model);
+
+                    var currentRowLas = $('#dbcode').ojTable('option', 'currentRow');
+                    
+                    self.DBCodeData()[currentRowLas['rowIndex']].active='N';
+                    var model = restServiceDBCode.createModel(self.DBCodeData()[currentRowLas['rowIndex']]);
+                    self.activateDeactivate(model);                    
+                    self.refreshData();
+                };
+                
+                self.search = function (dbcode, company) {
+                    var tmp = self.collectionDBCode().filter(function(rec){
+                        return ((dbcode.length ===0 || (dbcode.length > 0 && rec.attributes.DBCode.toLowerCase().indexOf(dbcode.toString().toLowerCase()) > -1)) &&
+                                (company ===undefined || (company !== undefined && rec.attributes.OrgId===company)));
+                    });
+                    self.collectionDBCode().reset(tmp);
+                    var tempdata = self.collectionDBCode().toJSON()
+                    
+                    var idx=0;
+                    self.DBCodeData.removeAll();
+                    ko.utils.arrayForEach(tempdata, function(item) {
+                        if(item.active==='Y'){
+                            ko.utils.arrayForEach(self.allData(), function(x) {
+                                if(x.CompanyId===item.OrgId)
+                                {
+
+                                    tempdata[idx].OrgName=x.CompanyName;
+                                    self.DBCodeData.push(tempdata[idx]);
+                                    return ;
+                                }
+                            });
+                        }
+
+                        idx++;
+
+                    });
+                };
+
+                self.onSearch = function(){
+                    
+                    self.collectionDBCode().fetch({
+                        success: function(){
+                    self.search(self.searchDBCode(),self.selectedcompanyId()[0]);
+
+                        },error: function(resp){
+                            self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                        }
+                    });
+                };
+                self.onReset = function(){
+                    self.refreshData();
+                    self.searchDBCode('');
+                    self.selectedcompanyId([]);
+                };
+                
+                self.onConfirmNo = function(){
+                    $("#ConfirmDialog").ojDialog("close");
+                };
+                
+//                self.onConfirmYes = function(){
+//                    $("#ConfirmDialog").ojDialog("close");
+//                    var model = self.collection().get(self.selectedRow());
+//                    self.activateDeactivate(model);
+//                };
+                
                 self.refreshData();
             }
             return organizationTypeMainViewModel();

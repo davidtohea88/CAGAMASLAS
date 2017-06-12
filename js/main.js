@@ -30,6 +30,7 @@ requirejs.config({
         'file-saverjs': 'libs/sheetjs/FileSaver.min',
         'jzip': 'libs/sheetjs/jszip',
         'xlsx-js': 'libs/sheetjs/xlsx',
+        'lodash': 'libs/lodash/lodash.min',
         'cagutils': 'services/cagutils'
     }
     //endinjector
@@ -241,6 +242,7 @@ require(['ojs/ojcore',
                 'purchaseconssubtype': {value:getMasterDataPath('prchsConsSubTyp'),label: 'Purchase Consideration Sub Type'},
                 'pricefactor': {value:getMasterDataPath('pricefactor'),label: 'Price Factor'},
                 'counterparty': {value:getMasterDataPath('counterparty'),label: 'counterparty'},
+                'counterpartydetail': {value:getMasterDataPath('counterpartyDetail'), label: 'counterparty Detail'},
                 'counterparty-detail': {value:getMasterDataPath('counterparty-detail'), label: 'counterparty detail'},
                 'counterpartytype': {value:getMasterDataPath('counterpartyType'),label: 'Counterparty Type'},
                 'counterpartysect': {value:getMasterDataPath('counterpartySector'),label: 'Counterparty Sector'},
@@ -289,7 +291,10 @@ require(['ojs/ojcore',
                 'revaluation': {value:getMasterDataPath('revaluation'), label: 'Revaluation'},
                 'daycountconvention': {value:getMasterDataPath('DayCountConvention'), label: 'Day Count Convention'},
                 
+                'orgbankacc': {value:getMasterDataPath('orgBankAcc'), label: 'Organization Bank Account'},
+                'amortization': {value:getMasterDataPath('amortization'), label: 'Amortization of Guarantee Fee'},
                 'vendor': {value:getMasterDataPath('vendor'), label: 'Vendor'},
+                'vendordetail': {value:getMasterDataPath('vendorDetail'), label: 'Vendor Detail'},
                 'postcode': {value:getMasterDataPath('postCode'), label: 'Post Code'},
                 'gstaccount': {value:getMasterDataPath('gstAccount'), label: 'GST Account'},
                 'gir': {value:getMasterDataPath('gir'), label: 'GIR'},

@@ -165,6 +165,7 @@ define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services
                 };
                 
                 self.onEdit = function(){
+                    alert(self.selectedRow());
                     var model = self.collection().get(self.selectedRow());
                     self.createOrEdit(model);
                 };

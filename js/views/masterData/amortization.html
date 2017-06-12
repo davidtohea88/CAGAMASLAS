@@ -9,6 +9,9 @@
         <div class="oj-flex">  
             <div class="oj-flex-item">
                 <div class="oj-margin oj-panel-alt demo-mypanel" >          
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">  
+                            <div class="oj-margin oj-panel-alt demo-mypanel" >   
                                 <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >  
                                     <h3><b>Filter</b></h3>
                                     <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
@@ -16,7 +19,7 @@
                                             <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchCode"><label data-bind="text:header"></label> Code</label>
+                                                        <label for="searchCode">Amortization Code</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearch, valueUpdate: 'afterkeydown'}">
@@ -24,7 +27,7 @@
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchName"><label data-bind="text:header"></label> Name</label>
+                                                        <label for="searchName">Amortization Name</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachName" data-bind="ojComponent: {component: 'ojInputText',value: nameSearch, valueUpdate: 'afterkeydown'}">
@@ -32,7 +35,7 @@
                                                 </div> 
                                                 <div class="oj-flex">  
                                                     <div class="oj-flex-item">
-                                                        <label for="searchDesc"><label data-bind="text:header"></label> Description</label>
+                                                        <label for="searchDesc">Amortization Description</label>
                                                     </div>
                                                     <div class="oj-flex-item">
                                                         <input id="seachDesc" data-bind="ojComponent: {component: 'ojInputText',value: descSearch, valueUpdate: 'afterkeydown'}">
@@ -80,11 +83,11 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                    [{headerText: 'Code',  field: 'vndrCd', style: 'width: 10%'},
-                                                                    {headerText: 'Name', field: 'vndrName', style: 'width: 20%'},
-                                                                    {headerText: 'Branch', field: 'branch',style: 'width: 20%'},
-                                                                    {headerText: 'Address', field: 'address',style: 'width: 20%'},
+                                                                    [{headerText: 'Code',  field: 'amorMtdCd', style: 'width: 10%'},
+                                                                    {headerText: 'Name', field: 'amorMtdName', style: 'width: 20%'},
+                                                                    {headerText: 'Description', field: 'amorMtdDesc',style: 'width: 30%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
+                                                                    {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
                                                                     {headerText: 'Last Updated Date',  field: 'updatedDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
                                                                     rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} ,
@@ -100,6 +103,9 @@
                                     </div>
                                 </div>                 
 
+                            </div>    
+                        </div>
+                    </div> 
                 </div>    
             </div>
         </div> 
@@ -122,41 +128,26 @@
             <div id="dialogContent" class="oj-form  oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
-                        <label for="code"><label data-bind="text:header"></label> Code</label>
+                        <label for="code">Amortization Code</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.postCd, required: true, invalidComponentTracker: tracker}" >
-                    </div>
-                </div> 
-                <div class="oj-flex">  
-                    <div class="oj-flex-item">
-                        <label for="district">District</label>
-                    </div>
-                    <div class="oj-flex-item">
-                        <select id="district" style="width: 100%;" data-bind="ojComponent: {
-                            component: 'ojSelect',
-                            options: districtLOV, 
-                            value: selectedDistrictId, 
-                            placeholder: 'Please Select',
-                            required: true, invalidComponentTracker: tracker,
-                            rootAttributes: {style:'max-width: 20em'}}">
-                        </select>
+                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.amorMtdCd, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
-                        <label for="name"><label data-bind="text:header"></label> Name</label>
+                        <label for="name">Amortization Name</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.addrName, required: true, invalidComponentTracker: tracker}" >
+                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.amorMtdName, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
                 <div class="oj-flex">  
                     <div class="oj-flex-item">
-                        <label for="desc"><label data-bind="text:header"></label> Description</label>
+                        <label for="desc">Amortization Description</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.addrDesc, required: true, invalidComponentTracker: tracker}">
+                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.amorMtdDesc, required: true, invalidComponentTracker: tracker}">
                     </div>
                 </div> 
                 <div class="oj-flex">  

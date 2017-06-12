@@ -83,9 +83,9 @@
                                                         <div id="pagingControlDemo" class="page-content">
                                                             <table id="table" summary="Origination List" aria-label="Origination Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                    [{headerText: 'Code',  field: 'acyCd', style: 'width: 10%'},
-                                                                    {headerText: 'Name', field: 'agencyName', style: 'width: 20%'},
-                                                                    {headerText: 'Description', field: 'agencyDesc',style: 'width: 30%'},
+                                                                    [{headerText: 'Code',  field: 'grntrCd', style: 'width: 10%'},
+                                                                    {headerText: 'Name', field: 'grntrName', style: 'width: 20%'},
+                                                                    {headerText: 'Description', field: 'grntrDesc',style: 'width: 30%'},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
@@ -131,7 +131,7 @@
                         <label for="code"><label data-bind="text:header"></label> Code</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.acyCd, required: true, invalidComponentTracker: tracker}" >
+                        <input id="code" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.grntrCd, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
                 <div class="oj-flex">  
@@ -139,7 +139,7 @@
                         <label for="name"><label data-bind="text:header"></label> Name</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.agencyName, required: true, invalidComponentTracker: tracker}" >
+                        <input id="name" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.grntrName, required: true, invalidComponentTracker: tracker}" >
                     </div>
                 </div> 
                 <div class="oj-flex">  
@@ -147,7 +147,55 @@
                         <label for="desc"><label data-bind="text:header"></label> Description</label>
                     </div>
                     <div class="oj-flex-item">
-                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.agencyDesc, required: true, invalidComponentTracker: tracker}">
+                        <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.grntrDesc, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="phone">Phone</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="phone" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.phone, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="fax">Fax</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="fax" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.fax, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="email" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.email, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="limit">Limit</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="limit" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.limit, required: true, invalidComponentTracker: tracker}">
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="address">Address</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <textarea id="address" style="width: 100%;" data-bind="ojComponent: {component: 'ojTextArea',value: attributes.address, required: true, invalidComponentTracker: tracker}"></textarea>
+                    </div>
+                </div> 
+                <div class="oj-flex">  
+                    <div class="oj-flex-item">
+                        <label for="remarks">Remarks</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <textarea id="remarks" style="width: 100%;" data-bind="ojComponent: {component: 'ojTextArea',value: attributes.remarks, required: true, invalidComponentTracker: tracker}"></textarea>
                     </div>
                 </div> 
                 <div class="oj-flex">  

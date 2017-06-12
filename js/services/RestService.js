@@ -10,16 +10,16 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
         var RestService = function() {
             var self = this;
             self.countryService = function(){
-                return new BaseRestService("country","countryId","MdCountry");
+                return new BaseRestService("Country","countryId","MdCountry");
             };
             self.districtService = function(){
                 return new BaseRestService("District","distId","MdDistrict");
             };
             self.stateService = function(){
-                return new BaseRestService("state","stateId","MdState");
+                return new BaseRestService("State","stateId","MdState");
             };
             self.branchService = function(){
-                return new BaseRestService("branch","branchId","MdBranch");
+                return new BaseRestService("Branch","cptBrId","MdCptBr");
             };
             self.rateTypeService = function(){
                 return new BaseRestService("rateType","rateTypeId","MdRateType");
@@ -31,7 +31,7 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("/MD_ProductType/ProductTypeRestPS","prodTypeId","MdProdType");
             };
             self.productGroupService = function(){
-                return new BaseRestService("/MD_Product_Group/ProductGroupRestPS","prodGrpId","MdProdGrp");
+                return new BaseRestService("ProductGroup","prodGrpId","MdProdGrp");
             };
             self.counterpartyContactService = function(){
                 return new BaseRestService("/MD_CounterpartyContacts/CPTContactRestPS","cptContId","MdCptContacts");
@@ -40,13 +40,13 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("MD_Counterparty/CPTRestPS","cptId","MdCpt");
             };
             self.counterpartySectorService = function(){
-                return new BaseRestService("/MD_CounterpartySector/CPTSCTRRestPS","cptSctrId","MdCptSctr");
+                return new BaseRestService("CounterpartySector","cptSctrId","MdCptSctr");
             };
             self.counterpartyTypeService = function(){
-                return new BaseRestService("/MD_CounterPartyType/CPTTypeRestPS","cptTypeId","MdCptType");
+                return new BaseRestService("CounterpartyType","cptTypeId","MdCptType");
             };
             self.counterpartyGroupService = function(){
-                return new BaseRestService("cptyGroup","cptGrpId","MdCptGroup");
+                return new BaseRestService("CounterpartyGroup","cptGrpId","MdCptGrp");
             };
             self.counterpartyGroupTypeService = function(){
                 return new BaseRestService("cptyGroupType","cptGrpTypeId","MdCptGroupType");
@@ -79,7 +79,7 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
                 return new BaseRestService("/organizationType","orgTypeId","MDOrganizationType");
             };
             self.organizationService = function(){
-                return new BaseRestService("/organization","orgId","MDOrganization");
+                return new BaseRestService("Organization","orgId","MdOrg");
             };
             self.organizationHierarchyService = function(){
                 return new BaseRestService("/MD_OrgHierarchy/OrgHierRestPS","orgHierId","MdOrgHier");
@@ -101,6 +101,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             };
             self.gstGLCodeService = function(){
                 return new BaseRestService("gstGl","gstglId","MdGstglCode");
+            };
+            self.gstAccountTypeService = function(){
+                return new BaseRestService("GSTAccountType","gstacctTypeId","MdGstacctType");
             };
             self.paymentFrequencyService = function(){
                 return new BaseRestService("/MD_PaymentFrequency/PaymentFreqRestPS","pymtFreqId","MdPymtFreq");
@@ -147,6 +150,9 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.counterpartyRatioFiService  = function(){
                 return new BaseRestService("RatioFI","fiCptRtId","MdCptRtFi");
             };
+            self.counterpartyVendorService  = function(){
+                return new BaseRestService("CounterpartyVendor","vndrLineId","MdCptVndrLine");
+            };
             self.ratingAgencyService  = function(){
                 return new BaseRestService("RatingAgency","acyId","MdRatingAcy");
             };
@@ -185,6 +191,18 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             };
             self.SunGLAccountService = function(){
                 return new BaseRestService("SUNaccount","AccountId","MdGLAccount");
+            };
+            self.counterpartyService = function(){
+                return new BaseRestService("Counterparty","cptId","MdCpt");
+            };
+            self.guarantorService = function(){
+                return new BaseRestService("Guarantor","grntrId","MdGrntrHdr");
+            };
+            self.amortizationService = function(){
+                return new BaseRestService("Amortization","amorMtdId","MdAmortization");
+            };
+            self.orgBankAccService = function(){
+                return new BaseRestService("OrgBankAcc","orgBkId","MdOrgBankAcc");
             };
         };
         return new RestService();

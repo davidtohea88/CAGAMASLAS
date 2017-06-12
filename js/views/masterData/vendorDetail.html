@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<div class="oj-form-layout oj-offcanvas-outer-wrapper" id="form-container">
+    <div class="page-title">
+        <label class="white-color" data-bind="text:header"></label>
+        <button id= "btnBack" data-bind="click: back, ojComponent: { component: 'ojButton', label: 'Back' }" style="float:right; margin: -2px 0px 0px 0px;"></button>
+        <button id= "btnSave" data-bind="click: onSave, ojComponent: { component: 'ojButton', label: 'Save' }" style="float:right; margin: -2px 5px 0px 0px;"></button>
+    </div>
+    <div id="pageDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center', color: 'white'}">
+        <span data-bind="text: message"></span>
+    </div>
+    <div id="pageContent" class="page-content oj-form oj-md-labels-inline oj-md-labels-nowrap oj-form-no-dividers oj-lg-form-across
+         oj-sm-odd-cols-12 oj-md-odd-cols-5 oj-lg-odd-cols-2 oj-lg-even-cols-4">  
+        <div class="oj-flex" id="pc-row-1">
+            <div style="width:100%;">
+                <h3></h3>
+                <div class="page-content oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">
+                    <div class="oj-flex-item">
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-6 oj-lg-even-cols-6 oj-lg-labels-inline">
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="vendorCd">Vendor Code</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="vendorCd" data-bind="ojComponent: {component: 'ojInputText', value: vndrCd, required: true, invalidComponentTracker: tracker}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="vendorName">Vendor Name</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="vendorName" data-bind="ojComponent: {component: 'ojInputText', value: vndrName, required: true, invalidComponentTracker: tracker}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="branch">Branch</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="branch" data-bind="ojComponent: {component: 'ojInputText', value: branch, required: true, rootAttributes: {style:'max-width:83.5%'}, invalidComponentTracker: tracker}"/>
+                                    <button id="btnBranchLOV" data-bind="click: btnBranchLOV, ojComponent:
+                                                        { component: 'ojButton', display: 'icons', icons: {start:'demo-icon-sprite demo-icon-search'}, label: 'Yes'}"></button>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="bankAccount">Bank Account</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="bankAccount" data-bind="ojComponent: {component: 'ojInputText', value: bankAct, required: true, invalidComponentTracker: tracker}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="address">Address</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <textarea id="address" rows="4" data-bind="ojComponent: {component: 'ojTextArea', value: address, required: true, invalidComponentTracker: tracker}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div id="PCI-col-2" class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-5 oj-lg-even-cols-6 oj-lg-labels-inline">
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="email" data-bind="ojComponent: {component: 'ojInputText', value: email, required: true, invalidComponentTracker: tracker}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="phone">Phone</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="phone" data-bind="ojComponent: {component: 'ojInputText', value: phone, required: true, invalidComponentTracker: tracker}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="fax">Fax</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="fax" data-bind="ojComponent: {component: 'ojInputText', value: fax, required: true, invalidComponentTracker: tracker}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="cpname">CP Name</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="cpname" data-bind="ojComponent: {component: 'ojInputText', value: cntName, required: true, invalidComponentTracker: tracker}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="cpnumber">CP Number</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="cpnumber" data-bind="ojComponent: {component: 'ojInputText', value: cntNo, required: true, invalidComponentTracker: tracker}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="web">Web</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="web" data-bind="ojComponent: {component: 'ojInputText', value: webUrl, required: true, invalidComponentTracker: tracker}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-5 oj-lg-even-cols-6 oj-lg-labels-inline">
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="country">Country</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <select id="country" style="width: 100%;" data-bind="ojComponent: {
+                                        component: 'ojSelect',
+                                        options: countryLOV, 
+                                        value: selectedCountryId, 
+                                        placeholder: 'Please Select',
+                                        required: true, invalidComponentTracker: tracker}">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="state">State</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="stateId" type="hidden"/>
+                                    <input id="state" data-bind="ojComponent: {component: 'ojInputText', value: state, required: true, rootAttributes: {style:'max-width:83.5%'}, invalidComponentTracker: tracker}"/>
+                                    <button id="btnStateLOV" data-bind="click: btnStateLOV, ojComponent:
+                                                        { component: 'ojButton', display: 'icons', icons: {start:'demo-icon-sprite demo-icon-search'}, label: 'Yes'}"> </button>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="district">District</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="districtId" type="hidden"/>
+                                    <input id="district" data-bind="ojComponent: {component: 'ojInputText', value: district, required: true, rootAttributes: {style:'max-width:83.5%'}, invalidComponentTracker: tracker}"/>
+                                    <button id="btnDistrictLOV" data-bind="click: btnDistrictLOV, ojComponent:
+                                                        { component: 'ojButton', display: 'icons', icons: {start:'demo-icon-sprite demo-icon-search'}, label: 'Yes'}"> </button>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="city">City</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="city" data-bind="ojComponent: {component: 'ojInputText', value: city, required: true, invalidComponentTracker: tracker}"/>
+                                </div>
+                            </div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item">
+                                    <label for="postCode">Postcode</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <input id="postCodeId" type="hidden"/>
+                                    <input id="postCode" data-bind="ojComponent: {component: 'ojInputText', value: postCode, required: true, rootAttributes: {style:'max-width:83.5%'}, invalidComponentTracker: tracker}"/>
+                                    <button id="btnPostCodeLOV" data-bind="click: btnPostCodeLOV, ojComponent:
+                                                        { component: 'ojButton', display: 'icons', icons: {start:'demo-icon-sprite demo-icon-search'}, label: 'Yes'}"> </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="oj-header-border"></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="counterParty">
+    <div class="page-title" style="background:#ffffff;">
+        <label>Counter Party</label>
+        </button>
+    </div>
+
+    <div class="oj-flex">  
+        <div class="oj-flex-item">  
+            <div class="oj-margin oj-panel-alt demo-mypanel" >   
+                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" > 
+                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                        <div class="oj-flex-item">   
+                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                <div class="oj-flex">                        
+                                    <div class="oj-flex-item">
+                                        <button id= "btnAdd" data-bind="click: btnAddCounterParty, ojComponent: { component: 'ojButton', label: 'Add' }"></button>
+                                        <button id= "btnDelete" data-bind="enable: true, click: btnDeleteCpVendor, ojComponent: { component: 'ojButton', label: 'Delete' }"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+
+                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >                    
+                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                        <div class="oj-flex-item">   
+                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                <div class="oj-flex">                        
+                                    <div style="width:100%;margin-left:0px;padding-left:0px;">
+                                        <div id="pagingControlDemo" class="page-content">
+                                            <table id="table" summary="Origination List" aria-label="Origination Table"
+                                                   data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSourceCpVendor, columns:
+                                                                        [{headerText: '', template: 'ck_action', sortable: 'disabled'},
+                                                                    {headerText: 'Counter Party Code',  field: 'cptCd', style: 'width: 10%'},
+                                                                    {headerText: 'Counter Party Name', field: 'cptName', style: 'width: 20%'},
+                                                                    {headerText: 'Review Group', field: 'vndrId',style: 'width: 20%'},
+                                                                    {headerText: 'Quarter Review Last Date', field: 'qtrRvwLastDate', style: 'width: 10%', renderer: dateTimeRenderer},
+                                                                    {headerText: 'Quarter Review Next Date',  field: 'qtrRvwNextDate', style: 'width: 10%', renderer: dateTimeRenderer},
+                                                                    {headerText: 'Available Limit',  field: 'effectiveDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
+                                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'none', column:'none'}}">
+                                            </table>
+                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSourceCpVendor, pageSize: 10}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>    
+
+<div id="BranchDialog" title=""
+     data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', modality: 'modeless', 
+                    cancelBehavior: 'escape',resizeBehavior: 'none', 
+                rootAttributes: { style: 'min-width:650px;'}}">
+    <div class="oj-dialog-header oj-helper-clearfix">
+        <div>
+            <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+            <span id="dialog-title-id" class="oj-dialog-title">Branch</span>
+        </div>
+    </div>
+    <div class="oj-dialog-body">
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-3 oj-md-labels-inline" style="margin-left:10px">
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Code</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearchBranch, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Name</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchName" data-bind="ojComponent: {component: 'ojInputText',value: nameSearchBranch, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">                       
+                <div class="oj-flex-item">
+                    <button id= "btnSearchBranch" data-bind="click: onSearchBranch,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
+                    <button id= "btnResetBranch" data-bind="click: onResetBranch,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
+                </div>
+            </div> 
+        </div>
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-flex">                        
+                <div style="margin-left:-10px; margin-right:-10px;">
+                    <div id="pagingControlDemo" class="page-content">
+                        <table id="table" summary="Origination List" aria-label="Origination Table"
+                               data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSourceBranch, columns:
+                                                                    [{headerText: 'Code', style: 'width: 10%',  field: 'brCd'},
+                                                                    {headerText: 'Name', style: 'width: 20%', field: 'brName'},
+                                                                    {headerText: 'Description', style: 'width: 55%', field: 'brDesc'},
+                                                                    {headerText: 'Active', field: 'active', style: 'width: 5%', renderer: activeRenderer},
+                                                                    {headerText: 'Effective Date', field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer}],
+                                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} ,
+                                                                        beforeCurrentRow: onSelectRowBranch}">
+                        </table>
+                        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSourceBranch, pageSize: 5}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="oj-dialog-footer">
+        <button id="btnBranchOk" data-bind="click: chooseBranchOk, ojComponent:
+                 { component: 'ojButton', label: 'OK'}"> </button>
+        <button id="btnBranchCancel" data-bind="click: chooseBranchCancel, ojComponent:
+                 { component: 'ojButton', label: 'Cancel'}"> </button>
+    </div>
+</div>
+
+<div id="StateDialog" title=""
+     data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', modality: 'modeless', 
+                    cancelBehavior: 'escape',resizeBehavior: 'none', 
+                rootAttributes: { style: 'min-width:650px;'}}">
+    <div class="oj-dialog-header oj-helper-clearfix">
+        <div>
+            <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+            <span id="dialog-title-id" class="oj-dialog-title">State</span>
+        </div>
+    </div>
+    <div class="oj-dialog-body">
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-3 oj-md-labels-inline" style="margin-left:10px">
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Code</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearchState, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Name</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchName" data-bind="ojComponent: {component: 'ojInputText',value: nameSearchState, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">                       
+                <div class="oj-flex-item">
+                    <button id= "btnSearchState" data-bind="click: onSearchState,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
+                    <button id= "btnResetState" data-bind="click: onResetState,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
+                </div>
+            </div> 
+        </div>
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-flex">                        
+                <div style="margin-left:-10px; margin-right:-10px;">
+                    <div id="pagingControlDemo" class="page-content">
+                        <table id="table" summary="Origination List" aria-label="Origination Table"
+                               data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSourceState, columns:
+                                                                    [{headerText: 'Code', style: 'width: 10%',  field: 'stateCd'},
+                                                                    {headerText: 'Name', style: 'width: 20%', field: 'stateName'},
+                                                                    {headerText: 'Description', style: 'width: 55%', field: 'stateDesc'},
+                                                                    {headerText: 'Active', field: 'active', style: 'width: 5%', renderer: activeRenderer},
+                                                                    {headerText: 'Effective Date', field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer}],
+                                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} ,
+                                                                        beforeCurrentRow: onSelectRowState}">
+                        </table>
+                        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSourceState, pageSize: 5}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="oj-dialog-footer">
+        <button id="btnStateOk" data-bind="click: chooseStateOk, ojComponent:
+                 { component: 'ojButton', label: 'OK'}"> </button>
+        <button id="btnStateCancel" data-bind="click: chooseStateCancel, ojComponent:
+                 { component: 'ojButton', label: 'Cancel'}"> </button>
+    </div>    
+</div>
+
+<div id="DistrictDialog" title=""
+     data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', modality: 'modeless', 
+                    cancelBehavior: 'escape',resizeBehavior: 'none', 
+                rootAttributes: { style: 'min-width:650px;'}}">
+    <div class="oj-dialog-header oj-helper-clearfix">
+        <div>
+            <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+            <span id="dialog-title-id" class="oj-dialog-title">District</span>
+        </div>
+    </div>
+    <div class="oj-dialog-body">
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-3 oj-md-labels-inline" style="margin-left:10px">
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Code</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearchDistrict, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Name</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchName" data-bind="ojComponent: {component: 'ojInputText',value: nameSearchDistrict, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">                       
+                <div class="oj-flex-item">
+                    <button id= "btnSearchDistrict" data-bind="click: onSearchDistrict,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
+                    <button id= "btnResetDistrict" data-bind="click: onResetDistrict,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
+                </div>
+            </div> 
+        </div>
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-flex">                        
+                <div style="margin-left:-10px; margin-right:-10px;">
+                    <div id="pagingControlDemo" class="page-content">
+                        <table id="table" summary="Origination List" aria-label="Origination Table"
+                               data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSourceDistrict, columns:
+                                                                    [{headerText: 'Code', style: 'width: 10%',  field: 'distCd'},
+                                                                    {headerText: 'Name', style: 'width: 20%', field: 'distName'},
+                                                                    {headerText: 'Description', style: 'width: 55%', field: 'distDesc'},
+                                                                    {headerText: 'Active', field: 'active', style: 'width: 5%', renderer: activeRenderer},
+                                                                    {headerText: 'Effective Date', field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer}],
+                                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} ,
+                                                                        beforeCurrentRow: onSelectRowDistrict}">
+                        </table>
+                        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSourceDistrict, pageSize: 5}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="oj-dialog-footer">
+        <button id="btnDistrictOk" data-bind="click: chooseDistrictOk, ojComponent:
+                 { component: 'ojButton', label: 'OK'}"> </button>
+        <button id="btnDistrictCancel" data-bind="click: chooseDistrictCancel, ojComponent:
+                 { component: 'ojButton', label: 'Cancel'}"> </button>
+    </div>    
+</div>
+
+<div id="PostCodeDialog" title=""
+     data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', modality: 'modeless', 
+                    cancelBehavior: 'escape',resizeBehavior: 'none', 
+                rootAttributes: { style: 'min-width:650px;'}}">
+    <div class="oj-dialog-header oj-helper-clearfix">
+        <div>
+            <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+            <span id="dialog-title-id" class="oj-dialog-title">PostCode</span>
+        </div>
+    </div>
+    <div class="oj-dialog-body">
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-3 oj-md-labels-inline" style="margin-left:10px">
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Code</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearchPostCode, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Name</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchName" data-bind="ojComponent: {component: 'ojInputText',value: nameSearchPostCode, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">                       
+                <div class="oj-flex-item">
+                    <button id= "btnSearchPostCode" data-bind="click: onSearchPostCode,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
+                    <button id= "btnResetPostCode" data-bind="click: onResetPostCode,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
+                </div>
+            </div> 
+        </div>
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-flex">                        
+                <div style="margin-left:-10px; margin-right:-10px;">
+                    <div id="pagingControlDemo" class="page-content">
+                        <table id="table" summary="Origination List" aria-label="Origination Table"
+                               data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSourcePostCode, columns:
+                                                                    [{headerText: 'Code', style: 'width: 10%',  field: 'postCd'},
+                                                                    {headerText: 'Name', style: 'width: 20%', field: 'addrName'},
+                                                                    {headerText: 'Description', style: 'width: 55%', field: 'addrDesc'},
+                                                                    {headerText: 'Active', field: 'active', style: 'width: 5%', renderer: activeRenderer},
+                                                                    {headerText: 'Effective Date', field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer}],
+                                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} ,
+                                                                        beforeCurrentRow: onSelectRowPostCode}">
+                        </table>
+                        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSourcePostCode, pageSize: 5}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="oj-dialog-footer">
+        <button id="btnPostCodeOk" data-bind="click: choosePostCodeOk, ojComponent:
+                 { component: 'ojButton', label: 'OK'}"> </button>
+        <button id="btnPostCodeCancel" data-bind="click: choosePostCodeCancel, ojComponent:
+                 { component: 'ojButton', label: 'Cancel'}"> </button>
+    </div>
+</div>    
+
+<div id="CounterpartyDialog" title=""
+     data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', modality: 'modeless', 
+                    cancelBehavior: 'escape',resizeBehavior: 'none', 
+                rootAttributes: { style: 'min-width:800px;'}}">
+    <div class="oj-dialog-header oj-helper-clearfix">
+        <div>
+            <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+            <span id="dialog-title-id" class="oj-dialog-title">Counterparty</span>
+        </div>
+    </div>
+    <div class="oj-dialog-body">
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-3 oj-md-labels-inline" style="margin-left:10px">
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Code</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchCode" data-bind="ojComponent: {component: 'ojInputText',value: codeSearchCounterparty, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label>Name</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="searchName" data-bind="ojComponent: {component: 'ojInputText',value: nameSearchCounterparty, valueUpdate: 'afterkeydown'}">
+                </div>
+            </div> 
+            <div class="oj-flex">                       
+                <div class="oj-flex-item">
+                    <button id= "btnSearchCounterparty" data-bind="click: onSearchCounterparty,ojComponent: {component: 'ojButton', label: 'Search' } "></button>
+                    <button id= "btnResetCounterparty" data-bind="click: onResetCounterparty,ojComponent: {component: 'ojButton', label: 'Reset' } "></button>
+                </div>
+            </div> 
+        </div>
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-flex">                        
+                <div style="margin-left:-10px; margin-right:-10px;">
+                    <div id="pagingControlDemo" class="page-content">
+                        <table id="table" summary="Origination List" aria-label="Origination Table"
+                               data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSourceCounterparty, columns:
+                                                                    [{headerText: 'Counter Party Code', style: 'width: 10%',  field: 'cptCd'},
+                                                                    {headerText: 'Counter Party Name', style: 'width: 70%', field: 'cptName'},
+                                                                    /*{headerText: 'Quarter Review Last Date', style: 'width: 10%', field: 'qtrRvwLastDate', renderer: dateRenderer},
+                                                                    {headerText: 'Quarter Review Next Date', style: 'width: 10%', field: 'qtrRvwNextDate', renderer: dateRenderer},*/
+                                                                    {headerText: 'Active', field: 'active', style: 'width: 10%', renderer: activeRenderer},
+                                                                    {headerText: 'Effective Date', field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer}],
+                                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} ,
+                                                                        beforeCurrentRow: onSelectRowCounterparty}">
+                        </table>
+                        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSourceCounterparty, pageSize: 5}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="oj-dialog-footer">
+        <button id="btnCounterpartyOk" data-bind="click: chooseCounterpartyOk, ojComponent:
+                 { component: 'ojButton', label: 'OK'}"> </button>
+        <button id="btnCounterpartyCancel" data-bind="click: chooseCounterpartyCancel, ojComponent:
+                 { component: 'ojButton', label: 'Cancel'}"> </button>
+    </div>
+    
+    <div id="ConfirmDialog" class="ojDialog" title="" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',  modality: 'modeless',
+		  rootAttributes: { style: 'width:400px;'}
+		  }">
+        <div class="oj-dialog-header oj-helper-clearfix">
+            <div>
+                <span id="infoIcon" class="oj-icon oj-message-info-icon" style="float:left;"></span>
+                <span id="dialog-title-id" class="oj-dialog-title">Confirmation</span>
+            </div>
+        </div>
+        <div class="oj-dialog-body">
+            <p>Are you sure you want to do this action?</p>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="btnConfirmOk" data-bind="click: onConfirmYes, ojComponent:
+                 { component: 'ojButton', label: 'Yes'}"> </button>
+            <button id="btnConfirmCancel" data-bind="click: onConfirmNo, ojComponent:
+                 { component: 'ojButton', label: 'No'}"> </button>
+        </div>
+    </div>
+
+</div>    
+
+<script type="text/html" id="ck_action">
+    <td align="center" style="padding-left: 15px;">
+        <input type="checkbox" data-bind="attr: {id: vndrLineId}, click: $root.enableDelete"/>
+    </td>
+</script>
+
+

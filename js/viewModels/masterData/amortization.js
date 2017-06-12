@@ -1,39 +1,25 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService','services/exportService','services/MessageService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services/RestService','services/exportService', 'services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset', 'ojs/ojselectcombobox','ojs/ojoffcanvas','ojs/ojknockout-validation'],
-        function (oj, ko, $, rendererService, RestService, exportService,MessageService)
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation'],
+        function (oj, ko, $, rendererService, RestService, exportService, MessageService)
         {
-            function organizationMainViewModel() {
+            function amortizationMainViewModel() {
                 var self = this;
-                var restService = RestService.dayCountConventionService();
-                self.header = "Day Count Convention";
+                var restService = RestService.amortizationService();
+                self.header = "Amortization of Guarantee Fee";
                 self.dialogTitle = "Create/edit "+self.header;
-                self.emptyPlaceholder = ko.observable(false);
                 self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
-
-                self.DCConvModel = ko.observable();
-
+                self.model = ko.observable();
                 self.nameSearch = ko.observable('');
                 self.descSearch = ko.observable('');
-                self.numeratorSearch = ko.observable('');
-                self.denominatorSearch = ko.observable('');
-                self.numeratorVal = ko.observable('');
-                self.denominatorVal = ko.observable('');
-                self.numeratorList = ko.observableArray([ 
-                    {value: "30", label: "30"},  
-                    {value: "Actual", label: "Actual"} 
-                ]);
-                self.denominatorList = ko.observableArray([ 
-                    {value: "360", label: "360"},  
-                    {value: "365", label: "365"},  
-                    {value: "Actual", label: "Actual"} 
-                ]);
+                self.codeSearch = ko.observable('');
+                self.dateConverter = rendererService.dateConverter;
                 self.message = ko.observable();
                 self.colorType = ko.observable();
                 self.tracker = ko.observable();
@@ -61,26 +47,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     },MessageService.displayTimeout);
                 };
 
-                self.orgRenderer = function(context) 
-                {
-                    if (context.data){
-                        return context.data.orgName;
-                    }
-                    return '';
-                };
-
-                self.dateTimeRenderer = function(context) 
-                {
+                self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
                 };
                 
-                self.dateRenderer = function(context) 
-                {
+                self.dateRenderer = function(context){
                     return rendererService.dateConverter.format(context.data);
                 };
                 
-                self.activeRenderer = function(context) 
-                {
+                self.activeRenderer = function(context){
                     return rendererService.activeConverter(context.data);
                 };
                     
@@ -92,52 +67,41 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         },error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
                         }
-                    });                     
+                    }); 
                 };
-
-                self.search = function (name, desc,numerator,denominator) {
-                    console.log(numerator[0]);
-                    console.log(denominator[0]);
+                
+                self.search = function (code, name, desc) {
                     var tmp = self.collection().filter(function(rec){
-                            return ((name.length ===0 || (name.length > 0 && rec.attributes.dayConvName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                    (desc.length ===0 || (desc.length > 0 && rec.attributes.dayConvDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)) &&
-                                    (numerator[0] ===undefined || (numerator[0].length > 0 && rec.attributes.numerator===numerator[0])) &&
-                                    (denominator[0] ===undefined || (denominator[0].length > 0 && rec.attributes.denominator===denominator[0]))
-                                    );
+                        return ((code.length ===0 || (code.length > 0 && rec.attributes.amorMtdCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.amorMtdName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.amorMtdDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
                 };
-
                 
                 self.createOrEdit = function (model) {
-                    self.DCConvModel(model);
+                    self.model(model);
                     $("#CreateEditDialog").ojDialog("open");
                 };
                 
-                self.cancel = function () {
-                    $("#CreateEditDialog").ojDialog("close");
-                };
-                
-                 self.save = function (model,successMsg) {
+                self.save = function (model,successMsg) {
                     var user = "LAS";
                     var currentDate = new Date().toISOString();
-                    var defaultAttributes = model.isNew()?{createdBy: user,
-                            createdDate: currentDate
-                        }:{createdBy: model.attributes.createdBy,
-                            createdDate: model.attributes.createdDate,
+                    var defaultAttributes = {createdBy: model.isNew()?user:model.attributes.createdBy,
+                            createdDate: model.isNew()?currentDate:model.attributes.createdDate,
                             updatedBy: user,
                             updatedDate: currentDate
                         };
                     model.save(defaultAttributes,{
-                        success: function(model,resp){
+                        success: function(model){
                             self.refreshData();
                             var message = successMsg? successMsg: (model.isNew()?'A new '+self.header+' is successfully created':self.header+' is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
                                 $("#CreateEditDialog").ojDialog("close");
                             });
                         },
-                        error: function(){
+                        error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));  
                         }
                     });
@@ -150,13 +114,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model,"Asset group \""+model.attributes.DCConvName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                    self.save(model,self.header+" \""+model.attributes.amorMtdName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
                     exportService.export($("#table").ojTable("option","columns"),self.allData(),'xlsx','data.xlsx', function(field,value){
                         if (field === 'active'){
                             return rendererService.activeConverter(value);
+                        }else if (field === 'effectiveDate'){
+                            return rendererService.dateConverter.format(value);
                         }else if (field === 'updatedDate'){
                             return rendererService.dateTimeConverter.format(value);
                         }else{
@@ -172,10 +138,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onReset = function(){
                     self.refreshData();
                     
+                    self.codeSearch('');
                     self.nameSearch('');
                     self.descSearch('');
-                    self.numeratorSearch('');
-                    self.denominatorSearch('');
                     
                     if (self.collection().models.length>1){
                         self.selectedRow(undefined);
@@ -187,14 +152,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onSearch = function(){
                     self.collection().fetch({
                         success: function(){
-                            self.search(self.nameSearch(),self.descSearch(),self.numeratorSearch(),self.denominatorSearch());
+                            self.search(self.codeSearch(),self.nameSearch(),self.descSearch());
                         },error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
                         }
                     });
-
-              };
-
+                };
                 
                 self.onCreate = function(){
                     var model = restService.createModel({active: 'Y'});
@@ -203,8 +166,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.onEdit = function(){
                     var model = self.collection().get(self.selectedRow());
-                    self.numeratorVal([model.attributes.numerator]);
-                    self.denominatorVal([model.attributes.denominator]);
                     self.createOrEdit(model);
                 };
                 
@@ -217,10 +178,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         }
                     }
                     if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
-                        //self.model().attributes.numerator = self.selectedCountryId()[0];
-                        self.DCConvModel().attributes.numerator = self.numeratorVal()[0];
-                        self.DCConvModel().attributes.denominator = self.denominatorVal()[0];
-                        self.save(self.DCConvModel());
+                        self.save(self.model());
                     }
                 };
                 
@@ -236,15 +194,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             $('#btnEdit').show();
                             $('#btnActivate').show();
                         });
-                };                
-                self.onExport = function(){
-                   self.exportxls(); 
                 };
-
+                
+                self.onExport = function(){
+                    self.exportxls(); 
+                };
+                
                 self.onCancel = function () {
                     $("#CreateEditDialog").ojDialog("close");
                 };
-                                
+                
                 self.onConfirmNo = function(){
                     $("#ConfirmDialog").ojDialog("close");
                 };
@@ -254,9 +213,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     var model = self.collection().get(self.selectedRow());
                     self.activateDeactivate(model);
                 };
-
+                
                 self.refreshData();
             }
-            return organizationMainViewModel();
+            return amortizationMainViewModel();
         }
 ); 

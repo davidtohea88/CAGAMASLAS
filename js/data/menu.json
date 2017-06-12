@@ -92,6 +92,13 @@
             },
             {
                 "attr" : {
+                    "id" : "counterpartydetail",
+                    "name" : "Counterparty Detail",
+                    "view" : "counterpartydetail"
+                }
+            },
+            {
+                "attr" : {
                     "id" : "counterpartytype",
                     "name" : "Counterparty Type",
                     "view" : "counterpartytype"
@@ -410,6 +417,27 @@
                     "id" : "vendor",
                     "name" : "Vendor",
                     "view" : "vendor"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "vendordetail",
+                    "name" : "Vendor Detail",
+                    "view" : "vendordetail"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "amortization",
+                    "name" : "Amortization of Guarantee Fee",
+                    "view" : "amortization"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "orgbankacc",
+                    "name" : "Organization Bank Account",
+                    "view" : "orgbankacc"
                 }
             },
             {
