@@ -543,7 +543,7 @@
     {
         "attr" : {
             "id" : "mgphome",
-            "name" : "MGP",
+            "name" : "MGP SRP",
             "view" : ""
         },
         "children" : [
@@ -616,6 +616,7 @@
                     "view" : "mgp-elig-summary"
                 }
             }
+
             
             ] },
             
@@ -881,5 +882,357 @@
                 ]
             }
         ]
+    },
+     
+        {
+        "attr" : {
+            "id" : "fi-mgphome",
+            "name" : "MGP FI",
+            "view" : ""
+        },
+        "children" : [
+            
+                 {
+                "attr" : {
+                    "id" : "fi-mgpsetup",
+                    "name" : "MGP Setup",
+                    "view" : ""
+                },
+            
+            "children" : [
+                    
+                                      
+                       
+                     {
+                "attr" : {
+                    "id" : "fi-mgp-verify-sheet",
+                    "name" : "Verification Sheet",
+                    "view" : "mgp-verify-sheet"
+                }
+            }  ,
+                        {
+                "attr" : {
+                    "id" : "fi-mgp-template-upd",
+                    "name" : "Document Template",
+                    "view" : "mgp-template-upd"
+                }
+            },
+             {
+                "attr" : {
+                    "id" : "fi-mgp-file-type",
+                    "name" : "File Type",
+                    "view" : "mgp-file-type"
+                }
+            },
+                        {
+                "attr" : {
+                    "id" : "fi-mgp-foreclosure-recovery",
+                    "name" : "Foreclosure and Recovery",
+                    "view" : "mgp-foreclosure-recovery"
+                }
+            },
+                        {
+                "attr" : {
+                    "id" : "fi-mgp-terminate-code",
+                    "name" : "Termination Code",
+                    "view" : "mgp-terminate-code"
+                }
+            },
+            
+                        {
+                "attr" : {
+                    "id" : "fi-mgp-caid-code",
+                    "name" : "CAID Code",
+                    "view" : "mgp-caid-code"
+                }
+            },
+        {
+                "attr" : {
+                    "id" : "fi-mgp-aar-code",
+                    "name" : "AAR Code",
+                    "view" : "mgp-aar-code"
+                }
+            },
+             {
+                "attr" : {
+                    "id" : "fi-mgp-elig-summary",
+                    "name" : "MGP Eligibility Summary",
+                    "view" : "mgp-elig-summary"
+                }
+            },
+               {
+                "attr" : {
+                    "id" : "fi-mgp-elig-approval",
+                    "name" : "MGP Eligibility Approval",
+                    "view" : "mgp-elig-approval"
+                }
+            }
+            
+            ] },
+            
+            {
+                "attr" : {
+                    "id" : "fi-origination",
+                    "name" : "Origination",
+                    "view" : "mgpsummary"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "fi-servicing",
+                    "name" : "Servicing",
+                    "view" : ""
+                },
+                "children" : [
+                     {
+                        "attr" : {
+                            "id" : "fi-mgp-msad1-upd",
+                            "name" : "MASDP1 Upload Part1",
+                            "view" : "mgp-msad1-upd"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-mgp-msad1-validated",
+                            "name" : "MASDP1 Update Status",
+                            "view" : "mgp-msad1-validated"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-mgp-msad1-err",
+                            "name" : "MASDP1 Summary",
+                            "view" : "mgp-msad1-err"
+                        }
+                    },
+                    {
+                "attr" : {
+                    "id" : "fi-mgp-arr-upload",
+                    "name" : "MGP ARR Report",
+                    "view" : "mgp-arr-upload"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "fi-mgp-aging-report",
+                    "name" : "MASD Aging Report",
+                    "view" : "mgp-aging-report"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "fi-mgp-fully-disp",
+                    "name" : "MGP Fully Disbursed Report",
+                    "view" : "mgp-fully-disp"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "fi-mgp-disp-approved",
+                    "name" : "Disbursed Approved Report",
+                    "view" : "mgp-disp-approved"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "fi-mgp-guarantee-review",
+                    "name" : "Guarantee Pay Review",
+                    "view" : "mgp-guarantee-review"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "fi-mgp-guarantee-recom",
+                    "name" : "Guarantee Pay Recommendation",
+                    "view" : "mgp-guarantee-recom"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "fi-mgp-guarantee-app",
+                    "name" : "Guarantee Pay Approval",
+                    "view" : "mgp-guarantee-app"
+                }
+            },{
+                "attr" : {
+                    "id" : "fi-mgp-asset-delinquency",
+                    "name" : "Default Notice",
+                    "view" : "mgp-asset-delinquency"
+                }
+            },
+            {
+                "attr" : {
+                    "id" : "fi-mgp-def-notice-sum",
+                    "name" : "Default Notice Summary",
+                    "view" : "mgp-def-notice-sum"
+                }
+            }
+                ]
+            },
+            {
+                "attr" : {
+                    "id" : "fi-",
+                    "name" : "Closure and Redemption",
+                    "view" : ""
+                },
+                "children" : [
+                    {
+                        "attr" : {
+                            "id" : "fi-masdpart2upload",
+                            "name" : "MASD Part 2",
+                            "view" : "masdpart2upload"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-masdpart2upload-sum",
+                            "name" : "MASD Part 2 Summary",
+                            "view" : "masdpart2upload-sum"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-masdpart3upload",
+                            "name" : "MASD Part 3",
+                            "view" : "masdpart3upload"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-creategen",
+                            "name" : "Guarantee Event Notice",
+                            "view" : "creategen"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-segenverification",
+                            "name" : "Guarantee Event Notice Verification",
+                            "view" : "segenverification"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-svpceoapproval",
+                            "name" : "Guarantee Event Notice Approval",
+                            "view" : "svpceoapproval"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-hodgenrecommendation",
+                            "name" : "Guarantee Event Notice Recommendation",
+                            "view" : "hodgenrecommendation"
+                        }
+                    }
+                ]
+            },
+            {
+                "attr" : {
+                    "id" : "fi-status and monitoring",
+                    "name" : "Status Monitoring",
+                    "view" : ""
+                },
+                "children" : [
+                    {
+                        "attr" : {
+                            "id" : "fi-status-monitoring-masd-aar-status",
+                            "name" : "MASD AAR Status",
+                            "view" : "status-monitoring-masd-aar-status"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-loanrecoverystatus",
+                            "name" : "Recovery Status",
+                            "view" : "loanrecoverystatus"
+                        }
+                    }
+                ]
+            },
+            {
+                "attr" : {
+                    "id" : "fi-monthly cof",
+                    "name" : "Monthly Cost and Funds",
+                    "view" : ""
+                },
+                "children" : [
+                    {
+                        "attr" : {
+                            "id" : "fi-guarantee-fund",
+                            "name" : "Guarantee Fund",
+                            "view" : "guarantee-fund"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-guarantee-fund-confirmation",
+                            "name" : "Guarantee Fund Confirmation",
+                            "view" : "guarantee-fund-confirmation"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-net-income",
+                            "name" : "Net Income",
+                            "view" : "net-income"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-net-income-confirmation",
+                            "name" : "Net Income Confirmation",
+                            "view" : "net-income-confirmation"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-cost",
+                            "name" : "Cost",
+                            "view" : "cost"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-cost-confirmation",
+                            "name" : "Cost Confirmation",
+                            "view" : "cost-confirmation"
+                        }
+                    }
+                ]
+            },
+            {
+                "attr" : {
+                    "id" : "fi-payment",
+                    "name" : "Payment",
+                    "view" : ""
+                },
+                "children" : [
+                    {
+                        "attr" : {
+                            "id" : "fi-mgp-payment-processing",
+                            "name" : "Payment Confirmation",
+                            "view" : "mgp-payment-processing"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-amortization-summary",
+                            "name" : "Amortization Summary",
+                            "view" : "amortization-summary"
+                        }
+                    },
+                    {
+                        "attr" : {
+                            "id" : "fi-amortization-schedule",
+                            "name" : "Amortization Schedule",
+                            "view" : "amortization-schedule"
+                        }
+                    }
+                ]
+            }
+        ]
     }
+
+
 ]

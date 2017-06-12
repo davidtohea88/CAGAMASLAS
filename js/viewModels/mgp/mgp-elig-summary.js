@@ -274,8 +274,18 @@ define(['ojs/ojcore', 'knockout', 'services/rendererService', 'services/configSe
                 };
 
                 self.onStatusBtn = function () {
-                    $("#ConfirmDialog").ojDialog("open");
+                    $("#ApprovalDialog").ojDialog("open");
                 };
+                
+              self.approveElig= function(item) {
+                    $("#ApprovalDialog").ojDialog("open");
+//                  alert('ddd');
+//                    self.productGroupModel(new model());
+//                    self.resetDialogValue();
+//                    $("#ApproveDialog").ojDialog("open");
+//                    return true;
+//                  oj.Router.rootInstance.go('mgp-elig-approval');
+                }     
 
                 self.onEditBtn = function () {
                     self.productGroupModel(new model());

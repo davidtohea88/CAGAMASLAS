@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<div id="container" >
+    <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+    <div class="page-content" style="margin:0 auto">
+        
+          <div id="validator" class="oj-form   ">
+            
+            
+                <div class="oj-flex">
+                    <div class="two-cols"> 
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-label oj-component oj-inputtext-label"><div class="oj-label-group"><label for="i1" class="oj-component-initnode">Institution Name</label></div></div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-inputtext oj-form-control oj-component oj-disabled oj-ojInputText-disabled"><input id="i1" data-bind="ojComponent: {component: 'ojInputText', disabled: true}" type="text"  placeholder="" class="oj-inputtext-input oj-component-initnode"></div>
+                    </div>
+                </div>
+                         
+                            
+             
+                <div class="oj-flex">
+                    
+                    <div class="oj-flex-item">
+                        <div class="oj-label oj-component oj-inputtext-label"><div class="oj-label-group"><label for="i5" class="oj-component-initnode">Product</label></div></div>
+                    </div>
+                    <div class="oj-flex-item">                    
+                    
+                                  <input id="i5" data-bind="ojComponent: {component: 'ojCombobox', required: true , options: lovProduct }">
+                                    
+                        
+                    </div>
+                
+                </div>            
+                            
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-label oj-component oj-inputtext-label"><div class="oj-label-group"><label for="i2" class="oj-component-initnode">Tentative Submission Date</label></div></div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-inputtext oj-form-control oj-component "><input id="i2" data-bind="ojComponent: {component: 'ojInputText', required: true}" type="text"  placeholder="" class="oj-inputtext-input oj-component-initnode"></div>
+                    </div>
+                </div>
+                            
+                                          
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-label oj-component oj-inputtext-label"><div class="oj-label-group"><label for="i3" class="oj-component-initnode">Remarks</label></div></div>
+                    </div>
+                    <div class="oj-flex-item">
+                      
+                        <div class="oj-textarea oj-form-control oj-component"><textarea id="textareacontrol" rows="3" data-bind="ojComponent: {component: 'ojTextArea', 
+                                             value: ' ',}" placeholder="" class="oj-textarea-input oj-component-initnode"></textarea></div>
+                        
+                </div>
+                      </div>
+     
+                </div>
+                        
+                    </div>
+                       <div class="two-cols"> 
+                           
+                           
+                        <div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-even-cols-6 oj-lg-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-label oj-component oj-inputtext-label"><div class="oj-label-group"><label for="j1" class="oj-component-initnode">Date</label></div></div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-inputtext oj-form-control oj-component oj-disabled oj-ojInputText-disabled"><input id="j1" data-bind="ojComponent: {component: 'ojInputText',  readOnly: true}" type="text"  placeholder="" class="oj-inputtext-input oj-component-initnode"></div>
+                    </div>
+                </div>
+                            
+                            
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-label oj-component oj-inputtext-label"><div class="oj-label-group"><label for="j2" class="oj-component-initnode">Status</label></div></div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-inputtext oj-form-control oj-component oj-disabled oj-ojInputText-disabled"><input id="j2" data-bind="ojComponent: {component: 'ojInputText' ,value : 'sdsdsd', readOnly: true}" type="text"  placeholder="" class="oj-inputtext-input oj-component-initnode"></div>
+                    </div>
+                       
+                </div>
+                    
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-label oj-component oj-inputtext-label"><div class="oj-label-group"><label for="j2" class="oj-component-initnode">Attachment</label></div></div>
+                    </div>
+                    <div class="oj-flex-item">
+                      <a onclick="{document.getElementById('browseFile').click(); }"><img style="width: 16px;vertical-align: sub;" src="css/images/blue-plus-icon.png"> Browse File</a>
+                      <input type="file" id="browseFile" value="Browse File" style="position: fixed; top: -100em">
+                    </div>
+                      
+                </div>            
+     
+                </div>
+                    </div>
+                      
+        
+                    
+                    
+            </div>
+            
+                                        
+            <div class="oj-dialog-footer">                       
+                <div class="page-button-wrapper">
+                   <div class="page-button-inner">   
+                    
+                    <button id= "btn_sav" data-bind="ojComponent: {component: 'ojButton', label: 'Save'} "></button>
+                    <button id= "btn_nt" data-bind="ojComponent: {component: 'ojButton', label: 'Notify RMD'} "></button>
+                    <button id= "btn_can" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel' } "></button>
+                   </div>
+                </div>
+            </div> 
+        </div>  
+        
+</div>
+ 
+ 
+ 
+</div>
+
+ 
