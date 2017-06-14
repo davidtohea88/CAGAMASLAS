@@ -10,7 +10,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
             function companyAccountMainViewModel() {
                 var self = this;
                             
-                var restService = RestService.companyService();
+                var restService = RestService.organizationService();
                 var restServiceTagging = RestService.companyAccountService();
 
                 self.header = "GL Account";
@@ -111,7 +111,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.search = function (name) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((name.length ===0 || (name.length > 0 && rec.attributes.CompanyName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
+                        return ((name.length ===0 || (name.length > 0 && rec.attributes.orgName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
@@ -245,12 +245,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         then(function (obj) {
                             self.selectedHdr(self.collection().model.idAttribute);
                             self.selectedRow(obj.data[self.collection().model.idAttribute]);
-                            self.selectedRowValue(obj.data['CompanyName']);
+                            self.selectedRowValue(obj.data['orgName']);
                         }).
                         then(self.collectionTagging().refresh().then(function(obj){
                             self.MappedDivText('GL Accounts mapped to "'+ self.selectedRowValue()+'"');
                             var tmptag = self.collectionTagging().filter(function(rec){
-                                return ((rec.attributes.CompanyId===self.selectedRow()) &&
+                                return ((rec.attributes.orgId===self.selectedRow()) &&
                                         (rec.attributes.active==='Y'));
                             });
                             self.collectionTagging().reset(tmptag);
@@ -275,8 +275,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         then(self.collectionTagging().refresh().then(function(obj){
 
                             var tmp = self.collectionTagging().filter(function(rec){
-                                return (rec.attributes.AccountId ===self.selectedRowTaggingId() &&
-                                        rec.attributes.CompanyId !==self.selectedRow());
+                                return (rec.attributes.accCd ===self.selectedRowTaggingId() &&
+                                        rec.attributes.orgId !==self.selectedRow());
                             });
                                 self.collectionTagging().reset(tmp);
                             self.allDataRelated(self.collectionTagging().toJSON());                                    
@@ -305,8 +305,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSaveTagging = function(){
-                    self.companyAccountTaggingModel().attributes.CompanyId = self.selectedRow();
-                    self.companyAccountTaggingModel().attributes.AccountNo = self.selectedAccountId()[0];
+                    self.companyAccountTaggingModel().attributes.orgId = self.selectedRow();
+                    self.companyAccountTaggingModel().attributes.accCd = self.selectedAccountId()[0];
                     self.save(self.companyAccountTaggingModel());
                     $("#CreateEditDialogTagging").ojDialog("close");                    
                 };

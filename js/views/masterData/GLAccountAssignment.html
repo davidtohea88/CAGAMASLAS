@@ -82,7 +82,7 @@
                                                         
                                                         <table id="table" summary="Origination List" aria-label="Origination Table"  style="width:100%;"
                                                                data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
-                                                                [{headerText: 'Name', field: 'CompanyName', style: 'width: 100%'},
+                                                                [{headerText: 'Name', field: 'orgName', style: 'width: 100%'},
                                                             {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer}
                                                             ], 
                                                                 rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'},beforeCurrentRow: onSelectRow}">
@@ -112,7 +112,7 @@
                                             <div id="AccountMapping" style="display:none;">
                                                 <table id="table" summary="Tagging" aria-label="Tagging Table" style="width:100%;"
                                                        data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSourceTagging, columns:
-                                                        [{headerText: 'Account Number', field: 'AccountNo', style: 'width: 30%'},
+                                                        [{headerText: 'Account Code', field: 'AccountNo', style: 'width: 30%'},
                                                         {headerText: 'Account Name', field: 'AccountName',style: 'width: 70%'},
                                                         {headerText: 'Postable',  field: 'Postable',style: 'width: 10%', renderer: switchRenderer},
                                                         {headerText: 'ControlAccount',  field: 'ControlAccount',style: 'width: 10%', renderer: switchRenderer}], 

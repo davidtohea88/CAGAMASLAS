@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<div id="container" class="oj-offcanvas-outer-wrapper">
+    <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+    <div id="pageDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center', color: 'white'}">
+        <span data-bind="text: message"></span>
+    </div>
+    <div class="page-content" style="margin:0 auto">
+        <div class="oj-flex">  
+            <div class="oj-flex-item">
+                <div class="oj-margin oj-panel-alt demo-mypanel" >          
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">  
+                            <div class="oj-margin oj-panel-alt demo-mypanel" >   
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" data-bind="with: model">  
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="company">Company</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="company" data-bind="ojComponent: {component: 'ojSelect',
+                                                                                placeholder: emptyPlaceholder() ? '' : 'Select a company',
+                                                                                value: company,
+                                                                                optionChange: companyChangeHandler, 
+                                                                                options: companyLOV}">
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="dbcode">Database Code</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="dbcode" data-bind="ojComponent: {component: 'ojSelect',
+                                                                                placeholder: emptyPlaceholder() ? '' : 'Select a Database Code',
+                                                                                value: selecteddbcode,
+                                                                                options: dbcodeoptions}">
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="product">Dates</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <input id="searchStartDate" data-bind="ojComponent: {component: 'ojInputDate', 
+                                                            value: searchStartDate, required: true, rootAttributes: {style:'width:45%;'}}"/>   
+                                                        to
+                                                        <input id="searchEndDate" data-bind="ojComponent: {component: 'ojInputDate', 
+                                                            value: searchEndDate, required: true, rootAttributes: {style:'width:45%;'}}"/>                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                        <div class="oj-flex-item">
+                                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="product">Product</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="product" data-bind="ojComponent: {component: 'ojSelect',
+                                                                                placeholder: emptyPlaceholder() ? '' : 'Select a product',
+                                                                                value: selectedProduct,
+                                                                                optionChange: productChangeHandler, 
+                                                                                options: productLOV}">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                        <label for="event">Event</label>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <select id="event" data-bind="ojComponent: {component: 'ojSelect',
+                                                                                placeholder: emptyPlaceholder() ? '' : 'Select an event',
+                                                                                value: selectedEvent,
+                                                                                options: eventOptions}">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex">  
+                                                    <div class="oj-flex-item">
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <button id= "btn_search" 
+                                                            data-bind="click: onClickSearch, ojComponent: { component: 'ojButton', label: 'Search' }">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >  
+                                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                                        <div class="oj-flex-item">
+                                            <table id="table" summary="Posted List" aria-label="Posted Table" style="width:100%;"
+                                                   data-bind="ojComponent: {component: 'ojTable', 
+                                                    data: postedBatchesDataSource, 
+                                                    columnsDefault: {sortable: 'none'}, 
+                                                    columns: [{headerText: 'GL ID', field: 'glId',style: 'width: 20%'},
+                                                              {headerText: 'GL Name', field: 'glName',style: 'width: 25%'},
+                                                              {headerText: 'GL Date', field: 'glDate',style: 'width: 25%'},
+                                                              {headerText: 'GL Description', field: 'glDesc',style: 'width: 25%'},
+                                                              {headerTemplate: 'view_detail_hdr', template: 'view_detail', style: 'width: 10%;text-align:center;'}]}">
+                                            </table>   
+                                        </div>
+                                    </div>
+                                    <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-flex-end" style="margin-top:50px;">
+                                        <div class="oj-flex-item">
+                                            <button id= "button" data-bind="click: onRun,ojComponent: {component: 'ojButton', label: 'Run Rules' } "></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div> 
+                </div>    
+            </div>
+        </div> 
+    </div>
+</div>
+<script type="text/html" id="view_detail_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="view_detail">
+    <td>
+        <button id= "btn_viewDetail" 
+            data-bind="click: onClickViewDetail, ojComponent: { component: 'ojButton', label: 'View Detail' }">
+        </button>
+    </td>
+</script>

@@ -39,13 +39,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
 
                 var productService = RestService.productService();
                 self.productLOV = ko.observableArray();
-                productService.fetchAsLOV('prodName','prodCd').then(function(data){
+                productService.fetchAsLOV('prodName','prodId').then(function(data){
                     self.productLOV(data);
                 });
 
-                var companyService = RestService.companyService();
+                var companyService = RestService.organizationService();
                 self.companyLOV = ko.observableArray();
-                companyService.fetchAsLOV('CompanyName','CompanyId').then(function(data){
+                companyService.fetchAsLOV('orgName','orgId').then(function(data){
                     self.companyLOV(data);
                 });
 
@@ -57,7 +57,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         var res = {
                             Account: data[item].value + ' | '+ data[item].label,
                             AccountNo: data[item].value,
-                            AccountName: data[item].label
+                            AccountName: data[item].label,
+                            label: data[item].label,
+                            value: data[item].value
                         };
                         if(data[item].value!==undefined){
                             self.accountLOV.push(res);                            
@@ -65,12 +67,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }
 
                 });
+                
+                var productEventService = RestService.productEventCodeService();
+                
+                
 
                 var eventService = RestService.eventService();
                 self.eventLOV = ko.observableArray();
+                self.collectionEventLOV = ko.observable(eventService.createCollection());
                 eventService.fetchAsLOV('EventName','eventCd').then(function(data){
                     self.eventLOV(data);
                 });
+
                 var paymentFrequencyService = RestService.paymentFrequencyService();
                 self.paymentFrequencyLOV = ko.observableArray();
                 paymentFrequencyService.fetchAsLOV('pymtFreqName','pymtFreqId').then(function(data){
@@ -84,34 +92,55 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.company = ko.observable('');
                 self.dbCode = ko.observable('');
                 self.selectedProduct = ko.observable('');
-                self.selectedEvent = ko.observable('');
+                self.selectedEvent = ko.observable([]);
                 self.selectedPaymentFreq = ko.observable('');
+
+                self.modelHeader = ko.observable();
+                var restServiceHeader = RestService.ActPostingRuleHeaderService();
+                self.collectionHeader = ko.observable(restServiceHeader.createCollection());
+                self.headerData = ko.observableArray();
+                
+                self.selecteddbcode = ko.observableArray();
+                self.dbcodeoptions = ko.observableArray();
+                self.eventOptions = ko.observableArray();
+                var temp_dbcode="";
+                var temp_event="";
+                
+
+                var restServiceCompanyDBCode = RestService.dbCodeService();
+                self.collectionCompanyDBCode = ko.observable(restServiceCompanyDBCode.createCollection());
+                self.companyDBCodeData = ko.observableArray();
+                self.dataSourcecompanyDBCode = new oj.ArrayTableDataSource(self.companyDBCodeData, {idAttribute: self.collectionCompanyDBCode().model.idAttribute});
+                
+                var restServiceProductEvent = RestService.productEventCodeService();
+                self.collectionProductEvent = ko.observable(restServiceProductEvent.createCollection());
+                self.ProductEventData = ko.observableArray();
+                self.dataSourceProductEvent = new oj.ArrayTableDataSource(self.ProductEventData, {idAttribute: self.collectionProductEvent().model.idAttribute});
+                
+                var restServiceEvent = RestService.eventService();
+                self.collectionEvent = ko.observable(restServiceEvent.createCollection());
+                self.EventData = ko.observableArray();
+                self.dataSourceEvent = new oj.ArrayTableDataSource(self.EventData, {idAttribute: self.collectionEvent().model.idAttribute});
 
                 self.model = ko.observable();
                 var restService = RestService.ActPostingRuleService();
+                self.params = ko.observableArray([{recordID:self.id(),recordName:'accPostrulesId'}]);
                 self.collection = ko.observable(restService.createCollection());
-                self.dbCodeData = ko.observableArray();
-                self.dbCodeDataForRender = ko.observableArray();
-                self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.dbCodeData, {idAttribute: self.collection().model.idAttribute}));
+                
+                self.detailData = ko.observableArray();
+                self.detailDataForRender = ko.observableArray();
+                self.dataSource = new oj.ArrayTableDataSource(self.detailData, {idAttribute: self.collection().model.idAttribute});
 
+                self.collectionGainAccount = ko.observable(restService.createCollection());
                 self.selectedGainAccount = ko.observable('');
                 self.selectedGainAccountList = ko.observableArray();
-                self.selectedGainAccountDataSource = new oj.ArrayTableDataSource(self.selectedGainAccountList, {idAttribute: 'Account'});
+                self.selectedGainAccountDataSource = new oj.ArrayTableDataSource(self.selectedGainAccountList, {idAttribute: 'accPostrulesId'});
+
+                self.collectionLossAccount = ko.observable(restService.createCollection());
                 self.selectedLossAccount = ko.observable('');
                 self.selectedLossAccountList = ko.observableArray();
-                self.selectedLossAccountDataSource = new oj.ArrayTableDataSource(self.selectedLossAccountList, {idAttribute: 'Account'});
+                self.selectedLossAccountDataSource = new oj.ArrayTableDataSource(self.selectedLossAccountList, {idAttribute: 'accPostrulesId'});
                 self.accountData = ko.observableArray();
-
-                self.selectedProduct.subscribe(function(newValue){
-                    console.log(newValue);
-//                    var tmp = self.collection().filter(function(rec){
-//                        return ((code.length ===0 || (code.length > 0 && rec.attributes.stateCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
-//                                (name.length ===0 || (name.length > 0 && rec.attributes.stateName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
-//                    });
-//                    self.collection().reset(tmp);
-//                    self.allData(self.collection().toJSON());
-                });
-                
                 
                 self.getParameterByName = function(name, url) {
                     if (!url) url = window.location.href;
@@ -122,28 +151,96 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     if (!results[2]) return '';
                     return decodeURIComponent(results[2].replace(/\+/g, " "));
                 };
+                
+                self.accountNameRenderer = function(context) 
+                {
+                    if (context.data){
+                        var id = context.data;
+                        return rendererService.LOVConverter(self.accountLOV(),id);
+                    }
+                    return '';
+                };
+                
                 // ===============  EVENT HANDLER  ==============
                 
                 self.refreshData = function(){
-                    // fetch from rest service
-                    
-
-                    
-                self.collection().fetch({
+                    // fetch from rest service                
+                    self.collectionHeader().fetch({
                         success: function(){
-                            self.dbCodeData(self.collection().toJSON());
+                            self.headerData(self.collectionHeader().toJSON());
+                            
                         },error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
                         }
                     }).then(function(obj){
-                        console.log(self.id());
                         if(self.id()!==undefined && self.id()!==null ){
-                            self.model(self.collection().get(self.id()));
-                            self.company(self.model().attributes.orgId);
-                            self.selectedProduct(self.model().attributes.prodCd);
-                            self.selectedPaymentFreq(self.model().attributes.pymtFreqId);
-                            self.selectedEvent(self.model().attributes.eventCd);
-                            console.log(self.model().attributes);
+                            self.params()[0].recordID=self.id();
+                                
+                            self.collection().fetch({
+                                success: function(){
+                                    
+                                    //detail
+                                    var tmp = self.collection().where({'accPostrulesId':parseInt(self.id())});
+                                    self.collection().reset(tmp);
+                                    self.detailData(self.collection().toJSON());
+                                    
+                                    var tmpC = self.collection().filter(function(rec){
+                                        return (rec.attributes.accType.toLowerCase()==='c');
+                                    });
+                                    self.collectionGainAccount().reset(tmpC);
+                                    self.selectedGainAccountList(self.collectionGainAccount().toJSON());
+               
+                                    var tmpD = self.collection().filter(function(rec){
+                                        return (rec.attributes.accType.toLowerCase()==='d');
+                                    });
+                                    
+                                    self.collectionLossAccount().reset(tmpD);
+                                    self.selectedLossAccountList(self.collectionLossAccount().toJSON());
+                                    
+
+                                },error: function(resp){
+                                    self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                                }
+                            }).then(function(obj){
+                            
+                                self.collectionCompanyDBCode().fetch({
+                                    success: function(){
+                                        self.companyDBCodeData(self.collectionCompanyDBCode().toJSON());
+
+                                    },error: function(resp){
+                                        self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                                    }
+                                });
+                                                                
+                                self.collectionProductEvent().fetch({
+                                    success: function(){
+                                        self.ProductEventData(self.collectionProductEvent().toJSON());
+
+                                    },error: function(resp){
+                                        self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                                    }
+                                });   
+                                
+                                self.collectionEvent().fetch({
+                                    success: function(){
+                                        self.EventData(self.collectionEvent().toJSON());
+
+                                    },error: function(resp){
+                                        self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
+                                    }
+                                });   
+                                
+                            }).then(function(obj){
+                                self.model(self.collectionHeader().get(self.id()));
+                                self.company(self.model().attributes.orgId);
+ //                               self.selecteddbcode(self.model().attributes.dbCd);
+                                self.selectedProduct(self.model().attributes.prodId);
+                                self.selectedPaymentFreq(self.model().attributes.pymtFreqId);
+//                                self.selectedEvent(self.model().attributes.eventCd);
+                                temp_dbcode=self.model().attributes.dbCd;
+                                temp_event=self.model().attributes.eventCd;
+                             });
+
                         }
                         else
                         {
@@ -163,7 +260,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     {
                         self.showMessage("ERROR",MessageService.httpStatusToMessage('Please select the Company'));
                     }
-                    else if(self.dbCodeDataForRender().length===0)
+                    else if(self.selecteddbcode().length===0)
                     {
                         self.showMessage("ERROR",MessageService.httpStatusToMessage('No Database Code for this Company'));
                     }
@@ -195,14 +292,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     
                 };
                 
+                
                 self.onAddGain = function () {
                         if(self.selectedGainAccount()[0]!==undefined){
                             var valNo = self.selectedGainAccount()[0].split(' | ')[0];
                             var valName = self.selectedGainAccount()[0].split(' | ')[1];
                             
                             var res = {
+                                accPostrulesId :'',
                                 Account: self.selectedGainAccount()[0],
-                                AccountNo: valNo,
+                                accCd: valNo,
                                 AccountName: valName
                             };
                             self.selectedGainAccountList.push(res);
@@ -214,8 +313,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             var valName = self.selectedLossAccount()[0].split(' | ')[1];
                             
                             var res = {
+                                accPostrulesId :'',
                                 Account: self.selectedLossAccount()[0],
-                                AccountNo: valNo,
+                                accCd: valNo,
                                 AccountName: valName
                             };
                             self.selectedLossAccountList.push(res);
@@ -223,39 +323,102 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     };        
                 
                 self.companyChangeHandler = function (context, valueParam) {
-                    self.dbCodeDataForRender([]);
+                        console.log('companyChangeHandler triggered');
+
                         if (valueParam.option == "value" && valueParam.value!="") {                        
                             var val = valueParam.value;                            
-//                            var tmp = self.collection().filter(function(rec){
-//                                return (rec.attributes.CompanyId===val[0]);
-//                            });
-//                            self.collection().reset(tmp);
-//                            self.dbCodeData(self.collection().toJSON());
-//
 
-                        ko.utils.arrayForEach(self.dbCodeData(),function(item){
-                                if (item.CompanyId === valueParam.value[0]){
-                                    var val = item['dbCodeId'];
-                                    self.dbCodeDataForRender.push(val);
+                        self.dbcodeoptions([]);
+                        ko.utils.arrayForEach(self.companyDBCodeData(),function(item){
+                                if (item.orgId === valueParam.value[0]){
+                                    var val = {
+                                        label: item['dbCd'],
+                                        value: item['dbCd']
+                                    };
+                                    self.dbcodeoptions.push(val);
                                 }
                             });
 
+                            if(valueParam.previousValue.length!==1)
+                            {
+                                self.selecteddbcode(temp_dbcode);
+                                console.log('a');
+                            }
+                            else
+                            {
+                                 self.selecteddbcode([]);                               
+                                console.log('b');
+                            }
+
                         };
-                    };        
+                    };  
+                    
+                self.productChangeHandler = function(context, valueParam){
+                    console.log("============================");                    
+                    if (valueParam.option == "value" && valueParam.value!="") {                        
+                            var val = valueParam.value[0];                            
+                        self.eventOptions([]);
+                        var tmp = [];
+                        ko.utils.arrayForEach(self.ProductEventData(),function(item){
+                             if(val===item.prodId){
+
+//                                    tmp.push(self.collectionEvent().filter(function(rec){
+//                                            return (item.eventCd===rec.value);
+//                                        
+//                                    }));   
+                                    
+                                    ko.utils.arrayForEach(self.EventData(),function(item2){
+                                        if(item.eventCd===item2.eventCd){
+                                            var val = {
+                                                eventCd: item2.eventCd,
+                                                label: item2.EventName,
+                                                value: item2.eventCd
+                                            };
+
+                                            self.eventOptions.push(val);
+                                        }
+                                       });
+                                       
+
+                            }
+                            });
+
+                            if(valueParam.previousValue.length!==1)
+                            {
+                                self.selectedEvent(temp_event);
+                                console.log('a');
+                            }
+                            else
+                            {
+                                self.selectedEvent([]);
+                                console.log('b');
+                            }
+                            
+                            //                        
+//                        self.collectionEvent().reset(tmp);
+//                        self.EventData(self.collectionEvent().toJSON());
+// //                       console.log(tmp);                            
+//                        self.eventOptions().push(tmp);
+                        
+                        
+                                           
+
+                        };
+                };
                     
                 self.onRemoveGain = function(data)
                 {
                     self.selectedGainAccountList.remove(function(item) {
-                        return item.AccountNo === data.AccountNo;
+                        return item.accCd === data.accCd;
                     });
                 };
                 self.onRemoveLoss = function(data)
                 {
                     self.selectedLossAccountList.remove(function(item) {
-                        return item.AccountNo === data.AccountNo;
+                        return item.accCd === data.accCd;
                     });
                 };
-                self.id(getParameterByName('id'));
+                self.id(oj.Router.rootInstance.retrieve());
                 self.refreshData();
             }
             return organizationTypeMainViewModel();

@@ -77,7 +77,7 @@
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
                                                                     [{headerText: 'Name', field: 'fundSrcName', style: 'width: 20%'},
                                                                     {headerText: 'Description', field: 'fundSrcDesc',style: 'width: 20%'},
-                                                                    {headerText: 'Product Group', field: 'prodGrpId',style: 'width: 20%'},
+                                                                    {headerText: 'Product Group', field: 'prodGrpId',style: 'width: 20%', renderer:productGroupNameRenderer},
                                                                     {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
                                                                     {headerText: 'Effective Date',  field: 'effectiveDate',style: 'width: 10%', renderer: dateRenderer},
                                                                     {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
@@ -107,6 +107,8 @@
                                                         </button>
                                                         <button id= "btnDeleteTagging" data-bind="click:onDeleteTagging,ojComponent: { component: 'ojButton', label: 'Delete', disabled: !selectedRowTagging() }">
                                                         </button>
+<!--                                                        <button id= "btnExportTagging" data-bind="click:onExportTagging,ojComponent: { component: 'ojButton', label: 'Export', disabled: !selectedRowTagging() }">
+                                                        </button>-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,9 +123,10 @@
                                                 <div class="oj-flex">                        
                                                     <div style="width:100%;">
                                                         <div id="pagingControlDemo" class="page-content">
-                                                            <table id="table" summary="Tagging" aria-label="Tagging Table"
+                                                            <table id="tableTagging" summary="Tagging" aria-label="Tagging Table"
                                                                    data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSourceTagging, columns:
-                                                                    [{headerText: 'Tagging Code',  field: 'fundLineId', style: 'width: 30%'},
+                                                                    [{headerTemplate: 'view_action_hdr', template: 'view_action', style: 'width: 10%;text-align:center;'},
+                                                                    {headerText: 'Tagging Code',  field: 'fundLineId', style: 'width: 30%'},
                                                                     {headerText: 'Deal Number', field: 'dealCd', style: 'width: 30%'},
                                                                     {headerText: 'Bond Number', field: 'bondNumber',style: 'width: 40%'}], 
                                                                     rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'},beforeCurrentRow: onSelectRowTagging}">
@@ -180,6 +183,20 @@
                             <input id="desc" style="width: 100%;" data-bind="ojComponent: {component: 'ojInputText',value: attributes.fundSrcDesc, required: true, invalidComponentTracker: tracker}">
                         </div>
                     </div> 
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="desc">Product Group</label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <select id="countryInput" style="width: 100%;" data-bind="ojComponent: {
+                                                            component: 'ojSelect',
+                                                            options: productGroupLOV, 
+                                                            value: selectedProductGroupId,
+                                                            placeholder: 'Please Select', required: true, invalidComponentTracker: tracker,
+                                                            rootAttributes: {style:'max-width: 20em'}}">
+                                                        </select>
+                        </div>
+                    </div>
                     <div class="oj-flex">  
                         <div class="oj-flex-item">
                             <label for="statusGroup">Status</label>
@@ -281,3 +298,14 @@
         </div>
     </div>
 </div>
+
+<script type="text/html" id="view_action_hdr">
+    <th style="padding-left: 5px; padding-right: 5px;text-align:center;">
+        Funding Source
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+        <span data-bind="text:selectedRowValue"></span>
+    </td>
+</script>

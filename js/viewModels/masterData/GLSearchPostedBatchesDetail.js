@@ -1,25 +1,34 @@
 /**
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'services/RestService', 'services/exportService','services/MessageService', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout','jquery', 'services/rendererService', 'services/RestService','services/exportService', 'services/MessageService', 'ojs/ojrouter',
         'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojbutton', 
         'ojs/ojarraytabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdialog',
-        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation'],
-        function (oj, ko, $, rendererService, RestService, exportService,MessageService)
+        'ojs/ojdatetimepicker','ojs/ojradioset','ojs/ojoffcanvas','ojs/ojknockout-validation','ojs/ojselectcombobox'],
+        function (oj, ko, $, rendererService, RestService, exportService, MessageService)
         {
-            function countryMainViewModel() {
+            function SearchPostedBatchesDetailMainViewModel() {
                 var self = this;
-                var restService = RestService.ActPostingRuleHeaderService();
-                self.header = "GL Posting Rule";
+                self.id = ko.observable(undefined);
+
+                //LOV
+                var countryService = RestService.countryService();
+                self.countryLOV = ko.observableArray();
+                countryService.fetchAsLOV('countryName','countryId').then(function(data){
+                    self.countryLOV(data);
+                });
+                self.selectedCountryId = ko.observableArray();
+
+                self.header = "Search Posted Batches Detail";
                 self.dialogTitle = "Create/edit "+self.header;
-                self.model = ko.observable();
+
+
+                var restService = RestService.SearchPostedBatchesDetailService();
                 self.collection = ko.observable(restService.createCollection());
                 self.allData = ko.observableArray();
                 self.dataSource = new oj.PagingTableDataSource(new oj.ArrayTableDataSource(self.allData, {idAttribute: self.collection().model.idAttribute}));
-                
-                self.companySearch = ko.observable('');
-                self.productSearch = ko.observable('');
-                self.paymentSearch = ko.observable('');
+
+                self.dateConverter = rendererService.dateConverter;
                 self.message = ko.observable();
                 self.colorType = ko.observable();
                 self.tracker = ko.observable();
@@ -46,6 +55,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         }
                     },MessageService.displayTimeout);
                 };
+                
 
                 self.dateTimeRenderer = function(context){
                     return rendererService.dateTimeConverter.format(context.data);
@@ -58,37 +68,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.activeRenderer = function(context){
                     return rendererService.activeConverter(context.data);
                 };
-                    
+                
                 self.refreshData = function(){
+                    
                     // fetch from rest service
                     self.collection().fetch({
                         success: function(){
-                            self.allData(self.collection().toJSON());                            
+                            self.allData(self.collection().toJSON());
                         },error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
                         }
-                    });   
+                    });  
+                                    console.log(self.id());
+
                 };
                 
-                self.buttonClick= function(item) {
-//                    history.pushState(null, '', 'index.html?root=glpostingrule&id=' + item.accPostrulesId);
-//                    oj.Router.sync();
-                    
-                    if (typeof item.accPostrulesId == 'undefined') {
-                        oj.Router.rootInstance.store(null);
-                    } else {
-                        oj.Router.rootInstance.store(item.accPostrulesId);
-                    }
-                    oj.Router.rootInstance.go("glpostingrule");
-                    
-                };
-                
-                self.search = function (company, product, payment) {
+                self.search = function (code, name) {
                     var tmp = self.collection().filter(function(rec){
-                    console.log(rec.attributes.prodName);
-                        return ((company.length ===0 || (company.length > 0 && rec.attributes.orgName.toLowerCase().indexOf(company.toString().toLowerCase()) > -1)) &&
-                                (product.length ===0 || (product.length > 0 && rec.attributes.prodName.toLowerCase().indexOf(product.toString().toLowerCase()) > -1)) &&
-                                (payment.length ===0 || (payment.length > 0 && rec.attributes.pymtFreqName.toLowerCase().indexOf(product.toString().toLowerCase()) > -1)));
+                        return ((code.length ===0 || (code.length > 0 && rec.attributes.stateCd.toLowerCase().indexOf(code.toString().toLowerCase()) > -1)) &&
+                                (name.length ===0 || (name.length > 0 && rec.attributes.stateName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
@@ -103,7 +101,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     $('#btnSave').ojButton("option", "disabled", true );
                     $('#btnCancel').ojButton("option", "disabled", true );
                     var user = "LAS";
-                    var currentDate = new Date();
+                    var currentDate = new Date().toISOString();
                     var defaultAttributes = model.isNew()?{createdBy: user,
                             createdDate: currentDate
                         }:{createdBy: model.attributes.createdBy,
@@ -112,10 +110,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             updatedDate: currentDate
                         };
                     model.save(defaultAttributes,{
-                        success: function(model,resp){
+                        success: function(model){
                             self.refreshData();
-                            var message = successMsg? successMsg: (model.isNew()?'A new country is successfully created':'Country is successfully updated');
+                            var message = successMsg? successMsg: (model.isNew()?'A new State is successfully created':'State is successfully updated');
                             self.showMessage("SUCCESS",message,function(){
+                                $("#CreateEditDialog").ojDialog("close");
                                 $('#btnSave').ojButton("option", "disabled", false );
                                 $('#btnCancel').ojButton("option", "disabled", false );
                                 $('#btnActivate').ojButton("option", "disabled", false );
@@ -138,17 +137,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }else if (model.attributes.active === 'N'){
                         model.attributes.active = 'Y';
                     }
-                    self.save(model,"Country \""+model.attributes.countryName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
+                    self.save(model,"State \""+model.attributes.stateName+"\" is successfully "+(model.attributes.active==='Y'?'activated':'deactivated'));
                 };
 
                 self.exportxls = function () {
                     exportService.export($("#table").ojTable("option","columns"),self.allData(),'xlsx','data.xlsx', function(field,value){
                         if (field === 'active'){
                             return rendererService.activeConverter(value);
-                        }else if (field === 'effectiveDate'){
-                            return rendererService.dateConverter.format(value);
                         }else if (field === 'updatedDate'){
                             return rendererService.dateTimeConverter.format(value);
+                        }else if (field === 'countryId'){
+                            return rendererService.LOVConverter(self.countryLOV(),value);
                         }else{
                             return value;
                         }
@@ -162,9 +161,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onReset = function(){
                     self.refreshData();
                     
-                    self.companySearch('');
-                    self.productSearch('');
-                    self.paymentSearch('');
+                    self.codeSearch('');
+                    self.nameSearch('');
                     
                     if (self.collection().models.length>1){
                         self.selectedRow(undefined);
@@ -176,8 +174,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onSearch = function(){
                     self.collection().fetch({
                         success: function(){
-
-                            self.search(self.companySearch(),self.productSearch(),self.paymentSearch());
+                            self.search(self.codeSearch(),self.nameSearch());
                         },error: function(resp){
                             self.showMessage("ERROR",MessageService.httpStatusToMessage(resp.status));
                         }
@@ -185,14 +182,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onCreate = function(){
-//                    var model = restService.createModel({active: 'Y'});
-//                    self.createOrEdit(model);
-                    history.pushState(null, '', 'index.html?root=glpostingrule');
-                    oj.Router.sync();
+                    self.selectedCountryId([]);
+                    var model = restService.createModel({active: 'Y'});
+                    self.createOrEdit(model);
                 };
                 
                 self.onEdit = function(){
                     var model = self.collection().get(self.selectedRow());
+                    self.selectedCountryId([model.attributes.countryId]);
                     self.createOrEdit(model);
                 };
                 
@@ -205,6 +202,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                         }
                     }
                     if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
+                        self.model().attributes.countryId = self.selectedCountryId()[0];
                         self.save(self.model());
                     }
                 };
@@ -243,7 +241,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.refreshData();
+                    
             }
-            return countryMainViewModel();
+            
+            self.id(oj.Router.rootInstance.retrieve());
+            return SearchPostedBatchesDetailMainViewModel();
         }
 ); 

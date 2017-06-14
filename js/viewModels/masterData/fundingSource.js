@@ -9,6 +9,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
         {
             function fundingSourceMainViewModel() {
                 var self = this;
+                
+                var productGroupService = RestService.productGroupService();
+                self.productGroupLOV = ko.observableArray();
+                productGroupService.fetchAsLOV('prodGrpName','prodGrpId').then(function(data){
+                    self.productGroupLOV(data);
+                });
+                self.selectedproductGroupId = ko.observableArray();
                             
                 var restService = RestService.fundingSourceService();
                 var restServiceTagging = RestService.fundingSourceTaggingService();
@@ -86,10 +93,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     
                 };
                 
+                self.productGroupNameRenderer = function(context){
+                    if (context.data){
+                        var id = context.data;
+                        return rendererService.LOVConverter(self.productGroupLOV(),id);
+                    }
+                    return '';
+                };
+                
                 self.search = function (name, desc) {
                     var tmp = self.collection().filter(function(rec){
-                        return ((name.length ===0 || (name.length > 0 && rec.attributes.FundSrcName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
-                                (desc.length ===0 || (desc.length > 0 && rec.attributes.FundSrcDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
+                        return ((name.length ===0 || (name.length > 0 && rec.attributes.fundSrcName.toLowerCase().indexOf(name.toString().toLowerCase()) > -1)) &&
+                                (desc.length ===0 || (desc.length > 0 && rec.attributes.fundSrcDesc.toLowerCase().indexOf(desc.toString().toLowerCase()) > -1)));
                     });
                     self.collection().reset(tmp);
                     self.allData(self.collection().toJSON());
@@ -149,6 +164,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                             return rendererService.activeConverter(value);
                         }else if (field === 'updatedDate'){
                             return rendererService.dateTimeConverter.format(value);
+                        }else if (field === 'prodGrpId'){
+                            return rendererService.LOVConverter(self.productGroupLOV(),value);
+                        }else{
+                            return value;
+                        }
+                    });
+                };
+
+                self.exportxlsTagging = function () {
+                    exportService.export($("#tableTagging").ojTable("option","columns"),self.allDataTagging(),'xlsx','data.xlsx', function(field,value){
+                        if (field === 'active'){
+                            return rendererService.activeConverter(value);
+                        }else if (field === 'updatedDate'){
+                            return rendererService.dateTimeConverter.format(value);
+                        }else if (field === 'prodGrpId'){
+                            return rendererService.LOVConverter(self.productGroupLOV(),value);
                         }else{
                             return value;
                         }
@@ -190,6 +221,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 
                 self.onEdit = function(){
                     var model = self.collection().get(self.selectedRow());
+                    self.selectedProductGroupId([model.attributes.prodGrpId]);
                     self.createOrEdit(model);
                 };
                 
@@ -203,7 +235,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                     }
                     console.log(trackerObj);
                     if (!(trackerObj.invalidHidden || trackerObj.invalidShown)){
-                         self.save(self.fundingSourceModel());
+                        self.fundingSourceModel().attributes.prodGrpId = self.selectedProductGroupId()[0];
+                        self.save(self.fundingSourceModel());
                     }
                 };
                 
@@ -246,7 +279,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 self.onExport = function(){
                     self.exportxls(); 
                 };
+                self.onExportTagging = function(){
+                    self.exportxlsTagging(); 
+                };
                 
+
                 self.onCancel = function () {
                     $("#CreateEditDialog").ojDialog("close");
                 };
@@ -262,7 +299,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'services/rendererService', 'service
                 };
                 
                 self.onSaveTagging = function(){
-                    self.fundingSourceTaggingModel().attributes.fundHdrId = self.selectedRow();
+                    self.fundingSourceTaggingModel().attributes.fundHdrId = self.selectedRow();                    
                     self.save(self.fundingSourceTaggingModel());
                     $("#CreateEditDialogTagging").ojDialog("close");                    
                 };

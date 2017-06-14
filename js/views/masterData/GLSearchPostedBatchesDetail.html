@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<div id="container" class="oj-offcanvas-outer-wrapper" >
+    <div class="page-title"><label class="white-color" data-bind="text:header"></label></div>
+    <div id="pageDrawer" class="oj-offcanvas-top oj-panel" data-bind="style: {backgroundColor: colorType, textAlign: 'center', color: 'white'}">
+        <span data-bind="text: message"></span>
+    </div>
+    <div id="pageContent" class="page-content" style="margin:0 auto">
+        <div class="oj-flex">  
+            <div class="oj-flex-item">
+                <div class="oj-panel oj-margin oj-panel-alt demo-mypanel" >                    
+                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout" >                      
+                        <div class="oj-flex-item">   
+                            <div class="oj-form  oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                <div class="oj-flex">
+                                        <div id="pagingControlDemo" class="page-content">
+                                            <table id="table" summary="Search Posted Batches Detail" aria-label="Search Posted Batches Detail"
+                                                   data-bind="ojComponent: {component: 'ojTable', display: 'grid', data: dataSource, columns:
+                                                    [{headerText: 'Account Code',  field: 'accCd', style: 'width: 10%'},
+                                                    {headerText: 'Account Name', field: 'accCd', style: 'width: 10%'},
+                                                    {headerText: 'Account Period', field: 'trxDate', style: 'width: 10%', renderer: dateTimeRenderer},
+                                                    {headerText: 'Transaction Date',  field: 'trxDate',style: 'width: 10%', renderer: dateTimeRenderer}, 
+                                                    {headerText: 'Record Type',  field: 'rcdType',style: 'width: 10%'},
+                                                    {headerText: 'Base Amount',  field: 'baseAmt',style: 'width: 10%'},
+                                                    {headerText: 'Drcr Marker',  field: 'drcrMarker',style: 'width: 10%'},
+                                                    {headerText: 'Journal Type',  field: 'jrnlType',style: 'width: 10%'},
+                                                    {headerText: 'Journal Source',  field: 'jrnlSrc',style: 'width: 10%'},
+                                                    {headerText: 'Transaction Reference',  field: 'txnRef',style: 'width: 10%'},
+                                                    {headerText: 'Description',  field: 'desc',style: 'width: 10%'},
+                                                    {headerText: 'Active',  field: 'active',style: 'width: 10%', renderer: activeRenderer},
+                                                    {headerText: 'Last Updated By',  field: 'updatedBy',style: 'width: 10%'},
+                                                    {headerText: 'Last Updated Date',  field: 'updatedDate',style: 'width: 10%', renderer: dateTimeRenderer}], 
+                                                    rootAttributes: {'style':'width: 100%;'}, selectionMode: {row: 'single'} ,
+                                                        beforeCurrentRow: onSelectRow}">
+                                            </table>
+                                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 10}">
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                </div>                                             
+            </div>
+        </div> 
+    </div>
+</div>
