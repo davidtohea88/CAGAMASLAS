@@ -204,6 +204,21 @@ define(['services/BaseRestService','ojs/ojcore' ,'knockout'],
             self.orgBankAccService = function(){
                 return new BaseRestService("OrgBankAcc","orgBkId","MdOrgBankAcc");
             };
+            self.ActPostingRuleHeaderService = function(){
+                return new BaseRestService("/MD_Accounting_Posting_Rules/PostRulesRestPS","accPostrulesId","MdAccPostrulesHdr");
+            };
+            self.ActPostingRuleService = function(){
+                return new BaseRestService("/MD_Accounting_Posting_Rules_Account/PostRulesAccRestPS","postrulesLineId","MdAccPostrulesLine");
+            };
+            self.OrganizationDBCodeService = function(){
+                return new BaseRestService("/MD_OrgDBCodeService/OrgDBCodeRestPS","DBCodeOrgId","MdOrgDbCode");
+            };
+            self.RevaluationService = function(){
+                return new BaseRestService("/MD_RevAccService/RevAccRestPS","revalId","MdRevalAcc");
+            };
+            self.SearchPostedBatchesDetailService = function(){
+                return new BaseRestService("SearchPostedBatchesDetail","glLineId","MdSearchPostedBatchesDetail");
+            };
         };
         return new RestService();
 });
