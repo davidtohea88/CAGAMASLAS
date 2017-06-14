@@ -324,7 +324,9 @@ require(['ojs/ojcore',
                 'glaccountmaster': {value:getMasterDataPath('GLAccountMaster'), label: 'GL Account Master'},
                 'companydbcodemapping': {value:getMasterDataPath('CompanyDatabaseCodeMapping'), label: 'Company Database Code Mapping'},
                 'glaccountassignment': {value:getMasterDataPath('GLAccountAssignment'), label: 'GL Account Assignment'},
-                'glaccounttemplate': {value:getMasterDataPath('GLAccountTemplate'), label: 'GL Account Template'}
+                'glaccounttemplate': {value:getMasterDataPath('GLAccountTemplate'), label: 'GL Account Template'},
+                'glsearchpostedbatches': {value:getMasterDataPath('GLSearchPostedBatches'), label: 'GL Search Posted Batches'},
+                'GLSearchPostedBatchesDetail': {value:getMasterDataPath('GLSearchPostedBatchesDetail'), label: 'Search Posted Batches Detail'}                
             });
             
                        
